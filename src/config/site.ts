@@ -7,6 +7,25 @@
  *    Phone numbers / addresses below are PLACEHOLDERS — confirm before launch.
  */
 
+const DEFAULT_SITE_URL = "https://www.chhedajewellers.com";
+
+/**
+ * Resolve the public origin defensively. Handles every way NEXT_PUBLIC_SITE_URL
+ * can be wrong in a deploy environment — unset, empty/whitespace, or missing a
+ * protocol (e.g. "www.chhedajewellers.com") — so `new URL()` in the metadata
+ * (metadataBase) can never throw "Invalid URL" during the build.
+ */
+function resolveSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!raw) return DEFAULT_SITE_URL;
+  const withProtocol = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    return new URL(withProtocol).origin;
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
+}
+
 export const siteConfig = {
   /** Canonical brand name — always the full form. */
   name: "Chheda Jewellers",
@@ -17,10 +36,8 @@ export const siteConfig = {
   description:
     "Chheda Jewellers — a house of fine gold, diamond and polki jewellery in Mumbai. Editorial craftsmanship, timeless design, and pieces made to be passed down.",
 
-  /** Public origin. Falls back to production domain for SSR/metadata. */
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "https://www.chhedajewellers.com",
+  /** Public origin — always a valid absolute URL (see resolveSiteUrl). */
+  url: resolveSiteUrl(),
 
   locale: "en_IN",
 
