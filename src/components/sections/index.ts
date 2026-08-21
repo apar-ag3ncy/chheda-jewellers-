@@ -1,0 +1,9 @@
+export { Hero } from "./Hero";
+export { ChhedaPromise } from "./ChhedaPromise";
+export { JewelleryTypes } from "./JewelleryTypes";
+export { Stories } from "./Stories";
+export { Collections } from "./Collections";
+export { CommunityStrip } from "./CommunityStrip";
+export { Testimonials } from "./Testimonials";
+export { MonthlyPlan } from "./MonthlyPlan";
+export { Branches } from "./Branches";

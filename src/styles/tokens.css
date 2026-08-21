@@ -1,0 +1,68 @@
+/* ============================================================
+   CHHEDA JEWELLERS — DESIGN TOKENS (single source of truth)
+   Brand primitives + motion. Consumed by globals.css @theme.
+   Never hard-code these values in components — use the tokens.
+   ============================================================ */
+
+:root {
+  /* ── Brand palette ─────────────────────────────────────── */
+  --green: #0b3a2d; /* PRIMARY — deep emerald, default background */
+  --green-deep: #06241b; /* deeper emerald for vignettes / gradients */
+  --green-soft: #124b39; /* lifted emerald for cards / surfaces */
+  --green-glass: rgba(11, 58, 45, 0.66); /* frosted nav / overlays */
+
+  --maroon: #440002; /* SECONDARY / accent — never body text on green */
+  --maroon-soft: #5c1416;
+
+  --beige: #e8ddc7; /* warm neutral — primary text on green */
+  --beige-dim: #b9ad93; /* muted beige — captions / secondary text */
+  --white: #ffffff;
+  --offwhite: #f7f3ec; /* soft white — large surfaces, headings */
+
+  /* Gold — derived from the monogram gradient; accents & hairlines only */
+  --gold: #c68d61;
+  --gold-light: #f0cfaa;
+  --gold-deep: #9a563a;
+
+  /* ── Semantic roles (reference the palette above) ──────── */
+  --bg: var(--green);
+  --bg-deep: var(--green-deep);
+  --surface: var(--green-soft);
+  --text: var(--beige);
+  --text-strong: var(--offwhite);
+  --text-muted: var(--beige-dim);
+  --accent: var(--gold);
+  --line: color-mix(in srgb, var(--beige) 16%, transparent);
+  --line-strong: color-mix(in srgb, var(--gold) 42%, transparent);
+
+  /* Signature gold gradient (wordmark, hairline flourishes) */
+  --grad-gold: linear-gradient(
+    100deg,
+    var(--gold-deep) 0%,
+    var(--gold) 22%,
+    var(--gold-light) 48%,
+    var(--gold) 74%,
+    var(--gold-deep) 100%
+  );
+
+  /* ── Type ──────────────────────────────────────────────── */
+  --tracking-caps: 0.24em; /* wide-tracked Montserrat labels */
+  --tracking-tight: -0.01em; /* large Cormorant display */
+  --leading-display: 0.98;
+
+  /* ── Motion (single source of truth) ───────────────────── */
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1); /* signature ease-out */
+  --ease-inout: cubic-bezier(0.83, 0, 0.17, 1); /* dramatic in-out */
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 0.4s;
+  --dur-base: 0.7s;
+  --dur-slow: 1.1s;
+  --dur-slower: 1.6s;
+
+  /* ── Layout ────────────────────────────────────────────── */
+  --container-max: 88rem;
+  --gutter: clamp(1.25rem, 4.5vw, 4.5rem);
+  --nav-h: 4.5rem;
+  --radius: 2px; /* restrained, editorial — near-square corners */
+  --radius-pill: 999px;
+}
