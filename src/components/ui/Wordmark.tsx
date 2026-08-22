@@ -5,7 +5,8 @@ type WordmarkProps = {
   className?: string;
   /** Stacked = two lines (CHHEDA / JEWELLERS); inline = one line. */
   layout?: "stacked" | "inline";
-  tone?: "beige" | "gold";
+  /** "dark" = deep green, for use on light (beige) surfaces. */
+  tone?: "beige" | "gold" | "dark";
 };
 
 /**
@@ -18,7 +19,8 @@ export function Wordmark({
   tone = "beige",
 }: WordmarkProps) {
   const [first, second] = siteConfig.name.split(" ");
-  const toneClass = tone === "gold" ? "u-gold-text" : "text-text-strong";
+  const toneClass =
+    tone === "gold" ? "u-gold-text" : tone === "dark" ? "text-green" : "text-text-strong";
 
   if (layout === "inline") {
     return (
