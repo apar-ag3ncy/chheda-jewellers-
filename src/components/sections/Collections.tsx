@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { useState } from "react";
 import { collections } from "@/lib/content/collections";
 import { Section, Container } from "@/components/ui/Section";
@@ -19,7 +20,7 @@ export function Collections() {
       <Container>
         <SectionHeading
           eyebrow="Collections"
-          title={"Campaigns, not\ncatalogues"}
+          title={"Campaigns, not\n*catalogues*"}
           size="lg"
         />
 
@@ -34,7 +35,7 @@ export function Collections() {
                   key={c.id}
                   src={c.image.src}
                   alt={c.image.alt}
-                  fill
+                  placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                   sizes="58vw"
                   className={cn(
                     "object-cover transition-opacity duration-[900ms] ease-[var(--ease-lux)]",
@@ -109,7 +110,7 @@ export function Collections() {
               <Image
                 src={c.image.src}
                 alt={c.image.alt}
-                fill
+                placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                 sizes="100vw"
                 className="object-cover"
                 style={{ objectPosition: c.image.focus ?? "50% 40%" }}

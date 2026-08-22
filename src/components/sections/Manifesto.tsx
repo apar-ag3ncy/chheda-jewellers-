@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
+import { SplitLines } from "@/components/motion/SplitLines";
 import { Monogram } from "@/components/ui/Monogram";
 
 /**
@@ -19,18 +21,31 @@ export function Manifesto() {
         src="/media/hero/hero-02.jpg"
         alt=""
         aria-hidden
+        placeholder="blur"
+        blurDataURL={EMERALD_LQIP}
         fill
         sizes="100vw"
         className="object-cover"
         style={{ objectPosition: "50% 30%" }}
       />
-      {/* Heavy emerald scrim — image reads as a whisper behind the words. */}
+      {/* Scrim: a NEUTRAL darkening behind the words (so the photograph keeps
+          its own colour — warm gold stays gold, skin stays skin), with the
+          emerald used only at the very edges to blend into the bands above and
+          below. Never a flat green wash over the image. */}
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 50%, color-mix(in srgb, var(--green-deep) 74%, transparent) 0%, color-mix(in srgb, var(--green-deep) 92%, transparent) 100%)",
+            "radial-gradient(72% 58% at 50% 50%, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.28) 55%, transparent 78%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, var(--green-deep) 0%, transparent 18%, transparent 82%, var(--green-deep) 100%)",
         }}
       />
 
@@ -41,12 +56,12 @@ export function Manifesto() {
         <Reveal as="p" delay={0.04} className="u-eyebrow mt-8">
           Our belief
         </Reveal>
-        <Reveal delay={0.08}>
+        <SplitLines delay={0.08}>
           <p className="mt-6 max-w-4xl font-display text-[clamp(1.6rem,4.4vw,3.4rem)] font-light leading-[1.16] text-text-strong">
             Gold is memory you can hold. We do not sell ornaments — we make the
             things a family keeps, and hands down, and remembers you by.
           </p>
-        </Reveal>
+        </SplitLines>
         <Reveal delay={0.14} className="mt-10">
           <span aria-hidden className="mx-auto block h-px w-16 bg-line-strong" />
         </Reveal>

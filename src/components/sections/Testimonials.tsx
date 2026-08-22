@@ -29,9 +29,9 @@ export function Testimonials() {
       <Container>
         <SectionHeading
           eyebrow="Kind words"
-          title={"Trusted, one\nfamily at a time"}
+          title={"Trusted, one\n*family at a time*"}
           align="center"
-          size="lg"
+          size="md"
           className="mx-auto items-center text-center"
         />
 

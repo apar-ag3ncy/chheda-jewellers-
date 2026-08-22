@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/cn";
@@ -96,7 +97,7 @@ export function ParallaxImage({
         <Image
           src={src}
           alt={alt}
-          fill
+          placeholder="blur" blurDataURL={EMERALD_LQIP} fill
           sizes={sizes}
           priority={priority}
           className="object-cover"

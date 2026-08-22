@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { categoryList } from "@/lib/content/categories";
 import { pageMetadata } from "@/lib/seo";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -36,7 +37,7 @@ export default function JewelleryPage() {
                   <Image
                     src={c.hero.src}
                     alt={c.hero.alt}
-                    fill
+                    placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-[1400ms] ease-[var(--ease-lux)] group-hover:scale-105"
                     style={{ objectPosition: c.hero.focus ?? "50% 35%" }}

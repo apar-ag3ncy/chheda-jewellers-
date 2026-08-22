@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { siteConfig } from "@/config/site";
 import { reviewsSummary } from "@/lib/content/testimonials";
 import { Monogram } from "@/components/ui/Monogram";
@@ -55,15 +56,21 @@ export function Footer() {
           <Image
             src="/media/categories/gold.jpg"
             alt=""
-            fill
+            placeholder="blur" blurDataURL={EMERALD_LQIP} fill
             sizes="(max-width: 1024px) 100vw, 58vw"
             className="object-cover"
             style={{ objectPosition: "50% 28%" }}
           />
           {/* Blend into emerald: strong wash on mobile, diagonal edge on desktop */}
+          {/* Mobile: darken neutrally (keeps the gold warm) and fade to emerald
+              at the edges — not a flat green wash over the photograph. */}
           <div
             aria-hidden
-            className="absolute inset-0 bg-green-deep/78 lg:hidden"
+            className="absolute inset-0 lg:hidden"
+            style={{
+              background:
+                "linear-gradient(to bottom, var(--green-deep) 0%, rgba(0,0,0,0.55) 26%, rgba(0,0,0,0.6) 70%, var(--green-deep) 100%)",
+            }}
           />
           <div
             aria-hidden

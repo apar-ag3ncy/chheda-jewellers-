@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { useRef } from "react";
 import { monthlyPlanTeaser } from "@/lib/content/plans";
 import { Container } from "@/components/ui/Section";
@@ -54,7 +55,7 @@ export function MonthlyPlan() {
         <Image
           src="/media/plan/plan-poster.jpg"
           alt="A quiet, intimate moment in warm gold jewellery"
-          fill
+          placeholder="blur" blurDataURL={EMERALD_LQIP} fill
           sizes="100vw"
           className="object-cover"
           style={{ objectPosition: "50% 35%" }}

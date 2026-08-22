@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { community } from "@/lib/content/community";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
@@ -75,7 +76,7 @@ export function CommunityStrip() {
                       <Image
                         src={img.src}
                         alt={img.alt}
-                        fill
+                        placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                         sizes="(max-width: 768px) 50vw, 25vw"
                         className="object-cover transition-transform duration-[900ms] ease-[var(--ease-lux)] group-hover:scale-105"
                       />

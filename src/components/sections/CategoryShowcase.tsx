@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import type { CategoryPage } from "@/types/content";
 import { categoryList } from "@/lib/content/categories";
 import { Section, Container } from "@/components/ui/Section";
@@ -20,7 +21,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         <Image
           src={category.hero.src}
           alt={category.hero.alt}
-          fill
+          placeholder="blur" blurDataURL={EMERALD_LQIP} fill
           priority
           sizes="100vw"
           className="object-cover"
@@ -176,7 +177,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
                 <Image
                   src={c.hero.src}
                   alt={c.hero.alt}
-                  fill
+                  placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                   sizes="(max-width: 640px) 100vw, 44vw"
                   className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-lux)] group-hover:scale-105"
                   style={{ objectPosition: c.hero.focus ?? "50% 40%" }}

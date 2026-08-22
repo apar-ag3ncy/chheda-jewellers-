@@ -23,12 +23,18 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={fontVariables} suppressHydrationWarning>
-      <body className="antialiased">
+      {/* u-grain / u-roomlight paint fixed, pointer-events-none material layers
+          (film grain + a soft overhead light) so the emerald reads as a lit
+          room rather than a flat fill. */}
+      <body className="u-grain u-roomlight antialiased">
         {/* No-JS fallback: the loader overlay is only removed by JS, so hide it
             entirely when scripts are unavailable — content is never trapped. */}
         <noscript>
           <style
-            dangerouslySetInnerHTML={{ __html: ".cj-loader{display:none!important}" }}
+            dangerouslySetInnerHTML={{
+              __html:
+                ".cj-loader{display:none!important}.cj-curtain{display:none!important}",
+            }}
           />
         </noscript>
         <a

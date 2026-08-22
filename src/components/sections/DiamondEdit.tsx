@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import Link from "next/link";
 import { useRef } from "react";
 import { Monogram } from "@/components/ui/Monogram";
@@ -179,7 +180,7 @@ export function DiamondEdit() {
                 <Image
                   src={p.src}
                   alt={p.alt}
-                  fill
+                  placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                   sizes="(max-width: 1024px) 100vw, 58vw"
                   className="object-cover grayscale transition-all duration-[900ms] ease-[var(--ease-lux)] group-hover/piece:grayscale-0 group-hover/piece:scale-[1.04]"
                   style={{ objectPosition: i === 1 ? "50% 30%" : "50% 40%" }}

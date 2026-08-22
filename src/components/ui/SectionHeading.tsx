@@ -1,25 +1,46 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/motion/Reveal";
+import { SplitLines } from "@/components/motion/SplitLines";
 
 type Align = "left" | "center";
 
 type SectionHeadingProps = {
   eyebrow?: string;
-  /** Supports "\n" for intentional line breaks in the display heading. */
+  /**
+   * Supports "\n" for intentional line breaks, and *asterisks* to set a phrase
+   * in Cormorant italic — the editorial roman/italic contrast.
+   *   "Campaigns, not *catalogues*"
+   */
   title: string;
   intro?: ReactNode;
   align?: Align;
   className?: string;
   as?: "h1" | "h2" | "h3";
-  size?: "md" | "lg" | "xl";
+  /** Display step — sm/md are workhorses, xl is reserved for tentpole moments. */
+  size?: "sm" | "md" | "lg" | "xl";
 };
 
 const sizes = {
-  md: "text-[clamp(1.9rem,4vw,3rem)]",
-  lg: "text-[clamp(2.3rem,5.2vw,4rem)]",
-  xl: "text-[clamp(2.8rem,6.5vw,5.5rem)]",
+  sm: "text-[var(--step-3)] tracking-[var(--tracking-3)] leading-[var(--leading-3)]",
+  md: "text-[var(--step-4)] tracking-[var(--tracking-4)] leading-[var(--leading-4)]",
+  lg: "text-[var(--step-5)] tracking-[var(--tracking-5)] leading-[var(--leading-5)]",
+  xl: "text-[var(--step-6)] tracking-[var(--tracking-6)] leading-[var(--leading-6)]",
 } as const;
+
+/** Renders *phrase* as Cormorant italic within a display line. */
+export function emphasise(line: string): ReactNode {
+  const parts = line.split(/\*([^*]+)\*/g);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <em key={i} className="font-display italic">
+        {part}
+      </em>
+    ) : (
+      part
+    ),
+  );
+}
 
 /** Eyebrow + Cormorant display heading + optional intro — the section header. */
 export function SectionHeading({
@@ -45,21 +66,21 @@ export function SectionHeading({
           {eyebrow}
         </Reveal>
       ) : null}
-      <Reveal delay={0.05}>
+      <SplitLines delay={0.05}>
         <Tag className={cn("font-display font-light", sizes[size])}>
           {lines.map((line, i) => (
             <span key={i} className="block">
-              {line}
+              {emphasise(line)}
             </span>
           ))}
         </Tag>
-      </Reveal>
+      </SplitLines>
       {intro ? (
         <Reveal
           delay={0.1}
           as="p"
           className={cn(
-            "mt-6 max-w-xl font-body text-[0.98rem] font-light leading-relaxed text-text-muted",
+            "mt-6 max-w-xl font-body text-[var(--step-0)] font-light leading-relaxed text-text-muted",
             align === "center" && "mx-auto",
           )}
         >

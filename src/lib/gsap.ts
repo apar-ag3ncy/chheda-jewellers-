@@ -8,12 +8,13 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
+import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 
 let registered = false;
 
 if (!registered) {
-  gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase);
+  gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase, SplitText);
 
   // Signature brand ease — mirrors --ease-lux in tokens.css.
   if (!CustomEase.get?.("lux")) {
@@ -40,4 +41,4 @@ export const DUR = {
   slower: 1.6,
 } as const;
 
-export { gsap, ScrollTrigger, CustomEase, useGSAP };
+export { gsap, ScrollTrigger, CustomEase, SplitText, useGSAP };

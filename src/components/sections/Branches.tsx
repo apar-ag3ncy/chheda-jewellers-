@@ -27,9 +27,9 @@ export function Branches() {
       <Container>
         <SectionHeading
           eyebrow="Visit the atelier"
-          title={"Two doors,\none welcome"}
+          title={"Two doors,\n*one welcome*"}
           intro="Jewellery is meant to be seen, held and tried on. Come sit with us over chai — no appointment needed, though we love it when you book ahead."
-          size="lg"
+          size="md"
         />
 
         <div className="mt-14 grid grid-cols-1 gap-8 lg:mt-20 lg:grid-cols-12 lg:gap-12">

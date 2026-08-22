@@ -50,6 +50,32 @@
   --tracking-tight: -0.01em; /* large Cormorant display */
   --leading-display: 0.98;
 
+  /**
+   * Modular type scale (~1.28), fluid between mobile and desktop.
+   * Leading and tracking are bound to size — large display sets tighter and
+   * closer; small text sets looser and wider. One global value across a 6×
+   * size range is what makes type look undesigned.
+   */
+  --step--2: 0.68rem; /* micro labels, eyebrows */
+  --step--1: 0.8rem; /* captions, legal */
+  --step-0: 1rem; /* body */
+  --step-1: 1.25rem; /* lead paragraph */
+  --step-2: clamp(1.4rem, 1.1rem + 1.2vw, 1.75rem); /* small display */
+  --step-3: clamp(1.7rem, 1.2rem + 2.2vw, 2.4rem);
+  --step-4: clamp(2rem, 1.3rem + 3.2vw, 3.1rem);
+  --step-5: clamp(2.4rem, 1.4rem + 4.6vw, 4.2rem);
+  --step-6: clamp(2.9rem, 1.5rem + 6.6vw, 6rem); /* tentpole only */
+
+  --tracking-3: -0.008em;
+  --tracking-4: -0.014em;
+  --tracking-5: -0.02em;
+  --tracking-6: -0.026em;
+
+  --leading-3: 1.04;
+  --leading-4: 1.0;
+  --leading-5: 0.98;
+  --leading-6: 0.94;
+
   /* ── Motion (single source of truth) ───────────────────── */
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1); /* signature ease-out */
   --ease-inout: cubic-bezier(0.83, 0, 0.17, 1); /* dramatic in-out */

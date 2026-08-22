@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { jewelleryTypes } from "@/lib/content/jewellery-types";
 import { Section, Container } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -12,8 +13,8 @@ export function JewelleryTypes() {
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
             eyebrow="Types of Jewellery"
-            title={"For every part\nof the story"}
-            size="lg"
+            title={"For every part\n*of the story*"}
+            size="md"
           />
           <Reveal
             as="p"
@@ -38,7 +39,7 @@ export function JewelleryTypes() {
                 <Image
                   src={type.image.src}
                   alt={type.image.alt}
-                  fill
+                  placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                   sizes="(max-width: 768px) 50vw, 24vw"
                   className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-lux)] group-hover:scale-105"
                   style={{ objectPosition: type.image.focus ?? "50% 40%" }}

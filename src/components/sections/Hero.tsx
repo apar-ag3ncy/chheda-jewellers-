@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { EMERALD_LQIP } from "@/lib/image-blur";
 import { useEffect, useState } from "react";
 import { heroSlides } from "@/lib/content";
 import { siteConfig } from "@/config/site";
@@ -59,7 +60,7 @@ export function Hero() {
           <Image
             src={s.image.src}
             alt={s.image.alt}
-            fill
+            placeholder="blur" blurDataURL={EMERALD_LQIP} fill
             priority={i === 0}
             sizes="100vw"
             className="object-cover"
