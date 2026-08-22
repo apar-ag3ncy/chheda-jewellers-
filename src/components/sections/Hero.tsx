@@ -71,14 +71,15 @@ export function Hero() {
         </div>
       ))}
 
-      {/* Minimal text scrim — only enough to keep the headline legible on
-          bright frames. No edge vignette; the image reads clean. */}
+      {/* Text-anchored scrim — darkens only the lower-left where the copy sits,
+          so the headline + body stay legible on bright frames while the top of
+          the image reads clean (no edge vignette). */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 52%, transparent) 0%, transparent 30%), linear-gradient(105deg, color-mix(in srgb, var(--green-deep) 30%, transparent) 0%, transparent 38%)",
+            "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 64%, transparent) 0%, color-mix(in srgb, var(--green-deep) 24%, transparent) 32%, transparent 52%), radial-gradient(130% 115% at 8% 94%, color-mix(in srgb, var(--green-deep) 48%, transparent) 0%, transparent 60%)",
         }}
       />
 

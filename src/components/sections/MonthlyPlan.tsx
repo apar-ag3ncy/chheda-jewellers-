@@ -65,7 +65,7 @@ export function MonthlyPlan() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to right, color-mix(in srgb, var(--green-deep) 72%, transparent) 4%, color-mix(in srgb, var(--green-deep) 16%, transparent) 64%), linear-gradient(to top, color-mix(in srgb, var(--green-deep) 52%, transparent) 0%, transparent 32%)",
+            "linear-gradient(to right, color-mix(in srgb, var(--green-deep) 82%, transparent) 4%, color-mix(in srgb, var(--green-deep) 22%, transparent) 60%), linear-gradient(to top, color-mix(in srgb, var(--green-deep) 55%, transparent) 0%, transparent 34%)",
         }}
       />
 

@@ -45,7 +45,7 @@ export function Collections() {
               ))}
               <div
                 aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-green-deep/66 via-transparent to-transparent"
+                className="absolute inset-0 bg-gradient-to-t from-green-deep/85 via-green-deep/10 to-transparent"
               />
               <div key={active} className="absolute inset-x-0 bottom-0 p-8" style={{ animation: "fadeRise .6s var(--ease-lux) both" }}>
                 <p className="u-eyebrow mb-3 text-gold-light">{current.tagline}</p>
@@ -114,7 +114,7 @@ export function Collections() {
                 className="object-cover"
                 style={{ objectPosition: c.image.focus ?? "50% 40%" }}
               />
-              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-green-deep/76 via-green-deep/5 to-transparent" />
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-green-deep/92 via-green-deep/25 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6">
                 <p className="u-eyebrow mb-2 text-gold-light">{c.tagline}</p>
                 <h3 className="font-display text-3xl font-light text-text-strong">{c.name}</h3>

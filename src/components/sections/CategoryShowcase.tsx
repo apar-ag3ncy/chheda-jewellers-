@@ -31,7 +31,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 62%, transparent) 0%, transparent 38%), linear-gradient(105deg, color-mix(in srgb, var(--green-deep) 32%, transparent) 0%, transparent 42%)",
+              "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 72%, transparent) 0%, color-mix(in srgb, var(--green-deep) 28%, transparent) 34%, transparent 56%), radial-gradient(120% 110% at 8% 96%, color-mix(in srgb, var(--green-deep) 46%, transparent) 0%, transparent 62%)",
           }}
         />
         <Container className="relative pb-16 pt-32 md:pb-24">

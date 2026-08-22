@@ -45,7 +45,7 @@ export function JewelleryTypes() {
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-green-deep/72 via-green-deep/5 to-transparent transition-opacity duration-500 group-hover:from-green-deep/82"
+                  className="absolute inset-0 bg-gradient-to-t from-green-deep/95 via-green-deep/25 to-transparent transition-opacity duration-500 group-hover:from-green-deep"
                 />
                 <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                   <p className="u-eyebrow mb-2 text-gold-light/90">{type.subtitle}</p>
