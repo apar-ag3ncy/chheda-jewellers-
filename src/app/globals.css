@@ -236,6 +236,22 @@
     color: var(--text);
   }
 
+  /**
+   * Counter-scope to .u-on-light: restores the DARK-ground token values.
+   * Needed for an element that stays dark inside a light band — e.g. the
+   * branches map plate sitting on cream paper.
+   */
+  .u-on-dark {
+    --text: var(--beige);
+    --text-strong: var(--offwhite);
+    --text-muted: var(--beige-dim);
+    --line: color-mix(in srgb, var(--beige) 16%, transparent);
+    --line-strong: color-mix(in srgb, var(--gold) 42%, transparent);
+    --gold: #c68d61;
+    --gold-light: #f0cfaa;
+    color: var(--text);
+  }
+
   /* Loader — rotating gold gleam behind the monogram bloom */
   .cj-loader-gleam {
     background: conic-gradient(

@@ -23,7 +23,13 @@ export function Branches() {
   }, []);
 
   return (
-    <Section id="branches" spacing="lg" tone="transparent" data-bg="green">
+    <Section
+      id="branches"
+      spacing="lg"
+      tone="transparent"
+      data-bg="beige"
+      className="u-on-light"
+    >
       <Container>
         <SectionHeading
           eyebrow="Visit the atelier"
@@ -42,8 +48,8 @@ export function Branches() {
                     className={cn(
                       "rounded-[var(--radius-brand)] border p-7 transition-colors duration-[400ms] md:p-8",
                       active === i
-                        ? "border-line-strong bg-green-soft/40"
-                        : "border-line bg-green-soft/15",
+                        ? "border-line-strong bg-white/65"
+                        : "border-line bg-white/40",
                     )}
                     onMouseEnter={() => setActive(i)}
                     onFocus={() => setActive(i)}
@@ -91,7 +97,7 @@ export function Branches() {
 
           {/* Designed map */}
           <Reveal className="lg:col-span-7">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-brand)] border border-line bg-green-deep md:aspect-[16/10]">
+            <div className="u-on-dark relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-brand)] border border-line bg-green-deep md:aspect-[16/10]">
               <StylisedMap active={active} reduce={reduce} />
               <div className="pointer-events-none absolute left-6 top-6">
                 <p className="font-body text-[0.66rem] uppercase tracking-[0.2em] text-text-muted">
