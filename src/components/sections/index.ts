@@ -2,6 +2,7 @@ export { Hero } from "./Hero";
 export { ChhedaPromise } from "./ChhedaPromise";
 export { JewelleryTypes } from "./JewelleryTypes";
 export { Stories } from "./Stories";
+export { Manifesto } from "./Manifesto";
 export { Collections } from "./Collections";
 export { CommunityStrip } from "./CommunityStrip";
 export { Testimonials } from "./Testimonials";

@@ -201,6 +201,159 @@
 }
 
 /* ============================================================
+   Liquid-glass buttons — brand-adapted (emerald/gold frosted glass).
+   Tuned for the dark & image backgrounds where the site's CTAs live.
+   Markup: .glass-button-wrap > .glass-button > .glass-button-text
+           + .glass-button-shadow (sibling)
+   ============================================================ */
+.glass-button-wrap {
+  position: relative;
+  display: inline-flex;
+  isolation: isolate;
+}
+
+.glass-button {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  border: 0;
+  overflow: hidden;
+  cursor: pointer;
+  color: var(--offwhite);
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--offwhite) 8%, transparent);
+  /* Frost comes from the Tailwind `backdrop-blur`/`backdrop-saturate` utilities
+     on the element — raw backdrop-filter here is overridden by Tailwind's
+     backdrop reset chain after the build, so we let the utilities own it. */
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 40%, transparent),
+    inset 0 -14px 26px -20px color-mix(in srgb, var(--green-deep) 92%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--gold) 34%, transparent);
+  transition:
+    transform var(--dur-fast) var(--ease-lux),
+    background-color var(--dur-base) var(--ease-lux),
+    box-shadow var(--dur-base) var(--ease-lux);
+}
+
+/* glass sheen */
+.glass-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--offwhite) 24%, transparent) 0%,
+    transparent 44%
+  );
+}
+
+/* travelling gold glint (on hover) */
+.glass-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  transform: translateX(-130%);
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    color-mix(in srgb, var(--gold-light) 55%, transparent) 50%,
+    transparent 70%
+  );
+  transition: transform 0.95s var(--ease-lux);
+}
+
+.glass-button:hover {
+  transform: translateY(-2px);
+  background-color: color-mix(in srgb, var(--offwhite) 13%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 55%, transparent),
+    inset 0 -14px 26px -20px color-mix(in srgb, var(--green-deep) 92%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--gold) 72%, transparent);
+}
+.glass-button:hover::after {
+  transform: translateX(130%);
+}
+.glass-button:active {
+  transform: translateY(0);
+}
+
+.glass-button-text {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.glass-button-shadow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 20px 46px -24px rgba(0, 0, 0, 0.72);
+  transition: box-shadow var(--dur-base) var(--ease-lux);
+}
+.glass-button-wrap:hover .glass-button-shadow {
+  box-shadow:
+    0 26px 56px -22px rgba(0, 0, 0, 0.8),
+    0 0 34px -8px color-mix(in srgb, var(--gold) 45%, transparent);
+}
+
+/* Gold (primary) tint — warm glass, dark label */
+.glass-button.glass-gold {
+  color: var(--green-deep);
+  background-color: color-mix(in srgb, var(--gold) 60%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 60%, transparent),
+    inset 0 -14px 24px -18px color-mix(in srgb, var(--gold-deep) 82%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--gold-light) 62%, transparent);
+}
+.glass-button.glass-gold:hover {
+  background-color: color-mix(in srgb, var(--gold-light) 74%, transparent);
+}
+
+/* Ghost — lower-emphasis frost, thinner rim */
+.glass-button.glass-ghost {
+  background-color: color-mix(in srgb, var(--offwhite) 4%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 24%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--gold) 20%, transparent);
+}
+.glass-button.glass-ghost:hover {
+  background-color: color-mix(in srgb, var(--offwhite) 9%, transparent);
+}
+
+/* On a light (beige) surface — flip the frost dark so it stays legible */
+.glass-button.glass-on-light {
+  color: var(--green-deep);
+  background-color: color-mix(in srgb, var(--green) 12%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 55%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--green) 30%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-button,
+  .glass-button::after,
+  .glass-button-shadow {
+    transition: none;
+  }
+}
+
+/* ============================================================
    Keyframes
    ============================================================ */
 @keyframes goldpulse {

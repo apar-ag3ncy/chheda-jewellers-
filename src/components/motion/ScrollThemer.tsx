@@ -16,6 +16,7 @@ const TONES: Record<string, string> = {
   green: "#0B3A2D", // A — primary brand
   deep: "#06241B", // deepened emerald
   maroon: "#440002", // B — secondary
+  beige: "#E8DDC7", // C — warm light interlude (dark text sections only)
 };
 
 export function ScrollThemer({ children }: { children: ReactNode }) {

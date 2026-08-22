@@ -3,6 +3,7 @@ import {
   ChhedaPromise,
   JewelleryTypes,
   Stories,
+  Manifesto,
   Collections,
   CommunityStrip,
   Testimonials,
@@ -35,6 +36,7 @@ export default function HomePage() {
       <ChhedaPromise />
       <JewelleryTypes />
       <Stories />
+      <Manifesto />
       <Collections />
       {social}
       <MonthlyPlan />

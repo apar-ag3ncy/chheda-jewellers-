@@ -2,31 +2,39 @@ import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "outline" | "ghost" | "link";
+/**
+ * Brand button — a liquid-glass surface (see .glass-button in globals.css)
+ * with centred, wide-tracked Montserrat labels. Every CTA on the site routes
+ * through here, so the glass treatment is applied everywhere consistently.
+ *
+ * Variants:
+ *   primary → warm gold glass (dark label) — the main action
+ *   outline → neutral frosted glass with a gold rim
+ *   ghost   → the same frosted glass, lower emphasis
+ *   onLight → dark frosted glass for use on beige/light surfaces
+ *   link    → plain underlined text link (not a glass button)
+ */
+type Variant = "primary" | "outline" | "ghost" | "onLight" | "link";
 type Size = "sm" | "md" | "lg";
 
-const base =
-  "group inline-flex items-center justify-center gap-2.5 font-body font-medium uppercase transition-all duration-[var(--dur-fast)] ease-[var(--ease-lux)] disabled:pointer-events-none disabled:opacity-50";
-
-const variants: Record<Variant, string> = {
-  // Solid warm gold — primary action
-  primary:
-    "bg-gold text-green-deep hover:bg-gold-light tracking-[0.14em] rounded-[var(--radius-brand)]",
-  // Hairline gold outline on green — the editorial default
-  outline:
-    "border border-line-strong text-text-strong hover:border-gold hover:bg-gold/10 tracking-[0.14em] rounded-[var(--radius-brand)]",
-  // Bare, spaced label
-  ghost:
-    "text-text-strong hover:text-gold-light tracking-[0.14em]",
-  // Underlined text link with animated rule
-  link: "text-text-strong hover:text-gold-light tracking-[0.14em] relative",
+const textSize: Record<Size, string> = {
+  sm: "px-4 py-2.5 text-[0.68rem]",
+  md: "px-6 py-3.5 text-[0.72rem]",
+  lg: "px-8 py-4 text-[0.78rem]",
 };
 
-const sizes: Record<Size, string> = {
-  sm: "text-[0.68rem] px-4 py-2.5",
-  md: "text-[0.72rem] px-6 py-3.5",
-  lg: "text-[0.78rem] px-8 py-4",
+const glassTint: Record<Exclude<Variant, "link">, string> = {
+  primary: "glass-gold",
+  outline: "",
+  ghost: "glass-ghost",
+  onLight: "glass-on-light",
 };
+
+const glassText =
+  "glass-button-text font-body font-medium uppercase tracking-[0.14em]";
+
+const linkText =
+  "inline-flex items-center justify-center gap-2 font-body font-medium uppercase tracking-[0.14em] text-text-strong underline-offset-4 transition-colors duration-[var(--dur-fast)] hover:text-gold-light hover:underline";
 
 type CommonProps = {
   variant?: Variant;
@@ -34,6 +42,8 @@ type CommonProps = {
   children: ReactNode;
   className?: string;
   withArrow?: boolean;
+  /** Extra classes on the inner label span. */
+  contentClassName?: string;
 };
 
 type AsLink = CommonProps & { href: string } & Omit<
@@ -48,38 +58,90 @@ type AsButton = CommonProps & { href?: undefined } & Omit<
 const Arrow = () => (
   <span
     aria-hidden
-    className="inline-block translate-x-0 transition-transform duration-[var(--dur-fast)] ease-[var(--ease-lux)] group-hover:translate-x-1"
+    className="ml-0.5 inline-block translate-x-0 transition-transform duration-[var(--dur-fast)] ease-[var(--ease-lux)] group-hover:translate-x-1"
   >
     &rarr;
   </span>
 );
 
 export function Button(props: AsLink | AsButton) {
-  const { variant = "outline", size = "md", children, className, withArrow, ...rest } =
-    props;
-  const classes = cn(base, sizes[size], variants[variant], className);
+  const {
+    variant = "outline",
+    size = "md",
+    children,
+    className,
+    withArrow,
+    contentClassName,
+    ...rest
+  } = props;
 
-  if (props.href !== undefined) {
-    const { href: _href, ...linkRest } = rest as AsLink;
-    const external = /^https?:\/\//.test(props.href);
-    return (
-      <Link
-        href={props.href}
-        className={classes}
-        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        {...linkRest}
-      >
+  const isExternal =
+    props.href !== undefined && /^https?:\/\//.test(props.href);
+  const externalAttrs = isExternal
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
+
+  // Plain text-link variant — not a glass surface.
+  if (variant === "link") {
+    const classes = cn("group", linkText, className);
+    const label = (
+      <>
         {children}
         {withArrow ? <Arrow /> : null}
-      </Link>
+      </>
+    );
+    if (props.href !== undefined) {
+      const { href: _href, ...linkRest } = rest as AsLink;
+      return (
+        <Link href={props.href} className={classes} {...externalAttrs} {...linkRest}>
+          {label}
+        </Link>
+      );
+    }
+    const { href: _omit, ...buttonRest } = rest as AsButton & { href?: undefined };
+    return (
+      <button className={classes} {...buttonRest}>
+        {label}
+      </button>
     );
   }
 
-  const { href: _omit, ...buttonRest } = rest as AsButton & { href?: undefined };
-  return (
-    <button className={classes} {...buttonRest}>
+  // Glass surface. Backdrop frost via Tailwind utilities (survives the build).
+  const surface = cn(
+    "glass-button group backdrop-blur-[14px] backdrop-saturate-[1.35]",
+    glassTint[variant],
+  );
+  const label = (
+    <span className={cn(glassText, textSize[size], contentClassName)}>
       {children}
       {withArrow ? <Arrow /> : null}
-    </button>
+    </span>
+  );
+
+  return (
+    <div className={cn("glass-button-wrap", className)}>
+      {props.href !== undefined ? (
+        (() => {
+          const { href: _href, ...linkRest } = rest as AsLink;
+          return (
+            <Link href={props.href} className={surface} {...externalAttrs} {...linkRest}>
+              {label}
+            </Link>
+          );
+        })()
+      ) : (
+        (() => {
+          const { href: _omit, ...buttonRest } = rest as AsButton & {
+            href?: undefined;
+          };
+          return (
+            <button className={surface} {...buttonRest}>
+              {label}
+            </button>
+          );
+        })()
+      )}
+      <div aria-hidden className="glass-button-shadow" />
+    </div>
   );
 }
