@@ -22,7 +22,6 @@ export function Loader() {
   const content = useRef<HTMLDivElement>(null);
   const gleam = useRef<HTMLDivElement>(null);
   const mono = useRef<HTMLDivElement>(null);
-  const ring = useRef<SVGCircleElement>(null);
   const word = useRef<HTMLDivElement>(null);
   const line = useRef<HTMLSpanElement>(null);
 
@@ -85,13 +84,6 @@ export function Loader() {
       // Petals and core counter-rotate into alignment (the "bloom")
       if (mandala) tl.from(mandala, { rotation: -180, svgOrigin: "200 200", duration: 1.6 }, 0);
       if (core) tl.from(core, { rotation: 200, svgOrigin: "200 200", duration: 1.6 }, 0);
-      // Gold ring draws itself around the mark
-      tl.fromTo(
-        ring.current,
-        { strokeDashoffset: 1 },
-        { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" },
-        0.4,
-      );
       // Wordmark + hairline settle
       tl.from(word.current, { yPercent: 70, autoAlpha: 0, duration: 0.7 }, 0.95);
       tl.fromTo(
@@ -134,26 +126,6 @@ export function Loader() {
             ref={gleam}
             className="cj-loader-gleam pointer-events-none absolute h-72 w-72 rounded-full md:h-80 md:w-80"
           />
-          {/* drawn gold ring */}
-          <svg
-            viewBox="0 0 100 100"
-            className="pointer-events-none absolute h-44 w-44 -rotate-90 md:h-52 md:w-52"
-            fill="none"
-            aria-hidden
-          >
-            <circle
-              ref={ring}
-              cx="50"
-              cy="50"
-              r="47"
-              pathLength={1}
-              strokeDasharray={1}
-              stroke="var(--gold)"
-              strokeWidth={0.75}
-              strokeLinecap="round"
-              opacity={0.85}
-            />
-          </svg>
           {/* the mark */}
           <div ref={mono} className="relative">
             <Monogram className="h-24 w-24 md:h-28 md:w-28" />
