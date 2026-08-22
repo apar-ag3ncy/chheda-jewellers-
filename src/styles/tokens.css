@@ -17,8 +17,10 @@
   --beige: #e8ddc7; /* warm neutral — primary text on green */
   --beige-dim: #b9ad93; /* muted beige — captions / secondary text */
   /* Creamy beige — the LIGHT SURFACE (paper bands, nav capsule). Kept separate
-     from --beige, which is the text colour on green and must not shift. */
-  --cream: #f4ebd9;
+     from --beige, which is the text colour on green and must not shift.
+     Warm on purpose: against deep emerald a paler value reads as plain white,
+     so the cream carries enough yellow to still read as BEIGE on dark. */
+  --cream: #f1e6ce;
   --white: #ffffff;
   --offwhite: #f7f3ec; /* soft white — large surfaces, headings */
 

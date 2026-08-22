@@ -18,7 +18,7 @@ const TONES: Record<string, string> = {
   maroon: "#440002", // B — secondary
   // C — the warm light interlude. Only ever on TEXT-LED sections, which set
   // their own dark type; never behind photography, which it would wash out.
-  beige: "#F4EBD9",
+  beige: "#F1E6CE",
 };
 
 export function ScrollThemer({ children }: { children: ReactNode }) {
