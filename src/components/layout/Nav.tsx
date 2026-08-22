@@ -117,7 +117,7 @@ export function Nav() {
               setMobileOpen(false);
             }
           }}
-          className="relative z-10 flex items-center gap-1 rounded-full border border-[color-mix(in_srgb,var(--maroon)_26%,transparent)] bg-beige px-3 py-1.5 shadow-[0_18px_46px_-22px_rgba(0,0,0,0.6)] md:gap-2 md:px-4 md:py-2"
+          className="relative z-10 flex items-center gap-1 rounded-full border border-[color-mix(in_srgb,var(--maroon)_26%,transparent)] bg-cream px-3 py-1.5 shadow-[0_18px_46px_-22px_rgba(0,0,0,0.6)] md:gap-2 md:px-4 md:py-2"
         >
           {/* Brand */}
           <Link

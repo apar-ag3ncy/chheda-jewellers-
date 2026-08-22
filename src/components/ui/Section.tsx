@@ -28,7 +28,7 @@ const tones: Record<NonNullable<SectionProps["tone"]>, string> = {
   surface: "bg-surface",
   transparent: "bg-transparent",
   /** Warm paper band. Pairs with .u-on-light so nested type inverts. */
-  light: "bg-beige",
+  light: "bg-cream",
 };
 
 /** Full-bleed section band with tone + vertical rhythm. */
