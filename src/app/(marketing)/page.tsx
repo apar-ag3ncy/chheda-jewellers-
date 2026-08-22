@@ -12,25 +12,12 @@ import {
   Branches,
 } from "@/components/sections";
 import { ScrollThemer } from "@/components/motion/ScrollThemer";
-import { flags } from "@/config/flags";
 
 /**
  * Homepage — the single-scroll cinematic journey.
- * Section order is data-driven; Community ⇄ Testimonials swap via a flag.
+ * CommunityStrip anchors the very end, handing off into the footer.
  */
 export default function HomePage() {
-  const social = flags.communityBeforeTestimonials ? (
-    <>
-      <CommunityStrip />
-      <Testimonials />
-    </>
-  ) : (
-    <>
-      <Testimonials />
-      <CommunityStrip />
-    </>
-  );
-
   return (
     <ScrollThemer>
       <Hero />
@@ -40,9 +27,10 @@ export default function HomePage() {
       <Manifesto />
       <Collections />
       <DiamondEdit />
-      {social}
+      <Testimonials />
       <MonthlyPlan />
       <Branches />
+      <CommunityStrip />
     </ScrollThemer>
   );
 }

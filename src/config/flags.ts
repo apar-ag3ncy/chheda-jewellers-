@@ -13,8 +13,6 @@ export const flags = {
    */
   heroVariant: "A" as HeroVariant,
 
-  /** Swap the Community strip and Testimonials order (spec §6 ⇄). */
-  communityBeforeTestimonials: true,
 
   /** Show the on-brand cinematic loader on first visit. */
   loaderEnabled: true,
