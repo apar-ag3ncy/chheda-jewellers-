@@ -34,7 +34,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-green-deep pt-20 md:pt-28">
       <div aria-hidden className="u-hairline absolute inset-x-0 top-0 opacity-60" />
       <Container>
-        <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-10">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-10">
           {/* Brand + gold rate */}
           <div className="md:col-span-4">
             <Link href="/" aria-label={`${siteConfig.name} — home`} className="inline-flex items-center gap-3">
@@ -58,7 +58,7 @@ export function Footer() {
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="font-body text-[0.9rem] font-light text-text transition-colors duration-300 hover:text-gold-light"
+                      className="inline-block py-1 font-body text-[0.9rem] font-light text-text transition-colors duration-300 hover:text-gold-light"
                     >
                       {l.label}
                     </Link>
@@ -129,7 +129,7 @@ function SocialLink({ href, label }: { href: string; label: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="rounded-full border border-line px-4 py-2 font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-muted transition-colors duration-300 hover:border-gold hover:text-gold-light"
+      className="inline-flex min-h-[40px] items-center rounded-full border border-line px-5 font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-muted transition-colors duration-300 hover:border-gold hover:text-gold-light"
     >
       {label}
     </Link>

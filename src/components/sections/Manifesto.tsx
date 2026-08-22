@@ -42,7 +42,7 @@ export function Manifesto() {
           Our belief
         </Reveal>
         <Reveal delay={0.08}>
-          <p className="mt-6 max-w-4xl font-display text-[clamp(1.9rem,4.4vw,3.4rem)] font-light leading-[1.14] text-text-strong">
+          <p className="mt-6 max-w-4xl font-display text-[clamp(1.6rem,4.4vw,3.4rem)] font-light leading-[1.16] text-text-strong">
             Gold is memory you can hold. We do not sell ornaments — we make the
             things a family keeps, and hands down, and remembers you by.
           </p>

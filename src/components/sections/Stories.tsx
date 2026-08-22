@@ -20,7 +20,7 @@ export function Stories() {
         />
       </Container>
 
-      <div className="mt-14 flex flex-col gap-24 md:mt-20 md:gap-36">
+      <div className="mt-14 flex flex-col gap-16 md:mt-20 md:gap-36">
         {stories.map((story, i) => {
           const flip = i % 2 === 1;
           return (

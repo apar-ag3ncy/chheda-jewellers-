@@ -98,7 +98,7 @@ export function GoldRateTicker({
         </div>
       )}
       {data ? (
-        <p className="mt-4 font-body text-[0.72rem] leading-relaxed text-text-muted">
+        <p className="mt-4 font-body text-[0.8rem] leading-relaxed text-text-muted">
           {data.disclaimer}
         </p>
       ) : null}

@@ -67,13 +67,13 @@ export function Branches() {
                         href={b.directionsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-full border border-line-strong px-4 py-2 font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-strong transition-colors hover:border-gold hover:bg-gold/10"
+                        className="inline-flex min-h-[44px] items-center rounded-full border border-line-strong px-5 py-2.5 font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-strong transition-colors hover:border-gold hover:bg-gold/10"
                       >
                         Get directions
                       </Link>
                       <Link
                         href={`tel:${b.phone.replace(/\s+/g, "")}`}
-                        className="rounded-full border border-line px-4 py-2 font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-text-strong"
+                        className="inline-flex min-h-[44px] items-center rounded-full border border-line px-5 py-2.5 font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-text-strong"
                       >
                         Call
                       </Link>

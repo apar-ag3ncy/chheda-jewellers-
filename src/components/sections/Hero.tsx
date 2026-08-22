@@ -93,7 +93,7 @@ export function Hero() {
           >
             {slide.eyebrow}
           </p>
-          <h1 className="font-display text-[clamp(2.8rem,8.5vw,6.6rem)] font-light leading-[0.96]">
+          <h1 className="font-display text-[clamp(2.4rem,8.5vw,6.6rem)] font-light leading-[0.98]">
             {slide.headline.split("\n").map((line, i) => (
               <span key={i} className="block overflow-hidden py-[0.02em]">
                 <span
@@ -137,7 +137,7 @@ export function Hero() {
               aria-label={`Show slide ${i + 1}`}
               aria-current={i === active}
               onClick={() => setActive(i)}
-              className="group flex h-6 items-center"
+              className="group flex h-10 items-center"
             >
               <span
                 className={cn(
@@ -154,7 +154,7 @@ export function Hero() {
               type="button"
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? "Play slideshow" : "Pause slideshow"}
-              className="ml-2 flex h-6 w-6 items-center justify-center text-text-muted transition-colors hover:text-gold-light"
+              className="ml-2 flex h-10 w-10 items-center justify-center text-text-muted transition-colors hover:text-gold-light"
             >
               {paused ? (
                 <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>

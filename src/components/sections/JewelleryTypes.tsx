@@ -9,7 +9,7 @@ export function JewelleryTypes() {
   return (
     <Section id="jewellery-types" spacing="lg" tone="transparent" data-bg="deep">
       <Container>
-        <div className="flex flex-col items-end justify-between gap-6 md:flex-row">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
             eyebrow="Types of Jewellery"
             title={"For every part\nof the story"}
@@ -52,7 +52,7 @@ export function JewelleryTypes() {
                   <h3 className="font-display text-2xl font-light text-text-strong md:text-[1.9rem]">
                     {type.name}
                   </h3>
-                  <p className="mt-2 max-h-32 overflow-hidden font-body text-[0.82rem] font-light leading-relaxed text-text-muted opacity-100 transition-all duration-500 ease-[var(--ease-lux)] md:max-h-0 md:opacity-0 md:group-hover:max-h-24 md:group-hover:opacity-100">
+                  <p className="mt-2 hidden max-h-0 overflow-hidden font-body text-[0.82rem] font-light leading-relaxed text-text-muted opacity-0 transition-all duration-500 ease-[var(--ease-lux)] md:block md:group-hover:max-h-24 md:group-hover:opacity-100">
                     {type.description}
                   </p>
                 </div>

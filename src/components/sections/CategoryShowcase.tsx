@@ -38,7 +38,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 font-body text-[0.7rem] uppercase tracking-[0.16em] text-text-muted">
               <li>
-                <Link href="/jewellery" className="hover:text-text-strong">
+                <Link href="/jewellery" className="inline-block py-2 hover:text-text-strong">
                   All Jewellery
                 </Link>
               </li>
@@ -63,7 +63,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
       {/* Signatures */}
       <Section spacing="lg" tone="green">
         <Container>
-          <div className="flex flex-col gap-20 md:gap-32">
+          <div className="flex flex-col gap-14 md:gap-32">
             {category.signatures.map((sig, i) => {
               const flip = i % 2 === 1;
               return (
@@ -103,7 +103,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
           </div>
 
           {/* Note + CTA */}
-          <Reveal className="mt-24 rounded-[var(--radius-brand)] border border-line bg-green-soft/25 p-8 md:mt-32 md:p-12">
+          <Reveal className="mt-16 rounded-[var(--radius-brand)] border border-line bg-green-soft/25 p-8 md:mt-32 md:p-12">
             <p className="max-w-2xl font-display text-[clamp(1.3rem,2.4vw,1.9rem)] font-light italic leading-snug text-text-strong">
               {category.note}
             </p>

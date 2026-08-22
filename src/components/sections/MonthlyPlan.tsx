@@ -69,7 +69,7 @@ export function MonthlyPlan() {
         }}
       />
 
-      <Container className="relative py-24">
+      <Container className="relative py-16 md:py-24">
         <div className="max-w-xl">
           <Reveal as="p" className="u-eyebrow mb-6">
             {monthlyPlanTeaser.eyebrow}

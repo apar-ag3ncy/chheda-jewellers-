@@ -16,9 +16,10 @@ type SectionProps = {
 
 const spacings: Record<NonNullable<SectionProps["spacing"]>, string> = {
   none: "",
-  sm: "py-16 md:py-20",
-  md: "py-24 md:py-32",
-  lg: "py-28 md:py-44",
+  // Tighter on phones (avoid huge empty bands between sections); generous on desktop.
+  sm: "py-12 md:py-20",
+  md: "py-16 md:py-32",
+  lg: "py-20 md:py-44",
 };
 
 const tones: Record<NonNullable<SectionProps["tone"]>, string> = {

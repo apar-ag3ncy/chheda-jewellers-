@@ -18,7 +18,7 @@ type Variant = "primary" | "outline" | "ghost" | "onLight" | "link";
 type Size = "sm" | "md" | "lg";
 
 const textSize: Record<Size, string> = {
-  sm: "px-4 py-2.5 text-[0.68rem]",
+  sm: "min-h-[42px] px-4 py-2.5 text-[0.68rem]",
   md: "px-6 py-3.5 text-[0.72rem]",
   lg: "px-8 py-4 text-[0.78rem]",
 };

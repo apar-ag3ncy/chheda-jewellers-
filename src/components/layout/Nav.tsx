@@ -173,7 +173,7 @@ export function Nav() {
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((v) => !v)}
-              className="flex h-9 w-9 items-center justify-center lg:hidden"
+              className="flex h-11 w-11 items-center justify-center lg:hidden"
             >
               <span className="relative block h-3 w-6">
                 <span
@@ -296,13 +296,13 @@ function MobileMenu({
                 {item.label}
               </Link>
               {item.children?.length ? (
-                <div className="flex flex-wrap gap-x-5 gap-y-2 pb-4">
+                <div className="flex flex-wrap gap-x-5 gap-y-1 pb-4">
                   {item.children.map((c) => (
                     <Link
                       key={c.href}
                       href={c.href}
                       onClick={onClose}
-                      className="font-body text-[0.72rem] uppercase tracking-[0.16em] text-text-muted"
+                      className="inline-flex min-h-[40px] items-center py-1 font-body text-[0.72rem] uppercase tracking-[0.16em] text-text-muted"
                     >
                       {c.label}
                     </Link>
