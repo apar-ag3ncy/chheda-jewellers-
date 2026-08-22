@@ -40,19 +40,8 @@ export function Monogram({
       fill={fill}
     >
       {title && !decorative ? <title>{title}</title> : null}
-      {tone === "gold" ? (
-        <defs>
-          <linearGradient id={gid} x1="0" y1="0.5" x2="1" y2="0.5">
-            <stop offset="0" stopColor="#9a563a" />
-            <stop offset="0.18" stopColor="#b37743" />
-            <stop offset="0.34" stopColor="#f0c690" />
-            <stop offset="0.48" stopColor="#f0cfaa" />
-            <stop offset="0.67" stopColor="#b37743" />
-            <stop offset="0.88" stopColor="#c9854d" />
-            <stop offset="1" stopColor="#9b583b" />
-          </linearGradient>
-        </defs>
-      ) : null}
+      {/* The gradient itself is defined once, globally, by <BrandDefs /> in the
+          root layout — see that file for why it must not live here. */}
       {/* Two groups so the mandala petals and the CJ core can be animated
           independently (e.g. the loader's counter-rotating bloom). */}
       <g className="cj-mandala">

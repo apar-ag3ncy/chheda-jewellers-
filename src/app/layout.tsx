@@ -6,6 +6,7 @@ import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Loader } from "@/components/layout/Loader";
+import { BrandDefs } from "@/components/ui/BrandDefs";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { flags } from "@/config/flags";
 
@@ -43,6 +44,10 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+
+        {/* One global definition of the brand gold gradient, always present and
+            never display:none, so every Monogram can resolve its fill. */}
+        <BrandDefs />
 
         <SmoothScroll>
           {flags.loaderEnabled ? <Loader /> : null}
