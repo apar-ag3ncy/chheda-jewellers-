@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 
 export function CommunityStrip() {
   return (
-    <Section id="community" spacing="lg" tone="deep">
+    <Section id="community" spacing="lg" tone="transparent" data-bg="deep">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Copy + CTAs */}

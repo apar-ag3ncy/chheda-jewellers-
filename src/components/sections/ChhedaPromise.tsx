@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 
 export function ChhedaPromise() {
   return (
-    <Section id="chheda-promise" spacing="lg" tone="green" className="u-vignette">
+    <Section id="chheda-promise" spacing="lg" tone="transparent" data-bg="green">
       <Container>
         <SectionHeading
           eyebrow={promiseIntro.eyebrow}

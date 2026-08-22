@@ -12,6 +12,7 @@ export function MonthlyPlan() {
   return (
     <section
       id="monthly-plan"
+      data-bg="green"
       className="relative flex min-h-[88svh] w-full items-center overflow-hidden bg-green-deep"
     >
       <Image
@@ -27,7 +28,7 @@ export function MonthlyPlan() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to right, color-mix(in srgb, var(--green-deep) 90%, transparent) 8%, color-mix(in srgb, var(--green-deep) 30%, transparent) 70%), linear-gradient(to top, var(--green-deep) 2%, transparent 40%)",
+            "linear-gradient(to right, color-mix(in srgb, var(--green-deep) 72%, transparent) 4%, color-mix(in srgb, var(--green-deep) 16%, transparent) 64%), linear-gradient(to top, color-mix(in srgb, var(--green-deep) 52%, transparent) 0%, transparent 32%)",
         }}
       />
 

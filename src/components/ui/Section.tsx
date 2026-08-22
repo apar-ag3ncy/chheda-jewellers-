@@ -7,9 +7,10 @@ type SectionProps = {
   className?: string;
   /** Vertical rhythm. */
   spacing?: "none" | "sm" | "md" | "lg";
-  /** Surface tint. */
-  tone?: "green" | "deep" | "surface";
+  /** Surface tint. "transparent" lets a morphing background layer show through. */
+  tone?: "green" | "deep" | "surface" | "transparent";
   as?: ElementType;
+  "data-bg"?: string;
   "aria-label"?: string;
 };
 
@@ -24,6 +25,7 @@ const tones: Record<NonNullable<SectionProps["tone"]>, string> = {
   green: "bg-bg",
   deep: "bg-green-deep",
   surface: "bg-surface",
+  transparent: "bg-transparent",
 };
 
 /** Full-bleed section band with tone + vertical rhythm. */

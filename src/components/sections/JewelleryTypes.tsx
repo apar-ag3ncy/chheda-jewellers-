@@ -7,7 +7,7 @@ import { Reveal } from "@/components/motion/Reveal";
 
 export function JewelleryTypes() {
   return (
-    <Section id="jewellery-types" spacing="lg" tone="deep">
+    <Section id="jewellery-types" spacing="lg" tone="transparent" data-bg="deep">
       <Container>
         <div className="flex flex-col items-end justify-between gap-6 md:flex-row">
           <SectionHeading
@@ -45,7 +45,7 @@ export function JewelleryTypes() {
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-green-deep/90 via-green-deep/10 to-transparent transition-opacity duration-500 group-hover:from-green-deep/95"
+                  className="absolute inset-0 bg-gradient-to-t from-green-deep/72 via-green-deep/5 to-transparent transition-opacity duration-500 group-hover:from-green-deep/82"
                 />
                 <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                   <p className="u-eyebrow mb-2 text-gold-light/90">{type.subtitle}</p>

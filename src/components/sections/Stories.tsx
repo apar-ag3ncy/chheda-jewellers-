@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 
 export function Stories() {
   return (
-    <Section id="stories" spacing="lg" tone="green">
+    <Section id="stories" spacing="lg" tone="transparent" data-bg="maroon">
       <Container>
         <SectionHeading
           eyebrow="Stories by Chheda"

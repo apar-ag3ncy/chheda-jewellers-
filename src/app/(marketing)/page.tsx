@@ -9,6 +9,7 @@ import {
   MonthlyPlan,
   Branches,
 } from "@/components/sections";
+import { ScrollThemer } from "@/components/motion/ScrollThemer";
 import { flags } from "@/config/flags";
 
 /**
@@ -29,7 +30,7 @@ export default function HomePage() {
   );
 
   return (
-    <>
+    <ScrollThemer>
       <Hero />
       <ChhedaPromise />
       <JewelleryTypes />
@@ -38,6 +39,6 @@ export default function HomePage() {
       {social}
       <MonthlyPlan />
       <Branches />
-    </>
+    </ScrollThemer>
   );
 }

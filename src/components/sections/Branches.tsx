@@ -23,7 +23,7 @@ export function Branches() {
   }, []);
 
   return (
-    <Section id="branches" spacing="lg" tone="deep">
+    <Section id="branches" spacing="lg" tone="transparent" data-bg="green">
       <Container>
         <SectionHeading
           eyebrow="Visit the atelier"

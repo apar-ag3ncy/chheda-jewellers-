@@ -97,5 +97,7 @@ export interface CategoryPage {
     description: string;
     image: ImageAsset;
   }[];
+  /** Curated edit — a handful of pieces that show the category's range. */
+  gallery: ImageAsset[];
   note: string;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ElementType, type ReactNode, type Ref } from "react";
-import { gsap, useGSAP, DUR } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 type RevealProps = {
   children: ReactNode;
@@ -26,7 +26,7 @@ export function Reveal({
   as: Tag = "div",
   className,
   delay = 0,
-  y = 26,
+  y = 32,
   once = true,
   style,
 }: RevealProps) {
@@ -43,12 +43,12 @@ export function Reveal({
         // happens. Only genuinely below-the-fold elements wait for scroll.
         const inView = el.getBoundingClientRect().top < window.innerHeight * 0.9;
         if (inView) {
-          gsap.from(el, { opacity: 0, y, duration: DUR.slow, delay, ease: "lux" });
+          gsap.from(el, { opacity: 0, y, duration: 1.35, delay, ease: "lux" });
         } else {
           gsap.from(el, {
             opacity: 0,
             y,
-            duration: DUR.slow,
+            duration: 1.35,
             delay,
             ease: "lux",
             scrollTrigger: { trigger: el, start: "top 90%", once },

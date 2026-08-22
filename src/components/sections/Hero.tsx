@@ -71,18 +71,15 @@ export function Hero() {
         </div>
       ))}
 
-      {/* Cinematic overlays */}
+      {/* Minimal text scrim — only enough to keep the headline legible on
+          bright frames. No edge vignette; the image reads clean. */}
       <div
         aria-hidden
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 92%, transparent) 4%, transparent 46%), linear-gradient(to right, color-mix(in srgb, var(--green-deep) 78%, transparent) 0%, transparent 58%)",
+            "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 52%, transparent) 0%, transparent 30%), linear-gradient(105deg, color-mix(in srgb, var(--green-deep) 30%, transparent) 0%, transparent 38%)",
         }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0_0_180px_60px_color-mix(in_srgb,var(--green-deep)_60%,transparent)]"
       />
 
       {/* Content — keyed by slide so the reveal replays on change (CSS-driven,

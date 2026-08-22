@@ -48,11 +48,14 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: auto; /* Lenis owns smooth scroll; never double up */
-    background-color: var(--bg-deep);
+    /* Base colour lives on <html> so a fixed, negative-z background layer
+       (ScrollThemer) can paint above it; <body> stays transparent, otherwise
+       its in-flow background would cover that layer. */
+    background-color: var(--bg);
   }
 
   body {
-    background-color: var(--bg);
+    background-color: transparent;
     color: var(--text);
     font-family: var(--font-body);
     font-feature-settings: "kern", "liga";

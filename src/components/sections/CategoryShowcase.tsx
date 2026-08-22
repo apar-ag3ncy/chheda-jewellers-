@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { CategoryPage } from "@/types/content";
 import { categoryList } from "@/lib/content/categories";
 import { Section, Container } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Button } from "@/components/ui/Button";
@@ -27,10 +28,10 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         />
         <div
           aria-hidden
-          className="absolute inset-0"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "linear-gradient(to top, var(--green-deep) 4%, transparent 52%), linear-gradient(to right, color-mix(in srgb,var(--green-deep) 72%, transparent), transparent 60%)",
+              "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 62%, transparent) 0%, transparent 38%), linear-gradient(105deg, color-mix(in srgb, var(--green-deep) 32%, transparent) 0%, transparent 42%)",
           }}
         />
         <Container className="relative pb-16 pt-32 md:pb-24">
@@ -118,8 +119,51 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         </Container>
       </Section>
 
+      {/* The Edit — a curated gallery of six pieces */}
+      <Section spacing="lg" tone="deep">
+        <Container>
+          <SectionHeading
+            eyebrow={`The ${category.name} Edit`}
+            title={`A closer look at\nour ${category.name.toLowerCase()} room`}
+            intro="A small selection from the counter — a sense of the range, the finish, and the feeling. Every piece is one-of-a-kind; come in to see them in the light."
+            size="lg"
+          />
+          <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
+            {category.gallery.map((img, i) => (
+              <figure
+                key={img.src}
+                className={cn(
+                  "group relative overflow-hidden rounded-[var(--radius-brand)]",
+                  i % 3 === 1 && "md:mt-14",
+                )}
+              >
+                <ParallaxImage
+                  src={img.src}
+                  alt={img.alt}
+                  focus={img.focus}
+                  className="aspect-[4/5] w-full"
+                  intensity={0.08}
+                  sizes="(max-width: 768px) 50vw, 30vw"
+                />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute left-4 top-4 font-body text-[0.7rem] tracking-[0.2em] text-gold-light opacity-0 transition-opacity duration-500 group-hover:opacity-90"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </figure>
+            ))}
+          </div>
+          <Reveal className="mt-14 flex justify-center">
+            <Button href="/offers-and-plans" variant="outline" size="lg" withArrow>
+              Book a viewing
+            </Button>
+          </Reveal>
+        </Container>
+      </Section>
+
       {/* Cross-links */}
-      <Section spacing="md" tone="deep">
+      <Section spacing="md" tone="green">
         <Container>
           <p className="u-eyebrow mb-8">Continue exploring</p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
