@@ -1,4 +1,5 @@
 import {
+  IntroScene,
   Hero,
   ChhedaPromise,
   JewelleryTypes,
@@ -20,6 +21,7 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
 export default function HomePage() {
   return (
     <ScrollThemer>
+      <IntroScene />
       <Hero />
       <ChhedaPromise />
       <JewelleryTypes />

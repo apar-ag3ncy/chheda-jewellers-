@@ -37,7 +37,17 @@ export function RouteCurtain({ children }: { children: ReactNode }) {
 
     // Curtain lifts; the incoming page trails slightly for depth.
     tl.to(panel, { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, 0.05)
-      .from(main, { y: 26, autoAlpha: 0, duration: 0.8, ease: "lux" }, 0.25)
+      // clearProps is REQUIRED: GSAP otherwise leaves transform:matrix(1,0,0,1,0,0)
+      // on this wrapper, and ANY transform — even identity — makes it a
+      // containing block, which breaks position:fixed for every descendant and
+      // silently disables all ScrollTrigger pins inside the page.
+      .from(main, {
+        y: 26,
+        autoAlpha: 0,
+        duration: 0.8,
+        ease: "lux",
+        clearProps: "transform,opacity,visibility",
+      }, 0.25)
       .to(panel.querySelector("[data-curtain-mark]"), { autoAlpha: 0, duration: 0.3 }, 0);
   }, []);
 

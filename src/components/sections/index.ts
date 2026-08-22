@@ -1,3 +1,4 @@
+export { IntroScene } from "./IntroScene";
 export { Hero } from "./Hero";
 export { ChhedaPromise } from "./ChhedaPromise";
 export { JewelleryTypes } from "./JewelleryTypes";

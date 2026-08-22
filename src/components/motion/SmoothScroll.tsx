@@ -41,11 +41,16 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     }
 
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // Lerp (not duration) gives a continuously-gliding feel: every frame eases
+      // a fixed fraction toward the target, so fast flicks and slow nudges both
+      // decelerate on the same curve instead of restarting a timed tween.
+      lerp: 0.085,
+      // Slightly damped wheel so a notch travels a touch less and rides longer.
+      wheelMultiplier: 0.9,
       smoothWheel: true,
-      touchMultiplier: 1.5,
-      wheelMultiplier: 1,
+      // Native momentum on touch — smoothing it fights the OS and feels laggy.
+      syncTouch: false,
+      touchMultiplier: 1.6,
     });
     lenisRef.current = lenis;
 

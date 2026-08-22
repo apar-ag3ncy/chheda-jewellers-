@@ -252,19 +252,6 @@
     color: var(--text);
   }
 
-  /* Loader — rotating gold gleam behind the monogram bloom */
-  .cj-loader-gleam {
-    background: conic-gradient(
-      from 0deg,
-      transparent 0deg,
-      color-mix(in srgb, var(--gold) 60%, transparent) 55deg,
-      transparent 120deg,
-      color-mix(in srgb, var(--gold-light) 45%, transparent) 215deg,
-      transparent 290deg,
-      transparent 360deg
-    );
-    filter: blur(34px);
-  }
 }
 
 /* ============================================================
