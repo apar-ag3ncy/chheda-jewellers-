@@ -53,8 +53,14 @@ export function Monogram({
           </linearGradient>
         </defs>
       ) : null}
-      <path fillRule="evenodd" d={MANDALA_PATH} />
-      <path fillRule="evenodd" d={CJ_PATH} />
+      {/* Two groups so the mandala petals and the CJ core can be animated
+          independently (e.g. the loader's counter-rotating bloom). */}
+      <g className="cj-mandala">
+        <path fillRule="evenodd" d={MANDALA_PATH} />
+      </g>
+      <g className="cj-core">
+        <path fillRule="evenodd" d={CJ_PATH} />
+      </g>
     </svg>
   );
 }
