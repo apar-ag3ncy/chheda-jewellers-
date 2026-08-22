@@ -8,7 +8,7 @@ type SectionProps = {
   /** Vertical rhythm. */
   spacing?: "none" | "sm" | "md" | "lg";
   /** Surface tint. "transparent" lets a morphing background layer show through. */
-  tone?: "green" | "deep" | "surface" | "transparent";
+  tone?: "green" | "deep" | "surface" | "transparent" | "light";
   as?: ElementType;
   "data-bg"?: string;
   "aria-label"?: string;
@@ -27,6 +27,8 @@ const tones: Record<NonNullable<SectionProps["tone"]>, string> = {
   deep: "bg-green-deep",
   surface: "bg-surface",
   transparent: "bg-transparent",
+  /** Warm paper band. Pairs with .u-on-light so nested type inverts. */
+  light: "bg-beige",
 };
 
 /** Full-bleed section band with tone + vertical rhythm. */

@@ -74,7 +74,7 @@ export function Ledger() {
   );
 
   return (
-    <Section spacing="lg" tone="green">
+    <Section spacing="lg" tone="light" className="u-on-light">
       <Container>
         <div ref={root}>
           <Reveal as="p" className="u-eyebrow mb-4">

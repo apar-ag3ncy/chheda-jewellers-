@@ -217,6 +217,24 @@
     );
   }
 
+  /**
+   * Light-band scope. Beige is a background in the scroll rotation, so any
+   * section sitting on it re-points the SEMANTIC text/line tokens at dark
+   * values. Everything nested — headings, eyebrows, rules, captions — inverts
+   * automatically, with no per-element colour classes to keep in sync.
+   * Gold darkens to --gold-deep, since --gold on beige fails contrast.
+   */
+  .u-on-light {
+    --text: color-mix(in srgb, var(--green) 82%, transparent);
+    --text-strong: var(--green-deep);
+    --text-muted: color-mix(in srgb, var(--green) 62%, transparent);
+    --line: color-mix(in srgb, var(--maroon) 16%, transparent);
+    --line-strong: color-mix(in srgb, var(--maroon) 34%, transparent);
+    --gold: var(--gold-deep);
+    --gold-light: var(--gold-deep);
+    color: var(--text);
+  }
+
   /* Loader — rotating gold gleam behind the monogram bloom */
   .cj-loader-gleam {
     background: conic-gradient(
