@@ -123,11 +123,12 @@ export function Nav() {
           <Link
             href="/"
             aria-label={`${siteConfig.name} — home`}
-            className="group flex shrink-0 items-center gap-2.5"
+            className="group flex shrink-0 items-center gap-3"
           >
-            {/* Gold monogram on an emerald disc — keeps the gold legible on beige */}
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-green-deep transition-transform duration-700 ease-[var(--ease-lux)] group-hover:rotate-[45deg] md:h-10 md:w-10">
-              <Monogram className="h-[68%] w-[68%]" />
+            {/* Jeweller's-seal medallion — gold mandala on a gold-rimmed
+                emerald disc, so the brand gold stays luminous on beige. */}
+            <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-b from-green to-green-deep shadow-[inset_0_1px_1px_rgba(240,207,170,0.28),0_3px_10px_-3px_rgba(0,0,0,0.45)] ring-1 ring-gold/45 transition-all duration-500 ease-[var(--ease-lux)] group-hover:ring-gold md:h-11 md:w-11">
+              <Monogram className="h-[66%] w-[66%] transition-transform duration-[900ms] ease-[var(--ease-lux)] group-hover:rotate-[72deg]" />
             </span>
             <Wordmark layout="stacked" tone="dark" className="hidden text-[15px] sm:flex" />
           </Link>
