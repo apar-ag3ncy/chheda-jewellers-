@@ -54,3 +54,68 @@ export const promiseStory = {
     },
   ],
 };
+
+/* ============================================================
+   /chheda-promise — the page reframed as a document of record.
+   ============================================================ */
+
+/** Contents index, rendered as an archival ruled table. */
+export const promiseIndex = [
+  { n: "01", label: "The house", note: "Where the name comes from" },
+  { n: "02", label: "The mark on the metal", note: "How to read a hallmark" },
+  { n: "03", label: "What you actually pay for", note: "A bill, itemised" },
+  { n: "04", label: "What we do not do", note: "Stated plainly" },
+] as const;
+
+/**
+ * BIS hallmark anatomy — the three marks required on hallmarked gold jewellery
+ * in India since the HUID system came into force (2021).
+ *
+ * These are the PUBLIC national standard, not claims about our own stock —
+ * the whole point of the section is that the customer can verify a hallmark
+ * independently, with the government's own BIS Care app.
+ */
+export const hallmarkMarks = [
+  {
+    id: "bis",
+    label: "The BIS mark",
+    short: "BIS",
+    body:
+      "The triangular standard mark of the Bureau of Indian Standards. Its presence means the piece was assayed at a BIS-recognised centre — not certified by the shop that sold it to you.",
+  },
+  {
+    id: "purity",
+    label: "Purity & fineness",
+    short: "22K916",
+    body:
+      "The karatage with its fineness in parts per thousand. 22K reads 916 (91.6% gold), 18K reads 750, 14K reads 585. If the number and the karat do not agree, walk away.",
+  },
+  {
+    id: "huid",
+    label: "The HUID",
+    short: "HUID",
+    body:
+      "A six-digit alphanumeric code, unique to that one piece. Type it into the BIS Care app and the piece's own record appears — article, purity, and the jeweller who registered it.",
+  },
+] as const;
+
+/**
+ * A worked example of how a bill is built.
+ * ⚠️ TODO(client): confirm the real making-charge range before launch. The
+ * rate line is pulled live; the making charge below is ILLUSTRATIVE and is
+ * labelled as such in the UI so nothing is passed off as a quoted price.
+ */
+export const ledger = {
+  netWeight: 24.6, // grams of fine gold in the example piece
+  makingPct: 12, // TODO(client): confirm. Shown as an example only.
+  gstPct: 3, // statutory GST on gold jewellery in India
+  note: "An illustration, not a quotation. Your bill shows these same lines, with your piece's real weight and the rate at the moment you buy.",
+};
+
+/** Negative promises — what we refuse to do. Credible because they are specific. */
+export const refusals = [
+  "We do not charge gold rate on the weight of stones.",
+  "We do not hide making charges inside a single bundled figure.",
+  "We do not sell an unhallmarked piece, at any price.",
+  "We do not deduct for 'wastage' you were never told about.",
+] as const;

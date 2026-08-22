@@ -22,10 +22,10 @@ type SectionHeadingProps = {
 };
 
 const sizes = {
-  sm: "text-[var(--step-3)] tracking-[var(--tracking-3)] leading-[var(--leading-3)]",
-  md: "text-[var(--step-4)] tracking-[var(--tracking-4)] leading-[var(--leading-4)]",
-  lg: "text-[var(--step-5)] tracking-[var(--tracking-5)] leading-[var(--leading-5)]",
-  xl: "text-[var(--step-6)] tracking-[var(--tracking-6)] leading-[var(--leading-6)]",
+  sm: "text-[length:var(--step-3)] tracking-[var(--tracking-3)] leading-[var(--leading-3)]",
+  md: "text-[length:var(--step-4)] tracking-[var(--tracking-4)] leading-[var(--leading-4)]",
+  lg: "text-[length:var(--step-5)] tracking-[var(--tracking-5)] leading-[var(--leading-5)]",
+  xl: "text-[length:var(--step-6)] tracking-[var(--tracking-6)] leading-[var(--leading-6)]",
 } as const;
 
 /** Renders *phrase* as Cormorant italic within a display line. */
@@ -80,7 +80,7 @@ export function SectionHeading({
           delay={0.1}
           as="p"
           className={cn(
-            "mt-6 max-w-xl font-body text-[var(--step-0)] font-light leading-relaxed text-text-muted",
+            "mt-6 max-w-xl font-body text-[length:var(--step-0)] font-light leading-relaxed text-text-muted",
             align === "center" && "mx-auto",
           )}
         >

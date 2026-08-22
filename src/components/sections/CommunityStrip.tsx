@@ -56,7 +56,7 @@ export function CommunityStrip() {
             {community.eyebrow}
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="mt-5 font-display text-[var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
+            <h2 className="mt-5 font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
               <span className="block">Be the first to see</span>
               <span className="block italic">what we make next</span>
             </h2>
@@ -197,7 +197,7 @@ function Invitation({
           {glyph}
         </span>
         <p className="u-eyebrow mt-6">{kicker}</p>
-        <h3 className="mt-3 font-display text-[var(--step-2)] font-light leading-tight text-text-strong">
+        <h3 className="mt-3 font-display text-[length:var(--step-2)] font-light leading-tight text-text-strong">
           {title}
         </h3>
         <p className="mt-3 max-w-sm font-body text-[0.92rem] font-light leading-relaxed text-text-muted">
