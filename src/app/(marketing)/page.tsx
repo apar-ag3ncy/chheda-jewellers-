@@ -5,6 +5,7 @@ import {
   Stories,
   Manifesto,
   Collections,
+  DiamondEdit,
   CommunityStrip,
   Testimonials,
   MonthlyPlan,
@@ -38,6 +39,7 @@ export default function HomePage() {
       <Stories />
       <Manifesto />
       <Collections />
+      <DiamondEdit />
       {social}
       <MonthlyPlan />
       <Branches />

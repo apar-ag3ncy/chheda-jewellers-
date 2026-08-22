@@ -4,6 +4,7 @@ export { JewelleryTypes } from "./JewelleryTypes";
 export { Stories } from "./Stories";
 export { Manifesto } from "./Manifesto";
 export { Collections } from "./Collections";
+export { DiamondEdit } from "./DiamondEdit";
 export { CommunityStrip } from "./CommunityStrip";
 export { Testimonials } from "./Testimonials";
 export { MonthlyPlan } from "./MonthlyPlan";
