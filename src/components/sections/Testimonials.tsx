@@ -61,21 +61,21 @@ export function Testimonials() {
               key={t.id}
               delay={(i % 2) * 0.06}
               as="figure"
-              className="flex h-full flex-col justify-between rounded-[var(--radius-brand)] border border-maroon/15 bg-beige p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)] md:p-10"
+              className="flex h-full flex-col justify-between rounded-[var(--radius-brand)] border border-line bg-green-soft/25 p-8 md:p-10"
             >
-              <blockquote className="font-display text-[clamp(1.3rem,2.2vw,1.7rem)] font-light italic leading-snug text-green">
-                <span aria-hidden className="text-maroon">“</span>
+              <blockquote className="font-display text-[clamp(1.3rem,2.2vw,1.7rem)] font-light italic leading-snug text-text-strong">
+                <span aria-hidden className="text-gold">“</span>
                 {t.quote}
-                <span aria-hidden className="text-maroon">”</span>
+                <span aria-hidden className="text-gold">”</span>
               </blockquote>
               <figcaption className="mt-8 flex items-center justify-between gap-4">
                 <div>
-                  <p className="font-body text-sm font-medium text-green">{t.author}</p>
-                  <p className="mt-0.5 font-body text-[0.78rem] text-green/60">{t.location}</p>
+                  <p className="font-body text-sm font-medium text-text-strong">{t.author}</p>
+                  <p className="mt-0.5 font-body text-[0.78rem] text-text-muted">{t.location}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1.5">
                   <Stars rating={t.rating} />
-                  <span className="font-body text-[0.66rem] uppercase tracking-[0.16em] text-green/55">
+                  <span className="font-body text-[0.66rem] uppercase tracking-[0.16em] text-text-muted">
                     via {t.source}
                   </span>
                 </div>

@@ -12,11 +12,12 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
  * Fully static under prefers-reduced-motion (colour still tracks the section,
  * it just snaps instead of easing).
  */
+// Dark brand tones only — they harmonise with the photography and keep every
+// light label/heading legible. No flat light (beige) stop.
 const TONES: Record<string, string> = {
   green: "#0B3A2D", // A — primary brand
   deep: "#06241B", // deepened emerald
   maroon: "#440002", // B — secondary
-  beige: "#E8DDC7", // C — warm light interlude (dark text sections only)
 };
 
 export function ScrollThemer({ children }: { children: ReactNode }) {

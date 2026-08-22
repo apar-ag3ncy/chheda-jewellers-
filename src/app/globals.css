@@ -226,13 +226,12 @@
   cursor: pointer;
   color: var(--offwhite);
   border-radius: 999px;
-  background-color: color-mix(in srgb, var(--offwhite) 8%, transparent);
-  /* Frost comes from the Tailwind `backdrop-blur`/`backdrop-saturate` utilities
-     on the element — raw backdrop-filter here is overridden by Tailwind's
-     backdrop reset chain after the build, so we let the utilities own it. */
+  /* Transparent frost — only a whisper of dark tint so light labels stay
+     legible on any backdrop, while the surface reads mostly see-through.
+     Blur/saturate come from the Tailwind backdrop utilities on the element. */
+  background-color: color-mix(in srgb, var(--green-deep) 15%, transparent);
   box-shadow:
-    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 40%, transparent),
-    inset 0 -14px 26px -20px color-mix(in srgb, var(--green-deep) 92%, transparent),
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 26%, transparent),
     inset 0 0 0 1px color-mix(in srgb, var(--gold) 34%, transparent);
   transition:
     transform var(--dur-fast) var(--ease-lux),
@@ -275,10 +274,9 @@
 
 .glass-button:hover {
   transform: translateY(-2px);
-  background-color: color-mix(in srgb, var(--offwhite) 13%, transparent);
+  background-color: color-mix(in srgb, var(--green-deep) 26%, transparent);
   box-shadow:
-    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 55%, transparent),
-    inset 0 -14px 26px -20px color-mix(in srgb, var(--green-deep) 92%, transparent),
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 40%, transparent),
     inset 0 0 0 1px color-mix(in srgb, var(--gold) 72%, transparent);
 }
 .glass-button:hover::after {
@@ -312,28 +310,26 @@
     0 0 34px -8px color-mix(in srgb, var(--gold) 45%, transparent);
 }
 
-/* Gold (primary) tint — warm glass, dark label */
+/* Gold (primary) — transparent warm-dark frost, bright gold rim, light label */
 .glass-button.glass-gold {
-  color: var(--green-deep);
-  background-color: color-mix(in srgb, var(--gold) 60%, transparent);
+  background-color: color-mix(in srgb, var(--gold-deep) 22%, transparent);
   box-shadow:
-    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 60%, transparent),
-    inset 0 -14px 24px -18px color-mix(in srgb, var(--gold-deep) 82%, transparent),
-    inset 0 0 0 1px color-mix(in srgb, var(--gold-light) 62%, transparent);
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 32%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--gold-light) 72%, transparent);
 }
 .glass-button.glass-gold:hover {
-  background-color: color-mix(in srgb, var(--gold-light) 74%, transparent);
+  background-color: color-mix(in srgb, var(--gold-deep) 34%, transparent);
 }
 
-/* Ghost — lower-emphasis frost, thinner rim */
+/* Ghost — lightest frost, thinnest rim */
 .glass-button.glass-ghost {
-  background-color: color-mix(in srgb, var(--offwhite) 4%, transparent);
+  background-color: color-mix(in srgb, var(--green-deep) 8%, transparent);
   box-shadow:
-    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 24%, transparent),
-    inset 0 0 0 1px color-mix(in srgb, var(--gold) 20%, transparent);
+    inset 0 1px 0 0 color-mix(in srgb, var(--offwhite) 18%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--gold) 18%, transparent);
 }
 .glass-button.glass-ghost:hover {
-  background-color: color-mix(in srgb, var(--offwhite) 9%, transparent);
+  background-color: color-mix(in srgb, var(--green-deep) 16%, transparent);
 }
 
 /* On a light (beige) surface — flip the frost dark so it stays legible */
