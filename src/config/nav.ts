@@ -83,39 +83,6 @@ export const primaryNav: NavItem[] = [
 ];
 
 /**
- * Footer link rail. Lives here (not in the Footer component) so the footer
- * stays presentational and the site's link graph is editable in one place.
- * Kept to three short columns on purpose — the footer has to fit one screen.
- */
-export const footerColumns = [
-  {
-    title: "Jewellery",
-    links: [
-      { label: "Gold", href: "/jewellery/gold" },
-      { label: "Diamond", href: "/jewellery/diamond" },
-      { label: "Polki", href: "/jewellery/polki" },
-      { label: "Bespoke", href: "/bespoke" },
-    ],
-  },
-  {
-    title: "The Edits",
-    links: edits.slice(0, 4).map((e) => ({
-      label: e.name,
-      href: `/edits/${e.slug}`,
-    })),
-  },
-  {
-    title: "The House",
-    links: [
-      { label: "Chheda Promise", href: "/chheda-promise" },
-      { label: "Offers & Plans", href: "/offers-and-plans" },
-      { label: "Live Gold Rate", href: "/live-gold-rate" },
-      { label: "Book an Appointment", href: "/enquire" },
-    ],
-  },
-] as const;
-
-/**
  * Homepage section order — the single place the scroll is choreographed.
  * The homepage renders FROM this list (see app/(marketing)/page.tsx), so
  * reordering the journey is a config edit, never a JSX surgery.
