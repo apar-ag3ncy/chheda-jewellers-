@@ -76,8 +76,14 @@ src/
   with ScrollTrigger reading progress only (`motion/useStickyScene`). GSAP is
   never allowed to move layout — see the comment in `RouteCurtain` for the bug
   that rule exists to prevent.
-- **The footer is capped at one screen** (`h-[100svh]` from `md`), with display
-  type sized in `svh` so it shrinks with the viewport instead of overflowing.
+- **The footer is a one-screen sign-off** (`h-[100svh]`): a single full-bleed
+  landscape frame with the monogram, CHHEDA at poster scale and a small
+  JEWELLERS beneath it, centred — and nothing else. No link rail, no legal row.
+  It composes its own lockup rather than reusing `<Wordmark>` (that one is the
+  nav ratio, where the second line ends up nearly as wide); the name still
+  comes from `config/site`. **Note:** with the legal row gone, `/privacy` and
+  `/terms` are reachable only by URL and the sitemap — add links back wherever
+  the client wants them before launch.
 - **The ring turns only when the visitor turns it.** `/media/reels/turn` is a
   72-frame WebP sequence cut from a 360° turntable generated on the house's
   Magnific account (Kling 3.0, image-to-video from a background-cut still).
