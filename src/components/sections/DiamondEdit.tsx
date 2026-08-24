@@ -86,12 +86,6 @@ export function DiamondEdit() {
             <Monogram className="h-14 w-14 md:h-16 md:w-16" />
           </div>
 
-          <span
-            data-edit-line
-            aria-hidden
-            className="mt-10 block h-px w-16 bg-line-strong"
-          />
-
           <p
             data-edit-line
             className="mt-10 font-display text-[clamp(3rem,7vw,5.5rem)] font-light leading-none text-text-strong"

@@ -5,6 +5,7 @@ import { hallmarkMarks } from "@/lib/content/promise";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
+import { HuidCheck } from "./HuidCheck";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 /**
@@ -272,6 +273,12 @@ export function Hallmark() {
                 you checked.
                 <span className="sr-only"> Currently reading: {current.label}.</span>
               </p>
+
+              {/* Reading about a hallmark and going to find one are different
+                  acts. This is what turns the section into the second. */}
+              <div className="mt-8">
+                <HuidCheck />
+              </div>
             </div>
           </div>
         </Container>

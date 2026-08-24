@@ -1,6 +1,6 @@
 import { plans } from "@/lib/content/plans";
 import { pageMetadata } from "@/lib/seo";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { PagePlate } from "@/components/ui/PagePlate";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
@@ -22,10 +22,22 @@ const steps = [
 export default function OffersAndPlansPage() {
   return (
     <>
-      <PageHeader
+      <PagePlate
+        folio="III"
         eyebrow="Offers & Plans"
-        title={"Save toward\nsomething lasting"}
+        title={"Save toward\n*something lasting*"}
         intro="No jargon, no fine-print traps. Straightforward ways to plan for the piece that marks your milestone."
+        plate={{
+          src: "/media/pages/plans.jpg",
+          alt: "A guest in mint green and polki, seated in warm light",
+          focus: "50% 24%",
+        }}
+        meta={[
+          { label: "From", value: "₹2,000 a month" },
+          { label: "Term", value: "11 months" },
+          { label: "Redeem at", value: "The day's rate" },
+          { label: "Joining fee", value: "None" },
+        ]}
       />
 
       {/* Plans */}
@@ -62,7 +74,7 @@ export default function OffersAndPlansPage() {
                     </ul>
                     <div className="mt-8">
                       <Button
-                        href={plan.cta.href === "/offers-and-plans" ? "#enquire" : plan.cta.href}
+                        href={plan.cta.href === "/offers-and-plans" ? "/enquire?intent=plans" : plan.cta.href}
                         variant={plan.flagship ? "primary" : "outline"}
                         size="lg"
                         withArrow
@@ -107,18 +119,25 @@ export default function OffersAndPlansPage() {
             ))}
           </div>
 
-          <div id="enquire" className="mt-16 flex flex-col items-start gap-6 border-t border-line pt-10 md:flex-row md:items-center md:justify-between">
+          <div id="enquire" className="mt-24 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="font-display text-[clamp(1.7rem,3.4vw,2.6rem)] font-light leading-tight">
                 Ready to begin? Let&rsquo;s talk.
               </h2>
               <p className="mt-3 max-w-md font-body text-[0.92rem] font-light leading-relaxed text-text-muted">
-                Enquiries are personal — message us on WhatsApp or visit a store and we&rsquo;ll walk you through it.
+                Enquiries are personal. Book twenty minutes with an advisor, or
+                message us on WhatsApp, and we&rsquo;ll walk you through it line by
+                line.
               </p>
             </div>
-            <Button href="/live-gold-rate" variant="ghost" size="lg" withArrow>
-              Check today&rsquo;s rate
-            </Button>
+            <div className="flex flex-wrap gap-4">
+              <Button href="/enquire?intent=plans" variant="primary" size="lg" withArrow>
+                Book an appointment
+              </Button>
+              <Button href="/live-gold-rate" variant="ghost" size="lg">
+                Check today&rsquo;s rate
+              </Button>
+            </div>
           </div>
 
           <p className="mt-10 font-body text-[0.72rem] leading-relaxed text-text-muted/70">

@@ -65,6 +65,7 @@ export const promiseIndex = [
   { n: "02", label: "The mark on the metal", note: "How to read a hallmark" },
   { n: "03", label: "What you actually pay for", note: "A bill, itemised" },
   { n: "04", label: "What we do not do", note: "Stated plainly" },
+  { n: "05", label: "Take this with you", note: "Seven questions for any counter" },
 ] as const;
 
 /**
@@ -118,4 +119,56 @@ export const refusals = [
   "We do not hide making charges inside a single bundled figure.",
   "We do not sell an unhallmarked piece, at any price.",
   "We do not deduct for 'wastage' you were never told about.",
+] as const;
+
+/**
+ * "Take this to any jeweller" — the questions that separate a straight counter
+ * from a slippery one, with the answer a customer should get.
+ *
+ * Published deliberately as a tool that works against US as readily as against
+ * anyone else. Everything here is checkable in a shop in under five minutes,
+ * and every "expect" line is one we can be held to.
+ */
+export const counterChecks = [
+  {
+    id: "huid",
+    ask: "Can I see the HUID on this piece?",
+    expect:
+      "A six-digit code, laser-marked on the piece, that they will help you look up in the BIS Care app while you stand there.",
+  },
+  {
+    id: "netweight",
+    ask: "What is the net gold weight, without the stones?",
+    expect:
+      "A number in grams, weighed in front of you, that is lower than the gross weight on the tag.",
+  },
+  {
+    id: "making",
+    ask: "What is the making charge, as a percentage?",
+    expect:
+      "A single percentage, stated before you decide — not folded into one bundled figure at the till.",
+  },
+  {
+    id: "stones",
+    ask: "Am I paying gold rate on the stone weight?",
+    expect: "No. Stones are weighed and priced separately, or not charged at all.",
+  },
+  {
+    id: "wastage",
+    ask: "Is there a wastage charge, and what is it?",
+    expect:
+      "Either none, or a figure named upfront. Never a deduction that appears for the first time on the bill.",
+  },
+  {
+    id: "buyback",
+    ask: "What will you pay me for this piece in five years?",
+    expect:
+      "A stated exchange and buy-back policy, in writing, that does not depend on who is behind the counter that day.",
+  },
+  {
+    id: "bill",
+    ask: "Will the bill show all of this, itemised?",
+    expect:
+      "Yes — weight, rate, making, GST, on separate lines. If the answer is a single total, walk away.",
+  },
 ] as const;

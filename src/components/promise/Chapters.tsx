@@ -1,45 +1,39 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
 import { promiseIndex, promiseStory } from "@/lib/content/promise";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
+import { useStickyScene } from "@/components/motion/useStickyScene";
 import { cn } from "@/lib/cn";
 
 /** One plate per chapter — the image turns as you read, like a monograph. */
 const PLATES = [
-  { src: "/media/promise/promise-01.jpg", alt: "A quiet portrait in fine gold jewellery", focus: "50% 28%" },
-  { src: "/media/categories/gold.jpg", alt: "Traditional gold necklace in a palace corridor", focus: "50% 30%" },
-  { src: "/media/hero/hero-01.jpg", alt: "Bridal polki jewellery worn with an embroidered lehenga", focus: "50% 26%" },
+  {
+    src: "/media/promise/promise-01.jpg",
+    alt: "A quiet portrait in fine gold jewellery",
+    focus: "50% 28%",
+  },
+  {
+    src: "/media/promise/plate-02.jpg",
+    alt: "Stacked gold bangles and a jewelled nath, photographed close enough to see the setting",
+    focus: "50% 38%",
+  },
+  {
+    src: "/media/promise/plate-03.jpg",
+    alt: "A matha-patti and layered polki necklace framed by roses",
+    focus: "50% 28%",
+  },
 ];
 
 export function Chapters() {
-  const root = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      // The plate only "turns" where it is actually sticky.
-      mm.add("(min-width: 768px)", () => {
-        const triggers = gsap.utils
-          .toArray<HTMLElement>("[data-chapter]")
-          .map((el, i) =>
-            ScrollTrigger.create({
-              trigger: el,
-              start: "top 60%",
-              end: "bottom 60%",
-              onToggle: (self) => self.isActive && setActive(i),
-            }),
-          );
-        return () => triggers.forEach((t) => t.kill());
-      });
-    },
-    { scope: root },
-  );
+  // Same primitive as the atelier and the edit lookbook, so all three sticky
+  // scenes on the site behave identically. See `useStickyScene`.
+  const { rootRef, active } = useStickyScene(promiseStory.chapters.length, {
+    start: "top 60%",
+    end: "bottom 60%",
+  });
 
   return (
     <Section spacing="lg" tone="green">
@@ -70,7 +64,7 @@ export function Chapters() {
         </ol>
 
         {/* ── Chapters, with a plate that turns ── */}
-        <div ref={root} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+        <div ref={rootRef} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-green-deep md:sticky md:top-28">
               {PLATES.map((p, i) => (
@@ -83,7 +77,7 @@ export function Chapters() {
                   fill
                   sizes="(max-width: 768px) 100vw, 42vw"
                   className={cn(
-                    "object-cover transition-opacity duration-[1100ms] ease-[var(--ease-lux)]",
+                    "object-cover transition-opacity duration-[1500ms] ease-[var(--ease-cinema)]",
                     // Mobile has no sticky turn, so it simply shows the first
                     // plate; from md up the plate follows the active chapter.
                     i === 0 ? "opacity-100" : "opacity-0",
@@ -104,7 +98,7 @@ export function Chapters() {
               {promiseStory.chapters.map((ch, i) => (
                 <li
                   key={ch.id}
-                  data-chapter
+                  data-scene-step
                   className="border-t border-line py-10 first:border-t-0 first:pt-0 md:py-16"
                 >
                   <Reveal delay={0.04}>

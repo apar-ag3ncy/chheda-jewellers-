@@ -72,38 +72,45 @@ export function Button(props: AsLink | AsButton) {
     className,
     withArrow,
     contentClassName,
-    ...rest
+    href,
+    ...attrs
   } = props;
 
-  const isExternal =
-    props.href !== undefined && /^https?:\/\//.test(props.href);
-  const externalAttrs = isExternal
-    ? { target: "_blank", rel: "noopener noreferrer" }
-    : {};
+  const externalAttrs =
+    href !== undefined && /^https?:\/\//.test(href)
+      ? { target: "_blank", rel: "noopener noreferrer" }
+      : {};
+
+  /** Render `content` as a Link when href is present, else as a <button>. */
+  const render = (classes: string, content: ReactNode) =>
+    href !== undefined ? (
+      <Link
+        href={href}
+        className={classes}
+        {...externalAttrs}
+        {...(attrs as Omit<AsLink, keyof CommonProps | "href">)}
+      >
+        {content}
+      </Link>
+    ) : (
+      <button
+        className={classes}
+        {...(attrs as Omit<AsButton, keyof CommonProps | "href">)}
+      >
+        {content}
+      </button>
+    );
+
+  const label = (
+    <>
+      {children}
+      {withArrow ? <Arrow /> : null}
+    </>
+  );
 
   // Plain text-link variant — not a glass surface.
   if (variant === "link") {
-    const classes = cn("group", linkText, className);
-    const label = (
-      <>
-        {children}
-        {withArrow ? <Arrow /> : null}
-      </>
-    );
-    if (props.href !== undefined) {
-      const { href: _href, ...linkRest } = rest as AsLink;
-      return (
-        <Link href={props.href} className={classes} {...externalAttrs} {...linkRest}>
-          {label}
-        </Link>
-      );
-    }
-    const { href: _omit, ...buttonRest } = rest as AsButton & { href?: undefined };
-    return (
-      <button className={classes} {...buttonRest}>
-        {label}
-      </button>
-    );
+    return render(cn("group", linkText, className), label);
   }
 
   // Glass surface. Backdrop frost via Tailwind utilities (survives the build).
@@ -111,35 +118,14 @@ export function Button(props: AsLink | AsButton) {
     "glass-button group backdrop-blur-[14px] backdrop-saturate-[1.35]",
     glassTint[variant],
   );
-  const label = (
-    <span className={cn(glassText, textSize[size], contentClassName)}>
-      {children}
-      {withArrow ? <Arrow /> : null}
-    </span>
-  );
 
   return (
     <div className={cn("glass-button-wrap", className)}>
-      {props.href !== undefined ? (
-        (() => {
-          const { href: _href, ...linkRest } = rest as AsLink;
-          return (
-            <Link href={props.href} className={surface} {...externalAttrs} {...linkRest}>
-              {label}
-            </Link>
-          );
-        })()
-      ) : (
-        (() => {
-          const { href: _omit, ...buttonRest } = rest as AsButton & {
-            href?: undefined;
-          };
-          return (
-            <button className={surface} {...buttonRest}>
-              {label}
-            </button>
-          );
-        })()
+      {render(
+        surface,
+        <span className={cn(glassText, textSize[size], contentClassName)}>
+          {label}
+        </span>,
       )}
       <div aria-hidden className="glass-button-shadow" />
     </div>

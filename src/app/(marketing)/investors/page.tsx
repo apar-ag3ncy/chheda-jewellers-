@@ -1,9 +1,12 @@
 import { siteConfig } from "@/config/site";
+import { reviewsSummary } from "@/lib/content/testimonials";
 import { pageMetadata } from "@/lib/seo";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { PagePlate } from "@/components/ui/PagePlate";
 import { Section, Container } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
+import { Monogram } from "@/components/ui/Monogram";
 
 /**
  * ⚠️ SCOPE NOTE (build): "Investors" is intentionally scaffolded.
@@ -12,69 +15,181 @@ import { Button } from "@/components/ui/Button";
  *   (b) a customer gold-investment scheme (which overlaps Offers & Plans).
  * Framed here as (a) — investor relations — to keep it distinct from the
  * Monthly Plan. Update the copy/CTA once the direction is confirmed.
+ *
+ * The page is written so the absence of a deck is not a dead end: the
+ * position, the roadmap and the terms of engagement are all stated, and the
+ * only thing missing is the numbers — which is honest, and reads far better
+ * than "coming soon" on its own.
  */
 export const metadata = pageMetadata({
   title: "Investors",
   description:
-    "Investor relations at Chheda Jewellers — partner with a heritage jewellery house built on transparency and trust.",
+    "Investor relations at Chheda Jewellers — a heritage Mumbai jewellery house built on hallmarked, transparent dealing, preparing its next chapter.",
   path: "/investors",
 });
 
 const pillars = [
   {
+    n: "01",
     title: "Heritage & trust",
-    body: "A neighbourhood name built over years of transparent, hallmarked dealing — the foundation of every lasting jewellery business.",
+    body: "A neighbourhood name built over years of transparent, hallmarked dealing — the compounding asset in this category, and the one that cannot be bought.",
+    proof: "Every piece BIS hallmarked; making charges published, not negotiated.",
   },
   {
+    n: "02",
     title: "A growing house",
-    body: "Two branches today, with a considered roadmap toward a modern, omnichannel jewellery experience.",
+    body: "Two boutiques today, with a considered roadmap toward a modern, omnichannel jewellery experience rather than a discount-led expansion.",
+    proof: "Two Mumbai locations; a third channel in preparation.",
   },
   {
+    n: "03",
     title: "Transparent by nature",
-    body: "The same openness we offer customers — clear rates, clear making — is how we intend to engage every partner.",
+    body: "The same openness we offer customers — clear rates, clear making, a bill with nothing folded into it — is how we intend to engage every partner.",
+    proof: "The pricing method is published in full on the Chheda Promise page.",
+  },
+];
+
+/** ⚠️ TODO(client): confirm every figure before this page goes live. */
+const position = [
+  { label: "Founded", value: "Mumbai" },
+  { label: "Boutiques", value: "Two" },
+  { label: "Customer rating", value: `${reviewsSummary.rating.toFixed(1)} / 5` },
+  { label: "Categories", value: "Gold · Diamond · Polki" },
+];
+
+const roadmap = [
+  {
+    horizon: "Now",
+    title: "The brand experience",
+    body: "A single editorial destination for the house — collections, the promise, appointments and the atelier.",
+  },
+  {
+    horizon: "Next",
+    title: "Commerce",
+    body: "Headless commerce behind the same experience, so the catalogue can be bought without the brand becoming a template.",
+  },
+  {
+    horizon: "Then",
+    title: "The third door",
+    body: "A further boutique, and the systems — inventory, CRM, valuation — that let a third location behave like the first two.",
   },
 ];
 
 export default function InvestorsPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Investors"
-        title={"Partner with a house\nbuilt on trust"}
-        intro="We are shaping the next chapter of Chheda Jewellers. If you would like to explore a partnership, we would be glad to talk."
+      <PagePlate
+        folio="V"
+        eyebrow="Investor relations"
+        title={"Partner with a house\n*built on trust*"}
+        intro="We are shaping the next chapter of Chheda Jewellers — the same business, run the same way, with the systems to do it at more than two counters."
+        plate={{
+          src: "/media/pages/investors.jpg",
+          alt: "A portrait in a red anarkali and layered gold beneath a chandelier",
+          focus: "50% 26%",
+        }}
+        meta={position}
       />
 
+      {/* ── The position ──────────────────────────────────────────────── */}
       <Section spacing="lg" tone="green">
         <Container>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
+          <SectionHeading
+            eyebrow="The position"
+            title={"Three things that\n*compound*"}
+            size="md"
+          />
+          <ol className="mt-14 md:mt-20">
             {pillars.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.07} className="border-t border-line pt-6">
-                <h2 className="font-display text-2xl font-light text-text-strong">{p.title}</h2>
-                <p className="mt-3 font-body text-[0.95rem] font-light leading-relaxed text-text-muted">
-                  {p.body}
+              <Reveal
+                as="li"
+                key={p.n}
+                delay={i * 0.06}
+                className="grid grid-cols-1 gap-5 border-t border-line py-9 last:border-b md:grid-cols-12 md:gap-10 md:py-12"
+              >
+                <div className="md:col-span-2">
+                  <span className="font-display text-4xl font-light text-gold">{p.n}</span>
+                </div>
+                <div className="md:col-span-6">
+                  <h2 className="font-display text-[length:var(--step-3)] font-light leading-[var(--leading-3)] text-text-strong">
+                    {p.title}
+                  </h2>
+                  <p className="mt-4 max-w-lg font-body text-[0.98rem] font-light leading-relaxed text-text-muted">
+                    {p.body}
+                  </p>
+                </div>
+                <div className="md:col-span-4">
+                  <p className="border-l border-line-strong pl-5 font-body text-[0.86rem] font-light leading-relaxed text-text">
+                    <span className="u-eyebrow mb-1.5 block text-[0.55rem]">Checkable</span>
+                    {p.proof}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </Container>
+      </Section>
+
+      {/* ── The roadmap ───────────────────────────────────────────────── */}
+      <Section spacing="lg" tone="light" className="u-on-light">
+        <Container>
+          <SectionHeading
+            eyebrow="The roadmap"
+            title={"Now, next,\n*and then*"}
+            intro="Stated as sequence rather than as dates, because a jeweller that promises quarters it cannot control is telling you something about how it runs everything else."
+            size="md"
+          />
+          <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden border border-line bg-line md:mt-20 md:grid-cols-3">
+            {roadmap.map((r, i) => (
+              <Reveal key={r.horizon} delay={i * 0.07} className="bg-cream p-8 md:p-10">
+                <p className="u-eyebrow mb-5">{r.horizon}</p>
+                <h3 className="font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
+                  {r.title}
+                </h3>
+                <p className="mt-4 font-body text-[0.92rem] font-light leading-relaxed text-text-muted">
+                  {r.body}
                 </p>
               </Reveal>
             ))}
           </div>
+        </Container>
+      </Section>
 
-          <Reveal className="mt-16 rounded-[var(--radius-brand)] border border-line-strong bg-green-soft/30 p-8 md:mt-24 md:p-12">
-            <p className="u-eyebrow mb-4 text-gold-light">Register your interest</p>
-            <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.6vw,2.8rem)] font-light leading-tight">
-              Detailed investor information is being prepared.
-            </h2>
-            <p className="mt-4 max-w-xl font-body text-[0.95rem] font-light leading-relaxed text-text-muted">
-              In the meantime, reach out and we&rsquo;ll be in touch as materials become
-              available.
+      {/* ── Register interest ─────────────────────────────────────────── */}
+      <Section spacing="lg" tone="deep">
+        <Container>
+          <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+            <Reveal variant="settle">
+              <Monogram className="h-12 w-12" />
+            </Reveal>
+            <Reveal delay={0.06}>
+              <h2 className="mt-9 font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)]">
+                The numbers are the one thing not on this page.
+              </h2>
+            </Reveal>
+            <Reveal as="p" delay={0.1} className="mt-5 max-w-lg font-body text-[0.98rem] font-light leading-relaxed text-text-muted">
+              Detailed investor materials are in preparation and are shared
+              directly rather than published. Write to us and we will send them
+              as they are ready.
+            </Reveal>
+            <Reveal delay={0.14} className="mt-10 flex flex-wrap justify-center gap-4">
+              <Button
+                href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent("Investor enquiry")}`}
+                variant="primary"
+                size="lg"
+                withArrow
+              >
+                Register your interest
+              </Button>
+              <Button href="/chheda-promise" variant="ghost" size="lg">
+                How we run the counter
+              </Button>
+            </Reveal>
+            <p className="mt-9 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+              Nothing on this page is an offer of securities or an invitation to
+              invest.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href={`mailto:${siteConfig.contact.email}`} variant="primary" size="lg" withArrow>
-                Contact us
-              </Button>
-              <Button href={siteConfig.contact.whatsappHref} variant="ghost" size="lg">
-                Message on WhatsApp
-              </Button>
-            </div>
-          </Reveal>
+          </div>
         </Container>
       </Section>
     </>

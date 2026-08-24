@@ -123,12 +123,6 @@ export function CommunityStrip() {
           ))}
         </div>
 
-        {/* plinth the facade stands on */}
-        <span
-          aria-hidden
-          className="mx-auto block h-px w-full max-w-5xl bg-line-strong/70"
-        />
-
         {/* ── Two invitations, split by a gold rule with the house mark ── */}
         <div className="relative mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-2 md:gap-0">
           {/* vertical divider + centre mark (desktop) */}

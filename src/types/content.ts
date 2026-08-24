@@ -101,3 +101,76 @@ export interface CategoryPage {
   gallery: ImageAsset[];
   note: string;
 }
+
+/* ============================================================
+   THE EDITS — occasion-led categories.
+
+   A second, independent axis through the same house. `categories`
+   (gold / diamond / polki) answers "what is it made of"; an edit answers
+   "where are you wearing it". They deliberately do not nest: a bridal edit
+   pulls from all three metals, and a single piece can appear in several
+   edits. Keeping the axes separate is what stops the IA collapsing into a
+   product taxonomy the moment commerce arrives.
+   ============================================================ */
+
+/** A single ruled row in an edit's "how to wear it" table. */
+export interface EditNote {
+  label: string;
+  value: string;
+}
+
+export interface OccasionEdit {
+  slug: string;
+  /** Short label for nav, chips and cross-links. */
+  name: string;
+  /** The editorial title — may carry *italic* phrases via `emphasise`. */
+  title: string;
+  /** Wide-tracked kicker above the title. */
+  eyebrow: string;
+  /** One line that has to earn the click. */
+  hook: string;
+  intro: string;
+  /** Accent tone used for the edit's chip / rule / index number. */
+  mood: "rose" | "ember" | "ink" | "sun" | "dusk";
+  hero: ImageAsset;
+  /** Six frames — the edit's own gallery. */
+  gallery: ImageAsset[];
+  /** The styling brief, as a ruled table. */
+  notes: EditNote[];
+  /** Three pieces that define the edit. */
+  picks: { id: string; title: string; description: string }[];
+  /** Which metal rooms this edit draws from. */
+  drawsFrom: CategoryPage["slug"][];
+}
+
+/* ============================================================
+   BESPOKE — the custom-jewellery commission.
+   ============================================================ */
+
+export interface BespokeStep {
+  id: string;
+  /** Roman numeral or 01-style index, rendered as-is. */
+  n: string;
+  title: string;
+  body: string;
+  /** What the customer walks away with at the end of this step. */
+  outcome: string;
+  image: ImageAsset;
+}
+
+/* ============================================================
+   THE RING — the scrub-driven 360° turntable.
+   ============================================================ */
+
+/** A directory of extracted frames the visitor rotates through. */
+export interface FilmReel {
+  id: string;
+  /** The piece's name — used for the accessible label, not shown as copy. */
+  name: string;
+  /** Directory under /media/reels containing f00..fNN.webp + poster.webp. */
+  dir: string;
+  /** Number of frames in the sequence. */
+  frames: number;
+  /** Poster alt text (the SSR/no-JS image). */
+  alt: string;
+}

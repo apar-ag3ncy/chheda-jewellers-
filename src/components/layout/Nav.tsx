@@ -136,7 +136,7 @@ export function Nav() {
           {/* Desktop links */}
           <ul className="ml-2 hidden items-center gap-0.5 lg:flex">
             {primaryNav.map((item) => {
-              const hasChildren = Boolean(item.children?.length);
+              const hasChildren = Boolean(item.groups?.length);
               return (
                 <li
                   key={item.label}
@@ -176,12 +176,10 @@ export function Nav() {
           {/* CTA + mobile toggle */}
           <div className="ml-1 flex shrink-0 items-center gap-2">
             <Link
-              href={siteConfig.contact.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/enquire"
               className="hidden rounded-full bg-green-deep px-4 py-2 font-body text-[0.66rem] uppercase tracking-[0.14em] text-offwhite transition-colors duration-300 hover:bg-green md:inline-flex"
             >
-              Book a Visit
+              Book Appointment
             </Link>
 
             <button
@@ -199,41 +197,67 @@ export function Nav() {
             </button>
           </div>
 
-          {/* Mega dropdown (desktop) — hangs below the beige capsule */}
-          {primaryNav.map((item) =>
-            item.children?.length ? (
+          {/* Mega dropdown (desktop) — hangs below the beige capsule.
+              Items that declare `groups` render the house's two navigation
+              axes side by side: BY METAL (what it is made of) and BY OCCASION
+              (where you are wearing it). Neither nests inside the other. */}
+          {primaryNav.map((item) => {
+            const groups = item.groups;
+            if (!groups?.length) return null;
+            return (
               <div
                 key={item.label}
                 onMouseEnter={() => handleEnter(item.label, true)}
                 inert={openMenu !== item.label}
                 className={cn(
-                  "absolute left-1/2 top-[calc(100%+12px)] w-[min(92vw,640px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-line-strong bg-[var(--green-glass)] p-2 backdrop-blur-2xl transition-all duration-300",
+                  "absolute left-1/2 top-[calc(100%+12px)] w-[min(94vw,780px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-line-strong bg-[var(--green-glass)] p-5 backdrop-blur-2xl transition-all duration-[420ms] ease-[var(--ease-lux)]",
                   openMenu === item.label
                     ? "pointer-events-auto translate-y-0 opacity-100"
                     : "pointer-events-none translate-y-2 opacity-0",
                 )}
               >
-                <div className="grid grid-cols-1 gap-1 sm:grid-cols-3">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className="group rounded-xl border border-transparent p-5 transition-colors duration-300 hover:border-line-strong hover:bg-white/5"
-                    >
-                      <span className="font-display text-2xl font-light text-text-strong">
-                        {child.label}
-                      </span>
-                      {child.description ? (
-                        <span className="mt-1.5 block font-body text-[0.75rem] leading-relaxed text-text-muted">
-                          {child.description}
-                        </span>
-                      ) : null}
-                    </Link>
+                <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                  {groups.map((group) => (
+                    <div key={group.title}>
+                      <div className="mb-3 flex items-baseline justify-between border-b border-line pb-2">
+                        <span className="u-eyebrow text-[0.62rem]">{group.title}</span>
+                        {group.note ? (
+                          <span className="font-body text-[0.66rem] font-light italic text-text-muted">
+                            {group.note}
+                          </span>
+                        ) : null}
+                      </div>
+                      <ul className="flex flex-col">
+                        {group.items.map((child) => (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              className="group/item flex items-baseline gap-3 rounded-lg px-2 py-2 transition-colors duration-300 hover:bg-white/[0.06]"
+                            >
+                              <span className="font-display text-[1.35rem] font-light leading-tight text-text-strong">
+                                {child.label}
+                              </span>
+                              {child.description ? (
+                                <span className="hidden flex-1 truncate font-body text-[0.7rem] font-light leading-relaxed text-text-muted sm:block">
+                                  {child.description}
+                                </span>
+                              ) : null}
+                              <span
+                                aria-hidden
+                                className="translate-x-0 text-[0.7rem] text-gold opacity-0 transition-all duration-300 group-hover/item:translate-x-0.5 group-hover/item:opacity-100"
+                              >
+                                &rarr;
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
                 </div>
               </div>
-            ) : null,
-          )}
+            );
+          })}
         </nav>
 
         {/* Right extra — socials (home-top only) */}
@@ -313,9 +337,9 @@ function MobileMenu({
               >
                 {item.label}
               </Link>
-              {item.children?.length ? (
+              {item.groups?.length ? (
                 <div className="flex flex-wrap gap-x-5 gap-y-1 pb-4">
-                  {item.children.map((c) => (
+                  {item.groups.flatMap((g) => g.items).map((c) => (
                     <Link
                       key={c.href}
                       href={c.href}
@@ -334,12 +358,11 @@ function MobileMenu({
           <GoldRateTicker variant="compact" />
           <div className="mt-6 flex flex-wrap gap-4">
             <Link
-              href={siteConfig.contact.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/enquire"
+              onClick={onClose}
               className="rounded-full border border-line-strong px-5 py-3 font-body text-[0.7rem] uppercase tracking-[0.14em] text-text-strong"
             >
-              Book a Visit
+              Book Appointment
             </Link>
             <Link
               href={siteConfig.socials.instagram}

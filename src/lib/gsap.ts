@@ -20,6 +20,14 @@ if (!registered) {
   if (!CustomEase.get?.("lux")) {
     CustomEase.create("lux", "0.22, 1, 0.36, 1");
   }
+  // Slow-mo tier — mirrors --ease-cinema / --ease-veil. Long moves land on
+  // "cinema"; curtains and wipes that need weight on both ends use "veil".
+  if (!CustomEase.get?.("cinema")) {
+    CustomEase.create("cinema", "0.16, 1, 0.3, 1");
+  }
+  if (!CustomEase.get?.("veil")) {
+    CustomEase.create("veil", "0.65, 0, 0.35, 1");
+  }
 
   // Sensible global defaults so every tween feels consistent.
   gsap.defaults({ ease: "lux", duration: 0.9 });
@@ -30,6 +38,8 @@ if (!registered) {
 /** Motion tokens for JS animations — mirror tokens.css. */
 export const EASE = {
   lux: "lux",
+  cinema: "cinema",
+  veil: "veil",
   inOut: "power4.inOut",
   soft: "power2.out",
 } as const;
@@ -39,6 +49,7 @@ export const DUR = {
   base: 0.7,
   slow: 1.1,
   slower: 1.6,
+  cinema: 2.4,
 } as const;
 
 export { gsap, ScrollTrigger, CustomEase, SplitText, useGSAP };

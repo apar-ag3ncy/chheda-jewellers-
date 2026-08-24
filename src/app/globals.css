@@ -151,19 +151,6 @@
     color: transparent;
   }
 
-  /* Thin gold hairline divider */
-  .u-hairline {
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--line-strong),
-      transparent
-    );
-    border: 0;
-  }
-
   /* Layered emerald depth for full-bleed sections */
   .u-vignette {
     background:
@@ -234,6 +221,60 @@
     --gold: var(--gold-deep);
     --gold-light: var(--gold-deep);
     color: var(--text);
+  }
+
+  /**
+   * Brand range slider. Native `<input type=range>` gives us keyboard support,
+   * touch targets and screen-reader semantics for free; only the track and the
+   * thumb are restyled, and both are drawn from tokens so the control inherits
+   * whichever ground (.u-on-light or dark) it is dropped onto.
+   */
+  .cj-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 28px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .cj-range::-webkit-slider-runnable-track {
+    height: 1px;
+    background: var(--line-strong);
+  }
+  .cj-range::-moz-range-track {
+    height: 1px;
+    background: var(--line-strong);
+  }
+  .cj-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin-top: -8.5px;
+    border-radius: 999px;
+    background: var(--gold);
+    border: 1px solid color-mix(in srgb, var(--gold-light) 80%, transparent);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.5);
+    transition:
+      transform var(--dur-fast) var(--ease-lux),
+      background-color var(--dur-fast) var(--ease-lux);
+  }
+  .cj-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--gold);
+    border: 1px solid color-mix(in srgb, var(--gold-light) 80%, transparent);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.5);
+  }
+  .cj-range:hover::-webkit-slider-thumb,
+  .cj-range:focus-visible::-webkit-slider-thumb {
+    transform: scale(1.15);
+  }
+  .cj-range:focus-visible {
+    outline: 2px solid var(--gold-light);
+    outline-offset: 4px;
+    border-radius: 999px;
   }
 
   /**

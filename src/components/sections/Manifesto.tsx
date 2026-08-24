@@ -62,13 +62,10 @@ export function Manifesto() {
             things a family keeps, and hands down, and remembers you by.
           </p>
         </SplitLines>
-        <Reveal delay={0.14} className="mt-10">
-          <span aria-hidden className="mx-auto block h-px w-16 bg-line-strong" />
-        </Reveal>
         <Reveal
           as="p"
           delay={0.16}
-          className="mt-8 font-body text-[0.72rem] uppercase tracking-[0.24em] text-text-muted"
+          className="mt-14 font-body text-[0.72rem] uppercase tracking-[0.24em] text-text-muted"
         >
           Chheda Jewellers · Mumbai
         </Reveal>

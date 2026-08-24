@@ -18,12 +18,8 @@ export function Signature() {
             <Monogram className="h-16 w-16" />
           </Reveal>
 
-          <Reveal delay={0.06} className="mt-10 w-full">
-            <span aria-hidden className="mx-auto block h-px w-24 bg-line-strong" />
-          </Reveal>
-
           <Reveal delay={0.08}>
-            <p className="mt-10 font-display text-[length:var(--step-2)] font-light italic leading-snug text-text">
+            <p className="mt-14 font-display text-[length:var(--step-2)] font-light italic leading-snug text-text">
               Everything above is checkable at our counter.
               <br />
               Come and check it.
@@ -40,7 +36,7 @@ export function Signature() {
           </Reveal>
 
           <Reveal delay={0.16} className="mt-12 flex flex-wrap justify-center gap-4">
-            <Button href={siteConfig.contact.whatsappHref} variant="primary" size="lg" withArrow>
+            <Button href="/enquire" variant="primary" size="lg" withArrow>
               Book a visit
             </Button>
             <Button href="/jewellery" variant="ghost" size="lg">
