@@ -59,8 +59,11 @@ export default function RootLayout({
 
         <script
           type="application/ld+json"
-          // schema.org structured data for local SEO
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          // schema.org structured data for local SEO. `<` is escaped so no
+          // value that ever flows into the config can close the script tag.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
       </body>
     </html>
