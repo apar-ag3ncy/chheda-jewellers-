@@ -15,9 +15,10 @@ import { cn } from "@/lib/cn";
 /**
  * SHOP BY OCCASION - the homepage door into /edits.
  *
- * Placed near the end of the scroll: the visitor has already been through the
- * house by metal, so this reads as "or come back in by occasion" rather than
- * a second taxonomy to absorb before they have seen anything.
+ * Sits directly under JewelleryTypes so the two ways in - by object, by
+ * occasion - stand together as one index. A family shopping for a wedding
+ * meets the word "bridal" in the first minute; the /edits tile in the closing
+ * bento is then the route back to this axis from the bottom of the page.
  *
  * The heading column is sticky and counts along with the cards, so the section
  * has a fixed anchor while the photography travels - the "logical sticky"

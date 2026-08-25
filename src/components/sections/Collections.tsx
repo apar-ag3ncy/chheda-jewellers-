@@ -21,9 +21,10 @@ import { cn } from "@/lib/cn";
  * pointer and the piece's name surfacing at the foot of the frame. No state,
  * no client JS - the whole section is server-rendered.
  *
- * Hung on cream rather than emerald. It sits third, directly under the promise
- * band, and two greens touching would have merged the two into one long block;
- * cream also lets the dark gutter read as a frame around the whole wall.
+ * Hung on cream rather than emerald. It opens the scroll directly under the
+ * hero and directly above the promise band, which is emerald - two greens
+ * touching would have merged into one long block. Cream also lets the dark
+ * gutter read as a frame around the whole wall.
  */
 export function Collections() {
   return (
