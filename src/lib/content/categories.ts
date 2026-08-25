@@ -1,7 +1,7 @@
 import type { CategoryPage } from "@/types/content";
 
 /**
- * Category / showcase pages — Gold · Diamond · Polki.
+ * Category / showcase pages - Gold · Diamond · Polki.
  * Editorial, not a product grid. Each has a hero + a few "signatures".
  */
 export const categories: Record<CategoryPage["slug"], CategoryPage> = {
@@ -11,7 +11,7 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
     eyebrow: "22 Karat Heritage",
     headline: "Gold that\nremembers",
     intro:
-      "The metal at the heart of every Indian family. From featherlight daily wear to the heaviest bridal sets, our 22K gold is hallmarked, hand-finished, and priced at the day's rate — nothing hidden.",
+      "The metal at the heart of every Indian family. From featherlight daily wear to the heaviest bridal sets, our 22K gold is hallmarked, hand-finished, and priced at the day's rate - nothing hidden.",
     hero: {
       src: "/media/categories/gold.jpg",
       alt: "Model in a palace corridor wearing a traditional gold necklace",
@@ -22,7 +22,7 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
         id: "temple",
         title: "Temple & antique gold",
         description:
-          "Nakashi and antique-finish work inspired by the temples of the south — deeply carved, timeless.",
+          "Nakashi and antique-finish work inspired by the temples of the south - deeply carved, timeless.",
         image: { src: "/media/types/necklace.jpg", alt: "Traditional gold necklace", focus: "50% 30%" },
       },
       {
@@ -36,7 +36,7 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
         id: "bridal-gold",
         title: "Bridal gold",
         description:
-          "The full sohaag — haar, vaddanam, bangles and jhumkas — for the bride who carries her family's gold.",
+          "The full sohaag - haar, vaddanam, bangles and jhumkas - for the bride who carries her family's gold.",
         image: { src: "/media/hero/hero-03.jpg", alt: "Model wearing gold jewellery in daylight", focus: "50% 26%" },
       },
     ],
@@ -67,21 +67,21 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
         id: "solitaire",
         title: "Solitaires",
         description:
-          "The single stone that says everything — graded, certified, and set to catch every angle of light.",
+          "The single stone that says everything - graded, certified, and set to catch every angle of light.",
         image: { src: "/media/community/community-02.jpg", alt: "Diamond jewellery with a rose", focus: "50% 40%" },
       },
       {
         id: "modern",
         title: "Everyday diamond",
         description:
-          "Tennis bracelets, line necklaces and studs — quiet brilliance for the days in between the occasions.",
+          "Tennis bracelets, line necklaces and studs - quiet brilliance for the days in between the occasions.",
         image: { src: "/media/collections/collection-03.jpg", alt: "Contemporary diamond necklace", focus: "50% 35%" },
       },
       {
         id: "statement",
         title: "Statement pieces",
         description:
-          "Cocktail rings and cuffs designed to be noticed — architectural, contemporary, unmistakably yours.",
+          "Cocktail rings and cuffs designed to be noticed - architectural, contemporary, unmistakably yours.",
         image: { src: "/media/community/community-06.jpg", alt: "Emerald and diamond statement necklace", focus: "50% 35%" },
       },
     ],
@@ -101,7 +101,7 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
     eyebrow: "Uncut & Regal",
     headline: "The court,\nrecreated",
     intro:
-      "Uncut diamonds set in gold with the kundan and jadau techniques of the royal ateliers. Polki is India's most regal jewellery — worn by queens, and now by our brides.",
+      "Uncut diamonds set in gold with the kundan and jadau techniques of the royal ateliers. Polki is India's most regal jewellery - worn by queens, and now by our brides.",
     hero: {
       src: "/media/categories/polki.jpg",
       alt: "Model wearing an elaborate polki and kundan bridal set",
@@ -112,7 +112,7 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
         id: "bridal-polki",
         title: "Bridal polki sets",
         description:
-          "The full rani-haar, choker, maang tikka and earrings — the centrepiece of a bride's day.",
+          "The full rani-haar, choker, maang tikka and earrings - the centrepiece of a bride's day.",
         image: { src: "/media/hero/hero-01.jpg", alt: "Bridal polki necklace set", focus: "50% 26%" },
       },
       {
@@ -126,7 +126,7 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
         id: "meenakari",
         title: "Meenakari reverse",
         description:
-          "Turn a polki piece over and find hand-painted enamel — a secret beauty only the wearer knows.",
+          "Turn a polki piece over and find hand-painted enamel - a secret beauty only the wearer knows.",
         image: { src: "/media/types/earrings.jpg", alt: "Ornate polki chandbali earrings", focus: "50% 30%" },
       },
     ],
@@ -138,7 +138,7 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
       { src: "/media/categories/polki/p5.jpg", alt: "Standing bride adorned in polki jewellery", focus: "50% 22%" },
       { src: "/media/categories/polki/p6.jpg", alt: "Bride holding a rose in antique-finish polki", focus: "50% 26%" },
     ],
-    note: "Polki is graded by the quality of its uncut stones and the finesse of the setting — we will walk you through both.",
+    note: "Polki is graded by the quality of its uncut stones and the finesse of the setting - we will walk you through both.",
   },
 };
 

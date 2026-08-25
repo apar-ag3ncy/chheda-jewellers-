@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { plans } from "@/lib/content/plans";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
@@ -9,14 +10,14 @@ import { cn } from "@/lib/cn";
 export const metadata = pageMetadata({
   title: "Offers & Plans",
   description:
-    "The Chheda Monthly Plan and Bridal Advance — simple, transparent ways to save toward the jewellery you have been dreaming of.",
+    "The Chheda Monthly Plan and Bridal Advance - simple, transparent ways to save toward the jewellery you have been dreaming of.",
   path: "/offers-and-plans",
 });
 
 const steps = [
-  { n: "01", title: "Choose your amount", body: "Pick a monthly instalment that suits you — starting from ₹2,000." },
+  { n: "01", title: "Choose your amount", body: "Pick a monthly instalment that suits you - starting from ₹2,000." },
   { n: "02", title: "Save each month", body: "Pay for eleven months; we keep every rupee accounted for." },
-  { n: "03", title: "Redeem & receive", body: "On maturity we add our contribution — redeem at the day's rate." },
+  { n: "03", title: "Redeem & receive", body: "On maturity we add our contribution - redeem at the day's rate." },
 ];
 
 export default function OffersAndPlansPage() {
@@ -25,7 +26,7 @@ export default function OffersAndPlansPage() {
       <PagePlate
         folio="III"
         eyebrow="Offers & Plans"
-        title={"Save toward\n*something lasting*"}
+        title={"Save toward\nsomething lasting"}
         intro="No jargon, no fine-print traps. Straightforward ways to plan for the piece that marks your milestone."
         plate={{
           src: "/media/pages/plans.jpg",
@@ -34,7 +35,7 @@ export default function OffersAndPlansPage() {
         }}
         meta={[
           { label: "From", value: "₹2,000 a month" },
-          { label: "Term", value: "11 months" },
+          { label: "Term", value: "11 + 1 months" },
           { label: "Redeem at", value: "The day's rate" },
           { label: "Joining fee", value: "None" },
         ]}
@@ -74,7 +75,7 @@ export default function OffersAndPlansPage() {
                     </ul>
                     <div className="mt-8">
                       <Button
-                        href={plan.cta.href === "/offers-and-plans" ? "/enquire?intent=plans" : plan.cta.href}
+                        href={plan.cta.href}
                         variant={plan.flagship ? "primary" : "outline"}
                         size="lg"
                         withArrow
@@ -102,7 +103,7 @@ export default function OffersAndPlansPage() {
       </Section>
 
       {/* How it works */}
-      <Section spacing="lg" tone="deep">
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <Reveal as="p" className="u-eyebrow mb-10">
             How the Monthly Plan works
@@ -131,18 +132,24 @@ export default function OffersAndPlansPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button href="/enquire?intent=plans" variant="primary" size="lg" withArrow>
+              <Button href="/enquire?intent=plans" variant="onLight" size="lg" withArrow>
                 Book an appointment
               </Button>
-              <Button href="/live-gold-rate" variant="ghost" size="lg">
+              <Button href="/live-gold-rate" variant="onLight" size="lg">
                 Check today&rsquo;s rate
               </Button>
             </div>
           </div>
 
           <p className="mt-10 font-body text-[0.72rem] leading-relaxed text-text-muted/70">
-            Plan terms shown are indicative and pending confirmation. Full terms &amp;
-            conditions apply and will be shared in-store before enrolment.
+            Plan terms shown are indicative and pending confirmation. Full{" "}
+            <Link
+              href="/terms"
+              className="underline underline-offset-2 transition-colors hover:text-text"
+            >
+              terms &amp; conditions
+            </Link>{" "}
+            apply and will be shared in-store before enrolment.
           </p>
         </Container>
       </Section>

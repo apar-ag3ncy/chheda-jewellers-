@@ -1,60 +1,102 @@
-import type { Collection } from "@/types/content";
+import type { ImageAsset } from "@/types/content";
 
 /**
- * Collections — each with a strong visual identity. Feels like a
- * jewellery campaign, not a catalogue.
+ * THE CAMPAIGN WALL - the Collections section as a bento of frames.
+ *
+ * Nine frames from the house archive, laid into mixed tile sizes. The section
+ * carries no words at all, so the `focus` hint on each image is doing real
+ * work: a tile can be cropped to a tall portrait, a wide landscape or a square
+ * depending on where it lands in the bento, and the hint is what keeps the
+ * subject in frame through all three. None of these frames is used elsewhere.
  */
-export const collections: Collection[] = [
+export interface CampaignTile {
+  id: string;
+  image: ImageAsset;
+  /**
+   * White serif label at the tile's foot, as in the reference grid. Six of
+   * the nine tiles carry one; the hero and the two closing tiles stay bare,
+   * exactly as in the reference.
+   */
+  label?: string;
+}
+
+export const campaignWall: CampaignTile[] = [
   {
-    id: "vivaha",
-    name: "Vivaha",
-    tagline: "The bridal legacy",
-    description:
-      "Temple gold, polki and uncut diamonds for the seven days that a family remembers forever.",
+    id: "sapphire-choker",
+    label: "Necklaces",
     image: {
-      src: "/media/collections/collection-01.jpg",
-      alt: "Bride in full bridal jewellery against a palace corridor",
+      src: "/media/wall/01.jpg",
+      alt: "A model in a rose-pink sari wearing a sapphire-drop polki choker in a palace colonnade",
+      focus: "45% 20%",
+    },
+  },
+  {
+    id: "cocktail-ring",
+    label: "Rings",
+    image: {
+      src: "/media/wall/05.jpg",
+      alt: "A polki cocktail ring worn on a hand resting against sheer embroidery",
+      focus: "50% 46%",
+    },
+  },
+  {
+    id: "matha-patti",
+    label: "Maangtika",
+    image: {
+      src: "/media/wall/03.jpg",
+      alt: "A bride in champagne gold with a pearl maangtika, holding a lotus",
+      focus: "50% 10%",
+    },
+  },
+  {
+    id: "bridal-set",
+    label: "Bridal",
+    image: {
+      src: "/media/wall/04.jpg",
+      alt: "A seated bride in red wearing the full gold bridal set",
       focus: "50% 30%",
     },
-    href: "/jewellery/polki",
   },
   {
-    id: "roz",
-    name: "Roz",
-    tagline: "Everyday fine gold",
-    description:
-      "Lightweight 22K pieces for the woman who wears her gold from morning to midnight.",
+    id: "kundan-haar",
+    label: "Kundan",
     image: {
-      src: "/media/collections/collection-02.jpg",
-      alt: "Model wearing delicate everyday gold jewellery",
-      focus: "50% 28%",
+      src: "/media/wall/02.jpg",
+      alt: "A close study of a kundan and ruby-bead haar against red silk",
+      focus: "50% 35%",
     },
-    href: "/jewellery/gold",
   },
   {
-    id: "noor",
-    name: "Noor",
-    tagline: "Diamonds, reimagined",
-    description:
-      "Certified solitaires and contemporary diamond silhouettes for a modern wardrobe.",
+    id: "vine-diamonds",
     image: {
-      src: "/media/collections/collection-03.jpg",
-      alt: "Close-up of diamond jewellery catching the light",
-      focus: "50% 40%",
+      src: "/media/wall/06.jpg",
+      alt: "A profile in dark studio light wearing vine-set diamond earrings, a red rose below",
+      focus: "50% 12%",
     },
-    href: "/jewellery/diamond",
   },
   {
-    id: "virasat",
-    name: "Virasat",
-    tagline: "Heritage revived",
-    description:
-      "Antique-finish jadau and kundan work, faithful to the craft that came before us.",
+    id: "chandbali-set",
+    label: "Chandbalis",
     image: {
-      src: "/media/collections/collection-04.jpg",
-      alt: "Model wearing antique-finish kundan and jadau jewellery",
-      focus: "50% 26%",
+      src: "/media/wall/07.jpg",
+      alt: "A model in peach and pink organza wearing a polki choker and chandbalis in evening sun",
+      focus: "50% 15%",
     },
-    href: "/jewellery/polki",
+  },
+  {
+    id: "jadau-twice",
+    image: {
+      src: "/media/wall/08.jpg",
+      alt: "Two brides in deep maroon jadau sets, seated among clay urns",
+      focus: "50% 60%",
+    },
+  },
+  {
+    id: "gold-going-places",
+    image: {
+      src: "/media/wall/09.jpg",
+      alt: "A model in red with a gold haar leaning on a vintage car under a low sun",
+      focus: "50% 5%",
+    },
   },
 ];

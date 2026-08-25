@@ -13,14 +13,14 @@ export function JewelleryTypes() {
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
             eyebrow="Types of Jewellery"
-            title={"For every part\n*of the story*"}
+            title={"Necklaces, earrings,\nrings, hathphool"}
             size="md"
           />
           <Reveal
             as="p"
             className="max-w-sm pb-2 font-body text-[0.95rem] font-light leading-relaxed text-text-muted"
           >
-            Four ornaments, four moments — from the necklace that sets the tone
+            Four ornaments, four moments - from the necklace that sets the tone
             to the hathphool that crowns the hand.
           </Reveal>
         </div>

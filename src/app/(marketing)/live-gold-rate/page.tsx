@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
 import { Section, Container } from "@/components/ui/Section";
@@ -10,7 +11,7 @@ import { siteConfig } from "@/config/site";
 export const metadata = pageMetadata({
   title: "Live Gold Rate",
   description:
-    "Today's indicative gold rate in Mumbai for 22K and 24K gold — updated through the day, with the arithmetic that turns a rate into a bill. For reference only; confirm in-store before any purchase.",
+    "Today's indicative gold rate in Mumbai for 22K and 24K gold - updated through the day, with the arithmetic that turns a rate into a bill. For reference only; confirm in-store before any purchase.",
   path: "/live-gold-rate",
 });
 
@@ -19,7 +20,7 @@ const notes = [
   {
     n: "01",
     title: "Why the rate moves",
-    body: "Gold is a global commodity. The price shifts with international markets, the rupee and local duties — often several times in a single trading day.",
+    body: "Gold is a global commodity. The price shifts with international markets, the rupee and local duties - often several times in a single trading day.",
   },
   {
     n: "02",
@@ -29,7 +30,7 @@ const notes = [
   {
     n: "03",
     title: "Rate is not price",
-    body: "The rate buys the metal. Your bill is that, plus making, plus statutory GST — and stones are weighed out and priced separately, never at the gold rate.",
+    body: "The rate buys the metal. Your bill is that, plus making, plus statutory GST - and stones are weighed out and priced separately, never at the gold rate.",
   },
 ];
 
@@ -53,12 +54,12 @@ const caveats = [
 ];
 
 /**
- * /live-gold-rate — the number, and then the honesty about the number.
+ * /live-gold-rate - the number, and then the honesty about the number.
  *
  * The rate panel was previously a lone card on an empty page. The page now
  * does the job the rate implies: it shows the figure, states plainly what the
  * figure is *not*, explains what moves it, and then hands the visitor to the
- * estimator on the promise page — which is where a rate becomes a bill.
+ * estimator on the promise page - which is where a rate becomes a bill.
  */
 export default function LiveGoldRatePage() {
   return (
@@ -66,7 +67,7 @@ export default function LiveGoldRatePage() {
       <PagePlate
         folio="IV"
         eyebrow="Live Gold Rate"
-        title={"Today's rate,\n*and what it isn't*"}
+        title={"Today's gold rate"}
         intro="An indicative reference for 22K and 24K gold in Mumbai, refreshed through the day. Always confirm the applicable rate in-store before a purchase."
         plate={{
           src: "/media/pages/rate.jpg",
@@ -83,7 +84,7 @@ export default function LiveGoldRatePage() {
               <GoldRateTicker variant="full" />
             </Reveal>
 
-            {/* Reading rail — the caveats set as a spec sheet rather than
+            {/* Reading rail - the caveats set as a spec sheet rather than
                 buried in a footnote nobody reaches. */}
             <div className="lg:col-span-5">
               <p className="u-eyebrow mb-5">How to read it</p>
@@ -117,6 +118,18 @@ export default function LiveGoldRatePage() {
                   Ask us
                 </Button>
               </div>
+
+              <p className="mt-6 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+                The rate shown is indicative, not an offer to sell - the full
+                wording lives in the{" "}
+                <Link
+                  href="/terms"
+                  className="underline underline-offset-2 transition-colors hover:text-text"
+                >
+                  terms of use
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </Container>
@@ -127,14 +140,13 @@ export default function LiveGoldRatePage() {
         <Container>
           <SectionHeading
             eyebrow="The mechanics"
-            title={"Three things worth\n*knowing about the number*"}
+            title={"How to read the number"}
             size="md"
           />
           <ol className="mt-14 grid grid-cols-1 gap-px overflow-hidden border border-line bg-line md:mt-20 md:grid-cols-3">
             {notes.map((n, i) => (
               <Reveal as="li" key={n.n} delay={i * 0.07} className="bg-cream p-8 md:p-10">
-                <span className="font-display text-4xl font-light text-gold-deep">{n.n}</span>
-                <h2 className="mt-5 font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
+                <h2 className="font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
                   {n.title}
                 </h2>
                 <p className="mt-4 font-body text-[0.92rem] font-light leading-relaxed text-text-muted">

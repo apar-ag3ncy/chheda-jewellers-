@@ -5,7 +5,7 @@ import { Monogram } from "@/components/ui/Monogram";
 import { Button } from "@/components/ui/Button";
 
 /**
- * The page closes the way a promise should — signed, not funnelled.
+ * The page closes the way a promise should - signed, not funnelled.
  * The house mark stamped as a seal, the name set as a signature, and only
  * then an invitation.
  */

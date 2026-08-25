@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 const sections = [
   {
     h: "Information we collect",
-    p: "When you contact us — by form, WhatsApp, email or phone — we collect the details you choose to share, such as your name and contact information, so we can respond and help you.",
+    p: "When you contact us - by form, WhatsApp, email or phone - we collect the details you choose to share, such as your name and contact information, so we can respond and help you.",
   },
   {
     h: "How we use it",
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
   return (
     <>
       <PageHeader eyebrow="Legal" title="Privacy Policy" />
-      <Section spacing="md" tone="green">
+      <Section spacing="md" tone="light" className="u-on-light">
         <Container>
           <div className="max-w-2xl">
             <p className="mb-10 rounded-[var(--radius-brand)] border border-line bg-green-soft/20 p-5 font-body text-[0.82rem] leading-relaxed text-text-muted">

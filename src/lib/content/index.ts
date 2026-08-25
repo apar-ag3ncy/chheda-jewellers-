@@ -6,7 +6,7 @@ export { heroSlides } from "./hero";
 export { promiseIntro, promiseValues, promiseStory } from "./promise";
 export { jewelleryTypes } from "./jewellery-types";
 export { stories } from "./stories";
-export { collections } from "./collections";
+export { campaignWall } from "./collections";
 export { testimonials, reviewsSummary } from "./testimonials";
 export { plans, monthlyPlanTeaser } from "./plans";
 export { community } from "./community";

@@ -13,18 +13,18 @@ import { Monogram } from "@/components/ui/Monogram";
  * Per the build plan (Open Question 1), this needs a client decision:
  *   (a) corporate investor relations, or
  *   (b) a customer gold-investment scheme (which overlaps Offers & Plans).
- * Framed here as (a) — investor relations — to keep it distinct from the
+ * Framed here as (a) - investor relations - to keep it distinct from the
  * Monthly Plan. Update the copy/CTA once the direction is confirmed.
  *
  * The page is written so the absence of a deck is not a dead end: the
  * position, the roadmap and the terms of engagement are all stated, and the
- * only thing missing is the numbers — which is honest, and reads far better
+ * only thing missing is the numbers - which is honest, and reads far better
  * than "coming soon" on its own.
  */
 export const metadata = pageMetadata({
   title: "Investors",
   description:
-    "Investor relations at Chheda Jewellers — a heritage Mumbai jewellery house built on hallmarked, transparent dealing, preparing its next chapter.",
+    "Investor relations at Chheda Jewellers - a heritage Mumbai jewellery house built on hallmarked, transparent dealing, preparing its next chapter.",
   path: "/investors",
 });
 
@@ -32,7 +32,7 @@ const pillars = [
   {
     n: "01",
     title: "Heritage & trust",
-    body: "A neighbourhood name built over years of transparent, hallmarked dealing — the compounding asset in this category, and the one that cannot be bought.",
+    body: "A neighbourhood name built over years of transparent, hallmarked dealing - the compounding asset in this category, and the one that cannot be bought.",
     proof: "Every piece BIS hallmarked; making charges published, not negotiated.",
   },
   {
@@ -44,7 +44,7 @@ const pillars = [
   {
     n: "03",
     title: "Transparent by nature",
-    body: "The same openness we offer customers — clear rates, clear making, a bill with nothing folded into it — is how we intend to engage every partner.",
+    body: "The same openness we offer customers - clear rates, clear making, a bill with nothing folded into it - is how we intend to engage every partner.",
     proof: "The pricing method is published in full on the Chheda Promise page.",
   },
 ];
@@ -61,7 +61,7 @@ const roadmap = [
   {
     horizon: "Now",
     title: "The brand experience",
-    body: "A single editorial destination for the house — collections, the promise, appointments and the atelier.",
+    body: "A single editorial destination for the house - collections, the promise, appointments and the atelier.",
   },
   {
     horizon: "Next",
@@ -71,7 +71,7 @@ const roadmap = [
   {
     horizon: "Then",
     title: "The third door",
-    body: "A further boutique, and the systems — inventory, CRM, valuation — that let a third location behave like the first two.",
+    body: "A further boutique, and the systems - inventory, CRM, valuation - that let a third location behave like the first two.",
   },
 ];
 
@@ -81,8 +81,8 @@ export default function InvestorsPage() {
       <PagePlate
         folio="V"
         eyebrow="Investor relations"
-        title={"Partner with a house\n*built on trust*"}
-        intro="We are shaping the next chapter of Chheda Jewellers — the same business, run the same way, with the systems to do it at more than two counters."
+        title={"Partner with a house\nbuilt on trust"}
+        intro="We are shaping the next chapter of Chheda Jewellers - the same business, run the same way, with the systems to do it at more than two counters."
         plate={{
           src: "/media/pages/investors.jpg",
           alt: "A portrait in a red anarkali and layered gold beneath a chandelier",
@@ -96,7 +96,7 @@ export default function InvestorsPage() {
         <Container>
           <SectionHeading
             eyebrow="The position"
-            title={"Three things that\n*compound*"}
+            title={"What compounds here"}
             size="md"
           />
           <ol className="mt-14 md:mt-20">
@@ -107,10 +107,7 @@ export default function InvestorsPage() {
                 delay={i * 0.06}
                 className="grid grid-cols-1 gap-5 border-t border-line py-9 last:border-b md:grid-cols-12 md:gap-10 md:py-12"
               >
-                <div className="md:col-span-2">
-                  <span className="font-display text-4xl font-light text-gold">{p.n}</span>
-                </div>
-                <div className="md:col-span-6">
+                <div className="md:col-span-7">
                   <h2 className="font-display text-[length:var(--step-3)] font-light leading-[var(--leading-3)] text-text-strong">
                     {p.title}
                   </h2>
@@ -118,7 +115,7 @@ export default function InvestorsPage() {
                     {p.body}
                   </p>
                 </div>
-                <div className="md:col-span-4">
+                <div className="md:col-span-5">
                   <p className="border-l border-line-strong pl-5 font-body text-[0.86rem] font-light leading-relaxed text-text">
                     <span className="u-eyebrow mb-1.5 block text-[0.55rem]">Checkable</span>
                     {p.proof}
@@ -135,7 +132,7 @@ export default function InvestorsPage() {
         <Container>
           <SectionHeading
             eyebrow="The roadmap"
-            title={"Now, next,\n*and then*"}
+            title={"Now, next, then"}
             intro="Stated as sequence rather than as dates, because a jeweller that promises quarters it cannot control is telling you something about how it runs everything else."
             size="md"
           />

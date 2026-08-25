@@ -10,9 +10,9 @@ import { Button } from "@/components/ui/Button";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 /**
- * Monthly Plan — emotional message first, details second (per spec §6).
+ * Monthly Plan - emotional message first, details second (per spec §6).
  * A cinematic full-bleed band. The image gets a gentle transform-only parallax
- * (GPU-cheap, never pins or reflows — safe under load); the message reveals on
+ * (GPU-cheap, never pins or reflows - safe under load); the message reveals on
  * enter. Static under reduced motion.
  */
 export function MonthlyPlan() {
@@ -94,9 +94,6 @@ export function MonthlyPlan() {
           <Reveal delay={0.14} className="mt-9 flex flex-wrap gap-4">
             <Button href={monthlyPlanTeaser.cta.href} variant="primary" size="lg" withArrow>
               {monthlyPlanTeaser.cta.label}
-            </Button>
-            <Button href="/offers-and-plans" variant="ghost" size="lg">
-              All offers &amp; plans
             </Button>
           </Reveal>
         </div>

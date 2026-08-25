@@ -116,6 +116,19 @@ src/
 - **SEO/local**: per-route metadata, `schema.org` JewelryStore for both
   branches, sitemap, robots, OG image.
 
+- **The palette breathes.** The scroll alternates emerald and cream instead of
+  running dark end to end: Stories, the Atelier, Testimonials and Branches sit
+  on the cream ground (`.u-on-light` flips every nested token), legal pages
+  read as paper — and maroon keeps its place as the third ground: one oxblood
+  band per scroll (the Diamond Edit on the homepage, Refusals on the promise
+  page, the vitrine's oxblood panel), never body-text-on-green.
+- **The branches map is real geography.** `Branches.tsx` draws Greater Mumbai
+  (coastline, Thane Creek, the national park, Powai, CSMIA, both rail lines)
+  and PROJECTS the pins from the coordinates in `config/site` — move the
+  lat/lng there and the pin moves. Vile Parle East (Trinity Square) and
+  Ghatkopar East (near Khau Galli) are the real localities; door numbers,
+  phones and hours are still `TODO(client)`.
+
 ## Security posture
 
 - Headers are set in `next.config.ts`: nosniff, frame denial (header + CSP

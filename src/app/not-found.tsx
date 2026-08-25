@@ -14,7 +14,7 @@ export default function NotFound() {
           slipped away
         </h1>
         <p className="mt-5 max-w-md font-body text-[0.98rem] font-light leading-relaxed text-text-muted">
-          The piece you were looking for isn&rsquo;t here — but there is plenty more to
+          The piece you were looking for isn&rsquo;t here - but there is plenty more to
           discover in the house.
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-4">

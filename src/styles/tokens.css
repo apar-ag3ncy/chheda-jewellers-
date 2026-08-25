@@ -1,30 +1,30 @@
 /* ============================================================
-   CHHEDA JEWELLERS — DESIGN TOKENS (single source of truth)
+   CHHEDA JEWELLERS - DESIGN TOKENS (single source of truth)
    Brand primitives + motion. Consumed by globals.css @theme.
-   Never hard-code these values in components — use the tokens.
+   Never hard-code these values in components - use the tokens.
    ============================================================ */
 
 :root {
   /* ── Brand palette ─────────────────────────────────────── */
-  --green: #0b3a2d; /* PRIMARY — deep emerald, default background */
+  --green: #0b3a2d; /* PRIMARY - deep emerald, default background */
   --green-deep: #06241b; /* deeper emerald for vignettes / gradients */
   --green-soft: #124b39; /* lifted emerald for cards / surfaces */
   --green-glass: rgba(11, 58, 45, 0.66); /* frosted nav / overlays */
 
-  --maroon: #440002; /* SECONDARY / accent — never body text on green */
+  --maroon: #440002; /* SECONDARY / accent - never body text on green */
   --maroon-soft: #5c1416;
 
-  --beige: #e8ddc7; /* warm neutral — primary text on green */
-  --beige-dim: #b9ad93; /* muted beige — captions / secondary text */
-  /* Creamy beige — the LIGHT SURFACE (paper bands, nav capsule). Kept separate
+  --beige: #e8ddc7; /* warm neutral - primary text on green */
+  --beige-dim: #b9ad93; /* muted beige - captions / secondary text */
+  /* Creamy beige - the LIGHT SURFACE (paper bands, nav capsule). Kept separate
      from --beige, which is the text colour on green and must not shift.
      Warm on purpose: against deep emerald a paler value reads as plain white,
      so the cream carries enough yellow to still read as BEIGE on dark. */
   --cream: #f1e6ce;
   --white: #ffffff;
-  --offwhite: #f7f3ec; /* soft white — large surfaces, headings */
+  --offwhite: #f7f3ec; /* soft white - large surfaces, headings */
 
-  /* Gold — derived from the monogram gradient; accents & hairlines only */
+  /* Gold - derived from the monogram gradient; accents & hairlines only */
   --gold: #c68d61;
   --gold-light: #f0cfaa;
   --gold-deep: #9a563a;
@@ -57,7 +57,7 @@
 
   /**
    * Modular type scale (~1.28), fluid between mobile and desktop.
-   * Leading and tracking are bound to size — large display sets tighter and
+   * Leading and tracking are bound to size - large display sets tighter and
    * closer; small text sets looser and wider. One global value across a 6×
    * size range is what makes type look undesigned.
    */
@@ -86,7 +86,7 @@
   --ease-inout: cubic-bezier(0.83, 0, 0.17, 1); /* dramatic in-out */
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
   /* Cinema: a near-exponential settle. Almost all of the distance is covered
-     in the first third, then it drifts to a stop — the "slow-mo landing" that
+     in the first third, then it drifts to a stop - the "slow-mo landing" that
      makes a long move read as deliberate rather than sluggish. Reserved for
      tentpole moments (the loader mark, pinned scene transitions). */
   --ease-cinema: cubic-bezier(0.16, 1, 0.3, 1);
@@ -96,12 +96,12 @@
   --dur-base: 0.7s;
   --dur-slow: 1.1s;
   --dur-slower: 1.6s;
-  --dur-cinema: 2.4s; /* slow-mo tier — tentpole only */
+  --dur-cinema: 2.4s; /* slow-mo tier - tentpole only */
 
   /* ── Layout ────────────────────────────────────────────── */
   --container-max: 88rem;
   --gutter: clamp(1.25rem, 4.5vw, 4.5rem);
   --nav-h: 4.5rem;
-  --radius: 2px; /* restrained, editorial — near-square corners */
+  --radius: 2px; /* restrained, editorial - near-square corners */
   --radius-pill: 999px;
 }

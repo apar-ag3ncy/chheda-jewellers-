@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Suspense } from "react";
 import { EMERALD_LQIP } from "@/lib/image-blur";
@@ -13,7 +14,7 @@ import { BookingFlow } from "@/components/enquire/BookingFlow";
 export const metadata = pageMetadata({
   title: "Book an Appointment",
   description:
-    "Book a private appointment at Chheda Jewellers — the viewing room to yourselves, a curated tray to your brief, and an advisor who knows your name before you arrive.",
+    "Book a private appointment at Chheda Jewellers - the viewing room to yourselves, a curated tray to your brief, and an advisor who knows your name before you arrive.",
   path: "/enquire",
 });
 
@@ -42,12 +43,12 @@ const priority = [
 ];
 
 /**
- * /enquire — the appointment desk.
+ * /enquire - the appointment desk.
  *
  * The brief was "priority service and personal prestige, professional, a bit
- * gen-z but classy". The way those reconcile: the *interaction* is modern —
+ * gen-z but classy". The way those reconcile: the *interaction* is modern -
  * chips, a live card assembling as you answer, four short steps instead of one
- * long form — while the *language* is a jeweller's. No emoji, no exclamation
+ * long form - while the *language* is a jeweller's. No emoji, no exclamation
  * marks, no "let's do this". Prestige comes from specifics ("the door closes",
  * "the tray is already pulled"), which is also the only kind of prestige a
  * customer can actually check.
@@ -57,7 +58,7 @@ export default function EnquirePage() {
     <>
       {/* ── Header ────────────────────────────────────────────────────── */}
       <header className="relative overflow-hidden bg-bg pb-12 pt-36 md:pb-20 md:pt-44">
-        {/* Portrait sits behind the header on wide screens — atmosphere, kept
+        {/* Portrait sits behind the header on wide screens - atmosphere, kept
             well clear of the type. */}
         <div
           aria-hidden
@@ -97,7 +98,7 @@ export default function EnquirePage() {
             <SplitLines delay={0.05}>
               <h1 className="font-display text-[clamp(2.6rem,6.8vw,5.2rem)] font-light leading-[0.98]">
                 <span className="block">Come in as</span>
-                <span className="block italic">someone expected</span>
+                <span className="block">someone expected</span>
               </h1>
             </SplitLines>
             <Reveal
@@ -106,7 +107,7 @@ export default function EnquirePage() {
               className="mt-7 max-w-lg font-body text-[1.02rem] font-light leading-relaxed text-text"
             >
               A jewellery counter is a public place, and some conversations are
-              not. Book ahead and the room, the advisor and the tray are yours —
+              not. Book ahead and the room, the advisor and the tray are yours -
               at no cost, and with no obligation to buy anything at all.
             </Reveal>
             <Reveal
@@ -144,7 +145,7 @@ export default function EnquirePage() {
         <Container>
           <SectionHeading
             eyebrow="What you actually get"
-            title={"Priority, described\n*in specifics*"}
+            title={"What booking changes"}
             intro="Every jeweller claims personal service. These are the four things that are different when you book, stated plainly enough that you can hold us to them."
             size="md"
           />
@@ -156,10 +157,7 @@ export default function EnquirePage() {
                 delay={i * 0.06}
                 className="bg-cream p-8 md:p-10"
               >
-                <span className="font-display text-3xl font-light text-gold-deep">
-                  {p.n}
-                </span>
-                <h3 className="mt-4 font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
+                <h3 className="font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
                   {p.title}
                 </h3>
                 <p className="mt-3 max-w-sm font-body text-[0.92rem] font-light leading-relaxed text-text-muted">
@@ -188,6 +186,21 @@ export default function EnquirePage() {
             <Reveal delay={0.12}>
               <p className="mt-9 font-body text-[0.68rem] uppercase tracking-[0.24em] text-text-muted">
                 {siteConfig.branches.map((b) => b.area).join(" · ")}
+              </p>
+            </Reveal>
+            {/* Server-rendered on purpose: the page that collects a name and
+                phone number is where the privacy note must be reachable -
+                the booking flow's own link only exists after interaction. */}
+            <Reveal delay={0.16}>
+              <p className="mt-6 font-body text-[0.7rem] font-light leading-relaxed text-text-muted/80">
+                Your details go only toward this appointment - see the{" "}
+                <Link
+                  href="/privacy"
+                  className="underline underline-offset-2 transition-colors hover:text-text"
+                >
+                  privacy note
+                </Link>
+                .
               </p>
             </Reveal>
           </div>

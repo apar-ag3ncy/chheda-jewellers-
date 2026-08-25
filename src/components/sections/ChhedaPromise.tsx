@@ -39,9 +39,6 @@ export function ChhedaPromise() {
                   delay={i * 0.05}
                   className="group flex gap-6 border-t border-line py-7 first:border-t-0 first:pt-0 md:gap-10"
                 >
-                  <span className="font-display text-2xl font-light text-gold md:text-3xl">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   <div>
                     <h3 className="font-display text-2xl font-light text-text-strong md:text-[1.7rem]">
                       {value.title}

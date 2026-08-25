@@ -23,13 +23,13 @@ type Props = {
 };
 
 /**
- * THE CARD — the thing the booking is actually for.
+ * THE CARD - the thing the booking is actually for.
  *
  * A private appointment is a small piece of theatre, so the form's output is
  * an object rather than a receipt: a gold-ruled card that assembles itself
  * line by line as the customer answers, with the house mark, a reference and a
  * perforated stub. It is the "prestige" half of the brief, and it is also the
- * honest half — everything printed on it is exactly what gets sent.
+ * honest half - everything printed on it is exactly what gets sent.
  *
  * Deliberately NOT a boarding pass pastiche: the perforation and the
  * monospaced reference are the only borrowings, and the rest is set in the
@@ -47,10 +47,10 @@ export function AppointmentCard({
   className,
 }: Props) {
   const rows: { label: string; value: string; muted?: boolean }[] = [
-    { label: "Guest", value: name.trim() || "—", muted: !name.trim() },
+    { label: "Guest", value: name.trim() || "-", muted: !name.trim() },
     { label: "Boutique", value: branchName(branchId) },
-    { label: "Date", value: date ? formatDate(date) : "—", muted: !date },
-    { label: "Time", value: slot || "—", muted: !slot },
+    { label: "Date", value: date ? formatDate(date) : "-", muted: !date },
+    { label: "Time", value: slot || "-", muted: !slot },
     { label: "Party", value: guests },
     { label: "Looking for", value: intentLabel(intent) },
   ];
@@ -62,7 +62,7 @@ export function AppointmentCard({
         className,
       )}
     >
-      {/* Gold rule along the top edge — the card's "foil". */}
+      {/* Gold rule along the top edge - the card's "foil". */}
       <span
         aria-hidden
         className="absolute inset-x-0 top-0 h-px"
@@ -116,7 +116,7 @@ export function AppointmentCard({
       </dl>
 
       <p className="border-t border-line px-6 py-4 font-body text-[0.66rem] font-light leading-relaxed text-text-muted md:px-8">
-        Held for you for 24 hours. We confirm every appointment by hand — you
+        Held for you for 24 hours. We confirm every appointment by hand - you
         will hear from a person, not an autoresponder.
       </p>
     </figure>

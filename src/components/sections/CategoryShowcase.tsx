@@ -84,7 +84,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
                   </div>
                   <div className={cn("md:px-4", flip && "md:order-1")}>
                     <Reveal as="p" className="u-eyebrow mb-4">
-                      {String(i + 1).padStart(2, "0")} — {category.name}
+                      {String(i + 1).padStart(2, "0")} - {category.name}
                     </Reveal>
                     <Reveal>
                       <h2 className="font-display text-[clamp(1.9rem,4vw,3rem)] font-light leading-tight">
@@ -121,13 +121,14 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         </Container>
       </Section>
 
-      {/* The Edit — a curated gallery of six pieces */}
-      <Section spacing="lg" tone="deep">
+      {/* The Edit - a curated gallery of six pieces */}
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <SectionHeading
-            eyebrow={`The ${category.name} Edit`}
+            // "Edit" is the reserved occasion-axis word - a room gallery is not one.
+            eyebrow={`Inside the ${category.name} room`}
             title={`A closer look at\nour ${category.name.toLowerCase()} room`}
-            intro="A small selection from the counter — a sense of the range, the finish, and the feeling. Every piece is one-of-a-kind; come in to see them in the light."
+            intro="A small selection from the counter - a sense of the range, the finish, and the feeling. Every piece is one-of-a-kind; come in to see them in the light."
             size="lg"
           />
           <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
@@ -157,14 +158,14 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
             ))}
           </div>
           <Reveal className="mt-14 flex justify-center">
-            <Button href="/enquire" variant="outline" size="lg" withArrow>
+            <Button href="/enquire" variant="onLight" size="lg" withArrow>
               Book a viewing
             </Button>
           </Reveal>
         </Container>
       </Section>
 
-      {/* The occasion axis — which edits draw on this room. Without this the
+      {/* The occasion axis - which edits draw on this room. Without this the
           two axes only ever cross in one direction (edit → metal). */}
       <Section spacing="md" tone="green">
         <Container>
@@ -223,6 +224,25 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
               </Link>
             ))}
           </div>
+
+          {/* The third door out of a room is the atelier - a visitor holding
+              family gold in mind should not have to back out to find it. */}
+          <Link
+            href="/bespoke"
+            className="group mt-5 flex items-center justify-between rounded-[var(--radius-brand)] border border-line px-6 py-5 transition-colors hover:border-gold"
+          >
+            <span>
+              <span className="block font-display text-xl font-light text-text-strong">
+                Or have it drawn instead
+              </span>
+              <span className="mt-1 block font-body text-[0.72rem] uppercase tracking-[0.16em] text-text-muted">
+                The atelier - bespoke &amp; remade heirlooms
+              </span>
+            </span>
+            <span aria-hidden className="font-body text-gold transition-transform duration-300 group-hover:translate-x-1">
+              &rarr;
+            </span>
+          </Link>
         </Container>
       </Section>
     </>

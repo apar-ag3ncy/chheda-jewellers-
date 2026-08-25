@@ -10,7 +10,7 @@ type WordmarkProps = {
 };
 
 /**
- * Text wordmark rendered in Montserrat with wide tracking — mirrors the
+ * Text wordmark rendered in Montserrat with wide tracking - mirrors the
  * official logo letterform. Uses the brand name from config (never typed).
  */
 export function Wordmark({

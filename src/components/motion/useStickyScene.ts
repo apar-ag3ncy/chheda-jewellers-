@@ -13,7 +13,7 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
  *
  * Why CSS sticky and NOT ScrollTrigger's `pin: true`: pinning injects a
  * wrapper element and pin-spacing into the layout. This codebase already has
- * one hard-won rule about transforms on wrappers (see RouteCurtain — any
+ * one hard-won rule about transforms on wrappers (see RouteCurtain - any
  * transform, even identity, makes an element a containing block and silently
  * breaks `position: fixed` for everything inside it). Combining that with
  * Lenis and a per-route curtain that remounts is exactly how pins end up
@@ -21,14 +21,14 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
  * and survives a route transition without a refresh.
  *
  * ScrollTrigger is therefore used only to READ progress, never to move layout.
- * React state updates once per step change — not per frame — so a long scene
+ * React state updates once per step change - not per frame - so a long scene
  * costs a handful of renders rather than hundreds.
  *
  * Reduced motion needs no branch here, and that is deliberate: this hook does
  * not animate anything. It reports which step is being read; the stage swaps
  * with a CSS transition, which the global `prefers-reduced-motion` floor in
  * globals.css already collapses to instant. So under reduced motion the stage
- * still tracks the step — it just changes without a dissolve, which is the
+ * still tracks the step - it just changes without a dissolve, which is the
  * correct behaviour. Do not add a guard that disables the tracking.
  *
  * @param count  number of steps in the scene

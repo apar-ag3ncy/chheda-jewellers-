@@ -1,7 +1,7 @@
 import type { Testimonial } from "@/types/content";
 
 /**
- * Testimonials — curated for now, typed to mirror Google review data so a
+ * Testimonials - curated for now, typed to mirror Google review data so a
  * live Places API sync can replace this array later with zero UI changes.
  * ⚠️ TODO(client): replace with real, attributable reviews before launch.
  */
@@ -12,7 +12,7 @@ export const testimonials: Testimonial[] = [
     location: "Vile Parle, Mumbai",
     rating: 5,
     quote:
-      "We bought my wedding set here and the transparency on rate and making charges was refreshing. It never felt like a sale — it felt like being looked after.",
+      "We bought my wedding set here and the transparency on rate and making charges was refreshing. It never felt like a sale - it felt like being looked after.",
     source: "Google",
   },
   {

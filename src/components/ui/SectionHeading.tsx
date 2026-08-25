@@ -9,7 +9,7 @@ type SectionHeadingProps = {
   eyebrow?: string;
   /**
    * Supports "\n" for intentional line breaks, and *asterisks* to set a phrase
-   * in Cormorant italic — the editorial roman/italic contrast.
+   * in Cormorant italic - the editorial roman/italic contrast.
    *   "Campaigns, not *catalogues*"
    */
   title: string;
@@ -17,7 +17,7 @@ type SectionHeadingProps = {
   align?: Align;
   className?: string;
   as?: "h1" | "h2" | "h3";
-  /** Display step — sm/md are workhorses, xl is reserved for tentpole moments. */
+  /** Display step - sm/md are workhorses, xl is reserved for tentpole moments. */
   size?: "sm" | "md" | "lg" | "xl";
 };
 
@@ -42,7 +42,7 @@ export function emphasise(line: string): ReactNode {
   );
 }
 
-/** Eyebrow + Cormorant display heading + optional intro — the section header. */
+/** Eyebrow + Cormorant display heading + optional intro - the section header. */
 export function SectionHeading({
   eyebrow,
   title,

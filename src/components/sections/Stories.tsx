@@ -8,12 +8,12 @@ import { cn } from "@/lib/cn";
 
 export function Stories() {
   return (
-    <Section id="stories" spacing="lg" tone="transparent" data-bg="maroon">
+    <Section id="stories" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
         <SectionHeading
           eyebrow="Stories by Chheda"
-          title={"Not products.\n*Pieces with a past*"}
-          intro="A few of our best-loved pieces, told the way they deserve to be — as the moments they were made for."
+          title={"The stories they carry"}
+          intro="Three pieces, and the moments they were made for."
           size="lg"
           align="center"
           className="mx-auto items-center text-center"
@@ -52,7 +52,7 @@ export function Stories() {
                     {story.excerpt}
                   </Reveal>
                   <Reveal delay={0.15} className="mt-8">
-                    <Button href={story.href} variant="ghost" withArrow>
+                    <Button href={story.href} variant="onLight" withArrow>
                       Read the story
                     </Button>
                   </Reveal>
@@ -62,6 +62,16 @@ export function Stories() {
           );
         })}
       </div>
+
+      {/* The section is the journal's genre - so it ends at the journal's
+          door. Without this the journal is an orphan reachable only by URL. */}
+      <Container>
+        <Reveal className="mt-16 flex justify-center md:mt-24">
+          <Button href="/journal" variant="onLight" withArrow>
+            More from the Journal
+          </Button>
+        </Reveal>
+      </Container>
     </Section>
   );
 }

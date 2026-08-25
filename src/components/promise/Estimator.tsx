@@ -10,12 +10,12 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/cn";
 
 /**
- * "WORK OUT YOUR OWN BILL" — the transparency promise made operable.
+ * "WORK OUT YOUR OWN BILL" - the transparency promise made operable.
  *
  * The previous version of this section was a worked example: correct, but
  * something to read. The promise is "you can repeat this arithmetic at home",
- * so the section now lets the customer do exactly that — their own weight,
- * their own karat, their own making charge — priced off the LIVE 22K rate.
+ * so the section now lets the customer do exactly that - their own weight,
+ * their own karat, their own making charge - priced off the LIVE 22K rate.
  *
  * Two deliberate design decisions:
  *
@@ -34,7 +34,7 @@ import { cn } from "@/lib/cn";
 /** Illustrative fallback so the section is complete before the rate lands. */
 const FALLBACK_RATE = 7740;
 
-/** Purity in parts per thousand — the number stamped next to the karat. */
+/** Purity in parts per thousand - the number stamped next to the karat. */
 const KARATS = [
   { id: "22K", fineness: 916, factor: 1 },
   { id: "18K", fineness: 750, factor: 750 / 916 },
@@ -107,7 +107,7 @@ export function Estimator() {
       <Container>
         <div ref={root}>
           <Reveal as="p" className="u-eyebrow mb-4">
-            03 — What you actually pay for
+            03 - What you actually pay for
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="max-w-3xl font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
@@ -118,7 +118,7 @@ export function Estimator() {
           </Reveal>
           <Reveal as="p" delay={0.08} className="mt-6 max-w-xl font-body text-[1rem] font-light leading-relaxed text-text-muted">
             Move the numbers. This is the same arithmetic we do at the counter,
-            against today&rsquo;s live rate — do it for a piece you already own
+            against today&rsquo;s live rate - do it for a piece you already own
             and see whether the bill you were given adds up.
           </Reveal>
 
@@ -243,7 +243,7 @@ export function Estimator() {
               <dl className="font-body">
                 <Row
                   label="Net gold weight"
-                  sub="The gold only — stones and thread weighed out"
+                  sub="The gold only - stones and thread weighed out"
                   value={`${weight.toFixed(3)} g`}
                 />
                 <Row
@@ -264,7 +264,7 @@ export function Estimator() {
                   value={`₹${formatNumberIN(metal)}`}
                 />
 
-                {/* The decisive line — fixed, and not adjustable on purpose. */}
+                {/* The decisive line - fixed, and not adjustable on purpose. */}
                 <div data-row className="border-t border-line py-5">
                   <div className="flex items-baseline justify-between gap-6">
                     <dt className="flex-1">
@@ -272,7 +272,7 @@ export function Estimator() {
                         Stone weight
                       </span>
                       <span className="mt-1 block text-[0.78rem] font-light leading-relaxed text-text-muted">
-                        Weighed separately. Never billed at the gold rate — which
+                        Weighed separately. Never billed at the gold rate - which
                         is why there is no slider on this line.
                       </span>
                     </dt>
@@ -284,7 +284,7 @@ export function Estimator() {
 
                 <Row
                   label="Making charge"
-                  sub={`${making}% of metal value — shown before you say yes`}
+                  sub={`${making}% of metal value - shown before you say yes`}
                   value={`₹${formatNumberIN(makingValue)}`}
                 />
                 <Row

@@ -10,11 +10,11 @@ import { MOODS } from "./EditMood";
 import { cn } from "@/lib/cn";
 
 /**
- * THE LOOKBOOK — a sticky scene, read like a contact sheet.
+ * THE LOOKBOOK - a sticky scene, read like a contact sheet.
  *
  * The frame holds still on the left while the six captions scroll past on the
  * right; the frame cross-dissolves to whichever caption you are reading. The
- * sheet of thumbnails underneath is not decoration — it is the scene's index,
+ * sheet of thumbnails underneath is not decoration - it is the scene's index,
  * and its marker tracks the same state, so at any moment you can see where you
  * are in the edit without scrolling back.
  *
@@ -35,8 +35,7 @@ export function EditGallery({ edit }: { edit: OccasionEdit }) {
           <div>
             <p className="u-eyebrow mb-2">The lookbook</p>
             <h2 className="font-display text-[length:var(--step-3)] font-light leading-[var(--leading-3)]">
-              Six frames from{" "}
-              <em className="font-display italic">{edit.name}</em>
+              Six frames from {edit.name}
             </h2>
           </div>
           <p
@@ -49,7 +48,10 @@ export function EditGallery({ edit }: { edit: OccasionEdit }) {
 
         <div ref={rootRef} className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-14">
           {/* ── The stage ─────────────────────────────────────────────── */}
-          <div className="md:col-span-7">
+          {/* Hidden below md: the caption list renders its own inline frames
+              there, so the stage would duplicate frame one and pin an inert
+              counter above it. */}
+          <div className="hidden md:block md:col-span-7">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-green md:sticky md:top-24">
               {edit.gallery.map((img, i) => (
                 <Image

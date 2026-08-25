@@ -13,12 +13,12 @@ import { EditsIndex } from "@/components/edits/EditsIndex";
 export const metadata = pageMetadata({
   title: "The Edits",
   description:
-    "Five occasions, five edits — bridal, office wear, outings, festive vibes and catching flights. The House of Chheda sorted by where you are wearing it, not what it is made of.",
+    "Five occasions, five edits - bridal, office wear, outings, festive vibes and catching flights. The House of Chheda sorted by where you are wearing it, not what it is made of.",
   path: "/edits",
 });
 
 /**
- * /edits — the index of the occasion axis.
+ * /edits - the index of the occasion axis.
  *
  * Opens with the two axes stated plainly (metal ⇄ occasion), because the whole
  * value of this section is that a visitor understands there are two ways in.
@@ -90,7 +90,7 @@ export default function EditsPage() {
 
       <EditsIndex />
 
-      {/* Cross-back to the metal rooms — an edit borrows from them, so the
+      {/* Cross-back to the metal rooms - an edit borrows from them, so the
           index has to point both ways or the two axes stop being equal. */}
       <Section spacing="md" tone="green">
         <Container>

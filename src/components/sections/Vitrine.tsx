@@ -4,19 +4,18 @@ import { useState } from "react";
 import { Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitLines } from "@/components/motion/SplitLines";
-import { emphasise } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/cn";
 
 /**
- * THE VITRINE — one piece, one whole screen, one ground.
+ * THE VITRINE - one piece, one whole screen, one ground.
  *
  * Each cutout (Magnific background removal on the house's own footage) gets
  * the screen to itself, and the ground it sits on is the screen: switching
- * pieces washes the entire section between the three colours the brand owns —
- * emerald, cream, oxblood — which is the effect a real case gives you when the
+ * pieces washes the entire section between the three colours the brand owns -
+ * emerald, cream, oxblood - which is the effect a real case gives you when the
  * lining changes behind the glass.
  *
- * STILL BY DESIGN. The lighting treatment is the whole effect — a fixed
+ * STILL BY DESIGN. The lighting treatment is the whole effect - a fixed
  * three-quarter tilt in true perspective, a specular sheen masked BY the piece
  * so light lands only on metal, a shadow leaning off the tilt, and the piece's
  * reflection beneath. Nothing tracks the pointer and nothing sways; the only
@@ -35,7 +34,7 @@ type Ground = {
   sheen: string;
 };
 
-/** The house's three grounds — dark, light, dark. */
+/** The house's three grounds - dark, light, dark. */
 const EMERALD: Ground = { bg: "bg-green", sheen: "rgba(255,236,200,0.42)" };
 const CREAM: Ground = { bg: "bg-cream", light: true, sheen: "rgba(255,255,255,0.55)" };
 const MAROON: Ground = { bg: "bg-maroon", sheen: "rgba(255,228,190,0.40)" };
@@ -99,7 +98,7 @@ export function Vitrine() {
         ground.light && "u-on-light",
       )}
     >
-      {/* Case light — a pool behind the piece, tuned to the ground. */}
+      {/* Case light - a pool behind the piece, tuned to the ground. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 transition-opacity duration-[900ms]"
@@ -118,7 +117,7 @@ export function Vitrine() {
           </Reveal>
           <SplitLines delay={0.04}>
             <h2 className="font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)]">
-              {emphasise("Laid out *on the glass*")}
+              Laid out on the glass
             </h2>
           </SplitLines>
         </div>
@@ -142,7 +141,7 @@ export function Vitrine() {
                   className="relative inline-block"
                   style={{ transform: `rotateX(${p.tilt.x}deg) rotateY(${p.tilt.y}deg)` }}
                 >
-                  {/* Shadow — offset against the tilt, sells the depth. */}
+                  {/* Shadow - offset against the tilt, sells the depth. */}
                   <div
                     aria-hidden
                     className="absolute inset-x-[10%] -bottom-[9%] h-[15%] rounded-[50%] blur-xl"
@@ -173,7 +172,7 @@ export function Vitrine() {
                     }}
                   />
 
-                  {/* Specular sheen — masked BY the piece, so the highlight can
+                  {/* Specular sheen - masked BY the piece, so the highlight can
                       only ever fall on metal and stones. */}
                   <div
                     aria-hidden
@@ -189,7 +188,7 @@ export function Vitrine() {
                     }}
                   />
 
-                  {/* Reflection in the glass — clipped to a shallow strip.
+                  {/* Reflection in the glass - clipped to a shallow strip.
                       Without the clip a full mirrored copy hangs below the
                       piece and washes straight over the plate and switches. */}
                   <div
@@ -230,7 +229,7 @@ export function Vitrine() {
           ))}
         </div>
 
-        {/* ── The switches — the rest of the case ─────────────────────── */}
+        {/* ── The switches - the rest of the case ─────────────────────── */}
         <div
           role="tablist"
           aria-label="Choose a piece"
@@ -244,7 +243,7 @@ export function Vitrine() {
                 type="button"
                 role="tab"
                 aria-selected={on}
-                aria-label={`${p.name} — ${p.detail}`}
+                aria-label={`${p.name} - ${p.detail}`}
                 onClick={() => setActive(i)}
                 className={cn(
                   "group relative grid h-14 w-14 place-items-center overflow-hidden rounded-full border transition-all duration-[450ms] ease-[var(--ease-lux)]",

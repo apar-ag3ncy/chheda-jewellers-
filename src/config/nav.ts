@@ -1,5 +1,5 @@
 /**
- * NAVIGATION CONFIG — the 5 primary items (floating capsule).
+ * NAVIGATION CONFIG - the 5 primary items (floating capsule).
  * Section order for the homepage also lives here so it is data,
  * not hard-coded JSX.
  */
@@ -15,6 +15,8 @@ export type NavChild = {
 /** A titled column inside a mega menu. */
 export type NavGroup = {
   title: string;
+  /** Index page for the whole group - the title renders as a link when set. */
+  href?: string;
   /** Optional note under the column title. */
   note?: string;
   items: NavChild[];
@@ -65,12 +67,13 @@ export const primaryNav: NavItem[] = [
           {
             label: "Bespoke",
             href: "/bespoke",
-            description: "Drawn for one person — or remade from your own gold",
+            description: "Drawn for one person - or remade from your own gold",
           },
         ],
       },
       {
         title: "The Edits",
+        href: "/edits",
         note: "Where you are wearing it",
         items: editChildren,
       },
@@ -83,26 +86,27 @@ export const primaryNav: NavItem[] = [
 ];
 
 /**
- * Homepage section order — the single place the scroll is choreographed.
+ * Homepage section order - the single place the scroll is choreographed.
  * The homepage renders FROM this list (see app/(marketing)/page.tsx), so
  * reordering the journey is a config edit, never a JSX surgery.
  */
 export const homepageSections = [
   "hero",
+  "collections",
   "chheda-promise",
   "jewellery-types",
   "edits",
-  "stories",
-  "manifesto",
-  "collections",
-  "atelier",
-  "diamond-edit",
   "film-room",
+  "stories",
   "vitrine",
   "testimonials",
+  "diamond-edit",
+  "manifesto",
+  "atelier",
   "monthly-plan",
   "branches",
   "community",
+  "doors",
 ] as const;
 
 export type HomepageSection = (typeof homepageSections)[number];

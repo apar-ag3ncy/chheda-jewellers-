@@ -11,13 +11,13 @@ import { MOODS } from "./EditMood";
 import { cn } from "@/lib/cn";
 
 /**
- * THE MARQUEE — the five edits as a ruled departures board.
+ * THE MARQUEE - the five edits as a ruled departures board.
  *
  * Five rows, each a full-width rule with an index, a name and a hook. Hovering
  * (or focusing) a row brings its photograph up behind the whole board and
  * dims the other rows, so the list behaves like a single image that changes
  * rather than five cards competing for attention. On touch, no row is
- * "hovered" — the board simply shows the first frame and each row is a plain,
+ * "hovered" - the board simply shows the first frame and each row is a plain,
  * large tap target, which is the better mobile interaction anyway.
  *
  * Chosen over a grid of five cards because five is an awkward grid number and
@@ -50,7 +50,7 @@ export function EditsIndex() {
             style={{ objectPosition: e.hero.focus ?? "50% 32%" }}
           />
         ))}
-        {/* Heavy, neutral scrim — the photograph is atmosphere here, the type
+        {/* Heavy, neutral scrim - the photograph is atmosphere here, the type
             is the content, so legibility wins outright. Two layers: a flat
             floor across the whole frame so no bright patch can ever sit under
             a line of copy, then a horizontal ramp that lets the right-hand
@@ -95,7 +95,7 @@ export function EditsIndex() {
                   onBlur={() => setActive(null)}
                   className={cn(
                     "group flex items-center gap-5 border-b border-line py-6 transition-opacity duration-500 md:gap-10 md:py-8",
-                    // Dim the rows you are not pointing at — the board reads as
+                    // Dim the rows you are not pointing at - the board reads as
                     // one focused line rather than five equal ones.
                     active !== null && !on ? "md:opacity-55" : "opacity-100",
                   )}
@@ -116,7 +116,7 @@ export function EditsIndex() {
                     </span>
                   </span>
 
-                  {/* A thumbnail rides the row on wide screens — enough to
+                  {/* A thumbnail rides the row on wide screens - enough to
                       preview the mood without leaving the list. */}
                   <span
                     className={cn(

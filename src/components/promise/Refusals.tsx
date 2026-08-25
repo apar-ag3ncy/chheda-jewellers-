@@ -4,7 +4,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SplitLines } from "@/components/motion/SplitLines";
 
 /**
- * "What we do not do" — the page's one maroon band.
+ * "What we do not do" - the page's one maroon band, and deliberately so:
+ * the darkest claim on the page gets the darkest ground the brand owns.
  *
  * Negative promises read as credible in a way positive ones structurally
  * cannot: anyone can claim transparency, but naming the specific practices you
@@ -15,7 +16,7 @@ export function Refusals() {
     <section className="relative w-full overflow-hidden bg-maroon py-20 md:py-32">
       <Container>
         <Reveal as="p" className="u-eyebrow mb-10 text-[color-mix(in_srgb,var(--gold-light)_85%,transparent)]">
-          04 — What we do not do
+          04 - What we do not do
         </Reveal>
         <ul className="flex max-w-4xl flex-col">
           {refusals.map((line, i) => (

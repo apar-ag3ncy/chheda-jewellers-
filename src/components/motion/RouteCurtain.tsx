@@ -5,7 +5,7 @@ import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { Monogram } from "@/components/ui/Monogram";
 
 /**
- * Route transition — an emerald curtain lifts away as each page arrives,
+ * Route transition - an emerald curtain lifts away as each page arrives,
  * reusing the Loader's exact curve so the site speaks one motion language.
  *
  * Mounted from `(marketing)/template.tsx`, which Next re-mounts on every
@@ -38,7 +38,7 @@ export function RouteCurtain({ children }: { children: ReactNode }) {
     // Curtain lifts; the incoming page trails slightly for depth.
     tl.to(panel, { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, 0.05)
       // clearProps is REQUIRED: GSAP otherwise leaves transform:matrix(1,0,0,1,0,0)
-      // on this wrapper, and ANY transform — even identity — makes it a
+      // on this wrapper, and ANY transform - even identity - makes it a
       // containing block, which breaks position:fixed for every descendant and
       // silently disables all ScrollTrigger pins inside the page.
       .from(main, {

@@ -9,7 +9,7 @@ const SEEN_KEY = "cj_loader_seen";
 /**
  * The loading page is the mark, and nothing else.
  *
- * No wordmark, no hairline, no progress bar — the whole performance is the
+ * No wordmark, no hairline, no progress bar - the whole performance is the
  * logo turning. The lotus mandala unwinds one and a half turns clockwise while
  * the interlocking CJ core counter-spins two and a half turns the other way;
  * both decelerate on the "cinema" curve, which spends most of its distance in
@@ -71,7 +71,7 @@ export function Loader() {
 
       // ── The turn ────────────────────────────────────────────────────────
       // Scale and rotation share one duration and one curve, so the mark reads
-      // as a single object arriving — not as a stack of separate tweens.
+      // as a single object arriving - not as a stack of separate tweens.
       const SPIN = 2.9;
 
       tl.fromTo(
@@ -129,7 +129,7 @@ export function Loader() {
       // ── The lift ────────────────────────────────────────────────────────
       // A held breath after the lock, then the emerald curtain leaves. The
       // mark travels slower than the curtain, so it is still settling as the
-      // hero arrives underneath — the two scenes overlap instead of cutting.
+      // hero arrives underneath - the two scenes overlap instead of cutting.
       const EXIT = SPIN + 0.34;
       tl.to(el, { yPercent: -100, duration: 1.15, ease: "veil" }, EXIT);
       tl.to(
@@ -159,7 +159,7 @@ export function Loader() {
         ref={stage}
         className="relative grid h-full place-items-center will-change-transform"
       >
-        {/* Warm bloom — light, not geometry. Sits behind the mark and never
+        {/* Warm bloom - light, not geometry. Sits behind the mark and never
             intercepts a pointer. */}
         <div
           ref={bloom}

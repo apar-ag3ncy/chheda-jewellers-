@@ -5,7 +5,7 @@ import { ScrollTrigger } from "@/lib/gsap";
 import { keyDelta, nearestLoaded, wrapFrame } from "@/lib/scrub";
 
 /**
- * THE TURNTABLE — a 360° frame sequence the VISITOR turns. Never on its own.
+ * THE TURNTABLE - a 360° frame sequence the VISITOR turns. Never on its own.
  *
  * The playhead is the sum of two user-driven inputs, so they can never fight:
  *
@@ -15,14 +15,14 @@ import { keyDelta, nearestLoaded, wrapFrame } from "@/lib/scrub";
  * holds its angle. Releasing a drag glides to a stop on a little inertia,
  * because that is the visitor's own gesture finishing, not an animation.
  *
- * Painted to <canvas> (CLAUDE.md: image sequences on canvas — never a scrubbed
+ * Painted to <canvas> (CLAUDE.md: image sequences on canvas - never a scrubbed
  * <video>), and neighbouring frames are CROSS-BLENDED at fractional playheads,
  * which is what makes a slow turn glide instead of stepping frame to frame.
  *
  * Loading is lazy and progressive: nothing is fetched until the stage nears
  * the viewport, then frames arrive with limited concurrency and the scrubber
  * snaps to the nearest LOADED frame, so it is usable from the first arrivals.
- * Frames stay as HTMLImageElements — the browser keeps them compressed and
+ * Frames stay as HTMLImageElements - the browser keeps them compressed and
  * decodes on demand; ImageBitmaps would pin megabytes each.
  *
  * There is no persistent rAF: the loop spins up only while inertia is
@@ -100,7 +100,7 @@ export function useFrameScrub(urls: string[], opts: Options = {}) {
     }
   }, [count]);
 
-  /** Inertia loop — runs only while a released gesture is still gliding. */
+  /** Inertia loop - runs only while a released gesture is still gliding. */
   const spinDown = useCallback(() => {
     const s = st.current;
     cancelAnimationFrame(s.raf);

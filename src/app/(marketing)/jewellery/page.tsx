@@ -9,18 +9,17 @@ import { Section, Container } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
-import { JewelleryTypes } from "@/components/sections";
 import { cn } from "@/lib/cn";
 
 export const metadata = pageMetadata({
   title: "All Jewellery",
   description:
-    "Explore the House of Chheda — heritage gold, certified diamonds and regal polki, plus five occasion edits and a bespoke atelier. Editorial collections made to be worn and inherited.",
+    "Explore the House of Chheda - heritage gold, certified diamonds and regal polki, plus five occasion edits and a bespoke atelier. Editorial collections made to be worn and inherited.",
   path: "/jewellery",
 });
 
 /**
- * /jewellery — the house index.
+ * /jewellery - the house index.
  *
  * Rebuilt from three equal cards into a MOSAIC that states a hierarchy: gold
  * takes the tall left column because it is the room most visitors come for,
@@ -32,15 +31,18 @@ export const metadata = pageMetadata({
  * so every route out of the house index is visible from one screen.
  */
 export default function JewelleryPage() {
-  const [gold, ...rest] = categoryList;
+  // By id, not by position - the mosaic gives gold the tall column, and
+  // that must survive any reordering of the content file.
+  const gold = categoryList.find((c) => c.slug === "gold") ?? categoryList[0]!;
+  const rest = categoryList.filter((c) => c !== gold);
 
   return (
     <>
       <PagePlate
         folio="I"
         eyebrow="The House of Chheda"
-        title={"Three rooms,\n*one roof*"}
-        intro="Heritage gold, certified diamonds, and regal polki — each with its own light, its own craft and its own reasons. Begin wherever your story does."
+        title={"Three rooms,\none roof"}
+        intro="Heritage gold, certified diamonds, and regal polki - each with its own light, its own craft and its own reasons. Begin wherever your story does."
         plate={{
           src: "/media/pages/jewellery.jpg",
           alt: "A guest in emerald and gold against a wall of marigolds",
@@ -50,7 +52,7 @@ export default function JewelleryPage() {
           { label: "Rooms", value: "Gold · Diamond · Polki" },
           { label: "Edits", value: `${edits.length} occasions` },
           { label: "Purity", value: "BIS hallmarked, always" },
-          { label: "Made to order", value: "6–10 weeks" },
+          { label: "Made to order", value: "6-10 weeks" },
         ]}
       />
 
@@ -58,7 +60,7 @@ export default function JewelleryPage() {
       <Section spacing="md" tone="green">
         <Container>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
-            {/* Gold — the tall plate */}
+            {/* Gold - the tall plate */}
             {gold ? (
               <Reveal variant="mask">
                 <RoomCard
@@ -76,7 +78,7 @@ export default function JewelleryPage() {
               </Reveal>
             ) : null}
 
-            {/* Diamond + polki — stacked beside it */}
+            {/* Diamond + polki - stacked beside it */}
             <div className="grid grid-cols-1 gap-4 md:gap-5">
               {rest.map((c, i) => (
                 <Reveal key={c.slug} variant="mask" delay={0.06 + i * 0.06}>
@@ -99,20 +101,20 @@ export default function JewelleryPage() {
       </Section>
 
       {/* ── The other axis ────────────────────────────────────────────── */}
-      <Section spacing="lg" tone="deep">
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <div className="flex flex-col items-start justify-between gap-6 border-b border-line pb-6 md:flex-row md:items-end">
             <SectionHeading
               eyebrow="The other way in"
-              title={"Or start from\n*the occasion*"}
+              title={"Or start from\nthe occasion"}
               size="md"
             />
-            <Button href="/edits" variant="ghost" withArrow>
+            <Button href="/edits" variant="onLight" withArrow>
               All five edits
             </Button>
           </div>
 
-          {/* A ruled strip — five edits in a single scannable row, sized to
+          {/* A ruled strip - five edits in a single scannable row, sized to
               the name rather than boxed into equal tiles. */}
           <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
             {edits.map((e, i) => (
@@ -148,7 +150,6 @@ export default function JewelleryPage() {
         </Container>
       </Section>
 
-      <JewelleryTypes />
 
       {/* ── Bespoke + visit ───────────────────────────────────────────── */}
       <Section spacing="lg" tone="green">
@@ -195,7 +196,7 @@ export default function JewelleryPage() {
   );
 }
 
-/** One room of the house — the mosaic's tile, at two scales. */
+/** One room of the house - the mosaic's tile, at two scales. */
 function RoomCard({
   href,
   src,
@@ -258,7 +259,7 @@ function RoomCard({
             "mt-3 font-body text-[0.86rem] font-light leading-relaxed text-text-muted",
             // Copy is present on touch (where there is no hover) and revealed
             // on pointer devices, so nothing is hidden from anyone who cannot
-            // hover — including keyboard users, via group-focus-within.
+            // hover - including keyboard users, via group-focus-within.
             "md:max-h-0 md:overflow-hidden md:opacity-0 md:transition-all md:duration-700 md:ease-[var(--ease-lux)]",
             "md:group-hover:max-h-40 md:group-hover:opacity-100",
             "md:group-focus-within:max-h-40 md:group-focus-within:opacity-100",

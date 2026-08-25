@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import {
   Hero,
+  Doors,
   ChhedaPromise,
   JewelleryTypes,
   EditsRail,
@@ -20,21 +21,32 @@ import { homepageSections, type HomepageSection } from "@/config/nav";
 import { ScrollThemer } from "@/components/motion/ScrollThemer";
 
 /**
- * Homepage — the single-scroll cinematic journey, rendered FROM
+ * Homepage - the single-scroll cinematic journey, rendered FROM
  * `config/nav.ts` so the choreography is data, not JSX surgery.
  *
- * Three placements in that order are load-bearing rather than arbitrary:
- *   · EditsRail sits directly after JewelleryTypes, so the site's two
- *     navigation axes are introduced back to back (what it is ⇄ where you
- *     wear it).
- *   · Atelier sits directly after Collections, because "campaigns, not
- *     catalogues" is precisely the line that provokes "but what if I want
- *     something that isn't in a campaign?" — and that is the bespoke pitch.
- *   · FilmRoom and then Vitrine sit directly before Testimonials — the
- *     visitor has just scrubbed the films and then held a cut-out piece in
- *     their hand, and the reviews land on the heels of that moment.
+ * The order is one continuous hand-off - each section answers the question
+ * the one above it raises, so the scroll reads as a single story instead of
+ * a stack of modules:
  *
- * CommunityStrip anchors the very end, handing off into the footer.
+ *   the work (Collections) - "who are these people?" answered in pictures -
+ *   then the word (ChhedaPromise), then the two ways in standing together
+ *   (JewelleryTypes by object, EditsRail by occasion), then "stop browsing,
+ *   hold one" (FilmRoom), the people pieces are made for (Stories), the
+ *   counter (Vitrine), what 480 families say about that counter
+ *   (Testimonials), the house's newest argument (DiamondEdit), the silence
+ *   that answers it (Manifesto: "we do not sell ornaments"), the piece that
+ *   doesn't exist yet (Atelier), how it becomes affordable (MonthlyPlan),
+ *   where we are (Branches), and how to stay close (CommunityStrip).
+ *
+ * Three adjacencies are load-bearing: Stories between the two long
+ * interactives so they never run back to back; Manifesto directly after
+ * DiamondEdit so the silence lands as a rebuttal; Atelier directly under the
+ * manifesto it answers. The ask corridor - plan, map, community - is
+ * unbroken at the end: nothing after the address pulls the visitor back
+ * into browsing.
+ *
+ * Doors closes the scroll - a bento of the site's doorways, and the page's
+ * last working navigation before the link-less sign-off footer.
  */
 const SECTIONS: Record<HomepageSection, ComponentType> = {
   hero: Hero,
@@ -52,6 +64,7 @@ const SECTIONS: Record<HomepageSection, ComponentType> = {
   "monthly-plan": MonthlyPlan,
   branches: Branches,
   community: CommunityStrip,
+  doors: Doors,
 };
 
 export default function HomePage() {

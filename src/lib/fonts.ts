@@ -16,7 +16,7 @@ export const cormorant = localFont({
   display: "swap",
   // Not preloaded: with `display: swap` the LCP headline paints instantly in
   // the metric-adjusted Georgia fallback, then swaps to Cormorant with minimal
-  // shift — avoiding ~11 render-path font fetches competing with the hero image.
+  // shift - avoiding ~11 render-path font fetches competing with the hero image.
   preload: false,
   adjustFontFallback: "Times New Roman",
   fallback: ["Georgia", "Times New Roman", "serif"],

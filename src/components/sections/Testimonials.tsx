@@ -1,6 +1,5 @@
 import { testimonials, reviewsSummary } from "@/lib/content/testimonials";
 import { Section, Container } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 
 function Stars({ rating, className }: { rating: number; className?: string }) {
@@ -25,17 +24,11 @@ function Stars({ rating, className }: { rating: number; className?: string }) {
 
 export function Testimonials() {
   return (
-    <Section id="testimonials" spacing="lg" tone="transparent" data-bg="green">
+    <Section id="testimonials" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
-        <SectionHeading
-          eyebrow="Kind words"
-          title={"Trusted, one\n*family at a time*"}
-          align="center"
-          size="md"
-          className="mx-auto items-center text-center"
-        />
+        <p className="u-eyebrow text-center">What customers say</p>
 
-        <Reveal className="mx-auto mt-8 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-line-strong bg-green-soft/40 px-5 py-3 sm:px-6">
+        <Reveal className="mx-auto mt-6 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-line-strong bg-white/55 px-5 py-3 sm:px-6">
           <span className="font-body text-lg font-semibold tabular-nums text-text-strong">
             {reviewsSummary.rating.toFixed(1)}
           </span>
@@ -50,7 +43,7 @@ export function Testimonials() {
             as="p"
             className="mx-auto mt-4 max-w-md text-center font-body text-[0.72rem] leading-relaxed text-text-muted"
           >
-            Reviews shown are illustrative — verified Google reviews will appear here
+            Reviews shown are illustrative - verified Google reviews will appear here
             once connected.
           </Reveal>
         ) : null}
@@ -61,7 +54,7 @@ export function Testimonials() {
               key={t.id}
               delay={(i % 2) * 0.06}
               as="figure"
-              className="flex h-full flex-col justify-between rounded-[var(--radius-brand)] border border-line bg-green-soft/25 p-8 md:p-10"
+              className="flex h-full flex-col justify-between rounded-[var(--radius-brand)] border border-line bg-white/45 p-8 md:p-10"
             >
               <blockquote className="font-display text-[clamp(1.3rem,2.2vw,1.7rem)] font-light italic leading-snug text-text-strong">
                 <span aria-hidden className="text-gold">“</span>

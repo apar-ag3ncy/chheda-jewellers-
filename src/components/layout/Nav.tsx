@@ -83,7 +83,7 @@ export function Nav() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4 md:px-6 md:pt-5">
-      {/* ── GREEN SHELL — frames the beige capsule at home-top, disperses on scroll ── */}
+      {/* ── GREEN SHELL - frames the beige capsule at home-top, disperses on scroll ── */}
       <div
         onMouseLeave={handleLeave}
         className={cn(
@@ -94,7 +94,7 @@ export function Nav() {
             : "gap-0 border border-transparent bg-transparent p-0 shadow-none",
         )}
       >
-        {/* Left extra — live gold rate (home-top only) */}
+        {/* Left extra - live gold rate (home-top only) */}
         {flags.navGoldRate ? (
           <div
             className={cn(
@@ -108,7 +108,7 @@ export function Nav() {
           </div>
         ) : null}
 
-        {/* ── BEIGE CAPSULE — the persistent nav ── */}
+        {/* ── BEIGE CAPSULE - the persistent nav ── */}
         <nav
           aria-label="Primary"
           onKeyDown={(e) => {
@@ -122,10 +122,10 @@ export function Nav() {
           {/* Brand */}
           <Link
             href="/"
-            aria-label={`${siteConfig.name} — home`}
+            aria-label={`${siteConfig.name} - home`}
             className="group flex shrink-0 items-center gap-3"
           >
-            {/* Jeweller's-seal medallion — gold mandala on a gold-rimmed
+            {/* Jeweller's-seal medallion - gold mandala on a gold-rimmed
                 emerald disc, so the brand gold stays luminous on beige. */}
             <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-b from-green to-green-deep shadow-[inset_0_1px_1px_rgba(240,207,170,0.28),0_3px_10px_-3px_rgba(0,0,0,0.45)] ring-1 ring-gold/45 transition-all duration-500 ease-[var(--ease-lux)] group-hover:ring-gold md:h-11 md:w-11">
               <Monogram className="h-[66%] w-[66%]" />
@@ -197,7 +197,7 @@ export function Nav() {
             </button>
           </div>
 
-          {/* Mega dropdown (desktop) — hangs below the beige capsule.
+          {/* Mega dropdown (desktop) - hangs below the beige capsule.
               Items that declare `groups` render the house's two navigation
               axes side by side: BY METAL (what it is made of) and BY OCCASION
               (where you are wearing it). Neither nests inside the other. */}
@@ -220,7 +220,16 @@ export function Nav() {
                   {groups.map((group) => (
                     <div key={group.title}>
                       <div className="mb-3 flex items-baseline justify-between border-b border-line pb-2">
-                        <span className="u-eyebrow text-[0.62rem]">{group.title}</span>
+                        {group.href ? (
+                          <Link
+                            href={group.href}
+                            className="u-eyebrow text-[0.62rem] transition-colors hover:text-gold"
+                          >
+                            {group.title} <span aria-hidden>&rarr;</span>
+                          </Link>
+                        ) : (
+                          <span className="u-eyebrow text-[0.62rem]">{group.title}</span>
+                        )}
                         {group.note ? (
                           <span className="font-body text-[0.66rem] font-light italic text-text-muted">
                             {group.note}
@@ -260,7 +269,7 @@ export function Nav() {
           })}
         </nav>
 
-        {/* Right extra — socials (home-top only) */}
+        {/* Right extra - socials (home-top only) */}
         <div
           className={cn(
             "hidden items-center overflow-hidden whitespace-nowrap transition-all duration-[750ms] ease-[var(--ease-lux)] md:flex",
@@ -339,7 +348,11 @@ function MobileMenu({
               </Link>
               {item.groups?.length ? (
                 <div className="flex flex-wrap gap-x-5 gap-y-1 pb-4">
-                  {item.groups.flatMap((g) => g.items).map((c) => (
+                  {item.groups
+                    .flatMap((g) =>
+                      g.href ? [{ label: g.title, href: g.href }, ...g.items] : g.items,
+                    )
+                    .map((c) => (
                     <Link
                       key={c.href}
                       href={c.href}

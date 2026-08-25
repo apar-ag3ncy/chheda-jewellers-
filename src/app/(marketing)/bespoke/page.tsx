@@ -17,12 +17,12 @@ import { Monogram } from "@/components/ui/Monogram";
 export const metadata = pageMetadata({
   title: "Bespoke",
   description:
-    "Custom jewellery at Chheda Jewellers — a piece drawn for one person, or your family's own gold remade into something worn again. The full commission process, priced and timed honestly.",
+    "Custom jewellery at Chheda Jewellers - a piece drawn for one person, or your family's own gold remade into something worn again. The full commission process, priced and timed honestly.",
   path: "/bespoke",
 });
 
 /**
- * /bespoke — the commission, end to end.
+ * /bespoke - the commission, end to end.
  *
  * The homepage Atelier section sells the idea; this page removes the reasons
  * not to do it. Hence the order: the two ways a commission actually starts
@@ -84,7 +84,7 @@ export default function BespokePage() {
         <Container>
           <SectionHeading
             eyebrow="Where it starts"
-            title={"Two ways a commission\n*actually begins*"}
+            title={"Where a commission\nbegins"}
             intro="One of these is the romantic version. The other is the one most families choose."
             size="md"
           />
@@ -115,7 +115,7 @@ export default function BespokePage() {
         <Container>
           <SectionHeading
             eyebrow="The commission"
-            title={"Four steps, and what\n*you hold at the end of each*"}
+            title={"The four steps"}
             size="md"
           />
 
@@ -164,7 +164,7 @@ export default function BespokePage() {
               </Reveal>
               <SectionHeading
                 eyebrow="Asked and answered"
-                title={"The four questions\n*nobody asks out loud*"}
+                title={"The questions nobody\nasks out loud"}
                 size="md"
                 className="mt-8"
               />

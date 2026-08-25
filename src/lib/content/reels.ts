@@ -1,7 +1,7 @@
 import type { FilmReel } from "@/types/content";
 
 /**
- * THE RING — a 360° turntable the visitor rotates by hand.
+ * THE RING - a 360° turntable the visitor rotates by hand.
  *
  * Generated on the house's Magnific account (Kling 3.0, image-to-video) from a
  * background-cut still of the Bloom ring, then cut at build time into 72 WebP
@@ -17,7 +17,7 @@ export const ringFilm: FilmReel = {
 };
 
 /** The section's single line of copy. */
-export const ringHeadline = "Turn it\n*in the light*";
+export const ringHeadline = "Turn it\nin the light";
 
 export function reelFrameSrc(reel: FilmReel, i: number): string {
   return `${reel.dir}/f${String(i).padStart(2, "0")}.webp`;

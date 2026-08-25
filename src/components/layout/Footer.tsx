@@ -8,13 +8,13 @@ import { Monogram } from "@/components/ui/Monogram";
  * THE SIGN-OFF.
  *
  * One full-bleed landscape photograph with the house's name set across it at
- * poster scale — the mark, then CHHEDA edge to edge, then the small JEWELLERS
+ * poster scale - the mark, then CHHEDA edge to edge, then the small JEWELLERS
  * beneath. Nothing else: no link rail, no branches, no legal row, no CTA.
  *
  * Why this composes its own lockup instead of reusing <Wordmark>: that
  * component is the NAV lockup, where the second line sits at half the first
  * and ends up almost as wide. At this scale that reads as two big words rather
- * than a name and its qualifier, so the sign-off uses its own ratio — a
+ * than a name and its qualifier, so the sign-off uses its own ratio - a
  * display first line and a genuinely small second one. The name itself still
  * comes from config and is never hard-typed (CLAUDE.md).
  *
@@ -32,7 +32,7 @@ export function Footer() {
     <footer className="relative h-[100svh] w-full overflow-hidden bg-green-deep">
       <Link
         href="/"
-        aria-label={`${siteConfig.name} — home`}
+        aria-label={`${siteConfig.name} - home`}
         className="group block h-full w-full outline-none"
       >
         <Image

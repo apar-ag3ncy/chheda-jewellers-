@@ -1,7 +1,7 @@
 /**
  * ANALYTICS ABSTRACTION (PostHog-ready).
  *
- * The heavy `posthog-js` SDK is intentionally NOT installed yet — this keeps
+ * The heavy `posthog-js` SDK is intentionally NOT installed yet - this keeps
  * the bundle lean and requires no key to build/run. Every call here is a safe
  * no-op until NEXT_PUBLIC_POSTHOG_KEY is set and the SDK is wired in.
  *
@@ -40,7 +40,7 @@ export const analytics = {
     // TODO(analytics): posthog.identify(id, props)
   },
 
-  /** Feature flag read — falls back to the static flag default when off. */
+  /** Feature flag read - falls back to the static flag default when off. */
   getFeatureFlag<T = boolean>(_name: string, fallback: T): T {
     if (!enabled) return fallback;
     // TODO(analytics): return posthog.getFeatureFlag(name) ?? fallback

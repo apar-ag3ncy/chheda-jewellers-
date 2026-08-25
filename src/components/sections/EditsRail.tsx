@@ -13,15 +13,15 @@ import { MOODS } from "@/components/edits/EditMood";
 import { cn } from "@/lib/cn";
 
 /**
- * SHOP BY OCCASION — the homepage door into /edits.
+ * SHOP BY OCCASION - the homepage door into /edits.
  *
- * Placed directly after "Types of Jewellery" so the two axes are introduced
- * back to back: that section says *what it is*, this one says *where you are
- * wearing it*. Reading them in sequence is what teaches the visitor that the
- * site has two ways in.
+ * Sits directly under JewelleryTypes so the two ways in - by object, by
+ * occasion - stand together as one index. A family shopping for a wedding
+ * meets the word "bridal" in the first minute; the /edits tile in the closing
+ * bento is then the route back to this axis from the bottom of the page.
  *
  * The heading column is sticky and counts along with the cards, so the section
- * has a fixed anchor while the photography travels — the "logical sticky"
+ * has a fixed anchor while the photography travels - the "logical sticky"
  * behaviour: something the eye can hold onto while the content moves past it.
  */
 export function EditsRail() {
@@ -35,7 +35,7 @@ export function EditsRail() {
   return (
     <section
       id="edits"
-      data-bg="green"
+      data-bg="maroon"
       className="relative w-full py-20 md:py-32"
     >
       <Container>
@@ -49,7 +49,7 @@ export function EditsRail() {
               <SplitLines delay={0.04}>
                 <h2 className="font-display text-[length:var(--step-5)] font-light leading-[var(--leading-5)] tracking-[var(--tracking-5)]">
                   <span className="block">Dressed for</span>
-                  <span className="block italic">where you&rsquo;re going</span>
+                  <span className="block">where you&rsquo;re going</span>
                 </h2>
               </SplitLines>
               <Reveal
@@ -57,12 +57,11 @@ export function EditsRail() {
                 delay={0.1}
                 className="mt-6 max-w-sm font-body text-[0.95rem] font-light leading-relaxed text-text-muted"
               >
-                Gold, diamond and polki are the rooms. These are the reasons you
-                walk into them — five occasions, each with its own weight, its
-                own light, and its own rules.
+                Gold, diamond and polki are the rooms. These are the
+                occasions you walk in for.
               </Reveal>
 
-              {/* Live index — tracks the card you are reading. */}
+              {/* Live index - tracks the card you are reading. */}
               <div className="mt-10 hidden items-baseline gap-4 md:flex">
                 <span
                   className="font-display text-5xl font-light tabular-nums transition-colors duration-700"

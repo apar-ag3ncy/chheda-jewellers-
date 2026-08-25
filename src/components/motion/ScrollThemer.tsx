@@ -13,11 +13,11 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
  * it just snaps instead of easing).
  */
 const TONES: Record<string, string> = {
-  green: "#0B3A2D", // A — primary brand
+  green: "#0B3A2D", // A - primary brand
   deep: "#06241B", // deepened emerald
-  maroon: "#440002", // B — secondary
-  // C — the warm light interlude. Only ever on TEXT-LED sections, which set
-  // their own dark type; never behind photography, which it would wash out.
+  maroon: "#440002", // B - the oxblood interlude, one band per scroll
+  // The warm light interlude. Sections on it scope themselves .u-on-light so
+  // every nested token flips dark; photography sits in framed plates on it.
   beige: "#F1E6CE",
 };
 
