@@ -35,7 +35,7 @@ export function EditsRail() {
   return (
     <section
       id="edits"
-      data-bg="green"
+      data-bg="maroon"
       className="relative w-full py-20 md:py-32"
     >
       <Container>
