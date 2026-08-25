@@ -31,13 +31,13 @@ const STEPS = ["Occasion", "Access", "When", "You"] as const;
  * Four steps, each answering exactly one question, with the appointment card
  * assembling alongside so the customer can always see what they are about to
  * send. Nothing is submitted in the background: at the end they get the
- * composed message and choose to open WhatsApp, mail it, or copy it — see
+ * composed message and choose to open WhatsApp, mail it, or copy it - see
  * `lib/enquiry` for why that seam exists and what replaces it later.
  *
  * On accessibility, this behaves like a form, not a toy: every choice is a
  * real radio inside a fieldset with a legend, so a screen reader announces the
  * group and the selection, and arrow keys move between options for free. The
- * chip look is CSS on `:checked` — no `div` pretending to be an input, no
+ * chip look is CSS on `:checked` - no `div` pretending to be an input, no
  * keyboard handlers to get wrong. Step changes are announced politely, and
  * focus moves to each new step's heading.
  */
@@ -73,7 +73,7 @@ export function BookingFlow() {
     setDraft((d) => ({ ...d, [key]: value }));
 
   // Reference and date bounds depend on the current time, so they are
-  // generated after mount — never during render, which would desync SSR.
+  // generated after mount - never during render, which would desync SSR.
   useEffect(() => {
     setReference(makeReference());
     const now = new Date();
@@ -294,7 +294,7 @@ export function BookingFlow() {
               headingRef={headingRef}
               kicker="The diary"
               title="When suits you?"
-              note="Same-day is usually possible too — call us and we will make it work."
+              note="Same-day is usually possible too - call us and we will make it work."
             >
               <ChipGroup
                 legend="Which boutique"
@@ -442,7 +442,7 @@ export function BookingFlow() {
               Ready when you are.
             </h2>
             <p className="mt-5 max-w-lg font-body text-[0.98rem] font-light leading-relaxed text-text-muted">
-              Nothing has been sent yet. Below is exactly what we will receive —
+              Nothing has been sent yet. Below is exactly what we will receive -
               send it however you prefer, and a person will confirm within the
               day.
             </p>
@@ -591,7 +591,7 @@ function Nav({
 /**
  * Chips that are really radios. The `peer` + `:checked` styling means the
  * selection state, keyboard behaviour and screen-reader announcement all come
- * from the native input — nothing here re-implements a control.
+ * from the native input - nothing here re-implements a control.
  */
 function ChipGroup({
   legend,

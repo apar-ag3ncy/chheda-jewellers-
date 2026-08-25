@@ -13,14 +13,14 @@ import { MOODS } from "@/components/edits/EditMood";
 import { cn } from "@/lib/cn";
 
 /**
- * SHOP BY OCCASION — the homepage door into /edits.
+ * SHOP BY OCCASION - the homepage door into /edits.
  *
  * Placed near the end of the scroll: the visitor has already been through the
  * house by metal, so this reads as "or come back in by occasion" rather than
  * a second taxonomy to absorb before they have seen anything.
  *
  * The heading column is sticky and counts along with the cards, so the section
- * has a fixed anchor while the photography travels — the "logical sticky"
+ * has a fixed anchor while the photography travels - the "logical sticky"
  * behaviour: something the eye can hold onto while the content moves past it.
  */
 export function EditsRail() {
@@ -60,7 +60,7 @@ export function EditsRail() {
                 occasions you walk in for.
               </Reveal>
 
-              {/* Live index — tracks the card you are reading. */}
+              {/* Live index - tracks the card you are reading. */}
               <div className="mt-10 hidden items-baseline gap-4 md:flex">
                 <span
                   className="font-display text-5xl font-light tabular-nums transition-colors duration-700"

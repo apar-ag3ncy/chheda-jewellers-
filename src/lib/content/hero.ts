@@ -1,7 +1,7 @@
 import type { HeroSlide } from "@/types/content";
 
 /**
- * Hero A — stable cinematic slides. Each slide holds subtle continuous
+ * Hero A - stable cinematic slides. Each slide holds subtle continuous
  * motion (handled in the section), never a hard stop. Copy is editorial,
  * never product-led.
  */

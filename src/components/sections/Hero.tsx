@@ -12,14 +12,14 @@ import { cn } from "@/lib/cn";
 const SLIDE_MS = 6400;
 
 /**
- * Hero A — stable cinematic slides. Crossfade + a slow, continuous Ken Burns
+ * Hero A - stable cinematic slides. Crossfade + a slow, continuous Ken Burns
  * are pure CSS (deterministic, no per-slide GSAP revert), so slides never
  * hard-stop and reduced motion is honoured automatically via the global floor
  * (crossfade + zoom collapse to instant). Headlines rise from a mask on change.
  *
  * THE HANDOFF: the one GSAP scene here is scroll-linked, not timed. As the
  * hero leaves, the copy drifts up faster than the page and dims while the
- * frame sinks slightly behind it — so the first section arrives *underneath* a
+ * frame sinks slightly behind it - so the first section arrives *underneath* a
  * hero that is still moving, instead of after a hard cut. It is the same trick
  * the loader's curtain uses (two layers, different speeds) and it is what
  * makes the top of the page read as one continuous shot.
@@ -92,7 +92,7 @@ export function Hero() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Slide layers — CSS crossfade, inside one transform host so the
+      {/* Slide layers - CSS crossfade, inside one transform host so the
           scroll handoff can move every frame together. */}
       <div ref={frames} className="absolute inset-0 will-change-transform">
       {heroSlides.map((s, i) => (
@@ -120,7 +120,7 @@ export function Hero() {
       ))}
       </div>
 
-      {/* Text-anchored scrim — darkens only the lower-left where the copy sits,
+      {/* Text-anchored scrim - darkens only the lower-left where the copy sits,
           so the headline + body stay legible on bright frames while the top of
           the image reads clean (no edge vignette). */}
       <div
@@ -132,7 +132,7 @@ export function Hero() {
         }}
       />
 
-      {/* Content — keyed by slide so the reveal replays on change (CSS-driven,
+      {/* Content - keyed by slide so the reveal replays on change (CSS-driven,
           deterministic, and reduced-motion-safe via the global floor). */}
       <div
         ref={copy}

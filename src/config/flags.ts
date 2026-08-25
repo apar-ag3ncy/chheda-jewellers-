@@ -1,5 +1,5 @@
 /**
- * FEATURE FLAGS — build-time toggles for experiments & swappable slots.
+ * FEATURE FLAGS - build-time toggles for experiments & swappable slots.
  * Later these can be driven by PostHog (see lib/analytics.ts) for real
  * A/B tests; for now they are static, typed defaults.
  */

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getGoldRate } from "@/lib/gold-rate";
 
 /**
- * Live gold-rate endpoint. The UI reads this — never a third-party API
+ * Live gold-rate endpoint. The UI reads this - never a third-party API
  * directly. Cached at the edge (~10 min) so we never hammer the provider.
  */
 export const revalidate = 600;

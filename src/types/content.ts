@@ -1,5 +1,5 @@
 /**
- * CONTENT TYPES — the shape of all editorial data.
+ * CONTENT TYPES - the shape of all editorial data.
  * Today these are satisfied by typed files in `lib/content/`.
  * Tomorrow the same types can be satisfied by a CMS (Sanity/Payload)
  * without touching a single component. This is the seam.
@@ -88,13 +88,13 @@ export interface CategoryPage {
     description: string;
     image: ImageAsset;
   }[];
-  /** Curated edit — a handful of pieces that show the category's range. */
+  /** Curated edit - a handful of pieces that show the category's range. */
   gallery: ImageAsset[];
   note: string;
 }
 
 /* ============================================================
-   THE EDITS — occasion-led categories.
+   THE EDITS - occasion-led categories.
 
    A second, independent axis through the same house. `categories`
    (gold / diamond / polki) answers "what is it made of"; an edit answers
@@ -114,7 +114,7 @@ export interface OccasionEdit {
   slug: string;
   /** Short label for nav, chips and cross-links. */
   name: string;
-  /** The editorial title — may carry *italic* phrases via `emphasise`. */
+  /** The editorial title - may carry *italic* phrases via `emphasise`. */
   title: string;
   /** Wide-tracked kicker above the title. */
   eyebrow: string;
@@ -124,7 +124,7 @@ export interface OccasionEdit {
   /** Accent tone used for the edit's chip / rule / index number. */
   mood: "rose" | "ember" | "ink" | "sun" | "dusk";
   hero: ImageAsset;
-  /** Six frames — the edit's own gallery. */
+  /** Six frames - the edit's own gallery. */
   gallery: ImageAsset[];
   /** The styling brief, as a ruled table. */
   notes: EditNote[];
@@ -135,7 +135,7 @@ export interface OccasionEdit {
 }
 
 /* ============================================================
-   BESPOKE — the custom-jewellery commission.
+   BESPOKE - the custom-jewellery commission.
    ============================================================ */
 
 export interface BespokeStep {
@@ -150,13 +150,13 @@ export interface BespokeStep {
 }
 
 /* ============================================================
-   THE RING — the scrub-driven 360° turntable.
+   THE RING - the scrub-driven 360° turntable.
    ============================================================ */
 
 /** A directory of extracted frames the visitor rotates through. */
 export interface FilmReel {
   id: string;
-  /** The piece's name — used for the accessible label, not shown as copy. */
+  /** The piece's name - used for the accessible label, not shown as copy. */
   name: string;
   /** Directory under /media/reels containing f00..fNN.webp + poster.webp. */
   dir: string;

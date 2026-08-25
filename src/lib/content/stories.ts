@@ -1,7 +1,7 @@
 import type { Story } from "@/types/content";
 
 /**
- * Stories by Chheda — best-sellers treated as editorial stories,
+ * Stories by Chheda - best-sellers treated as editorial stories,
  * explicitly not a product listing.
  */
 export const stories: Story[] = [
@@ -23,7 +23,7 @@ export const stories: Story[] = [
     kicker: "Worn Every Day",
     title: "Gold that lives with you",
     excerpt:
-      "The chain and studs that never come off — designed to survive a school run and still shine at dinner.",
+      "The chain and studs that never come off - designed to survive a school run and still shine at dinner.",
     image: {
       src: "/media/stories/story-02.jpg",
       alt: "Model wearing warm everyday gold jewellery",
@@ -36,7 +36,7 @@ export const stories: Story[] = [
     kicker: "Remade to Remember",
     title: "Her mother's gold, again",
     excerpt:
-      "An old haar melted and reimagined into something a new bride would actually wear — the metal, the memory, untouched.",
+      "An old haar melted and reimagined into something a new bride would actually wear - the metal, the memory, untouched.",
     image: {
       src: "/media/stories/story-03.jpg",
       alt: "Portrait of a bride adorned in reimagined heirloom gold jewellery",

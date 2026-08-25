@@ -17,7 +17,7 @@ type MonogramProps = {
 };
 
 /**
- * The Chheda Jewellers monogram — a lotus mandala with the interlocking
+ * The Chheda Jewellers monogram - a lotus mandala with the interlocking
  * CJ motif. Inline SVG so it can be recoloured and animated (loader).
  */
 export function Monogram({
@@ -41,7 +41,7 @@ export function Monogram({
     >
       {title && !decorative ? <title>{title}</title> : null}
       {/* The gradient itself is defined once, globally, by <BrandDefs /> in the
-          root layout — see that file for why it must not live here. */}
+          root layout - see that file for why it must not live here. */}
       {/* Two groups so the mandala petals and the CJ core can be animated
           independently (e.g. the loader's counter-rotating bloom). */}
       <g className="cj-mandala">

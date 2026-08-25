@@ -1,5 +1,5 @@
 /**
- * LIVE GOLD RATE — provider abstraction.
+ * LIVE GOLD RATE - provider abstraction.
  *
  * Components/pages NEVER call a third-party API directly; they read through
  * the Route Handler at /api/gold-rate, which calls `getGoldRate()` here.
@@ -55,7 +55,7 @@ const PURITY_22K = 22 / 24;
 
 function indicativeRates(): GoldRate[] {
   const now = new Date();
-  // Deterministic ±0.6% intraday drift from the hour+minute — no randomness.
+  // Deterministic ±0.6% intraday drift from the hour+minute - no randomness.
   const minuteOfDay = now.getHours() * 60 + now.getMinutes();
   const drift = Math.sin((minuteOfDay / 1440) * Math.PI * 2) * 0.006;
   const price24 = Math.round(BASE_24K * (1 + drift));
@@ -86,7 +86,7 @@ function indicativeRates(): GoldRate[] {
 
 /**
  * Live provider adapters. Each returns null on ANY failure so the caller can
- * fall back gracefully — a jeweller's site must never render a wrong number
+ * fall back gracefully - a jeweller's site must never render a wrong number
  * confidently, and must never render nothing at all.
  *
  * ── On accuracy ───────────────────────────────────────────────────────────
@@ -123,7 +123,7 @@ function build(
   ];
 }
 
-/** metals.dev — supports INR and per-gram directly, so no conversion needed. */
+/** metals.dev - supports INR and per-gram directly, so no conversion needed. */
 async function fetchFromMetalsDev(): Promise<GoldRate[] | null> {
   if (!API_KEY) return null;
   try {
@@ -142,7 +142,7 @@ async function fetchFromMetalsDev(): Promise<GoldRate[] | null> {
   }
 }
 
-/** GoldAPI.io — quotes XAU in the requested currency; price_gram_24k is provided. */
+/** GoldAPI.io - quotes XAU in the requested currency; price_gram_24k is provided. */
 async function fetchFromGoldApi(): Promise<GoldRate[] | null> {
   if (!API_KEY) return null;
   try {
@@ -166,7 +166,7 @@ async function fetchFromGoldApi(): Promise<GoldRate[] | null> {
 }
 
 /**
- * IBJA-aligned feed — the ONLY source we would publish as non-indicative,
+ * IBJA-aligned feed - the ONLY source we would publish as non-indicative,
  * because it is the rate Indian jewellers actually quote.
  *
  * TODO(client): IBJA does not offer a free public API. To show a true counter
@@ -187,7 +187,7 @@ async function fetchFromIbja(): Promise<GoldRate[] | null> {
     if (typeof r24 !== "number" && typeof r22 !== "number") return null;
     const price24 = typeof r24 === "number" ? r24 : (r22 as number) / PURITY_22K;
     if (!Number.isFinite(price24) || price24 <= 0) return null;
-    // The real counter rate — the one case where indicative is false.
+    // The real counter rate - the one case where indicative is false.
     return build(price24, "IBJA", false);
   } catch {
     return null;

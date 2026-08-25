@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
  * Everything the appointment form knows how to do lives here, so the UI never
  * talks to a channel directly. Today a booking is delivered by opening a
  * pre-composed WhatsApp message (or an email) that the customer sends
- * themselves — which is how an Indian jeweller's bookings actually arrive, and
+ * themselves - which is how an Indian jeweller's bookings actually arrive, and
  * needs no server, no third-party scheduler and no customer data at rest.
  *
  * When there is a CRM or an inbox to post to, `buildEnquiry` stays exactly as
@@ -15,7 +15,7 @@ import { siteConfig } from "@/config/site";
  * inside the component.
  *
  * ⚠️ Nothing here transmits anything on its own. The caller receives a URL and
- * the customer chooses to open it — the details are never sent in the
+ * the customer chooses to open it - the details are never sent in the
  * background, and nothing is stored.
  */
 
@@ -59,7 +59,7 @@ export const TIERS: {
     id: "counter",
     label: "Counter visit",
     duration: "30 min",
-    note: "Walk in whenever — this just tells us you're coming.",
+    note: "Walk in whenever - this just tells us you're coming.",
     perks: ["A named advisor waiting", "Pieces pulled before you arrive"],
   },
   {
@@ -96,7 +96,7 @@ export const SLOTS = [
   "7:30 PM",
 ] as const;
 
-export const GUEST_OPTIONS = ["Just me", "Two of us", "3–4", "5 or more"] as const;
+export const GUEST_OPTIONS = ["Just me", "Two of us", "3-4", "5 or more"] as const;
 
 /**
  * A short, speakable booking reference. Generated on the client only (never
@@ -111,7 +111,7 @@ export function makeReference(): string {
   return `CJ-${out}`;
 }
 
-/** The earliest bookable day — tomorrow, in the browser's own timezone. */
+/** The earliest bookable day - tomorrow, in the browser's own timezone. */
 export function earliestDate(from: Date): string {
   const d = new Date(from);
   d.setDate(d.getDate() + 1);
@@ -159,12 +159,12 @@ export function intentLabel(intent: Intent): string {
 }
 
 /**
- * The message itself — plain text, structured so whoever reads it at the
+ * The message itself - plain text, structured so whoever reads it at the
  * boutique can act on it without asking a follow-up question.
  */
 export function buildEnquiry(d: EnquiryDraft): string {
   const lines = [
-    `${siteConfig.name} — appointment request`,
+    `${siteConfig.name} - appointment request`,
     `Ref ${d.reference}`,
     "",
     `Name: ${d.name}`,
@@ -188,7 +188,7 @@ export type Channel = "whatsapp" | "email";
 export function enquiryUrl(d: EnquiryDraft, channel: Channel): string {
   const body = buildEnquiry(d);
   if (channel === "email") {
-    const subject = `Appointment request ${d.reference} — ${tierLabel(d.tier)}`;
+    const subject = `Appointment request ${d.reference} - ${tierLabel(d.tier)}`;
     return `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;

@@ -1,14 +1,14 @@
 import type { SavingsPlan } from "@/types/content";
 
 /**
- * Offers & Plans. The Monthly Plan is the flagship savings scheme —
+ * Offers & Plans. The Monthly Plan is the flagship savings scheme -
  * emotional first, details second.
  * ⚠️ TODO(client): confirm plan mechanics, tenure and benefit before launch.
  */
 export const monthlyPlanTeaser = {
   eyebrow: "The Chheda Monthly Plan",
   headline: "Save a little,\nevery month",
-  body: "Set aside a fixed amount each month toward the piece you have been dreaming of. When your plan matures, we add our contribution — and you walk in to choose, at the day's rate.",
+  body: "Set aside a fixed amount each month toward the piece you have been dreaming of. When your plan matures, we add our contribution - and you walk in to choose, at the day's rate.",
   cta: { label: "See how the plan works", href: "/offers-and-plans" },
 };
 

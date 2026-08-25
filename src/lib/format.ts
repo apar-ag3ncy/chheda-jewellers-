@@ -1,4 +1,4 @@
-/** Formatting helpers — Indian locale conventions. */
+/** Formatting helpers - Indian locale conventions. */
 
 const inr = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -15,7 +15,7 @@ export function formatINR(value: number): string {
   return inr.format(value);
 }
 
-/** 1,23,456 (no symbol) — for large numerals with a separate ₹ glyph. */
+/** 1,23,456 (no symbol) - for large numerals with a separate ₹ glyph. */
 export function formatNumberIN(value: number): string {
   return inrPerGram.format(value);
 }

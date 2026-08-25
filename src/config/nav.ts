@@ -1,5 +1,5 @@
 /**
- * NAVIGATION CONFIG — the 5 primary items (floating capsule).
+ * NAVIGATION CONFIG - the 5 primary items (floating capsule).
  * Section order for the homepage also lives here so it is data,
  * not hard-coded JSX.
  */
@@ -65,7 +65,7 @@ export const primaryNav: NavItem[] = [
           {
             label: "Bespoke",
             href: "/bespoke",
-            description: "Drawn for one person — or remade from your own gold",
+            description: "Drawn for one person - or remade from your own gold",
           },
         ],
       },
@@ -83,7 +83,7 @@ export const primaryNav: NavItem[] = [
 ];
 
 /**
- * Homepage section order — the single place the scroll is choreographed.
+ * Homepage section order - the single place the scroll is choreographed.
  * The homepage renders FROM this list (see app/(marketing)/page.tsx), so
  * reordering the journey is a config edit, never a JSX surgery.
  */

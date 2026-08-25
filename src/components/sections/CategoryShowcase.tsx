@@ -84,7 +84,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
                   </div>
                   <div className={cn("md:px-4", flip && "md:order-1")}>
                     <Reveal as="p" className="u-eyebrow mb-4">
-                      {String(i + 1).padStart(2, "0")} — {category.name}
+                      {String(i + 1).padStart(2, "0")} - {category.name}
                     </Reveal>
                     <Reveal>
                       <h2 className="font-display text-[clamp(1.9rem,4vw,3rem)] font-light leading-tight">
@@ -121,13 +121,13 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         </Container>
       </Section>
 
-      {/* The Edit — a curated gallery of six pieces */}
+      {/* The Edit - a curated gallery of six pieces */}
       <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <SectionHeading
             eyebrow={`The ${category.name} Edit`}
             title={`A closer look at\nour ${category.name.toLowerCase()} room`}
-            intro="A small selection from the counter — a sense of the range, the finish, and the feeling. Every piece is one-of-a-kind; come in to see them in the light."
+            intro="A small selection from the counter - a sense of the range, the finish, and the feeling. Every piece is one-of-a-kind; come in to see them in the light."
             size="lg"
           />
           <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
@@ -164,7 +164,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         </Container>
       </Section>
 
-      {/* The occasion axis — which edits draw on this room. Without this the
+      {/* The occasion axis - which edits draw on this room. Without this the
           two axes only ever cross in one direction (edit → metal). */}
       <Section spacing="md" tone="green">
         <Container>

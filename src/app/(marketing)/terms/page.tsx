@@ -16,7 +16,7 @@ const sections = [
   },
   {
     h: "Gold rate & pricing",
-    p: "Any gold rate shown is indicative and for reference only — it is not a live quote or an offer to sell. Final pricing is confirmed in-store at the time of purchase.",
+    p: "Any gold rate shown is indicative and for reference only - it is not a live quote or an offer to sell. Final pricing is confirmed in-store at the time of purchase.",
   },
   {
     h: "Plans & offers",

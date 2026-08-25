@@ -10,16 +10,16 @@ import { Wordmark } from "@/components/ui/Wordmark";
 import { cn } from "@/lib/cn";
 
 /**
- * COLLECTIONS — the campaign wall.
+ * COLLECTIONS - the campaign wall.
  *
  * Nine frames hung edge to edge like a run of campaign posters, and every
- * tile carries the same small house slate at its head — the way a maison
+ * tile carries the same small house slate at its head - the way a maison
  * stamps every advertisement it takes out. The repetition IS the design:
  * one brand, nine moods, no tile allowed to forget whose wall it is.
  *
  * Interaction is kept to what a poster wall can do: a slow zoom under the
  * pointer and the piece's name surfacing at the foot of the frame. No state,
- * no client JS — the whole section is server-rendered.
+ * no client JS - the whole section is server-rendered.
  */
 export function Collections() {
   return (
@@ -59,7 +59,7 @@ export function Collections() {
                 style={{ objectPosition: tile.image.focus ?? "50% 30%" }}
               />
 
-              {/* Legibility for the slate and the caption — never a flat wash. */}
+              {/* Legibility for the slate and the caption - never a flat wash. */}
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0"
@@ -69,7 +69,7 @@ export function Collections() {
                 }}
               />
 
-              {/* ── The house slate — identical on every tile ─────────── */}
+              {/* ── The house slate - identical on every tile ─────────── */}
               <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-col items-center pt-4 md:pt-6">
                 <Monogram className="h-5 w-5 opacity-90 md:h-6 md:w-6" />
                 <Wordmark

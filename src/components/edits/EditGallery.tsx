@@ -10,11 +10,11 @@ import { MOODS } from "./EditMood";
 import { cn } from "@/lib/cn";
 
 /**
- * THE LOOKBOOK — a sticky scene, read like a contact sheet.
+ * THE LOOKBOOK - a sticky scene, read like a contact sheet.
  *
  * The frame holds still on the left while the six captions scroll past on the
  * right; the frame cross-dissolves to whichever caption you are reading. The
- * sheet of thumbnails underneath is not decoration — it is the scene's index,
+ * sheet of thumbnails underneath is not decoration - it is the scene's index,
  * and its marker tracks the same state, so at any moment you can see where you
  * are in the edit without scrolling back.
  *

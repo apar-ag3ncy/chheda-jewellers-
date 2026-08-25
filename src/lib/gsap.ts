@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Central GSAP setup — the ONLY place plugins are registered.
+ * Central GSAP setup - the ONLY place plugins are registered.
  * Import { gsap, ScrollTrigger, SplitText, useGSAP } from here.
  * Never call registerPlugin() elsewhere (per CLAUDE.md motion rules).
  */
@@ -16,11 +16,11 @@ let registered = false;
 if (!registered) {
   gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase, SplitText);
 
-  // Signature brand ease — mirrors --ease-lux in tokens.css.
+  // Signature brand ease - mirrors --ease-lux in tokens.css.
   if (!CustomEase.get?.("lux")) {
     CustomEase.create("lux", "0.22, 1, 0.36, 1");
   }
-  // Slow-mo tier — mirrors --ease-cinema / --ease-veil. Long moves land on
+  // Slow-mo tier - mirrors --ease-cinema / --ease-veil. Long moves land on
   // "cinema"; curtains and wipes that need weight on both ends use "veil".
   if (!CustomEase.get?.("cinema")) {
     CustomEase.create("cinema", "0.16, 1, 0.3, 1");
@@ -35,7 +35,7 @@ if (!registered) {
   registered = true;
 }
 
-/** Motion tokens for JS animations — mirror tokens.css. */
+/** Motion tokens for JS animations - mirror tokens.css. */
 export const EASE = {
   lux: "lux",
   cinema: "cinema",

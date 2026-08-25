@@ -6,10 +6,10 @@ import { gsap, useGSAP } from "@/lib/gsap";
 /**
  * Entry gestures. Assign by content ROLE so the page has a motion grammar
  * instead of one gesture repeated everywhere:
- *   rise  — the quiet default, for supporting copy
- *   mask  — a clip wipe upward, for framed content
- *   slide — travel from the side, for list rows and numerals
- *   settle— scale-settle, for marks, medallions and stats
+ *   rise  - the quiet default, for supporting copy
+ *   mask  - a clip wipe upward, for framed content
+ *   slide - travel from the side, for list rows and numerals
+ *   settle- scale-settle, for marks, medallions and stats
  */
 export type RevealVariant = "rise" | "mask" | "slide" | "settle";
 

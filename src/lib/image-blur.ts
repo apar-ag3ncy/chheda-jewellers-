@@ -1,7 +1,7 @@
 /**
  * Shared low-quality image placeholder.
  *
- * An 8×10 emerald gradient, pre-encoded inline — no network request, no build
+ * An 8×10 emerald gradient, pre-encoded inline - no network request, no build
  * step, no dependency, and safe in client components (nothing Node-only).
  * Because the whole site sits on emerald, a photograph resolving out of this
  * reads as atmosphere rather than as a loading state.

@@ -20,7 +20,7 @@ export function generateStaticParams() {
 /**
  * The edits are a fixed, known set, so anything outside `generateStaticParams`
  * is a genuine 404. Without this, Next renders unknown slugs on demand and the
- * `notFound()` below lands AFTER the 200 status has already been streamed — a
+ * `notFound()` below lands AFTER the 200 status has already been streamed - a
  * soft 404 that search engines happily index. `false` makes them hard 404s.
  */
 export const dynamicParams = false;
@@ -34,7 +34,7 @@ export async function generateMetadata({
   const edit = editsBySlug[slug];
   if (!edit) return pageMetadata({ title: "The Edits", path: "/edits" });
   return pageMetadata({
-    title: `${edit.name} — The Edits`,
+    title: `${edit.name} - The Edits`,
     description: `${edit.hook} ${edit.intro}`.slice(0, 180),
     path: `/edits/${edit.slug}`,
   });
@@ -45,7 +45,7 @@ export async function generateMetadata({
  *
  * The page is deliberately NOT the metal-category layout with different
  * pictures. A category page answers "show me the gold"; an edit answers "I
- * have a thing on Saturday" — so the structure is a brief: the hook, three
+ * have a thing on Saturday" - so the structure is a brief: the hook, three
  * pieces that define it, a ruled styling table you could screenshot, the
  * lookbook, and then the way out to the metal rooms it borrows from.
  */
@@ -80,7 +80,7 @@ export default async function EditPage({
             animation: "heroZoom 22s ease-out infinite alternate",
           }}
         />
-        {/* Mood scrim — anchored under the copy, so the top of the frame
+        {/* Mood scrim - anchored under the copy, so the top of the frame
             stays a photograph rather than a tinted panel. */}
         <div
           aria-hidden
@@ -117,7 +117,7 @@ export default async function EditPage({
             {edit.hook}
           </p>
 
-          {/* The scroll of edits, as a rule of chips — you can jump sideways
+          {/* The scroll of edits, as a rule of chips - you can jump sideways
               without going back to the index. */}
           <ul className="mt-10 flex flex-wrap gap-2">
             {edits.map((e) => (
@@ -163,7 +163,7 @@ export default async function EditPage({
               </div>
             </div>
 
-            {/* The styling table — a ruled document, not a card. This is the
+            {/* The styling table - a ruled document, not a card. This is the
                 bit a customer screenshots and sends to a friend. */}
             <aside className="md:col-span-5">
               <p className="u-eyebrow mb-5">How to wear it</p>

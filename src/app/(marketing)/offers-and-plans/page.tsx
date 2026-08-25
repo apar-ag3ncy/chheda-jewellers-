@@ -9,14 +9,14 @@ import { cn } from "@/lib/cn";
 export const metadata = pageMetadata({
   title: "Offers & Plans",
   description:
-    "The Chheda Monthly Plan and Bridal Advance — simple, transparent ways to save toward the jewellery you have been dreaming of.",
+    "The Chheda Monthly Plan and Bridal Advance - simple, transparent ways to save toward the jewellery you have been dreaming of.",
   path: "/offers-and-plans",
 });
 
 const steps = [
-  { n: "01", title: "Choose your amount", body: "Pick a monthly instalment that suits you — starting from ₹2,000." },
+  { n: "01", title: "Choose your amount", body: "Pick a monthly instalment that suits you - starting from ₹2,000." },
   { n: "02", title: "Save each month", body: "Pay for eleven months; we keep every rupee accounted for." },
-  { n: "03", title: "Redeem & receive", body: "On maturity we add our contribution — redeem at the day's rate." },
+  { n: "03", title: "Redeem & receive", body: "On maturity we add our contribution - redeem at the day's rate." },
 ];
 
 export default function OffersAndPlansPage() {

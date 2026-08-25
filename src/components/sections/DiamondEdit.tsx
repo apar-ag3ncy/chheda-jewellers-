@@ -10,7 +10,7 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/cn";
 import { gsap, useGSAP } from "@/lib/gsap";
 
-/** One type — diamonds — presented as an editorial catalogue cover. */
+/** One type - diamonds - presented as an editorial catalogue cover. */
 const pieces = [
   { src: "/media/categories/diamond/d1.jpg", name: "Solitaire", alt: "Diamond necklace in soft light" },
   { src: "/media/categories/diamond/d4.jpg", name: "Brilliance", alt: "Model in a green gown with a diamond necklace" },
@@ -28,7 +28,7 @@ export function DiamondEdit() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         // Elements already in view at mount animate immediately; the rest wait
-        // for their own scroll trigger — so nothing can ever stay stuck hidden.
+        // for their own scroll trigger - so nothing can ever stay stuck hidden.
         const inView = (el: Element) =>
           el.getBoundingClientRect().top < window.innerHeight * 0.92;
 
@@ -52,7 +52,7 @@ export function DiamondEdit() {
               scrollTrigger: { trigger: el, start: "top 90%", once: true },
             });
         });
-        // Concentric arcs drift as the section scrolls — a subtle dial
+        // Concentric arcs drift as the section scrolls - a subtle dial
         gsap.fromTo(
           rings.current,
           { yPercent: -6 },
@@ -109,7 +109,7 @@ export function DiamondEdit() {
             data-edit-line
             className="mt-10 max-w-xs font-body text-[0.9rem] font-light leading-relaxed text-text-muted"
           >
-            Certified, conflict-free diamonds — set for the boardroom, the
+            Certified, conflict-free diamonds - set for the boardroom, the
             black-tie, and every quiet day in between.
           </p>
 
@@ -164,7 +164,7 @@ export function DiamondEdit() {
                 key={p.name}
                 href="/jewellery/diamond"
                 data-edit-piece
-                aria-label={`${p.name} — view the diamond collection`}
+                aria-label={`${p.name} - view the diamond collection`}
                 className={cn(
                   "group/piece relative block overflow-hidden opacity-100 transition-opacity duration-500",
                   "h-56 lg:h-auto lg:flex-1",
@@ -183,7 +183,7 @@ export function DiamondEdit() {
                   aria-hidden
                   className="absolute inset-0 bg-green-deep/20 transition-opacity duration-500 group-hover/piece:opacity-0"
                 />
-                {/* Piece label — slides up on hover */}
+                {/* Piece label - slides up on hover */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-3 p-5 opacity-0 transition-all duration-500 ease-[var(--ease-lux)] group-hover/piece:translate-y-0 group-hover/piece:opacity-100">
                   <p className="font-body text-[0.62rem] uppercase tracking-[0.24em] text-gold-light">
                     N° {String(i + 1).padStart(2, "0")}

@@ -17,12 +17,12 @@ import { Monogram } from "@/components/ui/Monogram";
 export const metadata = pageMetadata({
   title: "Bespoke",
   description:
-    "Custom jewellery at Chheda Jewellers — a piece drawn for one person, or your family's own gold remade into something worn again. The full commission process, priced and timed honestly.",
+    "Custom jewellery at Chheda Jewellers - a piece drawn for one person, or your family's own gold remade into something worn again. The full commission process, priced and timed honestly.",
   path: "/bespoke",
 });
 
 /**
- * /bespoke — the commission, end to end.
+ * /bespoke - the commission, end to end.
  *
  * The homepage Atelier section sells the idea; this page removes the reasons
  * not to do it. Hence the order: the two ways a commission actually starts

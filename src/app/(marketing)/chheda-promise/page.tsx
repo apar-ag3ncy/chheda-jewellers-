@@ -17,10 +17,10 @@ export const metadata = pageMetadata({
 
 /**
  * The promise page, built as a DOCUMENT OF RECORD rather than an About Us:
- * an index, chapters against a turning plate, then the proofs — how to audit a
+ * an index, chapters against a turning plate, then the proofs - how to audit a
  * hallmark (with a HUID field that sends you to look at your own jewellery), a
  * bill you can rebuild yourself against the live rate, and the practices we
- * refuse — closing on a checklist the customer takes away and a signature
+ * refuse - closing on a checklist the customer takes away and a signature
  * rather than a funnel.
  *
  * The rule the page is written to: every claim on it is one a customer can go

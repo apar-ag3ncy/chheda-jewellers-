@@ -48,7 +48,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       // Slightly damped wheel so a notch travels a touch less and rides longer.
       wheelMultiplier: 0.9,
       smoothWheel: true,
-      // Native momentum on touch — smoothing it fights the OS and feels laggy.
+      // Native momentum on touch - smoothing it fights the OS and feels laggy.
       syncTouch: false,
       touchMultiplier: 1.6,
     });
@@ -76,7 +76,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       lenis.scrollTo(target, { offset: opts?.offset ?? 0, duration: 1.4 });
       return;
     }
-    // Reduced-motion / pre-init fallback — handle every target shape natively.
+    // Reduced-motion / pre-init fallback - handle every target shape natively.
     if (typeof target === "number") {
       window.scrollTo({ top: target, behavior: "smooth" });
     } else if (typeof target === "string") {

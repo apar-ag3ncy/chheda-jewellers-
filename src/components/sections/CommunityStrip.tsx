@@ -8,11 +8,11 @@ import { Monogram } from "@/components/ui/Monogram";
 import { cn } from "@/lib/cn";
 
 /**
- * The Jharokha — a palace-facade take on "join our community".
+ * The Jharokha - a palace-facade take on "join our community".
  *
  * The photographs sit inside arched jharokha frames (the mehrab silhouette of
  * temple and haveli architecture) arranged in a pyramid rhythm, tallest at the
- * centre like a shrine. Traditional form, luxury execution — never a plain
+ * centre like a shrine. Traditional form, luxury execution - never a plain
  * social-icon strip. Anchors the page just above the footer.
  */
 
@@ -33,7 +33,7 @@ const WhatsAppGlyph = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-/** A small gold lozenge — the finial/ornament between arches. */
+/** A small gold lozenge - the finial/ornament between arches. */
 const Lozenge = ({ className }: { className?: string }) => (
   <span
     aria-hidden
@@ -100,7 +100,7 @@ export function CommunityStrip() {
                     sizes="(max-width: 640px) 33vw, 18vw"
                     className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-lux)] group-hover:scale-[1.06]"
                   />
-                  {/* inner gold hairline — the matted temple frame */}
+                  {/* inner gold hairline - the matted temple frame */}
                   <span
                     aria-hidden
                     className="pointer-events-none absolute inset-2 rounded-t-full border border-gold/25 transition-colors duration-[var(--dur-base)] group-hover:border-gold/50"

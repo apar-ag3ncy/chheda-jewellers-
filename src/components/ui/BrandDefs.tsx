@@ -6,7 +6,7 @@
  *
  * Why this exists: SVG ids are global. When each Monogram carried its own
  * <defs id="cj-gold-gradient">, the browser resolved every reference to the
- * FIRST match in the DOM — which was the one inside the loader overlay. As soon
+ * FIRST match in the DOM - which was the one inside the loader overlay. As soon
  * as the loader finished and was set to `display:none`, that definition stopped
  * resolving and every gold mark on the page rendered invisible.
  *

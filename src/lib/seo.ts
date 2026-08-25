@@ -3,11 +3,11 @@ import { siteConfig } from "@/config/site";
 
 const baseUrl = siteConfig.url;
 
-/** Root metadata — extended per route via `pageMetadata`. */
+/** Root metadata - extended per route via `pageMetadata`. */
 export const baseMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    default: `${siteConfig.name} - ${siteConfig.tagline}`,
     template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -30,20 +30,20 @@ export const baseMetadata: Metadata = {
     locale: siteConfig.locale,
     url: baseUrl,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [
       {
         url: "/brand/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} — ${siteConfig.tagline}`,
+        alt: `${siteConfig.name} - ${siteConfig.tagline}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: ["/brand/og-image.jpg"],
   },
@@ -81,7 +81,7 @@ export function pageMetadata(opts: {
           url: "/brand/og-image.jpg",
           width: 1200,
           height: 630,
-          alt: `${siteConfig.name} — ${siteConfig.tagline}`,
+          alt: `${siteConfig.name} - ${siteConfig.tagline}`,
         },
       ],
     },
@@ -97,7 +97,7 @@ export function pageMetadata(opts: {
 /**
  * schema.org JSON-LD. Organization is always emitted; JewelryStore
  * (LocalBusiness) nodes are only published once a branch is `verified`, so we
- * never ship placeholder NAP (name/address/phone) — which would hurt local
+ * never ship placeholder NAP (name/address/phone) - which would hurt local
  * ranking and trust. Each store carries a stable @id so the two branches are
  * never de-duplicated.
  */

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * FUTURE COMMERCE — cart context stub (Phase 5).
+ * FUTURE COMMERCE - cart context stub (Phase 5).
  * Not mounted anywhere yet. It defines the shape of cart state so the
  * transition to a real cart is "wire it up," not "design it from scratch."
  */

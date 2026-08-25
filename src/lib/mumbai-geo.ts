@@ -1,12 +1,12 @@
 /**
- * GREATER MUMBAI — real geography, generated from OpenStreetMap district
- * boundaries (Mumbai City + Mumbai Suburban), Douglas–Peucker simplified and
+ * GREATER MUMBAI - real geography, generated from OpenStreetMap district
+ * boundaries (Mumbai City + Mumbai Suburban), Douglas-Peucker simplified and
  * projected with a local cosine-corrected equirectangular projection.
  *
- * Map data © OpenStreetMap contributors (ODbL) — keep the credit that the
+ * Map data © OpenStreetMap contributors (ODbL) - keep the credit that the
  * Branches map renders alongside this geometry.
  *
- * GENERATED — do not hand-edit the path strings. Regenerate via the session
+ * GENERATED - do not hand-edit the path strings. Regenerate via the session
  * script if the districts ever need refreshing.
  */
 
@@ -17,7 +17,7 @@ export const MAP_BOUNDS = {
   east: 72.99375,
   south: 18.88016,
   north: 19.28148,
-  /** cos(mid-latitude) — the horizontal scale correction used at generation. */
+  /** cos(mid-latitude) - the horizontal scale correction used at generation. */
   kx: 0.945058,
 } as const;
 

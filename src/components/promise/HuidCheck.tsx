@@ -7,7 +7,7 @@ import { cn } from "@/lib/cn";
 const HUID = /^[A-Z0-9]{6}$/;
 
 /**
- * THE HUID FIELD — an honest verifier, and honest about its limits.
+ * THE HUID FIELD - an honest verifier, and honest about its limits.
  *
  * It checks the FORMAT of a code and then hands the customer off to the Bureau
  * of Indian Standards' own tools, which are the only thing that can confirm a
@@ -31,7 +31,7 @@ export function HuidCheck() {
         Try it on a piece you own
       </label>
       <p className="mb-5 font-body text-[0.85rem] font-light leading-relaxed text-text-muted">
-        Find the six-character code on the piece — you will need a loupe or a
+        Find the six-character code on the piece - you will need a loupe or a
         phone camera at full zoom. Type it in and we will point you at the
         Bureau&rsquo;s own record for it.
       </p>
@@ -50,7 +50,7 @@ export function HuidCheck() {
           className="w-40 rounded-[var(--radius-brand)] border border-line bg-green-deep/45 px-4 py-3 font-body text-[1rem] uppercase tracking-[0.28em] text-text-strong placeholder:tracking-[0.28em] placeholder:text-text-muted/45 focus:border-gold focus:outline-none"
         />
 
-        {/* Six ticks, one per character — the field tells you how far you are
+        {/* Six ticks, one per character - the field tells you how far you are
             without needing a message. */}
         <span aria-hidden className="flex gap-1.5">
           {Array.from({ length: 6 }).map((_, i) => (
@@ -75,7 +75,7 @@ export function HuidCheck() {
           : !complete
             ? `${6 - cleaned.length} character${6 - cleaned.length === 1 ? "" : "s"} to go.`
             : valid
-              ? "That is the right shape for a HUID. Only the Bureau can confirm the piece itself — open BIS Care and enter it there."
+              ? "That is the right shape for a HUID. Only the Bureau can confirm the piece itself - open BIS Care and enter it there."
               : "That does not look like a HUID. Six letters and numbers, no spaces."}
       </p>
 
@@ -92,7 +92,7 @@ export function HuidCheck() {
 
       <p className="mt-5 border-t border-line pt-4 font-body text-[0.7rem] font-light leading-relaxed text-text-muted/80">
         This field checks the format only. We do not look your code up, store
-        it, or send it anywhere — a jeweller confirming its own hallmarks would
+        it, or send it anywhere - a jeweller confirming its own hallmarks would
         prove nothing.
       </p>
     </div>

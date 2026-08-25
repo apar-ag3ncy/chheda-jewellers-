@@ -1,7 +1,7 @@
 import type { FilmReel } from "@/types/content";
 
 /**
- * THE RING — a 360° turntable the visitor rotates by hand.
+ * THE RING - a 360° turntable the visitor rotates by hand.
  *
  * Generated on the house's Magnific account (Kling 3.0, image-to-video) from a
  * background-cut still of the Bloom ring, then cut at build time into 72 WebP

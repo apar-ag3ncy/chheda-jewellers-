@@ -20,7 +20,7 @@ export function JewelleryTypes() {
             as="p"
             className="max-w-sm pb-2 font-body text-[0.95rem] font-light leading-relaxed text-text-muted"
           >
-            Four ornaments, four moments — from the necklace that sets the tone
+            Four ornaments, four moments - from the necklace that sets the tone
             to the hathphool that crowns the hand.
           </Reveal>
         </div>

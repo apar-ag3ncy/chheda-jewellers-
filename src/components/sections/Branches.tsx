@@ -15,11 +15,11 @@ import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
 /**
- * BRANCHES — Greater Mumbai as a chart plate, with the two doors pinned on it.
+ * BRANCHES - Greater Mumbai as a chart plate, with the two doors pinned on it.
  *
  * The geography is REAL: both district boundaries come from OpenStreetMap
- * (see lib/mumbai-geo — simplified and projected at generation time), and
- * every marker on the plate is projected from true WGS84 coordinates — the
+ * (see lib/mumbai-geo - simplified and projected at generation time), and
+ * every marker on the plate is projected from true WGS84 coordinates - the
  * shops from `config/site`, the rail lines through their actual stations,
  * localities, the airport, the national park. Fix a lat/lng and the mark
  * moves.
@@ -27,7 +27,7 @@ import { cn } from "@/lib/cn";
  * The drawing language is a surveyor's chart done in the house palette: a
  * fine graticule with edge ticks, a luminous coastal glow, bathymetric
  * ripples in the sea, stippled land, the two suburban rail lines as glowing
- * routes (Western through Vile Parle, Central through Ghatkopar — exactly
+ * routes (Western through Vile Parle, Central through Ghatkopar - exactly
  * how customers arrive), concentric-ring station marks for the two shops
  * with their coordinates set beside them, a scale bar and a north arrow.
  */
@@ -99,7 +99,7 @@ export function Branches() {
         <SectionHeading
           eyebrow="Visit the house"
           title={"Vile Parle &\nGhatkopar"}
-          intro="Come sit with us over chai — no appointment needed, though we love it when you book ahead."
+          intro="Come sit with us over chai - no appointment needed, though we love it when you book ahead."
           size="md"
         />
 
@@ -174,7 +174,7 @@ export function Branches() {
               </div>
               <div className="pointer-events-none absolute bottom-5 right-6 text-right">
                 <p className="font-body text-[0.6rem] uppercase tracking-[0.18em] text-text-muted/80">
-                  Western line · Vile Parle&ensp;—&ensp;Central line · Ghatkopar
+                  Western line · Vile Parle&ensp;-&ensp;Central line · Ghatkopar
                 </p>
                 <p className="mt-1 font-body text-[0.52rem] tracking-[0.08em] text-text-muted/55">
                   Map data © OpenStreetMap contributors
@@ -224,7 +224,7 @@ function MumbaiChart({ active, reduce }: { active: number; reduce: boolean }) {
           <stop offset="0" stopColor="var(--green-soft)" stopOpacity="0.6" />
           <stop offset="1" stopColor="var(--green-soft)" stopOpacity="0.3" />
         </radialGradient>
-        {/* stippled land — the chart's paper grain */}
+        {/* stippled land - the chart's paper grain */}
         <pattern id="cj-stipple" width="7" height="7" patternUnits="userSpaceOnUse">
           <circle cx="1.2" cy="1.2" r="0.55" fill="var(--beige)" opacity="0.13" />
           <circle cx="4.7" cy="4.9" r="0.45" fill="var(--beige)" opacity="0.09" />
@@ -234,7 +234,7 @@ function MumbaiChart({ active, reduce }: { active: number; reduce: boolean }) {
         </filter>
       </defs>
 
-      {/* the sea — oversized so it reaches the plate's edges */}
+      {/* the sea - oversized so it reaches the plate's edges */}
       <rect x="-500" y="-500" width={MAP_VIEW.w + 1000} height={MAP_VIEW.h + 1000} fill="url(#cj-sea)" />
 
       {/* graticule with edge ticks */}
@@ -276,7 +276,7 @@ function MumbaiChart({ active, reduce }: { active: number; reduce: boolean }) {
         ))}
       </g>
 
-      {/* the city — real district boundaries */}
+      {/* the city - real district boundaries */}
       {land.map((d, i) => (
         <path key={`l${i}`} d={d} fill="url(#cj-landlight)" stroke="var(--line-strong)" strokeWidth="1" />
       ))}
@@ -305,7 +305,7 @@ function MumbaiChart({ active, reduce }: { active: number; reduce: boolean }) {
         CSMIA
       </text>
 
-      {/* locality bearings — small ringed nodes */}
+      {/* locality bearings - small ringed nodes */}
       {LOCALITIES.map((l) => {
         const p = pt(l.lat, l.lng);
         return (
@@ -336,7 +336,7 @@ function MumbaiChart({ active, reduce }: { active: number; reduce: boolean }) {
         THANE CREEK
       </text>
 
-      {/* north arrow + scale bar — the chart's credentials */}
+      {/* north arrow + scale bar - the chart's credentials */}
       <g transform={`translate(${MAP_VIEW.w - 26} 30)`} opacity="0.75">
         <line x1="0" y1="12" x2="0" y2="-10" stroke="var(--beige-dim)" strokeWidth="0.8" />
         <path d="M0,-14 L4,-4 L0,-7 L-4,-4 Z" fill="var(--beige-dim)" />
@@ -353,7 +353,7 @@ function MumbaiChart({ active, reduce }: { active: number; reduce: boolean }) {
         </text>
       </g>
 
-      {/* ── the two doors — concentric station marks with coordinates ── */}
+      {/* ── the two doors - concentric station marks with coordinates ── */}
       {pins.map((p, i) => {
         const on = active === i;
         const vp = i === 0;

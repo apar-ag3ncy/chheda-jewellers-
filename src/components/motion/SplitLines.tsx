@@ -18,7 +18,7 @@ type SplitLinesProps = {
 };
 
 /**
- * Masked line reveal — the signature editorial headline gesture.
+ * Masked line reveal - the signature editorial headline gesture.
  * Each line is clipped by its own overflow-hidden wrapper and rises into
  * place, so display type resolves line-by-line instead of fading as a block.
  *

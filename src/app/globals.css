@@ -93,7 +93,7 @@
     border-radius: 1px;
   }
 
-  /* Custom scrollbar — desktop only */
+  /* Custom scrollbar - desktop only */
   @media (pointer: fine) {
     ::-webkit-scrollbar {
       width: 10px;
@@ -174,7 +174,7 @@
   }
 
   /**
-   * Film grain — the cheapest, most effective signal that a dark field is
+   * Film grain - the cheapest, most effective signal that a dark field is
    * "photographed" rather than a flat CSS colour. Self-contained SVG turbulence
    * (no bitmap, no request), fixed so it never scrolls with content, and
    * pointer-events-none so it can never intercept a click.
@@ -208,7 +208,7 @@
   /**
    * Light-band scope. Beige is a background in the scroll rotation, so any
    * section sitting on it re-points the SEMANTIC text/line tokens at dark
-   * values. Everything nested — headings, eyebrows, rules, captions — inverts
+   * values. Everything nested - headings, eyebrows, rules, captions - inverts
    * automatically, with no per-element colour classes to keep in sync.
    * Gold darkens to --gold-deep, since --gold on beige fails contrast.
    */
@@ -279,7 +279,7 @@
 
   /**
    * Counter-scope to .u-on-light: restores the DARK-ground token values.
-   * Needed for an element that stays dark inside a light band — e.g. the
+   * Needed for an element that stays dark inside a light band - e.g. the
    * branches map plate sitting on cream paper.
    */
   .u-on-dark {
@@ -296,7 +296,7 @@
 }
 
 /* ============================================================
-   Liquid-glass buttons — brand-adapted (emerald/gold frosted glass).
+   Liquid-glass buttons - brand-adapted (emerald/gold frosted glass).
    Tuned for the dark & image backgrounds where the site's CTAs live.
    Markup: .glass-button-wrap > .glass-button > .glass-button-text
            + .glass-button-shadow (sibling)
@@ -321,7 +321,7 @@
   cursor: pointer;
   color: var(--offwhite);
   border-radius: 999px;
-  /* Transparent frost — only a whisper of dark tint so light labels stay
+  /* Transparent frost - only a whisper of dark tint so light labels stay
      legible on any backdrop, while the surface reads mostly see-through.
      Blur/saturate come from the Tailwind backdrop utilities on the element. */
   background-color: color-mix(in srgb, var(--green-deep) 15%, transparent);
@@ -405,7 +405,7 @@
     0 0 34px -8px color-mix(in srgb, var(--gold) 45%, transparent);
 }
 
-/* Gold (primary) — transparent warm-dark frost, bright gold rim, light label */
+/* Gold (primary) - transparent warm-dark frost, bright gold rim, light label */
 .glass-button.glass-gold {
   background-color: color-mix(in srgb, var(--gold-deep) 22%, transparent);
   box-shadow:
@@ -416,7 +416,7 @@
   background-color: color-mix(in srgb, var(--gold-deep) 34%, transparent);
 }
 
-/* Ghost — lightest frost, thinnest rim */
+/* Ghost - lightest frost, thinnest rim */
 .glass-button.glass-ghost {
   background-color: color-mix(in srgb, var(--green-deep) 8%, transparent);
   box-shadow:
@@ -427,7 +427,7 @@
   background-color: color-mix(in srgb, var(--green-deep) 16%, transparent);
 }
 
-/* On a light (beige) surface — flip the frost dark so it stays legible */
+/* On a light (beige) surface - flip the frost dark so it stays legible */
 .glass-button.glass-on-light {
   color: var(--green-deep);
   background-color: color-mix(in srgb, var(--green) 12%, transparent);
@@ -447,7 +447,7 @@
 /* ============================================================
    Keyframes
    ============================================================ */
-/* Grain drifts in coarse steps — reads as film weave, never as a smooth slide. */
+/* Grain drifts in coarse steps - reads as film weave, never as a smooth slide. */
 @keyframes grainShift {
   0% { transform: translate(0, 0); }
   20% { transform: translate(-3%, 2%); }
@@ -522,7 +522,7 @@
 }
 
 /* ============================================================
-   Motion safety — global reduced-motion floor.
+   Motion safety - global reduced-motion floor.
    Section-level GSAP also guards via gsap.matchMedia().
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {

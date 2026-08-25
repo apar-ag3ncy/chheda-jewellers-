@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 const sections = [
   {
     h: "Information we collect",
-    p: "When you contact us — by form, WhatsApp, email or phone — we collect the details you choose to share, such as your name and contact information, so we can respond and help you.",
+    p: "When you contact us - by form, WhatsApp, email or phone - we collect the details you choose to share, such as your name and contact information, so we can respond and help you.",
   },
   {
     h: "How we use it",

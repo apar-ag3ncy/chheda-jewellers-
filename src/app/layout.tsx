@@ -29,7 +29,7 @@ export default function RootLayout({
           room rather than a flat fill. */}
       <body className="u-grain u-roomlight antialiased">
         {/* No-JS fallback: the loader overlay is only removed by JS, so hide it
-            entirely when scripts are unavailable — content is never trapped. */}
+            entirely when scripts are unavailable - content is never trapped. */}
         <noscript>
           <style
             dangerouslySetInnerHTML={{

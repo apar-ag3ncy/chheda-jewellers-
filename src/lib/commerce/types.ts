@@ -1,10 +1,10 @@
 /**
- * FUTURE COMMERCE — data model (Phase 5).
+ * FUTURE COMMERCE - data model (Phase 5).
  *
  * Nothing here is wired into the live marketing site. It exists so that when
  * we bolt on headless commerce (Shopify Storefront or Medusa), the jewellery
- * data already carries the fields Indian retail needs — purity, weight,
- * making charges, HSN, hallmark — and the frontend contracts don't change.
+ * data already carries the fields Indian retail needs - purity, weight,
+ * making charges, HSN, hallmark - and the frontend contracts don't change.
  */
 
 export type Purity = "22K" | "18K" | "14K" | "24K" | "Silver" | "Platinum";
@@ -56,7 +56,7 @@ export interface Product {
   tags: string[];
 }
 
-/** The provider contract — one implementation per backend. */
+/** The provider contract - one implementation per backend. */
 export interface CommerceProvider {
   listProducts(params?: { category?: Product["category"]; limit?: number }): Promise<Product[]>;
   getProduct(slug: string): Promise<Product | null>;

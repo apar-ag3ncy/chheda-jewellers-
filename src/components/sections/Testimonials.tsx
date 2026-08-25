@@ -43,7 +43,7 @@ export function Testimonials() {
             as="p"
             className="mx-auto mt-4 max-w-md text-center font-body text-[0.72rem] leading-relaxed text-text-muted"
           >
-            Reviews shown are illustrative — verified Google reviews will appear here
+            Reviews shown are illustrative - verified Google reviews will appear here
             once connected.
           </Reveal>
         ) : null}

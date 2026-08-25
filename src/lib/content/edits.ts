@@ -1,14 +1,14 @@
 import type { OccasionEdit } from "@/types/content";
 
 /**
- * THE EDITS — the house sorted by occasion rather than by metal.
+ * THE EDITS - the house sorted by occasion rather than by metal.
  *
  * Five rooms, each with its own light. The names are deliberately spoken
  * rather than merchandised ("Catching Flights, Not Feelings" is the caption a
  * customer would actually write); the copy underneath stays grown-up, because
  * the joke only lands if the jewellery is taken seriously.
  *
- * Photography is drawn from the house archive — no frame is used twice across
+ * Photography is drawn from the house archive - no frame is used twice across
  * the site, so each edit reads as its own shoot.
  */
 export const edits: OccasionEdit[] = [
@@ -62,7 +62,7 @@ export const edits: OccasionEdit[] = [
       { label: "Anchor piece", value: "Rani-haar or a layered polki choker" },
       { label: "Metal", value: "22K gold; polki set in gold foil" },
       { label: "Weight to expect", value: "The set carries; the neck should not" },
-      { label: "Book ahead", value: "8–12 weeks for a made-to-order set" },
+      { label: "Book ahead", value: "8-12 weeks for a made-to-order set" },
       { label: "Bring", value: "Your lehenga swatch and your neckline" },
     ],
     picks: [
@@ -82,7 +82,7 @@ export const edits: OccasionEdit[] = [
         id: "hathphool",
         title: "The hathphool",
         description:
-          "Ring to bracelet in one flourish. The piece that shows in every photograph of your hands — which is most of them.",
+          "Ring to bracelet in one flourish. The piece that shows in every photograph of your hands - which is most of them.",
       },
     ],
     drawsFrom: ["polki", "gold"],
@@ -94,7 +94,7 @@ export const edits: OccasionEdit[] = [
     title: "Quiet, until\nsomeone looks twice",
     hook: "Jewellery that survives a video call and a dinner after it.",
     intro:
-      "The brief is restraint: nothing that swings, nothing that catches on a collar, nothing you have to explain. One considered piece against plain cloth reads as more expensive than three competing ones — and it goes straight from the desk to the table without a change.",
+      "The brief is restraint: nothing that swings, nothing that catches on a collar, nothing you have to explain. One considered piece against plain cloth reads as more expensive than three competing ones - and it goes straight from the desk to the table without a change.",
     mood: "ink",
     hero: {
       src: "/media/edits/office/hero.jpg",
@@ -157,7 +157,7 @@ export const edits: OccasionEdit[] = [
         id: "signet",
         title: "One serious ring",
         description:
-          "Worn alone. A cocktail stone or a clean band — the piece that does all the talking in a handshake.",
+          "Worn alone. A cocktail stone or a clean band - the piece that does all the talking in a handshake.",
       },
     ],
     drawsFrom: ["diamond", "gold"],
@@ -167,9 +167,9 @@ export const edits: OccasionEdit[] = [
     name: "Outing",
     eyebrow: "Edit 03 · After hours",
     title: "Dressed for the\ntable you're at",
-    hook: "Sangeet, supper club, someone's engagement — the going-out drawer.",
+    hook: "Sangeet, supper club, someone's engagement - the going-out drawer.",
     intro:
-      "Between the office and the wedding sits most of a life: dinners, sangeets, the friend's party you said you would drop into for an hour. This edit is built for warm indoor light and close conversation — pieces with movement, worn at the height a photograph will find them.",
+      "Between the office and the wedding sits most of a life: dinners, sangeets, the friend's party you said you would drop into for an hour. This edit is built for warm indoor light and close conversation - pieces with movement, worn at the height a photograph will find them.",
     mood: "rose",
     hero: {
       src: "/media/edits/outing/hero.jpg",
@@ -209,7 +209,7 @@ export const edits: OccasionEdit[] = [
       },
     ],
     notes: [
-      { label: "Anchor piece", value: "Drop earrings, or a necklace — pick one" },
+      { label: "Anchor piece", value: "Drop earrings, or a necklace - pick one" },
       { label: "Metal", value: "Polki and diamond, kept light" },
       { label: "Movement", value: "Something that swings when you laugh" },
       { label: "Light", value: "Tuned for warm indoor light, not daylight" },
@@ -244,7 +244,7 @@ export const edits: OccasionEdit[] = [
     title: "Loud rooms,\nlouder gold",
     hook: "Diwali, Navratri, the sangeet that starts at eleven.",
     intro:
-      "Festival dressing is the one time restraint is the wrong answer. Rooms are hung with marigold, everyone is photographed from every angle, and the jewellery is competing with the outfit rather than finishing it. This edit is built to hold its own in that noise — high-karat gold, colour set against colour, and pieces that read across a crowded courtyard.",
+      "Festival dressing is the one time restraint is the wrong answer. Rooms are hung with marigold, everyone is photographed from every angle, and the jewellery is competing with the outfit rather than finishing it. This edit is built to hold its own in that noise - high-karat gold, colour set against colour, and pieces that read across a crowded courtyard.",
     mood: "sun",
     hero: {
       src: "/media/edits/festive/hero.jpg",
@@ -286,7 +286,7 @@ export const edits: OccasionEdit[] = [
     notes: [
       { label: "Anchor piece", value: "A choker that reads from across the room" },
       { label: "Metal", value: "22K gold, warm against festival light" },
-      { label: "Colour", value: "Meena and kundan — set colour against your silk" },
+      { label: "Colour", value: "Meena and kundan - set colour against your silk" },
       { label: "Layer", value: "Two lengths, so photographs have depth" },
       { label: "Between wears", value: "Wipe the meena; never soak enamel" },
     ],
@@ -301,7 +301,7 @@ export const edits: OccasionEdit[] = [
         id: "chandbali",
         title: "Chandbalis with drops",
         description:
-          "Colour at the ear — ruby, emerald, or pearl — swinging just enough to be caught by a camera mid-laugh.",
+          "Colour at the ear - ruby, emerald, or pearl - swinging just enough to be caught by a camera mid-laugh.",
       },
       {
         id: "meena",
@@ -319,7 +319,7 @@ export const edits: OccasionEdit[] = [
     title: "Packs small.\nArrives loud.",
     hook: "Three pieces, one roll, zero decisions at the airport.",
     intro:
-      "A capsule for people who are somewhere else by Friday. Everything here is chosen to survive a cabin bag and a schedule: no sharp points, no trailing chains, nothing that needs its own box. Three pieces that recombine into a week of outfits — and one of them is always allowed to be dramatic.",
+      "A capsule for people who are somewhere else by Friday. Everything here is chosen to survive a cabin bag and a schedule: no sharp points, no trailing chains, nothing that needs its own box. Three pieces that recombine into a week of outfits - and one of them is always allowed to be dramatic.",
     mood: "dusk",
     hero: {
       src: "/media/edits/flights/hero.jpg",
@@ -360,7 +360,7 @@ export const edits: OccasionEdit[] = [
     ],
     notes: [
       { label: "The capsule", value: "One necklace, one pair, one ring" },
-      { label: "Metal", value: "22K gold — recognised at any counter, anywhere" },
+      { label: "Metal", value: "22K gold - recognised at any counter, anywhere" },
       { label: "Packing", value: "Flat, in a roll; never in the hold" },
       { label: "Airport", value: "Wear the heavy piece, pack the rest" },
       { label: "Insurance", value: "Ask us for the valuation before you fly" },
@@ -397,5 +397,5 @@ export const editsBySlug = Object.fromEntries(
 export const editsIntro = {
   eyebrow: "The Edits",
   title: "Not what it's made of.\nWhere you're wearing it.",
-  body: "Gold, diamond and polki are the rooms of the house. The edits are the reasons you walk into them — five occasions, each with its own light, its own weight, and its own rules about what to leave at home.",
+  body: "Gold, diamond and polki are the rooms of the house. The edits are the reasons you walk into them - five occasions, each with its own light, its own weight, and its own rules about what to leave at home.",
 };

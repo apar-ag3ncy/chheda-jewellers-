@@ -13,7 +13,7 @@ import { BookingFlow } from "@/components/enquire/BookingFlow";
 export const metadata = pageMetadata({
   title: "Book an Appointment",
   description:
-    "Book a private appointment at Chheda Jewellers — the viewing room to yourselves, a curated tray to your brief, and an advisor who knows your name before you arrive.",
+    "Book a private appointment at Chheda Jewellers - the viewing room to yourselves, a curated tray to your brief, and an advisor who knows your name before you arrive.",
   path: "/enquire",
 });
 
@@ -42,12 +42,12 @@ const priority = [
 ];
 
 /**
- * /enquire — the appointment desk.
+ * /enquire - the appointment desk.
  *
  * The brief was "priority service and personal prestige, professional, a bit
- * gen-z but classy". The way those reconcile: the *interaction* is modern —
+ * gen-z but classy". The way those reconcile: the *interaction* is modern -
  * chips, a live card assembling as you answer, four short steps instead of one
- * long form — while the *language* is a jeweller's. No emoji, no exclamation
+ * long form - while the *language* is a jeweller's. No emoji, no exclamation
  * marks, no "let's do this". Prestige comes from specifics ("the door closes",
  * "the tray is already pulled"), which is also the only kind of prestige a
  * customer can actually check.
@@ -57,7 +57,7 @@ export default function EnquirePage() {
     <>
       {/* ── Header ────────────────────────────────────────────────────── */}
       <header className="relative overflow-hidden bg-bg pb-12 pt-36 md:pb-20 md:pt-44">
-        {/* Portrait sits behind the header on wide screens — atmosphere, kept
+        {/* Portrait sits behind the header on wide screens - atmosphere, kept
             well clear of the type. */}
         <div
           aria-hidden
@@ -106,7 +106,7 @@ export default function EnquirePage() {
               className="mt-7 max-w-lg font-body text-[1.02rem] font-light leading-relaxed text-text"
             >
               A jewellery counter is a public place, and some conversations are
-              not. Book ahead and the room, the advisor and the tray are yours —
+              not. Book ahead and the room, the advisor and the tray are yours -
               at no cost, and with no obligation to buy anything at all.
             </Reveal>
             <Reveal

@@ -1,10 +1,10 @@
 import type { PromiseValue } from "@/types/content";
 
-/** Chheda Promise — brand strip storytelling (not a corporate "About Us"). */
+/** Chheda Promise - brand strip storytelling (not a corporate "About Us"). */
 export const promiseIntro = {
   eyebrow: "The Chheda Promise",
   headline: "A jeweller is only\nas good as their word",
-  body: "For families across Mumbai, Chheda Jewellers has been the quiet name behind the biggest days — the first mangalsutra, the wedding set, the gift that marks a milestone. We measure our worth not in carats alone, but in the trust worn on the skin of the people we serve.",
+  body: "For families across Mumbai, Chheda Jewellers has been the quiet name behind the biggest days - the first mangalsutra, the wedding set, the gift that marks a milestone. We measure our worth not in carats alone, but in the trust worn on the skin of the people we serve.",
 };
 
 export const promiseValues: PromiseValue[] = [
@@ -12,7 +12,7 @@ export const promiseValues: PromiseValue[] = [
     id: "purity",
     title: "Hallmarked purity",
     description:
-      "Every piece carries a BIS hallmark. What we say is 22 karat, is 22 karat — verifiable, always.",
+      "Every piece carries a BIS hallmark. What we say is 22 karat, is 22 karat - verifiable, always.",
   },
   {
     id: "transparency",
@@ -30,7 +30,7 @@ export const promiseValues: PromiseValue[] = [
     id: "buyback",
     title: "Lifetime of trust",
     description:
-      "Fair exchange and buy-back, cleaning and care — a relationship that outlasts the purchase.",
+      "Fair exchange and buy-back, cleaning and care - a relationship that outlasts the purchase.",
   },
 ];
 
@@ -40,23 +40,23 @@ export const promiseStory = {
     {
       id: "roots",
       title: "Roots in the neighbourhood",
-      body: "We began the way the best jewellers do — one family at a time, in a lane where everyone knew our name. Word travelled by trust, not advertising, and that is still how most of Mumbai finds their way to us.",
+      body: "We began the way the best jewellers do - one family at a time, in a lane where everyone knew our name. Word travelled by trust, not advertising, and that is still how most of Mumbai finds their way to us.",
     },
     {
       id: "hand",
       title: "The hand behind the piece",
-      body: "Behind the vitrine is a workshop. Wax is carved, gold is drawn into wire, stones are set under a loupe. Nothing here is anonymous — a piece leaves us only when the karigar who made it would wear it themselves.",
+      body: "Behind the vitrine is a workshop. Wax is carved, gold is drawn into wire, stones are set under a loupe. Nothing here is anonymous - a piece leaves us only when the karigar who made it would wear it themselves.",
     },
     {
       id: "forever",
       title: "Made to be inherited",
-      body: "Fashion changes; an heirloom does not. We design for the long arc of a family — jewellery that a daughter will one day open a velvet box to find, and understand exactly why it was kept.",
+      body: "Fashion changes; an heirloom does not. We design for the long arc of a family - jewellery that a daughter will one day open a velvet box to find, and understand exactly why it was kept.",
     },
   ],
 };
 
 /* ============================================================
-   /chheda-promise — the page reframed as a document of record.
+   /chheda-promise - the page reframed as a document of record.
    ============================================================ */
 
 /** Contents index, rendered as an archival ruled table. */
@@ -69,10 +69,10 @@ export const promiseIndex = [
 ] as const;
 
 /**
- * BIS hallmark anatomy — the three marks required on hallmarked gold jewellery
+ * BIS hallmark anatomy - the three marks required on hallmarked gold jewellery
  * in India since the HUID system came into force (2021).
  *
- * These are the PUBLIC national standard, not claims about our own stock —
+ * These are the PUBLIC national standard, not claims about our own stock -
  * the whole point of the section is that the customer can verify a hallmark
  * independently, with the government's own BIS Care app.
  */
@@ -82,7 +82,7 @@ export const hallmarkMarks = [
     label: "The BIS mark",
     short: "BIS",
     body:
-      "The triangular standard mark of the Bureau of Indian Standards. Its presence means the piece was assayed at a BIS-recognised centre — not certified by the shop that sold it to you.",
+      "The triangular standard mark of the Bureau of Indian Standards. Its presence means the piece was assayed at a BIS-recognised centre - not certified by the shop that sold it to you.",
   },
   {
     id: "purity",
@@ -96,7 +96,7 @@ export const hallmarkMarks = [
     label: "The HUID",
     short: "HUID",
     body:
-      "A six-digit alphanumeric code, unique to that one piece. Type it into the BIS Care app and the piece's own record appears — article, purity, and the jeweller who registered it.",
+      "A six-digit alphanumeric code, unique to that one piece. Type it into the BIS Care app and the piece's own record appears - article, purity, and the jeweller who registered it.",
   },
 ] as const;
 
@@ -113,7 +113,7 @@ export const ledger = {
   note: "An illustration, not a quotation. Your bill shows these same lines, with your piece's real weight and the rate at the moment you buy.",
 };
 
-/** Negative promises — what we refuse to do. Credible because they are specific. */
+/** Negative promises - what we refuse to do. Credible because they are specific. */
 export const refusals = [
   "We do not charge gold rate on the weight of stones.",
   "We do not hide making charges inside a single bundled figure.",
@@ -122,7 +122,7 @@ export const refusals = [
 ] as const;
 
 /**
- * "Take this to any jeweller" — the questions that separate a straight counter
+ * "Take this to any jeweller" - the questions that separate a straight counter
  * from a slippery one, with the answer a customer should get.
  *
  * Published deliberately as a tool that works against US as readily as against
@@ -146,7 +146,7 @@ export const counterChecks = [
     id: "making",
     ask: "What is the making charge, as a percentage?",
     expect:
-      "A single percentage, stated before you decide — not folded into one bundled figure at the till.",
+      "A single percentage, stated before you decide - not folded into one bundled figure at the till.",
   },
   {
     id: "stones",
@@ -169,6 +169,6 @@ export const counterChecks = [
     id: "bill",
     ask: "Will the bill show all of this, itemised?",
     expect:
-      "Yes — weight, rate, making, GST, on separate lines. If the answer is a single total, walk away.",
+      "Yes - weight, rate, making, GST, on separate lines. If the answer is a single total, walk away.",
   },
 ] as const;

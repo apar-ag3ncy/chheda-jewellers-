@@ -11,11 +11,11 @@ import { emphasise } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/cn";
 
 /**
- * THE RING — one line, one piece, and a great deal of air.
+ * THE RING - one line, one piece, and a great deal of air.
  *
  * The whole section is a tall scroll runway with a sticky stage in the middle
  * of it, so the ring stays centred in the viewport while the page moves. That
- * scroll is what turns it — plus a hand on it, if the visitor wants one. It
+ * scroll is what turns it - plus a hand on it, if the visitor wants one. It
  * never rotates on its own, and there is no timeline, counter, caption or
  * chapter list: a single display line and the piece, floating.
  *
@@ -24,7 +24,7 @@ import { cn } from "@/lib/cn";
  * page's emerald, and the piece simply sits on the site.
  */
 
-/** Rotations across the section's scroll — gentle, so it reads as slow-motion. */
+/** Rotations across the section's scroll - gentle, so it reads as slow-motion. */
 const SCROLL_TURNS = 1.15;
 
 /** Feathers every edge of the frame into the page. */
@@ -78,7 +78,7 @@ export function FilmRoom() {
             ref={scrub.stageRef}
             role="slider"
             tabIndex={0}
-            aria-label={`${ringFilm.name} — drag, or use the arrow keys, to turn it`}
+            aria-label={`${ringFilm.name} - drag, or use the arrow keys, to turn it`}
             aria-valuemin={0}
             aria-valuemax={360}
             aria-valuenow={0}
@@ -91,7 +91,7 @@ export function FilmRoom() {
               className="absolute inset-0"
               style={{ WebkitMaskImage: SEAMLESS_MASK, maskImage: SEAMLESS_MASK }}
             >
-              {/* Poster — the SSR / no-JS layer; the canvas paints over it. */}
+              {/* Poster - the SSR / no-JS layer; the canvas paints over it. */}
               <Image
                 src={reelPosterSrc(ringFilm)}
                 alt={ringFilm.alt}

@@ -8,7 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { useStickyScene } from "@/components/motion/useStickyScene";
 import { cn } from "@/lib/cn";
 
-/** One plate per chapter — the image turns as you read, like a monograph. */
+/** One plate per chapter - the image turns as you read, like a monograph. */
 const PLATES = [
   {
     src: "/media/promise/promise-01.jpg",
@@ -38,7 +38,7 @@ export function Chapters() {
   return (
     <Section spacing="lg" tone="green">
       <Container>
-        {/* ── The index — reframes the page as a document of record ── */}
+        {/* ── The index - reframes the page as a document of record ── */}
         <Reveal as="p" className="u-eyebrow mb-6">
           Contents
         </Reveal>

@@ -1,7 +1,7 @@
 import type { ImageAsset } from "@/types/content";
 
 /**
- * THE CAMPAIGN WALL — the Collections section as a poster series.
+ * THE CAMPAIGN WALL - the Collections section as a poster series.
  *
  * Nine frames from the house archive, hung edge to edge like a wall of
  * campaign posters, every tile carrying the same small house slate the way a
@@ -11,7 +11,7 @@ import type { ImageAsset } from "@/types/content";
 export interface CampaignTile {
   id: string;
   image: ImageAsset;
-  /** The piece, named — revealed on hover like a plate caption. */
+  /** The piece, named - revealed on hover like a plate caption. */
   caption: string;
 }
 

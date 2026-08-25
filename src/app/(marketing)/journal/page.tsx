@@ -10,17 +10,17 @@ import { Button } from "@/components/ui/Button";
 export const metadata = pageMetadata({
   title: "Journal",
   description:
-    "The Chheda Jewellers journal — craft, collections and the families who wear us. The first pieces are in preparation; the contents are published here first.",
+    "The Chheda Jewellers journal - craft, collections and the families who wear us. The first pieces are in preparation; the contents are published here first.",
   path: "/journal",
 });
 
 /**
- * /journal — an empty section, published as a table of contents.
+ * /journal - an empty section, published as a table of contents.
  *
  * A "coming soon" page with two buttons on it wastes the visit. A contents
  * page does not: it says what the journal will be, it is genuinely
  * interesting to read on its own, and it turns the absence into an
- * announcement. Nothing here is presented as published — every row is marked
+ * announcement. Nothing here is presented as published - every row is marked
  * "in preparation", so it reads as an editorial plan rather than as articles
  * that lead nowhere.
  *
@@ -37,7 +37,7 @@ const contents = [
   {
     n: "02",
     kicker: "Method",
-    title: "Jadau, kundan, polki — what the words actually mean",
+    title: "Jadau, kundan, polki - what the words actually mean",
     body: "Three terms used interchangeably in shop windows across India, and the very different work behind each of them.",
   },
   {
@@ -50,7 +50,7 @@ const contents = [
     n: "04",
     kicker: "Wearing it",
     title: "The set that gets worn twice, and the set that gets worn always",
-    body: "On buying for the wedding and for the forty years after it — usually a different piece than the one people arrive asking for.",
+    body: "On buying for the wedding and for the forty years after it - usually a different piece than the one people arrive asking for.",
   },
   {
     n: "05",
@@ -67,7 +67,7 @@ export default function JournalPage() {
         folio="VI"
         eyebrow="The Journal"
         title={"The contents,\nbefore the issue"}
-        intro="A journal of craft, method and the families who wear us. The first pieces are being written and photographed — until they land, here is exactly what is coming."
+        intro="A journal of craft, method and the families who wear us. The first pieces are being written and photographed - until they land, here is exactly what is coming."
         plate={{
           src: "/media/pages/journal.jpg",
           alt: "A portrait in ochre and maroon silk beside a carved wooden door",

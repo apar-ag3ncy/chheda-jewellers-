@@ -9,7 +9,7 @@ import { HuidCheck } from "./HuidCheck";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 /**
- * "Read the mark" — the BIS hallmark drawn at monumental scale inside a
+ * "Read the mark" - the BIS hallmark drawn at monumental scale inside a
  * jeweller's loupe, with each of the three marks selectable.
  *
  * This is the page's proof device: every jeweller writes "BIS hallmarked" as a
@@ -58,7 +58,7 @@ export function Hallmark() {
       <div ref={root as React.RefObject<HTMLDivElement>}>
         <Container>
           <Reveal as="p" className="u-eyebrow mb-4">
-            02 — The mark on the metal
+            02 - The mark on the metal
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="max-w-3xl font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
@@ -267,7 +267,7 @@ export function Hallmark() {
               </ol>
 
               <p className="mt-8 border-t border-line pt-6 font-body text-[0.8rem] font-light leading-relaxed text-text-muted">
-                Verify any piece — ours or anyone&rsquo;s — with the Bureau of Indian
+                Verify any piece - ours or anyone&rsquo;s - with the Bureau of Indian
                 Standards&rsquo; own{" "}
                 <span className="text-gold-light">BIS Care</span> app. We would rather
                 you checked.

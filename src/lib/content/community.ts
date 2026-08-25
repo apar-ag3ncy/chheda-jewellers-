@@ -1,14 +1,14 @@
 import type { ImageAsset } from "@/types/content";
 import { siteConfig } from "@/config/site";
 
-/** Community strip — WhatsApp community + Instagram follow. */
+/** Community strip - WhatsApp community + Instagram follow. */
 export const community = {
   eyebrow: "Join the house",
   headline: "Be the first to see\nwhat we make next",
   whatsapp: {
     title: "The Chheda Circle",
     description:
-      "New collections, private previews and the day's gold rate — shared first with our WhatsApp community.",
+      "New collections, private previews and the day's gold rate - shared first with our WhatsApp community.",
     cta: { label: "Join on WhatsApp", href: siteConfig.socials.whatsappCommunity },
   },
   instagram: {

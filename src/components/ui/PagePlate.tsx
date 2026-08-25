@@ -19,7 +19,7 @@ type PagePlateProps = {
   intro?: ReactNode;
   /** The tall plate on the right. Omit for a text-only header. */
   plate?: ImageAsset;
-  /** Structured key/value rail under the header — the "spec sheet" line. */
+  /** Structured key/value rail under the header - the "spec sheet" line. */
   meta?: MetaRow[];
   children?: ReactNode;
   className?: string;
@@ -30,12 +30,12 @@ type PagePlateProps = {
  *
  * The site had exactly two page openings: a full-bleed cinematic cover (home,
  * categories, edits) and a bare left-aligned `PageHeader` (everything else).
- * That second one is why the interior pages read as an afterthought — a
+ * That second one is why the interior pages read as an afterthought - a
  * headline floating on empty emerald.
  *
  * This is the third: an asymmetric editorial spread. Display type on the left
  * against a tall plate on the right, split by a gold rule, closing on a ruled
- * meta rail. It is deliberately NOT a smaller version of the cinematic cover —
+ * meta rail. It is deliberately NOT a smaller version of the cinematic cover -
  * a cover fills the screen and says "look"; a plate fits above the fold and
  * says "here is what this page contains", which is the right register for an
  * interior page.

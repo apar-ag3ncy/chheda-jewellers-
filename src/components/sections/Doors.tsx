@@ -7,18 +7,18 @@ import { Monogram } from "@/components/ui/Monogram";
 import { cn } from "@/lib/cn";
 
 /**
- * THE DOORS — a bento of everywhere the house can take you, closing the
+ * THE DOORS - a bento of everywhere the house can take you, closing the
  * scroll just before the sign-off.
  *
  * Mixed tile sizes are the point: a bento reads as a cabinet of different
- * drawers, not a gallery. Every tile is a real doorway — the two metal rooms,
- * the bridal edit, the edits index, the atelier — plus one quiet tile that is
+ * drawers, not a gallery. Every tile is a real doorway - the two metal rooms,
+ * the bridal edit, the edits index, the atelier - plus one quiet tile that is
  * not a photograph at all: the monogram on deep emerald, asking the only
  * question that matters at the end of a visit. Since the footer below is now
  * a pure sign-off with no links, this grid is also the page's last working
  * navigation.
  *
- * All six frames are fresh from the archive — nothing reused elsewhere.
+ * All six frames are fresh from the archive - nothing reused elsewhere.
  */
 
 type Door = {
@@ -28,7 +28,7 @@ type Door = {
   src: string;
   alt: string;
   focus?: string;
-  /** Tailwind span classes — the bento's geometry. */
+  /** Tailwind span classes - the bento's geometry. */
   span: string;
 };
 
@@ -65,7 +65,7 @@ const DOORS: Door[] = [
     label: "The Edits",
     note: "Five occasions",
     src: "/media/doors/edits.jpg",
-    alt: "A wedding tableau — the couple and family in gold, seated by a carved throne",
+    alt: "A wedding tableau - the couple and family in gold, seated by a carved throne",
     focus: "50% 30%",
     span: "col-span-2 row-span-1",
   },
@@ -105,7 +105,7 @@ export function Doors() {
             <BentoTile key={door.href} door={door} delay={i * 0.05} />
           ))}
 
-          {/* The quiet tile — the only door that is a question, not a photo. */}
+          {/* The quiet tile - the only door that is a question, not a photo. */}
           <Reveal delay={0.25} className="col-span-1 row-span-1">
             <Link
               href="/enquire"

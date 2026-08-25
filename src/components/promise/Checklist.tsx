@@ -10,14 +10,14 @@ import { Monogram } from "@/components/ui/Monogram";
 import { cn } from "@/lib/cn";
 
 /**
- * "TAKE THIS TO ANY JEWELLER" — the page's most useful object.
+ * "TAKE THIS TO ANY JEWELLER" - the page's most useful object.
  *
  * Every other section here asks the customer to trust a claim. This one hands
  * them a tool that works against *us* as readily as against anyone else: seven
  * questions, each with the answer they should get, tickable as they stand at a
  * counter on a phone.
  *
- * That is why it is genuinely creative rather than decorative — a jeweller
+ * That is why it is genuinely creative rather than decorative - a jeweller
  * publishing the questions that expose a bad jeweller is making a claim they
  * cannot walk back, and the customer leaves with something they can use today.
  *
@@ -43,12 +43,12 @@ export function Checklist() {
     if (score === 0) return "Start ticking as you get answers.";
     if (score <= 2) return "Early days. Keep asking.";
     if (score < counterChecks.length) return "Promising. Finish the list before you pay.";
-    return "That is a jeweller worth buying from — whoever it is.";
+    return "That is a jeweller worth buying from - whoever it is.";
   }, [score]);
 
   const copy = async () => {
     const text = [
-      `${siteConfig.name} — questions to ask any jeweller`,
+      `${siteConfig.name} - questions to ask any jeweller`,
       "",
       ...counterChecks.map((c, i) => `${i + 1}. ${c.ask}\n   Expect: ${c.expect}`),
       "",
@@ -71,7 +71,7 @@ export function Checklist() {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <Reveal as="p" className="u-eyebrow mb-4">
-                05 — Take this with you
+                05 - Take this with you
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="max-w-md font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
@@ -82,11 +82,11 @@ export function Checklist() {
               </Reveal>
               <Reveal as="p" delay={0.08} className="mt-6 max-w-sm font-body text-[1rem] font-light leading-relaxed text-text-muted">
                 This list works on any counter in India, including ours. Tick
-                them off as you get answers — if a shop cannot clear all seven,
+                them off as you get answers - if a shop cannot clear all seven,
                 you already know everything you need to.
               </Reveal>
 
-              {/* Score dial — a gold arc rather than a percentage badge. */}
+              {/* Score dial - a gold arc rather than a percentage badge. */}
               <div className="mt-10 flex items-center gap-6">
                 <div className="relative h-24 w-24 shrink-0">
                   <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
@@ -175,7 +175,7 @@ export function Checklist() {
                       className="peer sr-only"
                     />
 
-                    {/* The tick — a drawn gold check, not an emoji. */}
+                    {/* The tick - a drawn gold check, not an emoji. */}
                     <span
                       aria-hidden
                       className={cn(

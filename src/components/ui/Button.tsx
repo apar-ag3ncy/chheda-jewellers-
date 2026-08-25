@@ -3,12 +3,12 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 /**
- * Brand button — a liquid-glass surface (see .glass-button in globals.css)
+ * Brand button - a liquid-glass surface (see .glass-button in globals.css)
  * with centred, wide-tracked Montserrat labels. Every CTA on the site routes
  * through here, so the glass treatment is applied everywhere consistently.
  *
  * Variants:
- *   primary → warm gold glass (dark label) — the main action
+ *   primary → warm gold glass (dark label) - the main action
  *   outline → neutral frosted glass with a gold rim
  *   ghost   → the same frosted glass, lower emphasis
  *   onLight → dark frosted glass for use on beige/light surfaces
@@ -108,7 +108,7 @@ export function Button(props: AsLink | AsButton) {
     </>
   );
 
-  // Plain text-link variant — not a glass surface.
+  // Plain text-link variant - not a glass surface.
   if (variant === "link") {
     return render(cn("group", linkText, className), label);
   }
