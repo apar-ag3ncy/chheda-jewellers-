@@ -12,11 +12,18 @@ import type { ImageAsset } from "@/types/content";
 export interface CampaignTile {
   id: string;
   image: ImageAsset;
+  /**
+   * White serif label at the tile's foot, as in the reference grid. Six of
+   * the nine tiles carry one; the hero and the two closing tiles stay bare,
+   * exactly as in the reference.
+   */
+  label?: string;
 }
 
 export const campaignWall: CampaignTile[] = [
   {
     id: "sapphire-choker",
+    label: "Necklaces",
     image: {
       src: "/media/wall/01.jpg",
       alt: "A model in a rose-pink sari wearing a sapphire-drop polki choker in a palace colonnade",
@@ -25,6 +32,7 @@ export const campaignWall: CampaignTile[] = [
   },
   {
     id: "kundan-haar",
+    label: "Kundan",
     image: {
       src: "/media/wall/02.jpg",
       alt: "A close study of a kundan and ruby-bead haar against red silk",
@@ -33,6 +41,7 @@ export const campaignWall: CampaignTile[] = [
   },
   {
     id: "matha-patti",
+    label: "Matha Patti",
     image: {
       src: "/media/wall/03.jpg",
       alt: "A bride in champagne gold with a pearl matha patti, holding a lotus",
@@ -41,6 +50,7 @@ export const campaignWall: CampaignTile[] = [
   },
   {
     id: "bridal-set",
+    label: "Bridal",
     image: {
       src: "/media/wall/04.jpg",
       alt: "A seated bride in red wearing the full gold bridal set",
@@ -49,6 +59,7 @@ export const campaignWall: CampaignTile[] = [
   },
   {
     id: "cocktail-ring",
+    label: "Rings",
     image: {
       src: "/media/wall/05.jpg",
       alt: "A polki cocktail ring worn on a hand resting against sheer embroidery",
@@ -65,6 +76,7 @@ export const campaignWall: CampaignTile[] = [
   },
   {
     id: "chandbali-set",
+    label: "Chandbalis",
     image: {
       src: "/media/wall/07.jpg",
       alt: "A model in peach and pink organza wearing a polki choker and chandbalis in evening sun",

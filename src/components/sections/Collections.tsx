@@ -6,13 +6,11 @@ import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
 /**
- * COLLECTIONS - a bento of frames, and nothing else.
+ * COLLECTIONS - the reference bento, replicated to its own measurements.
  *
- * The section carries no words: no eyebrow, no headline, no captions, no
- * button. Nine photographs in mixed tile sizes are the whole argument, which
- * is the point - a visitor two sections into the page should be looking at
- * jewellery, not reading about it. The house makes its case in type further
- * down; here it just shows the work.
+ * No headline, no intro, no buttons - the only type is a one-word serif
+ * label at the foot of six tiles, exactly the tiles the reference labels;
+ * the 2x2 hero and the two closing tiles stay bare, as in the reference.
  *
  * The geometry is a 5x3 bento: one tall frame anchoring the left, a 2x2 hero
  * in the middle of the run, two wide landscapes, and five squares around
@@ -53,7 +51,11 @@ export function Collections() {
       className="u-on-light"
     >
       <Container>
-        <ul className="grid aspect-[2/6] auto-rows-fr grid-cols-2 gap-2 md:aspect-[5/3] md:grid-cols-5 md:gap-2.5">
+        {/* Aspect ratios are the reference's own numbers: its cells measure
+            334x358 (7% taller than square) with 12px gaps, which makes the
+            5x3 grid 1718x1098 - aspect 859/549. The mobile 2x6 keeps the same
+            cell ratio, which lands at 25/81. */}
+        <ul className="grid aspect-[25/81] auto-rows-fr grid-cols-2 gap-2 md:aspect-[859/549] md:grid-cols-5 md:gap-3">
           {campaignWall.map((tile, i) => {
             const span = SPANS[i] ?? SPANS[SPANS.length - 1]!;
             return (
@@ -62,7 +64,9 @@ export function Collections() {
                 key={tile.id}
                 delay={(i % 4) * 0.05}
                 className={cn(
-                  "group relative overflow-hidden rounded-[var(--radius-brand)] bg-green-deep",
+                  // rounded-[10px], not the brand's 2px token: the radius is part of
+                  // the grid style being replicated, scoped to these tiles only.
+                  "group relative overflow-hidden rounded-[10px] bg-green-deep",
                   span.base,
                   span.wide,
                 )}
@@ -77,6 +81,20 @@ export function Collections() {
                   className="object-cover transition-transform duration-[1800ms] ease-[var(--ease-cinema)] group-hover:scale-[1.06]"
                   style={{ objectPosition: tile.image.focus ?? "50% 30%" }}
                 />
+                {tile.label ? (
+                  <>
+                    {/* The label's scrim - the reference fades every labelled
+                        tile to dark at the foot so white type reads on any
+                        photograph. */}
+                    <div
+                      aria-hidden
+                      className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/55 via-black/20 to-transparent"
+                    />
+                    <span className="absolute bottom-4 left-4 font-display text-[clamp(1.05rem,1.6vw,1.7rem)] font-normal leading-none text-white md:bottom-5 md:left-5">
+                      {tile.label}
+                    </span>
+                  </>
+                ) : null}
               </Reveal>
             );
           })}
