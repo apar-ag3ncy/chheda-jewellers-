@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { siteConfig } from "@/config/site";
-import { edits } from "@/lib/content/edits";
 import {
   GUEST_OPTIONS,
   INTENTS,
@@ -52,7 +51,6 @@ export function BookingFlow() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const startedRef = useRef(false);
 
-  const editSlug = params.get("edit") ?? undefined;
   const intentParam = params.get("intent");
 
   const [draft, setDraft] = useState({
@@ -82,7 +80,6 @@ export function BookingFlow() {
     setDraft((d) => (d.date ? d : { ...d, date: earliestDate(now) }));
   }, []);
 
-  // Deep links: an edit page sends `?edit=bridal`, the atelier sends
   // `?intent=bespoke`. Both pre-answer step one so the customer starts at the
   // question they have not been asked yet.
   useEffect(() => {
@@ -92,14 +89,8 @@ export function BookingFlow() {
     if (intentParam && known.includes(intentParam)) {
       setDraft((d) => ({ ...d, intent: intentParam as Intent }));
       setStep(1);
-    } else if (editSlug && edits.some((e) => e.slug === editSlug)) {
-      setDraft((d) => ({
-        ...d,
-        intent: editSlug === "bridal" ? "bridal" : "browse",
-      }));
-      setStep(1);
     }
-  }, [intentParam, editSlug]);
+  }, [intentParam]);
 
   // Move focus to the new step's heading so keyboard and screen-reader users
   // land where the content changed rather than at the top of the document.
@@ -108,8 +99,8 @@ export function BookingFlow() {
   }, [step]);
 
   const full: EnquiryDraft = useMemo(
-    () => ({ ...draft, editSlug, reference }),
-    [draft, editSlug, reference],
+    () => ({ ...draft, reference }),
+    [draft, reference],
   );
 
   const message = useMemo(() => buildEnquiry(full), [full]);

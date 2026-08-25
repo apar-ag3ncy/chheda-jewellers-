@@ -12,7 +12,7 @@ import { cn } from "@/lib/cn";
  *
  * Mixed tile sizes are the point: a bento reads as a cabinet of different
  * drawers, not a gallery. Every tile is a real doorway - the two metal rooms,
- * the bridal edit, the edits index, the atelier - plus one quiet tile that is
+ * the bridal consult, the journal, the atelier - plus one quiet tile that is
  * not a photograph at all: the monogram on deep emerald, asking the only
  * question that matters at the end of a visit. Since the footer below is now
  * a pure sign-off with no links, this grid is also the page's last working
@@ -34,9 +34,9 @@ type Door = {
 
 const DOORS: Door[] = [
   {
-    href: "/edits/bridal",
+    href: "/enquire?intent=bridal",
     label: "Bridal",
-    note: "The long day",
+    note: "Plan the long day",
     src: "/media/doors/bridal.jpg",
     alt: "A bride in deep red holding a rose, wearing an emerald-set polki collar",
     focus: "50% 20%",
@@ -61,9 +61,12 @@ const DOORS: Door[] = [
     span: "col-span-1 row-span-1",
   },
   {
-    href: "/edits",
-    label: "The Edits",
-    note: "Five occasions",
+    // Same frame, new door: the tile that led to the occasion edits now
+    // leads to the journal, which keeps the bento's geometry and gives the
+    // journal a second inbound link.
+    href: "/journal",
+    label: "The Journal",
+    note: "Stories from the house",
     src: "/media/doors/edits.jpg",
     alt: "A wedding tableau - the couple and family in gold, seated by a carved throne",
     focus: "50% 30%",

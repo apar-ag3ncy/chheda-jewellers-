@@ -3,7 +3,6 @@ import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import type { CategoryPage } from "@/types/content";
 import { categoryList } from "@/lib/content/categories";
-import { edits } from "@/lib/content/edits";
 import { Section, Container } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
@@ -162,34 +161,6 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
               Book a viewing
             </Button>
           </Reveal>
-        </Container>
-      </Section>
-
-      {/* The occasion axis - which edits draw on this room. Without this the
-          two axes only ever cross in one direction (edit → metal). */}
-      <Section spacing="md" tone="green">
-        <Container>
-          <div className="flex flex-col items-start justify-between gap-4 border-b border-line pb-5 sm:flex-row sm:items-end">
-            <p className="u-eyebrow">Worn in these edits</p>
-            <Button href="/edits" variant="link" withArrow>
-              All five
-            </Button>
-          </div>
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {edits
-              .filter((e) => e.drawsFrom.includes(category.slug))
-              .map((e) => (
-                <li key={e.slug}>
-                  <Link
-                    href={`/edits/${e.slug}`}
-                    className="inline-flex min-h-[42px] items-center gap-3 rounded-full border border-line px-5 font-body text-[0.7rem] uppercase tracking-[0.14em] text-text-muted transition-colors duration-300 hover:border-gold hover:text-gold-light"
-                  >
-                    {e.name}
-                    <span aria-hidden className="text-gold">&rarr;</span>
-                  </Link>
-                </li>
-              ))}
-          </ul>
         </Container>
       </Section>
 

@@ -24,8 +24,6 @@ export type Intent = "bridal" | "gift" | "bespoke" | "plans" | "browse";
 
 export interface EnquiryDraft {
   intent: Intent;
-  /** Optional edit slug the customer arrived from (e.g. "bridal"). */
-  editSlug?: string;
   tier: AppointmentTier;
   branchId: string;
   /** ISO date string, yyyy-mm-dd. */
@@ -175,7 +173,7 @@ export function buildEnquiry(d: EnquiryDraft): string {
     `Boutique: ${branchName(d.branchId)}`,
     `Date: ${formatDate(d.date)} at ${d.slot}`,
     `Party: ${d.guests}`,
-    `Looking for: ${intentLabel(d.intent)}${d.editSlug ? ` (${d.editSlug} edit)` : ""}`,
+    `Looking for: ${intentLabel(d.intent)}`,
     d.notes ? "" : null,
     d.notes ? `Notes: ${d.notes}` : null,
   ];

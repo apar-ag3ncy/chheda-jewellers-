@@ -4,7 +4,6 @@
  * not hard-coded JSX.
  */
 
-import { edits } from "@/lib/content/edits";
 
 export type NavChild = {
   label: string;
@@ -25,20 +24,9 @@ export type NavGroup = {
 export type NavItem = {
   label: string;
   href: string;
-  /**
-   * Optional two-axis mega menu. The house is navigable BY METAL (what it is
-   * made of) and BY OCCASION (where you are wearing it); those are separate
-   * axes, so the menu shows them side by side rather than nesting one inside
-   * the other.
-   */
+  /** Optional mega menu, rendered as titled columns. */
   groups?: NavGroup[];
 };
-
-const editChildren: NavChild[] = edits.map((e) => ({
-  label: e.name,
-  href: `/edits/${e.slug}`,
-  description: e.hook,
-}));
 
 export const primaryNav: NavItem[] = [
   {
@@ -71,12 +59,6 @@ export const primaryNav: NavItem[] = [
           },
         ],
       },
-      {
-        title: "The Edits",
-        href: "/edits",
-        note: "Where you are wearing it",
-        items: editChildren,
-      },
     ],
   },
   { label: "Chheda Promise", href: "/chheda-promise" },
@@ -95,7 +77,6 @@ export const homepageSections = [
   "collections",
   "chheda-promise",
   "jewellery-types",
-  "edits",
   "film-room",
   "stories",
   "vitrine",

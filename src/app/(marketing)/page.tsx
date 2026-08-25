@@ -4,7 +4,6 @@ import {
   Doors,
   ChhedaPromise,
   JewelleryTypes,
-  EditsRail,
   Stories,
   Manifesto,
   Collections,
@@ -29,9 +28,8 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * a stack of modules:
  *
  *   the work (Collections) - "who are these people?" answered in pictures -
- *   then the word (ChhedaPromise), then the two ways in standing together
- *   (JewelleryTypes by object, EditsRail by occasion), then "stop browsing,
- *   hold one" (FilmRoom), the people pieces are made for (Stories), the
+ *   then the word (ChhedaPromise), then the house by object
+ *   (JewelleryTypes), then "stop browsing, hold one" (FilmRoom), the people pieces are made for (Stories), the
  *   counter (Vitrine), what 480 families say about that counter
  *   (Testimonials), the house's newest argument (DiamondEdit), the silence
  *   that answers it (Manifesto: "we do not sell ornaments"), the piece that
@@ -52,7 +50,6 @@ const SECTIONS: Record<HomepageSection, ComponentType> = {
   hero: Hero,
   "chheda-promise": ChhedaPromise,
   "jewellery-types": JewelleryTypes,
-  edits: EditsRail,
   stories: Stories,
   manifesto: Manifesto,
   collections: Collections,

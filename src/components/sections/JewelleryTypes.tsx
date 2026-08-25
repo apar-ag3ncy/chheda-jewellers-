@@ -7,8 +7,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 
 export function JewelleryTypes() {
+  // Maroon, not deep: with the occasion rail gone this section borders
+  // FilmRoom, which is deep - and the page keeps its oxblood band.
   return (
-    <Section id="jewellery-types" spacing="lg" tone="transparent" data-bg="deep">
+    <Section id="jewellery-types" spacing="lg" tone="transparent" data-bg="maroon">
       <Container>
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading

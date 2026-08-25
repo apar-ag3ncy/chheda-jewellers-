@@ -152,7 +152,6 @@ export default function JournalPage() {
               <ul className="border-t border-line">
                 {[
                   { href: "/bespoke", label: "The atelier", note: "How a commission works, step by step" },
-                  { href: "/edits", label: "The Edits", note: "Five occasions, five rooms" },
                   { href: "/chheda-promise", label: "The Chheda Promise", note: "A bill you can rebuild yourself" },
                 ].map((l) => (
                   <li key={l.href}>
