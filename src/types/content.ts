@@ -50,15 +50,6 @@ export interface Story {
   href: string;
 }
 
-export interface Collection {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  image: ImageAsset;
-  href: string;
-}
-
 export interface Testimonial {
   id: string;
   author: string;

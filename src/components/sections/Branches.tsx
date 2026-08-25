@@ -4,75 +4,80 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import { Section, Container } from "@/components/ui/Section";
+import {
+  MAP_VIEW,
+  MUMBAI_CITY_PATHS,
+  MUMBAI_SUBURBAN_PATHS,
+  projectPoint,
+} from "@/lib/mumbai-geo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
 /**
- * BRANCHES — the whole of Mumbai, drawn, with the two doors pinned on it.
+ * BRANCHES — Greater Mumbai as a chart plate, with the two doors pinned on it.
  *
- * The map is a hand-drawn silhouette of Greater Mumbai (the Colaba peninsula,
- * Marine Drive's bay, the Malabar Hill and Bandra headlands, Juhu's shore,
- * the northern suburbs, Thane Creek down the east) with the national park,
- * Powai lake, the airport's crossed runways and the two suburban rail lines —
- * Western through Vile Parle, Central through Ghatkopar — because those two
- * lines are exactly how customers actually reach the two shops.
+ * The geography is REAL: both district boundaries come from OpenStreetMap
+ * (see lib/mumbai-geo — simplified and projected at generation time), and
+ * every marker on the plate is projected from true WGS84 coordinates — the
+ * shops from `config/site`, the rail lines through their actual stations,
+ * localities, the airport, the national park. Fix a lat/lng and the mark
+ * moves.
  *
- * Pin positions are PROJECTED from the real coordinates in `config/site`, not
- * eyeballed: fix the lat/lng there and the pin moves here.
+ * The drawing language is a surveyor's chart done in the house palette: a
+ * fine graticule with edge ticks, a luminous coastal glow, bathymetric
+ * ripples in the sea, stippled land, the two suburban rail lines as glowing
+ * routes (Western through Vile Parle, Central through Ghatkopar — exactly
+ * how customers arrive), concentric-ring station marks for the two shops
+ * with their coordinates set beside them, a scale bar and a north arrow.
  */
 
-/* Linear projection of Greater Mumbai onto the SVG viewBox. */
-const VIEW = { w: 400, h: 720 };
-const BOUNDS = { west: 72.75, east: 72.99, north: 19.295, south: 18.885 };
+const pt = (lat: number, lng: number) => projectPoint(lat, lng);
 
-function project(lat: number, lng: number): { x: number; y: number } {
-  return {
-    x: ((lng - BOUNDS.west) / (BOUNDS.east - BOUNDS.west)) * VIEW.w,
-    y: ((BOUNDS.north - lat) / (BOUNDS.north - BOUNDS.south)) * VIEW.h,
-  };
-}
+/** The two suburban lines, drawn through their real stations. */
+const WESTERN_STATIONS: [number, number][] = [
+  [18.9351, 72.8277], // Churchgate
+  [18.9695, 72.8194], // Mumbai Central
+  [19.0189, 72.8446], // Dadar
+  [19.0544, 72.8402], // Bandra
+  [19.0997, 72.8468], // Vile Parle
+  [19.1197, 72.8464], // Andheri
+  [19.2307, 72.8567], // Borivali
+];
+const CENTRAL_STATIONS: [number, number][] = [
+  [18.9398, 72.8355], // CSMT
+  [18.9764, 72.833], // Byculla
+  [19.0186, 72.8484], // Dadar
+  [19.0653, 72.8791], // Kurla
+  [19.0866, 72.9081], // Ghatkopar
+  [19.144, 72.9367], // Bhandup
+  [19.1723, 72.9566], // Mulund
+];
 
-/**
- * Greater Mumbai, simplified to its recognisable line. Clockwise from the
- * Colaba tip: up the west coast (Marine Drive bay, Malabar Hill, Worli,
- * Mahim bay, Bandra point, Juhu, Versova, the Madh and Gorai inlets), across
- * the northern boundary, down Thane Creek, around the Trombay bulge and the
- * docks, back to the tip.
- */
-const MUMBAI =
-  "M108,702 C102,684 100,668 100,650 C104,635 109,618 105,600 " +
-  "C99,605 90,607 87,600 C85,589 90,581 94,575 C98,570 100,564 100,556 " +
-  "C100,538 95,520 94,504 C98,488 110,473 121,465 C129,460 135,458 138,457 " +
-  "C129,451 115,446 106,438 C110,416 115,392 118,370 C116,358 114,350 112,340 " +
-  "C106,326 101,312 98,300 C93,290 88,282 85,275 C78,268 72,262 70,255 " +
-  "C64,232 63,205 62,180 C63,150 66,118 70,95 C100,68 138,45 170,35 " +
-  "C220,30 280,36 320,45 C335,58 348,72 355,90 C366,110 374,130 378,150 " +
-  "C386,172 390,192 390,215 C386,245 380,275 372,300 C362,318 350,332 340,345 " +
-  "C333,362 327,378 322,395 C318,413 313,432 310,450 C326,468 344,486 350,505 " +
-  "C348,522 343,536 335,545 C322,556 306,562 290,565 C265,572 240,577 215,580 " +
-  "C202,600 188,620 175,635 C162,650 148,660 135,668 C126,680 116,692 108,702 Z";
+const line = (stations: [number, number][]) =>
+  "M" + stations.map(([la, ln]) => { const p = pt(la, ln); return `${p.x.toFixed(1)},${p.y.toFixed(1)}`; }).join(" L");
 
-/** Sanjay Gandhi National Park — the green heart of the northern suburbs. */
+/** Sanjay Gandhi National Park, coarsely traced. */
+const FOREST_PTS: [number, number][] = [
+  [19.14, 72.885], [19.17, 72.87], [19.22, 72.868], [19.26, 72.88],
+  [19.27, 72.92], [19.23, 72.945], [19.18, 72.935], [19.15, 72.91],
+];
 const FOREST =
-  "M150,90 C190,70 250,66 290,80 C310,110 318,150 310,190 C295,225 260,245 220,240 " +
-  "C185,232 158,205 148,170 C143,140 144,112 150,90 Z";
+  "M" + FOREST_PTS.map(([la, ln]) => { const p = pt(la, ln); return `${p.x.toFixed(1)},${p.y.toFixed(1)}`; }).join(" L") + "Z";
 
-/** Western line (Churchgate → past Vile Parle → north). */
-const RAIL_WESTERN = "M122,648 C145,560 152,500 158,462 C164,410 168,300 174,100";
-/** Central line (CSMT → past Ghatkopar → north-east). */
-const RAIL_CENTRAL = "M140,660 C185,560 225,470 242,418 C258,388 290,260 326,120";
-
-/** Locality reference dots — restrained, just enough to orient. */
 const LOCALITIES = [
   { name: "Colaba", lat: 18.915, lng: 72.825, anchor: "start" },
   { name: "Dadar", lat: 19.019, lng: 72.844, anchor: "start" },
   { name: "Bandra", lat: 19.055, lng: 72.83, anchor: "end" },
+  { name: "Juhu", lat: 19.098, lng: 72.827, anchor: "end" },
   { name: "Powai", lat: 19.125, lng: 72.906, anchor: "start" },
 ] as const;
 
-/** CSMIA — between the two shops, which is a genuinely useful landmark. */
 const AIRPORT = { lat: 19.0926, lng: 72.868 };
+
+/** Graticule steps and the scale bar, both in real units. */
+const GRID_STEP = 0.05; // degrees
+const KM5_PX = (5 / 110.9) * (MAP_VIEW.h / 0.4013); // ≈ five kilometres
 
 export function Branches() {
   const [active, setActive] = useState(0);
@@ -155,18 +160,24 @@ export function Branches() {
             ) : null}
           </div>
 
-          {/* ── The map ──────────────────────────────────────────────── */}
+          {/* ── The chart ────────────────────────────────────────────── */}
           <Reveal className="lg:col-span-7">
-            <div className="u-on-dark relative h-[520px] w-full overflow-hidden rounded-[var(--radius-brand)] border border-line bg-green-deep md:h-[640px]">
-              <MumbaiMap active={active} reduce={reduce} />
+            <div className="u-on-dark relative h-[560px] w-full overflow-hidden rounded-[var(--radius-brand)] border border-line bg-green-deep md:h-[680px]">
+              <MumbaiChart active={active} reduce={reduce} />
               <div className="pointer-events-none absolute left-6 top-6">
                 <p className="font-body text-[0.66rem] uppercase tracking-[0.2em] text-text-muted">
                   Greater Mumbai
                 </p>
+                <p className="mt-1 font-body text-[0.56rem] uppercase tracking-[0.16em] text-text-muted/70">
+                  Two houses · one city
+                </p>
               </div>
-              <div className="pointer-events-none absolute bottom-5 right-6">
+              <div className="pointer-events-none absolute bottom-5 right-6 text-right">
                 <p className="font-body text-[0.6rem] uppercase tracking-[0.18em] text-text-muted/80">
                   Western line · Vile Parle&ensp;—&ensp;Central line · Ghatkopar
+                </p>
+                <p className="mt-1 font-body text-[0.52rem] tracking-[0.08em] text-text-muted/55">
+                  Map data © OpenStreetMap contributors
                 </p>
               </div>
             </div>
@@ -177,20 +188,29 @@ export function Branches() {
   );
 }
 
-function MumbaiMap({ active, reduce }: { active: number; reduce: boolean }) {
+function MumbaiChart({ active, reduce }: { active: number; reduce: boolean }) {
   const pins = siteConfig.branches.map((b) => ({
-    ...project(b.coordinates.lat, b.coordinates.lng),
+    ...pt(b.coordinates.lat, b.coordinates.lng),
     area: b.area,
     landmark: b.addressLines[0]!.replace("Near ", ""),
+    coords: `${b.coordinates.lat.toFixed(4)}° N · ${b.coordinates.lng.toFixed(4)}° E`,
   }));
-  const airport = project(AIRPORT.lat, AIRPORT.lng);
+  const airport = pt(AIRPORT.lat, AIRPORT.lng);
+  const powai = pt(19.125, 72.906);
+  const land = [...MUMBAI_SUBURBAN_PATHS, ...MUMBAI_CITY_PATHS];
+
+  // Graticule lines at real 0.05° intervals.
+  const lngLines: number[] = [];
+  for (let lng = 72.8; lng < 72.99; lng += GRID_STEP) lngLines.push(lng);
+  const latLines: number[] = [];
+  for (let lat = 18.9; lat < 19.28; lat += GRID_STEP) latLines.push(lat);
 
   return (
     <svg
-      viewBox={`0 0 ${VIEW.w} ${VIEW.h}`}
+      viewBox={`0 0 ${MAP_VIEW.w} ${MAP_VIEW.h}`}
       className="h-full w-full overflow-visible"
       role="img"
-      aria-label={`Map of Greater Mumbai showing both boutiques: ${siteConfig.branches
+      aria-label={`Chart of Greater Mumbai showing both boutiques: ${siteConfig.branches
         .map((b) => b.area)
         .join(" and ")}`}
       preserveAspectRatio="xMidYMid meet"
@@ -200,76 +220,104 @@ function MumbaiMap({ active, reduce }: { active: number; reduce: boolean }) {
           <stop offset="0" stopColor="var(--green-deep)" />
           <stop offset="1" stopColor="var(--green)" />
         </linearGradient>
-        <radialGradient id="cj-landlight" cx="0.45" cy="0.5" r="0.7">
-          <stop offset="0" stopColor="var(--green-soft)" stopOpacity="0.55" />
-          <stop offset="1" stopColor="var(--green-soft)" stopOpacity="0.28" />
+        <radialGradient id="cj-landlight" cx="0.45" cy="0.5" r="0.75">
+          <stop offset="0" stopColor="var(--green-soft)" stopOpacity="0.6" />
+          <stop offset="1" stopColor="var(--green-soft)" stopOpacity="0.3" />
         </radialGradient>
+        {/* stippled land — the chart's paper grain */}
+        <pattern id="cj-stipple" width="7" height="7" patternUnits="userSpaceOnUse">
+          <circle cx="1.2" cy="1.2" r="0.55" fill="var(--beige)" opacity="0.13" />
+          <circle cx="4.7" cy="4.9" r="0.45" fill="var(--beige)" opacity="0.09" />
+        </pattern>
+        <filter id="cj-glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="4" />
+        </filter>
       </defs>
 
-      {/* the sea — oversized so it reaches the plate's edges however
-          the viewBox letter-fits inside it */}
-      <rect x="-500" y="-500" width={VIEW.w + 1000} height={VIEW.h + 1000} fill="url(#cj-sea)" />
+      {/* the sea — oversized so it reaches the plate's edges */}
+      <rect x="-500" y="-500" width={MAP_VIEW.w + 1000} height={MAP_VIEW.h + 1000} fill="url(#cj-sea)" />
 
-      {/* the city */}
-      <path
-        d={MUMBAI}
-        fill="url(#cj-landlight)"
-        stroke="var(--line-strong)"
-        strokeWidth="1.1"
-      />
+      {/* graticule with edge ticks */}
+      <g stroke="var(--line)" strokeWidth="0.4" opacity="0.55">
+        {lngLines.map((lng) => {
+          const x = pt(19, lng).x;
+          return <line key={lng} x1={x} y1="0" x2={x} y2={MAP_VIEW.h} />;
+        })}
+        {latLines.map((lat) => {
+          const y = pt(lat, 72.9).y;
+          return <line key={lat} x1="0" y1={y} x2={MAP_VIEW.w} y2={y} />;
+        })}
+      </g>
+      <g className="font-body" fontSize="7" letterSpacing="1" fill="var(--beige-dim)" opacity="0.6">
+        {lngLines.map((lng) => (
+          <text key={lng} x={pt(19, lng).x + 3} y={MAP_VIEW.h - 6}>
+            {lng.toFixed(2)}° E
+          </text>
+        ))}
+        {latLines.map((lat) => (
+          <text key={lat} x={6} y={pt(lat, 72.9).y - 4}>
+            {lat.toFixed(2)}° N
+          </text>
+        ))}
+      </g>
+
+      {/* coastal glow + bathymetric ripples */}
+      <g fill="none">
+        {land.map((d, i) => (
+          <path key={`g${i}`} d={d} stroke="var(--gold)" strokeWidth="7" opacity="0.1" filter="url(#cj-glow)" />
+        ))}
+        {land.map((d, i) => (
+          <path key={`r${i}`} d={d} stroke="var(--beige)" strokeWidth="0.5" strokeDasharray="1 5" opacity="0.35"
+            transform={`translate(${MAP_VIEW.w / 2} ${MAP_VIEW.h / 2}) scale(1.035) translate(${-MAP_VIEW.w / 2} ${-MAP_VIEW.h / 2})`} />
+        ))}
+        {land.map((d, i) => (
+          <path key={`r2${i}`} d={d} stroke="var(--beige)" strokeWidth="0.4" strokeDasharray="1 7" opacity="0.2"
+            transform={`translate(${MAP_VIEW.w / 2} ${MAP_VIEW.h / 2}) scale(1.075) translate(${-MAP_VIEW.w / 2} ${-MAP_VIEW.h / 2})`} />
+        ))}
+      </g>
+
+      {/* the city — real district boundaries */}
+      {land.map((d, i) => (
+        <path key={`l${i}`} d={d} fill="url(#cj-landlight)" stroke="var(--line-strong)" strokeWidth="1" />
+      ))}
+      {land.map((d, i) => (
+        <path key={`s${i}`} d={d} fill="url(#cj-stipple)" stroke="none" />
+      ))}
 
       {/* the national park and Powai lake */}
-      <path d={FOREST} fill="var(--green)" opacity="0.5" />
-      <ellipse
-        cx={project(19.125, 72.906).x}
-        cy={project(19.125, 72.906).y}
-        rx="11"
-        ry="7"
-        fill="var(--green-deep)"
-        opacity="0.85"
-      />
+      <path d={FOREST} fill="var(--green)" opacity="0.55" />
+      <ellipse cx={powai.x} cy={powai.y} rx="10" ry="6" fill="var(--green-deep)" opacity="0.9" />
 
-      {/* the two rail lines — how customers actually arrive */}
-      <g fill="none" stroke="var(--gold)" strokeWidth="1.1" strokeDasharray="1.5 4" opacity="0.5">
-        <path d={RAIL_WESTERN} />
-        <path d={RAIL_CENTRAL} />
+      {/* the two lines, drawn through their real stations */}
+      <g fill="none" strokeLinecap="round">
+        <path d={line(WESTERN_STATIONS)} stroke="var(--gold-light)" strokeWidth="2.4" opacity="0.16" filter="url(#cj-glow)" />
+        <path d={line(WESTERN_STATIONS)} stroke="var(--gold-light)" strokeWidth="0.9" opacity="0.55" />
+        <path d={line(CENTRAL_STATIONS)} stroke="var(--gold)" strokeWidth="2.4" opacity="0.14" filter="url(#cj-glow)" />
+        <path d={line(CENTRAL_STATIONS)} stroke="var(--gold)" strokeWidth="0.9" opacity="0.5" />
       </g>
 
       {/* the airport, between the two doors */}
-      <g
-        transform={`translate(${airport.x} ${airport.y})`}
-        stroke="var(--beige-dim)"
-        strokeWidth="3"
-        opacity="0.55"
-        strokeLinecap="round"
-      >
-        <line x1="-13" y1="7" x2="13" y2="-7" />
-        <line x1="-6" y1="-9" x2="8" y2="8" />
+      <g transform={`translate(${airport.x} ${airport.y})`} stroke="var(--beige-dim)" strokeWidth="2.6" opacity="0.55" strokeLinecap="round">
+        <line x1="-12" y1="6" x2="12" y2="-6" />
+        <line x1="-5" y1="-8" x2="7" y2="7" />
       </g>
-      <text
-        x={airport.x + 18}
-        y={airport.y + 3}
-        className="font-body"
-        fontSize="9"
-        letterSpacing="1.5"
-        fill="var(--beige-dim)"
-        opacity="0.8"
-      >
+      <text x={airport.x + 16} y={airport.y + 3} className="font-body" fontSize="8" letterSpacing="1.4" fill="var(--beige-dim)" opacity="0.8">
         CSMIA
       </text>
 
-      {/* locality bearings */}
+      {/* locality bearings — small ringed nodes */}
       {LOCALITIES.map((l) => {
-        const p = project(l.lat, l.lng);
+        const p = pt(l.lat, l.lng);
         return (
           <g key={l.name}>
-            <circle cx={p.x} cy={p.y} r="2" fill="var(--beige-dim)" opacity="0.65" />
+            <circle cx={p.x} cy={p.y} r="4" fill="none" stroke="var(--beige-dim)" strokeWidth="0.5" opacity="0.5" />
+            <circle cx={p.x} cy={p.y} r="1.4" fill="var(--beige-dim)" opacity="0.75" />
             <text
-              x={l.anchor === "end" ? p.x - 7 : p.x + 7}
+              x={l.anchor === "end" ? p.x - 8 : p.x + 8}
               y={p.y + 3}
               textAnchor={l.anchor}
               className="font-body"
-              fontSize="9.5"
+              fontSize="9"
               letterSpacing="1.2"
               fill="var(--beige-dim)"
               opacity="0.85"
@@ -281,102 +329,73 @@ function MumbaiMap({ active, reduce }: { active: number; reduce: boolean }) {
       })}
 
       {/* water labels */}
-      <text
-        x="34"
-        y="430"
-        className="font-display"
-        fontSize="15"
-        letterSpacing="6"
-        fill="var(--beige-dim)"
-        opacity="0.55"
-        transform="rotate(-90 34 430)"
-      >
+      <text x="56" y="600" className="font-display" fontSize="15" letterSpacing="6" fill="var(--beige-dim)" opacity="0.5" transform="rotate(-90 56 600)">
         ARABIAN SEA
       </text>
-      <text
-        x="384"
-        y="220"
-        className="font-display"
-        fontSize="11"
-        letterSpacing="4"
-        fill="var(--beige-dim)"
-        opacity="0.5"
-        transform="rotate(76 384 220)"
-      >
+      <text x="405" y="300" className="font-display" fontSize="11" letterSpacing="4" fill="var(--beige-dim)" opacity="0.45" transform="rotate(80 405 300)">
         THANE CREEK
       </text>
 
-      {/* ── the two doors ─────────────────────────────────────────────── */}
+      {/* north arrow + scale bar — the chart's credentials */}
+      <g transform={`translate(${MAP_VIEW.w - 26} 30)`} opacity="0.75">
+        <line x1="0" y1="12" x2="0" y2="-10" stroke="var(--beige-dim)" strokeWidth="0.8" />
+        <path d="M0,-14 L4,-4 L0,-7 L-4,-4 Z" fill="var(--beige-dim)" />
+        <text x="0" y="26" textAnchor="middle" className="font-body" fontSize="8" letterSpacing="2" fill="var(--beige-dim)">
+          N
+        </text>
+      </g>
+      <g transform={`translate(14 ${MAP_VIEW.h - 22})`} opacity="0.8">
+        <line x1="0" y1="0" x2={KM5_PX} y2="0" stroke="var(--beige-dim)" strokeWidth="1" />
+        <line x1="0" y1="-3" x2="0" y2="3" stroke="var(--beige-dim)" strokeWidth="1" />
+        <line x1={KM5_PX} y1="-3" x2={KM5_PX} y2="3" stroke="var(--beige-dim)" strokeWidth="1" />
+        <text x={KM5_PX / 2} y="-6" textAnchor="middle" className="font-body" fontSize="7.5" letterSpacing="1.5" fill="var(--beige-dim)">
+          5 KM
+        </text>
+      </g>
+
+      {/* ── the two doors — concentric station marks with coordinates ── */}
       {pins.map((p, i) => {
         const on = active === i;
         const vp = i === 0;
-        // Vile Parle reads up-and-left into the sea; Ghatkopar sits under its
-        // own pin, centred, clear of the creek edge.
-        const lx = vp ? p.x - 30 : p.x + 2;
-        const ly = vp ? p.y - 42 : p.y + 46;
+        const lx = vp ? p.x - 34 : p.x + 6;
+        const ly = vp ? p.y - 48 : p.y + 52;
         const anchor = vp ? "end" : "middle";
         return (
           <g key={p.area}>
-            {/* leader */}
             <path
-              d={
-                vp
-                  ? `M${p.x - 7},${p.y - 6} L${lx + 4},${ly + 12}`
-                  : `M${p.x},${p.y + 8} L${lx},${ly - 15}`
-              }
+              d={vp ? `M${p.x - 9},${p.y - 8} L${lx + 5},${ly + 26}` : `M${p.x},${p.y + 10} L${lx},${ly - 30}`}
               stroke="var(--gold)"
-              strokeWidth="0.9"
-              opacity={on ? 0.85 : 0.45}
+              strokeWidth="0.8"
+              opacity={on ? 0.85 : 0.4}
               style={{ transition: "opacity .4s var(--ease-lux)" }}
             />
-            {/* pin */}
-            <circle
-              cx={p.x}
-              cy={p.y}
-              r="15"
-              fill="var(--gold)"
-              opacity={on ? 0.22 : 0.1}
-              style={{ transition: "opacity .4s var(--ease-lux)" }}
-            />
+            {/* concentric rings, chart-style */}
+            <circle cx={p.x} cy={p.y} r="17" fill="none" stroke="var(--gold)" strokeWidth="0.5" strokeDasharray="1 3"
+              opacity={on ? 0.8 : 0.4} style={{ transition: "opacity .4s var(--ease-lux)" }} />
+            <circle cx={p.x} cy={p.y} r="10" fill="none" stroke="var(--gold-light)" strokeWidth="0.7"
+              opacity={on ? 0.9 : 0.5} style={{ transition: "opacity .4s var(--ease-lux)" }} />
+            <circle cx={p.x} cy={p.y} r="16" fill="var(--gold)" opacity={on ? 0.14 : 0.06}
+              style={{ transition: "opacity .4s var(--ease-lux)" }} />
             {on && !reduce ? (
-              <circle cx={p.x} cy={p.y} r="9" fill="none" stroke="var(--gold-light)" strokeWidth="1">
-                <animate attributeName="r" from="7" to="20" dur="1.8s" repeatCount="indefinite" />
-                <animate attributeName="opacity" from="0.7" to="0" dur="1.8s" repeatCount="indefinite" />
+              <circle cx={p.x} cy={p.y} r="10" fill="none" stroke="var(--gold-light)" strokeWidth="0.9">
+                <animate attributeName="r" from="8" to="24" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="opacity" from="0.7" to="0" dur="2s" repeatCount="indefinite" />
               </circle>
             ) : null}
-            <circle
-              cx={p.x}
-              cy={p.y}
-              r={on ? 5.5 : 4.5}
-              fill={on ? "var(--gold-light)" : "var(--gold)"}
-              stroke="var(--green-deep)"
-              strokeWidth="1.4"
-              style={{ transition: "all .4s var(--ease-lux)" }}
-            />
-            {/* callout */}
-            <text
-              x={lx}
-              y={ly}
-              textAnchor={anchor}
-              className="font-body"
-              fontSize="11"
-              fontWeight="600"
-              letterSpacing="1.8"
-              fill={on ? "var(--gold-light)" : "var(--beige)"}
-              style={{ transition: "fill .4s var(--ease-lux)" }}
-            >
+            <circle cx={p.x} cy={p.y} r={on ? 4.5 : 3.6} fill={on ? "var(--gold-light)" : "var(--gold)"}
+              stroke="var(--green-deep)" strokeWidth="1.2" style={{ transition: "all .4s var(--ease-lux)" }} />
+
+            {/* annotation block */}
+            <text x={lx} y={ly} textAnchor={anchor} className="font-body" fontSize="10.5" fontWeight="600"
+              letterSpacing="1.8" fill={on ? "var(--gold-light)" : "var(--beige)"}
+              style={{ transition: "fill .4s var(--ease-lux)" }}>
               {p.area.toUpperCase()}
             </text>
-            <text
-              x={lx}
-              y={ly + 14}
-              textAnchor={anchor}
-              className="font-body"
-              fontSize="9"
-              letterSpacing="1"
-              fill="var(--beige-dim)"
-            >
+            <text x={lx} y={ly + 12} textAnchor={anchor} className="font-body" fontSize="8.5" letterSpacing="0.8" fill="var(--beige-dim)">
               {p.landmark}
+            </text>
+            <text x={lx} y={ly + 23} textAnchor={anchor} className="font-body" fontSize="7" letterSpacing="1" fill="var(--beige-dim)" opacity="0.8">
+              {p.coords}
             </text>
           </g>
         );
