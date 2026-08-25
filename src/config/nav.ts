@@ -91,7 +91,6 @@ export const homepageSections = [
   "hero",
   "chheda-promise",
   "jewellery-types",
-  "edits",
   "stories",
   "manifesto",
   "collections",
@@ -102,6 +101,7 @@ export const homepageSections = [
   "testimonials",
   "monthly-plan",
   "branches",
+  "edits",
   "community",
   "doors",
 ] as const;

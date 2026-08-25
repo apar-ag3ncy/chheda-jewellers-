@@ -15,10 +15,9 @@ import { cn } from "@/lib/cn";
 /**
  * SHOP BY OCCASION — the homepage door into /edits.
  *
- * Placed directly after "Types of Jewellery" so the two axes are introduced
- * back to back: that section says *what it is*, this one says *where you are
- * wearing it*. Reading them in sequence is what teaches the visitor that the
- * site has two ways in.
+ * Placed near the end of the scroll: the visitor has already been through the
+ * house by metal, so this reads as "or come back in by occasion" rather than
+ * a second taxonomy to absorb before they have seen anything.
  *
  * The heading column is sticky and counts along with the cards, so the section
  * has a fixed anchor while the photography travels — the "logical sticky"

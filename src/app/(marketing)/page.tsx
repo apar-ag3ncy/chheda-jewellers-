@@ -25,9 +25,10 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * `config/nav.ts` so the choreography is data, not JSX surgery.
  *
  * Three placements in that order are load-bearing rather than arbitrary:
- *   · EditsRail sits directly after JewelleryTypes, so the site's two
- *     navigation axes are introduced back to back (what it is ⇄ where you
- *     wear it).
+ *   · EditsRail closes the scroll rather than opening it: by the time a
+ *     visitor reaches it they have seen the house, so "or browse by
+ *     occasion" reads as a second way back in rather than a second taxonomy
+ *     to learn up front.
  *   · Atelier sits directly after Collections, because "campaigns, not
  *     catalogues" is precisely the line that provokes "but what if I want
  *     something that isn't in a campaign?" — and that is the bespoke pitch.
