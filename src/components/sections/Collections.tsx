@@ -73,10 +73,12 @@ export function Collections() {
                   // rounded-[10px], not the brand's 2px token: the radius is part of
                   // the grid style being replicated, scoped to these tiles only.
                   "group relative overflow-hidden rounded-[10px] bg-green-deep",
-                  // The minimal lift - shadow, not border. Tinted with the
-                  // deep emerald rather than black so it reads as the same
-                  // world as the frames.
-                  "shadow-[0_10px_24px_-12px_rgba(6,36,27,0.38)]",
+                  // The lift - two layers, like a real cast: a tight contact
+                  // shade plus a broad soft falloff. Tinted with the deep
+                  // emerald rather than black so it belongs to the same world
+                  // as the frames. The first cut used -12px spread on a 10px
+                  // offset, which cancelled itself to near-invisibility.
+                  "shadow-[0_3px_8px_rgba(6,36,27,0.18),0_18px_38px_-10px_rgba(6,36,27,0.5)]",
                   span.base,
                   span.wide,
                 )}
