@@ -9,7 +9,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
  *   rise  - the quiet default, for supporting copy
  *   mask  - a clip wipe upward, for framed content
  *   slide - travel from the side, for list rows and numerals
- *   settle- scale-settle, for marks, medallions and stats
+ *   settle - scale-settle, for marks, medallions and stats
  */
 export type RevealVariant = "rise" | "mask" | "slide" | "settle";
 

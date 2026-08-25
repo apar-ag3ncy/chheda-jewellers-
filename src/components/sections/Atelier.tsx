@@ -10,10 +10,8 @@ import { emphasise } from "@/components/ui/SectionHeading";
 /**
  * THE ATELIER - the bespoke invitation, kept short by design.
  *
- * This section sits immediately after Collections, where "campaigns, not
- * catalogues" provokes the obvious question - "what if I want something that
- * isn't in a campaign?" It answers in one breath: the claim, one photograph,
- * and the door. The four steps of the commission live on /bespoke; the
+ * It answers, in one breath, the question the manifesto above it raises: the
+ * claim, one photograph, and the door. The four steps of the commission live on /bespoke; the
  * homepage no longer walks through them.
  */
 export function Atelier() {
