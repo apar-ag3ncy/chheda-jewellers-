@@ -41,10 +41,10 @@ export const campaignWall: CampaignTile[] = [
   },
   {
     id: "matha-patti",
-    label: "Matha Patti",
+    label: "Maangtika",
     image: {
       src: "/media/wall/03.jpg",
-      alt: "A bride in champagne gold with a pearl matha patti, holding a lotus",
+      alt: "A bride in champagne gold with a pearl maangtika, holding a lotus",
       focus: "50% 10%",
     },
   },
