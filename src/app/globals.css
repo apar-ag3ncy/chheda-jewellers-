@@ -93,6 +93,26 @@
     border-radius: 1px;
   }
 
+  /* ── The collections ground ─────────────────────────────────────────
+     The reference floats its bento on a radial page gradient - lifted at
+     the top centre, darkening toward the edges. Same move in the house
+     emerald, with a faint gold bloom where the light source sits. Layers:
+     bloom, then lift, then the deep field. */
+  .cj-collections-ground {
+    background:
+      radial-gradient(
+        58% 30% at 50% 0%,
+        rgba(198, 141, 97, 0.13),
+        transparent 70%
+      ),
+      radial-gradient(
+        130% 92% at 50% 8%,
+        var(--green-soft) 0%,
+        var(--green) 44%,
+        var(--green-deep) 100%
+      );
+  }
+
   /* ── The Mumbai plate ───────────────────────────────────────────────
      Light travelling the longest arterials, and the pin's breathing ring.
      Both are decorative, so both stop entirely under reduced motion (the

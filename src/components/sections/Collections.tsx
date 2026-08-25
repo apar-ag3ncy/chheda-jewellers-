@@ -12,16 +12,24 @@ import { cn } from "@/lib/cn";
  * label at the foot of six tiles, exactly the tiles the reference labels;
  * the 2x2 hero and the two closing tiles stay bare, as in the reference.
  *
+ * The ground is the reference's radial gradient in the house emerald - a
+ * gold-tinged lift at the top centre falling to deep at the edges (see
+ * .cj-collections-ground). The section reports data-bg="deep" so the scroll
+ * themer meets the gradient's darkest value at both seams; the flat green of
+ * the promise band below is a different ground, so the alternation holds.
+ * The gradient is background-image, so it never fights the transparent
+ * tone's background-color.
+ *
  * The geometry is a 5x3 bento: one tall frame anchoring the left, a 2x2 hero
  * in the middle of the run, two wide landscapes, and five squares around
  * them. Tiles are placed by the grid's own auto-flow rather than by explicit
  * line numbers - in this order the spans tessellate exactly, with no holes
  * and no need for `dense`.
  *
- * Cells stay square at every width because the container carries the matching
- * aspect ratio (5/3 across five columns, 2/6 across two) and the rows are
- * `1fr`. That is what keeps the bento's proportions intact from 360px to
- * 1600px without a single breakpoint-specific row height.
+ * Cells hold the reference's own shape - 334x358, 7% taller than square - at
+ * every width, because the container carries the measured aspect (859/549
+ * across five columns, 25/81 across two) and the rows are `1fr`. No
+ * breakpoint-specific row heights.
  */
 
 /**
@@ -47,8 +55,8 @@ export function Collections() {
       id="collections"
       spacing="lg"
       tone="transparent"
-      data-bg="beige"
-      className="u-on-light"
+      data-bg="deep"
+      className="cj-collections-ground"
     >
       <Container>
         {/* Aspect ratios are the reference's own numbers: its cells measure
