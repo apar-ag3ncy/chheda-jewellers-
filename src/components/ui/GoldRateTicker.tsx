@@ -8,7 +8,7 @@ import type { GoldRateResponse } from "@/lib/gold-rate";
 type Variant = "compact" | "full";
 
 /**
- * Shared, deduped fetch - the widget renders in several places (nav, footer,
+ * Shared, deduped fetch - the widget renders in more than one place (nav,
  * mobile menu); this ensures a single network request per page load. Cleared
  * on failure so a transient error isn't cached forever.
  */

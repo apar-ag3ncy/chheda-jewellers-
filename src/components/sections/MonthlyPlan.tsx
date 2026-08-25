@@ -95,9 +95,6 @@ export function MonthlyPlan() {
             <Button href={monthlyPlanTeaser.cta.href} variant="primary" size="lg" withArrow>
               {monthlyPlanTeaser.cta.label}
             </Button>
-            <Button href="/offers-and-plans" variant="ghost" size="lg">
-              All offers &amp; plans
-            </Button>
           </Reveal>
         </div>
       </Container>

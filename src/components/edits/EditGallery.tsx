@@ -48,7 +48,10 @@ export function EditGallery({ edit }: { edit: OccasionEdit }) {
 
         <div ref={rootRef} className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-14">
           {/* ── The stage ─────────────────────────────────────────────── */}
-          <div className="md:col-span-7">
+          {/* Hidden below md: the caption list renders its own inline frames
+              there, so the stage would duplicate frame one and pin an inert
+              counter above it. */}
+          <div className="hidden md:block md:col-span-7">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-green md:sticky md:top-24">
               {edit.gallery.map((img, i) => (
                 <Image

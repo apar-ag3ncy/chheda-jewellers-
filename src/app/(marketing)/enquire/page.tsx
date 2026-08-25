@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Suspense } from "react";
 import { EMERALD_LQIP } from "@/lib/image-blur";
@@ -185,6 +186,21 @@ export default function EnquirePage() {
             <Reveal delay={0.12}>
               <p className="mt-9 font-body text-[0.68rem] uppercase tracking-[0.24em] text-text-muted">
                 {siteConfig.branches.map((b) => b.area).join(" · ")}
+              </p>
+            </Reveal>
+            {/* Server-rendered on purpose: the page that collects a name and
+                phone number is where the privacy note must be reachable -
+                the booking flow's own link only exists after interaction. */}
+            <Reveal delay={0.16}>
+              <p className="mt-6 font-body text-[0.7rem] font-light leading-relaxed text-text-muted/80">
+                Your details go only toward this appointment - see the{" "}
+                <Link
+                  href="/privacy"
+                  className="underline underline-offset-2 transition-colors hover:text-text"
+                >
+                  privacy note
+                </Link>
+                .
               </p>
             </Reveal>
           </div>

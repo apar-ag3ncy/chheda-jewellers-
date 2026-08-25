@@ -62,6 +62,16 @@ export function Stories() {
           );
         })}
       </div>
+
+      {/* The section is the journal's genre - so it ends at the journal's
+          door. Without this the journal is an orphan reachable only by URL. */}
+      <Container>
+        <Reveal className="mt-16 flex justify-center md:mt-24">
+          <Button href="/journal" variant="onLight" withArrow>
+            More from the Journal
+          </Button>
+        </Reveal>
+      </Container>
     </Section>
   );
 }

@@ -15,6 +15,8 @@ export type NavChild = {
 /** A titled column inside a mega menu. */
 export type NavGroup = {
   title: string;
+  /** Index page for the whole group - the title renders as a link when set. */
+  href?: string;
   /** Optional note under the column title. */
   note?: string;
   items: NavChild[];
@@ -71,6 +73,7 @@ export const primaryNav: NavItem[] = [
       },
       {
         title: "The Edits",
+        href: "/edits",
         note: "Where you are wearing it",
         items: editChildren,
       },

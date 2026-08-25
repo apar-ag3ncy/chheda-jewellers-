@@ -1,17 +1,9 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-
-type LenisContextValue = {
-  scrollTo: (target: string | number | HTMLElement, opts?: { offset?: number }) => void;
-};
-
-const LenisContext = createContext<LenisContextValue>({ scrollTo: () => {} });
-
-export const useSmoothScroll = () => useContext(LenisContext);
 
 /**
  * Lenis smooth-scroll provider, wired into the GSAP ticker + ScrollTrigger.
@@ -70,21 +62,5 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const scrollTo: LenisContextValue["scrollTo"] = (target, opts) => {
-    const lenis = lenisRef.current;
-    if (lenis) {
-      lenis.scrollTo(target, { offset: opts?.offset ?? 0, duration: 1.4 });
-      return;
-    }
-    // Reduced-motion / pre-init fallback - handle every target shape natively.
-    if (typeof target === "number") {
-      window.scrollTo({ top: target, behavior: "smooth" });
-    } else if (typeof target === "string") {
-      document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  return <LenisContext.Provider value={{ scrollTo }}>{children}</LenisContext.Provider>;
+  return <>{children}</>;
 }

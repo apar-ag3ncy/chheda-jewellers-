@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
 import { Section, Container } from "@/components/ui/Section";
@@ -117,6 +118,18 @@ export default function LiveGoldRatePage() {
                   Ask us
                 </Button>
               </div>
+
+              <p className="mt-6 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+                The rate shown is indicative, not an offer to sell - the full
+                wording lives in the{" "}
+                <Link
+                  href="/terms"
+                  className="underline underline-offset-2 transition-colors hover:text-text"
+                >
+                  terms of use
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </Container>

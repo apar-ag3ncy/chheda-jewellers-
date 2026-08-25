@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { plans } from "@/lib/content/plans";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
@@ -34,7 +35,7 @@ export default function OffersAndPlansPage() {
         }}
         meta={[
           { label: "From", value: "₹2,000 a month" },
-          { label: "Term", value: "11 months" },
+          { label: "Term", value: "11 + 1 months" },
           { label: "Redeem at", value: "The day's rate" },
           { label: "Joining fee", value: "None" },
         ]}
@@ -74,7 +75,7 @@ export default function OffersAndPlansPage() {
                     </ul>
                     <div className="mt-8">
                       <Button
-                        href={plan.cta.href === "/offers-and-plans" ? "/enquire?intent=plans" : plan.cta.href}
+                        href={plan.cta.href}
                         variant={plan.flagship ? "primary" : "outline"}
                         size="lg"
                         withArrow
@@ -141,8 +142,14 @@ export default function OffersAndPlansPage() {
           </div>
 
           <p className="mt-10 font-body text-[0.72rem] leading-relaxed text-text-muted/70">
-            Plan terms shown are indicative and pending confirmation. Full terms &amp;
-            conditions apply and will be shared in-store before enrolment.
+            Plan terms shown are indicative and pending confirmation. Full{" "}
+            <Link
+              href="/terms"
+              className="underline underline-offset-2 transition-colors hover:text-text"
+            >
+              terms &amp; conditions
+            </Link>{" "}
+            apply and will be shared in-store before enrolment.
           </p>
         </Container>
       </Section>

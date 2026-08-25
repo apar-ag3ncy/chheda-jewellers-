@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { siteConfig } from "@/config/site";
@@ -482,7 +483,15 @@ export function BookingFlow() {
 
             <p className="mt-8 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
               Contact details are used to confirm this appointment and are not
-              added to any mailing list. Nothing is stored on this website.
+              added to any mailing list. Nothing is stored on this website - see
+              the{" "}
+              <Link
+                href="/privacy"
+                className="underline underline-offset-2 transition-colors hover:text-text-strong"
+              >
+                privacy note
+              </Link>
+              .
             </p>
           </div>
         ) : null}

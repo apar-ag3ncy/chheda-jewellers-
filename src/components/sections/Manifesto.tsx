@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { siteConfig } from "@/config/site";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import { Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
@@ -67,7 +68,7 @@ export function Manifesto() {
           delay={0.16}
           className="mt-14 font-body text-[0.72rem] uppercase tracking-[0.24em] text-text-muted"
         >
-          Chheda Jewellers · Mumbai
+          {siteConfig.name} · Mumbai
         </Reveal>
       </Container>
     </section>

@@ -125,7 +125,8 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
       <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <SectionHeading
-            eyebrow={`The ${category.name} Edit`}
+            // "Edit" is the reserved occasion-axis word - a room gallery is not one.
+            eyebrow={`Inside the ${category.name} room`}
             title={`A closer look at\nour ${category.name.toLowerCase()} room`}
             intro="A small selection from the counter - a sense of the range, the finish, and the feeling. Every piece is one-of-a-kind; come in to see them in the light."
             size="lg"
@@ -223,6 +224,25 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
               </Link>
             ))}
           </div>
+
+          {/* The third door out of a room is the atelier - a visitor holding
+              family gold in mind should not have to back out to find it. */}
+          <Link
+            href="/bespoke"
+            className="group mt-5 flex items-center justify-between rounded-[var(--radius-brand)] border border-line px-6 py-5 transition-colors hover:border-gold"
+          >
+            <span>
+              <span className="block font-display text-xl font-light text-text-strong">
+                Or have it drawn instead
+              </span>
+              <span className="mt-1 block font-body text-[0.72rem] uppercase tracking-[0.16em] text-text-muted">
+                The atelier - bespoke &amp; remade heirlooms
+              </span>
+            </span>
+            <span aria-hidden className="font-body text-gold transition-transform duration-300 group-hover:translate-x-1">
+              &rarr;
+            </span>
+          </Link>
         </Container>
       </Section>
     </>

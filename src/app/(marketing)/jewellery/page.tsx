@@ -9,7 +9,6 @@ import { Section, Container } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
-import { JewelleryTypes } from "@/components/sections";
 import { cn } from "@/lib/cn";
 
 export const metadata = pageMetadata({
@@ -32,7 +31,10 @@ export const metadata = pageMetadata({
  * so every route out of the house index is visible from one screen.
  */
 export default function JewelleryPage() {
-  const [gold, ...rest] = categoryList;
+  // By id, not by position - the mosaic gives gold the tall column, and
+  // that must survive any reordering of the content file.
+  const gold = categoryList.find((c) => c.slug === "gold") ?? categoryList[0]!;
+  const rest = categoryList.filter((c) => c !== gold);
 
   return (
     <>
@@ -148,7 +150,6 @@ export default function JewelleryPage() {
         </Container>
       </Section>
 
-      <JewelleryTypes />
 
       {/* ── Bespoke + visit ───────────────────────────────────────────── */}
       <Section spacing="lg" tone="green">

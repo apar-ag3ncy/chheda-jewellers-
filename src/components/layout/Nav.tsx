@@ -220,7 +220,16 @@ export function Nav() {
                   {groups.map((group) => (
                     <div key={group.title}>
                       <div className="mb-3 flex items-baseline justify-between border-b border-line pb-2">
-                        <span className="u-eyebrow text-[0.62rem]">{group.title}</span>
+                        {group.href ? (
+                          <Link
+                            href={group.href}
+                            className="u-eyebrow text-[0.62rem] transition-colors hover:text-gold"
+                          >
+                            {group.title} <span aria-hidden>&rarr;</span>
+                          </Link>
+                        ) : (
+                          <span className="u-eyebrow text-[0.62rem]">{group.title}</span>
+                        )}
                         {group.note ? (
                           <span className="font-body text-[0.66rem] font-light italic text-text-muted">
                             {group.note}
@@ -339,7 +348,11 @@ function MobileMenu({
               </Link>
               {item.groups?.length ? (
                 <div className="flex flex-wrap gap-x-5 gap-y-1 pb-4">
-                  {item.groups.flatMap((g) => g.items).map((c) => (
+                  {item.groups
+                    .flatMap((g) =>
+                      g.href ? [{ label: g.title, href: g.href }, ...g.items] : g.items,
+                    )
+                    .map((c) => (
                     <Link
                       key={c.href}
                       href={c.href}
