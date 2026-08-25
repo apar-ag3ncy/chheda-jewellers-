@@ -28,7 +28,7 @@ export function Collections() {
         <SectionHeading
           eyebrow="Collections"
           title={"Campaigns, not\n*catalogues*"}
-          intro="Nine frames from the house campaigns — every piece photographed the way it deserves, and signed the same way, every time."
+          intro="Nine frames from the house campaigns, signed the way we sign everything."
           size="lg"
         />
       </Container>

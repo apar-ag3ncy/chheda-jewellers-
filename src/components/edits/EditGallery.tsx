@@ -35,8 +35,7 @@ export function EditGallery({ edit }: { edit: OccasionEdit }) {
           <div>
             <p className="u-eyebrow mb-2">The lookbook</p>
             <h2 className="font-display text-[length:var(--step-3)] font-light leading-[var(--leading-3)]">
-              Six frames from{" "}
-              <em className="font-display italic">{edit.name}</em>
+              Six frames from {edit.name}
             </h2>
           </div>
           <p

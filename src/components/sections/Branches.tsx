@@ -98,8 +98,8 @@ export function Branches() {
       <Container>
         <SectionHeading
           eyebrow="Visit the house"
-          title={"Two doors,\n*one welcome*"}
-          intro="Jewellery is meant to be seen, held and tried on. Come sit with us over chai — no appointment needed, though we love it when you book ahead."
+          title={"Vile Parle &\nGhatkopar"}
+          intro="Come sit with us over chai — no appointment needed, though we love it when you book ahead."
           size="md"
         />
 

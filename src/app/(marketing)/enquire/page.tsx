@@ -97,7 +97,7 @@ export default function EnquirePage() {
             <SplitLines delay={0.05}>
               <h1 className="font-display text-[clamp(2.6rem,6.8vw,5.2rem)] font-light leading-[0.98]">
                 <span className="block">Come in as</span>
-                <span className="block italic">someone expected</span>
+                <span className="block">someone expected</span>
               </h1>
             </SplitLines>
             <Reveal
@@ -144,7 +144,7 @@ export default function EnquirePage() {
         <Container>
           <SectionHeading
             eyebrow="What you actually get"
-            title={"Priority, described\n*in specifics*"}
+            title={"What booking changes"}
             intro="Every jeweller claims personal service. These are the four things that are different when you book, stated plainly enough that you can hold us to them."
             size="md"
           />
@@ -156,10 +156,7 @@ export default function EnquirePage() {
                 delay={i * 0.06}
                 className="bg-cream p-8 md:p-10"
               >
-                <span className="font-display text-3xl font-light text-gold-deep">
-                  {p.n}
-                </span>
-                <h3 className="mt-4 font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
+                <h3 className="font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
                   {p.title}
                 </h3>
                 <p className="mt-3 max-w-sm font-body text-[0.92rem] font-light leading-relaxed text-text-muted">

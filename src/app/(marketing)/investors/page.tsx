@@ -81,7 +81,7 @@ export default function InvestorsPage() {
       <PagePlate
         folio="V"
         eyebrow="Investor relations"
-        title={"Partner with a house\n*built on trust*"}
+        title={"Partner with a house\nbuilt on trust"}
         intro="We are shaping the next chapter of Chheda Jewellers — the same business, run the same way, with the systems to do it at more than two counters."
         plate={{
           src: "/media/pages/investors.jpg",
@@ -96,7 +96,7 @@ export default function InvestorsPage() {
         <Container>
           <SectionHeading
             eyebrow="The position"
-            title={"Three things that\n*compound*"}
+            title={"What compounds here"}
             size="md"
           />
           <ol className="mt-14 md:mt-20">
@@ -107,10 +107,7 @@ export default function InvestorsPage() {
                 delay={i * 0.06}
                 className="grid grid-cols-1 gap-5 border-t border-line py-9 last:border-b md:grid-cols-12 md:gap-10 md:py-12"
               >
-                <div className="md:col-span-2">
-                  <span className="font-display text-4xl font-light text-gold">{p.n}</span>
-                </div>
-                <div className="md:col-span-6">
+                <div className="md:col-span-7">
                   <h2 className="font-display text-[length:var(--step-3)] font-light leading-[var(--leading-3)] text-text-strong">
                     {p.title}
                   </h2>
@@ -118,7 +115,7 @@ export default function InvestorsPage() {
                     {p.body}
                   </p>
                 </div>
-                <div className="md:col-span-4">
+                <div className="md:col-span-5">
                   <p className="border-l border-line-strong pl-5 font-body text-[0.86rem] font-light leading-relaxed text-text">
                     <span className="u-eyebrow mb-1.5 block text-[0.55rem]">Checkable</span>
                     {p.proof}
@@ -135,7 +132,7 @@ export default function InvestorsPage() {
         <Container>
           <SectionHeading
             eyebrow="The roadmap"
-            title={"Now, next,\n*and then*"}
+            title={"Now, next, then"}
             intro="Stated as sequence rather than as dates, because a jeweller that promises quarters it cannot control is telling you something about how it runs everything else."
             size="md"
           />

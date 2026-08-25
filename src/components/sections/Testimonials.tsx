@@ -1,6 +1,5 @@
 import { testimonials, reviewsSummary } from "@/lib/content/testimonials";
 import { Section, Container } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 
 function Stars({ rating, className }: { rating: number; className?: string }) {
@@ -27,15 +26,9 @@ export function Testimonials() {
   return (
     <Section id="testimonials" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
-        <SectionHeading
-          eyebrow="Kind words"
-          title={"Trusted, one\n*family at a time*"}
-          align="center"
-          size="md"
-          className="mx-auto items-center text-center"
-        />
+        <p className="u-eyebrow text-center">What customers say</p>
 
-        <Reveal className="mx-auto mt-8 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-line-strong bg-white/55 px-5 py-3 sm:px-6">
+        <Reveal className="mx-auto mt-6 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-line-strong bg-white/55 px-5 py-3 sm:px-6">
           <span className="font-body text-lg font-semibold tabular-nums text-text-strong">
             {reviewsSummary.rating.toFixed(1)}
           </span>

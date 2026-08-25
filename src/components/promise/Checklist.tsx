@@ -77,7 +77,7 @@ export function Checklist() {
                 <h2 className="max-w-md font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
                   Seven questions.
                   <br />
-                  <em className="italic">Ask us first.</em>
+                  Ask us first.
                 </h2>
               </Reveal>
               <Reveal as="p" delay={0.08} className="mt-6 max-w-sm font-body text-[1rem] font-light leading-relaxed text-text-muted">

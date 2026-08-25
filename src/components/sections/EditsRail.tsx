@@ -49,7 +49,7 @@ export function EditsRail() {
               <SplitLines delay={0.04}>
                 <h2 className="font-display text-[length:var(--step-5)] font-light leading-[var(--leading-5)] tracking-[var(--tracking-5)]">
                   <span className="block">Dressed for</span>
-                  <span className="block italic">where you&rsquo;re going</span>
+                  <span className="block">where you&rsquo;re going</span>
                 </h2>
               </SplitLines>
               <Reveal
@@ -57,9 +57,8 @@ export function EditsRail() {
                 delay={0.1}
                 className="mt-6 max-w-sm font-body text-[0.95rem] font-light leading-relaxed text-text-muted"
               >
-                Gold, diamond and polki are the rooms. These are the reasons you
-                walk into them — five occasions, each with its own weight, its
-                own light, and its own rules.
+                Gold, diamond and polki are the rooms. These are the
+                occasions you walk in for.
               </Reveal>
 
               {/* Live index — tracks the card you are reading. */}

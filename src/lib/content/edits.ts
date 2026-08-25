@@ -16,7 +16,7 @@ export const edits: OccasionEdit[] = [
     slug: "bridal",
     name: "Bridal",
     eyebrow: "Edit 01 · The long day",
-    title: "Everything, and\n*it still has to last*",
+    title: "Everything, and\nit still has to last",
     hook: "The one day the jewellery is photographed from every angle.",
     intro:
       "A bridal set is worn for fourteen hours, hugged in, cried in, and then kept for forty years. It has to survive all of that and still photograph like the first hour. This is the room where weight, balance and the strength of a clasp matter as much as the stones.",
@@ -91,7 +91,7 @@ export const edits: OccasionEdit[] = [
     slug: "office",
     name: "Office Wear",
     eyebrow: "Edit 02 · Nine to nine",
-    title: "Quiet, until\n*someone looks twice*",
+    title: "Quiet, until\nsomeone looks twice",
     hook: "Jewellery that survives a video call and a dinner after it.",
     intro:
       "The brief is restraint: nothing that swings, nothing that catches on a collar, nothing you have to explain. One considered piece against plain cloth reads as more expensive than three competing ones — and it goes straight from the desk to the table without a change.",
@@ -166,7 +166,7 @@ export const edits: OccasionEdit[] = [
     slug: "outing",
     name: "Outing",
     eyebrow: "Edit 03 · After hours",
-    title: "Dressed for the\n*table you're at*",
+    title: "Dressed for the\ntable you're at",
     hook: "Sangeet, supper club, someone's engagement — the going-out drawer.",
     intro:
       "Between the office and the wedding sits most of a life: dinners, sangeets, the friend's party you said you would drop into for an hour. This edit is built for warm indoor light and close conversation — pieces with movement, worn at the height a photograph will find them.",
@@ -241,7 +241,7 @@ export const edits: OccasionEdit[] = [
     slug: "festive",
     name: "Festive Vibes",
     eyebrow: "Edit 04 · Marigold season",
-    title: "Loud rooms,\n*louder gold*",
+    title: "Loud rooms,\nlouder gold",
     hook: "Diwali, Navratri, the sangeet that starts at eleven.",
     intro:
       "Festival dressing is the one time restraint is the wrong answer. Rooms are hung with marigold, everyone is photographed from every angle, and the jewellery is competing with the outfit rather than finishing it. This edit is built to hold its own in that noise — high-karat gold, colour set against colour, and pieces that read across a crowded courtyard.",
@@ -316,7 +316,7 @@ export const edits: OccasionEdit[] = [
     slug: "flights",
     name: "Catching Flights",
     eyebrow: "Edit 05 · Not feelings",
-    title: "Packs small.\n*Arrives loud.*",
+    title: "Packs small.\nArrives loud.",
     hook: "Three pieces, one roll, zero decisions at the airport.",
     intro:
       "A capsule for people who are somewhere else by Friday. Everything here is chosen to survive a cabin bag and a schedule: no sharp points, no trailing chains, nothing that needs its own box. Three pieces that recombine into a week of outfits — and one of them is always allowed to be dramatic.",
@@ -396,6 +396,6 @@ export const editsBySlug = Object.fromEntries(
 /** Intro copy for the /edits index. */
 export const editsIntro = {
   eyebrow: "The Edits",
-  title: "Not what it's made of.\n*Where you're wearing it.*",
+  title: "Not what it's made of.\nWhere you're wearing it.",
   body: "Gold, diamond and polki are the rooms of the house. The edits are the reasons you walk into them — five occasions, each with its own light, its own weight, and its own rules about what to leave at home.",
 };

@@ -17,7 +17,7 @@ export const ringFilm: FilmReel = {
 };
 
 /** The section's single line of copy. */
-export const ringHeadline = "Turn it\n*in the light*";
+export const ringHeadline = "Turn it\nin the light";
 
 export function reelFrameSrc(reel: FilmReel, i: number): string {
   return `${reel.dir}/f${String(i).padStart(2, "0")}.webp`;

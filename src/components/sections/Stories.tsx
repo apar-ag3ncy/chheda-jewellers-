@@ -12,8 +12,8 @@ export function Stories() {
       <Container>
         <SectionHeading
           eyebrow="Stories by Chheda"
-          title={"Not products.\n*Pieces with a past*"}
-          intro="A few of our best-loved pieces, told the way they deserve to be — as the moments they were made for."
+          title={"The stories they carry"}
+          intro="Three pieces, and the moments they were made for."
           size="lg"
           align="center"
           className="mx-auto items-center text-center"

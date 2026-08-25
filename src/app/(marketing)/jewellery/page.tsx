@@ -39,7 +39,7 @@ export default function JewelleryPage() {
       <PagePlate
         folio="I"
         eyebrow="The House of Chheda"
-        title={"Three rooms,\n*one roof*"}
+        title={"Three rooms,\none roof"}
         intro="Heritage gold, certified diamonds, and regal polki — each with its own light, its own craft and its own reasons. Begin wherever your story does."
         plate={{
           src: "/media/pages/jewellery.jpg",
@@ -104,7 +104,7 @@ export default function JewelleryPage() {
           <div className="flex flex-col items-start justify-between gap-6 border-b border-line pb-6 md:flex-row md:items-end">
             <SectionHeading
               eyebrow="The other way in"
-              title={"Or start from\n*the occasion*"}
+              title={"Or start from\nthe occasion"}
               size="md"
             />
             <Button href="/edits" variant="onLight" withArrow>

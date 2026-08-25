@@ -66,7 +66,7 @@ export default function LiveGoldRatePage() {
       <PagePlate
         folio="IV"
         eyebrow="Live Gold Rate"
-        title={"Today's rate,\n*and what it isn't*"}
+        title={"Today's gold rate"}
         intro="An indicative reference for 22K and 24K gold in Mumbai, refreshed through the day. Always confirm the applicable rate in-store before a purchase."
         plate={{
           src: "/media/pages/rate.jpg",
@@ -127,14 +127,13 @@ export default function LiveGoldRatePage() {
         <Container>
           <SectionHeading
             eyebrow="The mechanics"
-            title={"Three things worth\n*knowing about the number*"}
+            title={"How to read the number"}
             size="md"
           />
           <ol className="mt-14 grid grid-cols-1 gap-px overflow-hidden border border-line bg-line md:mt-20 md:grid-cols-3">
             {notes.map((n, i) => (
               <Reveal as="li" key={n.n} delay={i * 0.07} className="bg-cream p-8 md:p-10">
-                <span className="font-display text-4xl font-light text-gold-deep">{n.n}</span>
-                <h2 className="mt-5 font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
+                <h2 className="font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
                   {n.title}
                 </h2>
                 <p className="mt-4 font-body text-[0.92rem] font-light leading-relaxed text-text-muted">

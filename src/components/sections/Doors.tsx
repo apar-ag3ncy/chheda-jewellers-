@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import { Section, Container } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { Monogram } from "@/components/ui/Monogram";
 import { cn } from "@/lib/cn";
@@ -94,13 +93,14 @@ export function Doors() {
   return (
     <Section id="doors" spacing="lg" tone="transparent" data-bg="green">
       <Container>
-        <SectionHeading
-          eyebrow="Before you go"
-          title={"One house,\n*many doors*"}
-          size="md"
-        />
+        <div className="flex items-baseline justify-between gap-6 border-b border-line pb-5">
+          <p className="u-eyebrow">Keep exploring</p>
+          <p className="hidden font-body text-[0.72rem] font-light text-text-muted sm:block">
+            Every door below is open
+          </p>
+        </div>
 
-        <div className="mt-12 grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[180px] md:mt-16 md:auto-rows-[210px] md:grid-cols-4 md:gap-4">
+        <div className="mt-10 grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[180px] md:mt-16 md:auto-rows-[210px] md:grid-cols-4 md:gap-4">
           {DOORS.slice(0, 5).map((door, i) => (
             <BentoTile key={door.href} door={door} delay={i * 0.05} />
           ))}

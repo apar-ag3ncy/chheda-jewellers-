@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitLines } from "@/components/motion/SplitLines";
-import { emphasise } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/cn";
 
 /**
@@ -118,7 +117,7 @@ export function Vitrine() {
           </Reveal>
           <SplitLines delay={0.04}>
             <h2 className="font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)]">
-              {emphasise("Laid out *on the glass*")}
+              Laid out on the glass
             </h2>
           </SplitLines>
         </div>

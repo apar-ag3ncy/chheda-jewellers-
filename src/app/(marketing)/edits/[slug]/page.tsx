@@ -210,7 +210,7 @@ export default async function EditPage({
         <Container>
           <SectionHeading
             eyebrow="Three pieces"
-            title={"If you take\n*only three things*"}
+            title={"Three pieces to start"}
             intro="Every edit reduces to three decisions. Get these right and the rest is styling."
             size="md"
           />
@@ -221,10 +221,7 @@ export default async function EditPage({
                 delay={i * 0.07}
                 className="flex flex-col bg-cream p-8 md:p-10"
               >
-                <span className="font-display text-4xl font-light text-gold-deep">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-5 font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
+                <h3 className="font-display text-[length:var(--step-2)] font-light leading-snug text-text-strong">
                   {p.title}
                 </h3>
                 <p className="mt-4 font-body text-[0.92rem] font-light leading-relaxed text-text-muted">

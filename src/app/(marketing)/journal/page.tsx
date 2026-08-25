@@ -66,7 +66,7 @@ export default function JournalPage() {
       <PagePlate
         folio="VI"
         eyebrow="The Journal"
-        title={"The contents,\n*before the issue*"}
+        title={"The contents,\nbefore the issue"}
         intro="A journal of craft, method and the families who wear us. The first pieces are being written and photographed — until they land, here is exactly what is coming."
         plate={{
           src: "/media/pages/journal.jpg",
@@ -86,7 +86,7 @@ export default function JournalPage() {
         <Container>
           <SectionHeading
             eyebrow="Issue one"
-            title={"Five pieces,\n*in preparation*"}
+            title={"Five pieces,\nin preparation"}
             size="md"
           />
 
