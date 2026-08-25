@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import {
   Hero,
+  Doors,
   ChhedaPromise,
   JewelleryTypes,
   EditsRail,
@@ -34,7 +35,8 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  *     visitor has just scrubbed the films and then held a cut-out piece in
  *     their hand, and the reviews land on the heels of that moment.
  *
- * CommunityStrip anchors the very end, handing off into the footer.
+ * Doors closes the scroll — a bento of the site's doorways, and the page's
+ * last working navigation before the link-less sign-off footer.
  */
 const SECTIONS: Record<HomepageSection, ComponentType> = {
   hero: Hero,
@@ -52,6 +54,7 @@ const SECTIONS: Record<HomepageSection, ComponentType> = {
   "monthly-plan": MonthlyPlan,
   branches: Branches,
   community: CommunityStrip,
+  doors: Doors,
 };
 
 export default function HomePage() {

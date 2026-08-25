@@ -103,6 +103,7 @@ export const homepageSections = [
   "monthly-plan",
   "branches",
   "community",
+  "doors",
 ] as const;
 
 export type HomepageSection = (typeof homepageSections)[number];
