@@ -119,8 +119,9 @@ src/
 - **The palette breathes.** The scroll alternates emerald and cream instead of
   running dark end to end: Stories, the Atelier, Testimonials and Branches sit
   on the cream ground (`.u-on-light` flips every nested token), legal pages
-  read as paper, and maroon is back to being an accent only — the vitrine's
-  oxblood panel is the one full-maroon surface left, by design.
+  read as paper — and maroon keeps its place as the third ground: one oxblood
+  band per scroll (the Diamond Edit on the homepage, Refusals on the promise
+  page, the vitrine's oxblood panel), never body-text-on-green.
 - **The branches map is real geography.** `Branches.tsx` draws Greater Mumbai
   (coastline, Thane Creek, the national park, Powai, CSMIA, both rail lines)
   and PROJECTS the pins from the coordinates in `config/site` — move the
