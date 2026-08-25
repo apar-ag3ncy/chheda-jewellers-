@@ -27,34 +27,7 @@ export const campaignWall: CampaignTile[] = [
     image: {
       src: "/media/wall/01.jpg",
       alt: "A model in a rose-pink sari wearing a sapphire-drop polki choker in a palace colonnade",
-      focus: "50% 24%",
-    },
-  },
-  {
-    id: "kundan-haar",
-    label: "Kundan",
-    image: {
-      src: "/media/wall/02.jpg",
-      alt: "A close study of a kundan and ruby-bead haar against red silk",
-      focus: "50% 40%",
-    },
-  },
-  {
-    id: "matha-patti",
-    label: "Matha Patti",
-    image: {
-      src: "/media/wall/03.jpg",
-      alt: "A bride in champagne gold with a pearl matha patti, holding a lotus",
-      focus: "50% 22%",
-    },
-  },
-  {
-    id: "bridal-set",
-    label: "Bridal",
-    image: {
-      src: "/media/wall/04.jpg",
-      alt: "A seated bride in red wearing the full gold bridal set",
-      focus: "50% 26%",
+      focus: "45% 20%",
     },
   },
   {
@@ -63,7 +36,34 @@ export const campaignWall: CampaignTile[] = [
     image: {
       src: "/media/wall/05.jpg",
       alt: "A polki cocktail ring worn on a hand resting against sheer embroidery",
-      focus: "50% 45%",
+      focus: "50% 46%",
+    },
+  },
+  {
+    id: "matha-patti",
+    label: "Matha Patti",
+    image: {
+      src: "/media/wall/03.jpg",
+      alt: "A bride in champagne gold with a pearl matha patti, holding a lotus",
+      focus: "50% 10%",
+    },
+  },
+  {
+    id: "bridal-set",
+    label: "Bridal",
+    image: {
+      src: "/media/wall/04.jpg",
+      alt: "A seated bride in red wearing the full gold bridal set",
+      focus: "50% 30%",
+    },
+  },
+  {
+    id: "kundan-haar",
+    label: "Kundan",
+    image: {
+      src: "/media/wall/02.jpg",
+      alt: "A close study of a kundan and ruby-bead haar against red silk",
+      focus: "50% 35%",
     },
   },
   {
@@ -71,7 +71,7 @@ export const campaignWall: CampaignTile[] = [
     image: {
       src: "/media/wall/06.jpg",
       alt: "A profile in dark studio light wearing vine-set diamond earrings, a red rose below",
-      focus: "50% 30%",
+      focus: "50% 12%",
     },
   },
   {
@@ -80,7 +80,7 @@ export const campaignWall: CampaignTile[] = [
     image: {
       src: "/media/wall/07.jpg",
       alt: "A model in peach and pink organza wearing a polki choker and chandbalis in evening sun",
-      focus: "50% 24%",
+      focus: "50% 15%",
     },
   },
   {
@@ -88,7 +88,7 @@ export const campaignWall: CampaignTile[] = [
     image: {
       src: "/media/wall/08.jpg",
       alt: "Two brides in deep maroon jadau sets, seated among clay urns",
-      focus: "50% 35%",
+      focus: "50% 60%",
     },
   },
   {
@@ -96,7 +96,7 @@ export const campaignWall: CampaignTile[] = [
     image: {
       src: "/media/wall/09.jpg",
       alt: "A model in red with a gold haar leaning on a vintage car under a low sun",
-      focus: "50% 30%",
+      focus: "50% 5%",
     },
   },
 ];
