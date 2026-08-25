@@ -12,13 +12,11 @@ import { cn } from "@/lib/cn";
  * label at the foot of six tiles, exactly the tiles the reference labels;
  * the 2x2 hero and the two closing tiles stay bare, as in the reference.
  *
- * The ground is the reference's radial gradient in the house emerald - a
- * gold-tinged lift at the top centre falling to deep at the edges (see
- * .cj-collections-ground). The section reports data-bg="deep" so the scroll
- * themer meets the gradient's darkest value at both seams; the flat green of
- * the promise band below is a different ground, so the alternation holds.
- * The gradient is background-image, so it never fights the transparent
- * tone's background-color.
+ * The ground is cream, and each frame drops a minimal emerald-tinted
+ * shadow - the reference's tiles sit ON their ground rather than in it, and
+ * on a light ground that lift is what a soft shadow buys. The scroll themer
+ * paints the cream via data-bg="beige"; hero into beige into the promise
+ * band's green keeps the alternation legal.
  *
  * The geometry is a 5x3 bento: one tall frame anchoring the left, a 2x2 hero
  * in the middle of the run, two wide landscapes, and five squares around
@@ -55,8 +53,8 @@ export function Collections() {
       id="collections"
       spacing="lg"
       tone="transparent"
-      data-bg="deep"
-      className="cj-collections-ground"
+      data-bg="beige"
+      className="u-on-light"
     >
       <Container>
         {/* Aspect ratios are the reference's own numbers: its cells measure
@@ -75,6 +73,10 @@ export function Collections() {
                   // rounded-[10px], not the brand's 2px token: the radius is part of
                   // the grid style being replicated, scoped to these tiles only.
                   "group relative overflow-hidden rounded-[10px] bg-green-deep",
+                  // The minimal lift - shadow, not border. Tinted with the
+                  // deep emerald rather than black so it reads as the same
+                  // world as the frames.
+                  "shadow-[0_10px_24px_-12px_rgba(6,36,27,0.38)]",
                   span.base,
                   span.wide,
                 )}
