@@ -93,6 +93,44 @@
     border-radius: 1px;
   }
 
+  /* ── The Mumbai plate ───────────────────────────────────────────────
+     Light travelling the longest arterials, and the pin's breathing ring.
+     Both are decorative, so both stop entirely under reduced motion (the
+     global floor below also catches them). */
+  /* Each path carries pathLength="1", so the dash is a fraction of the road
+     rather than a pixel count - the same rule lights a 300-unit slip road and
+     a 3000-unit freeway identically. Hardcoded units silently miss any path
+     shorter than the offset. */
+  .cj-trace path {
+    stroke-dasharray: 0.08 1;
+    stroke-dashoffset: 1.08;
+    opacity: 0;
+    animation: cj-trace-run 9s linear infinite;
+    filter: drop-shadow(0 0 7px rgba(255, 240, 214, 0.95));
+  }
+
+  @keyframes cj-trace-run {
+    0% { stroke-dashoffset: 1.08; opacity: 0; }
+    8% { opacity: 0.9; }
+    72% { opacity: 0.9; }
+    92%, 100% { stroke-dashoffset: 0.08; opacity: 0; }
+  }
+
+  .cj-pin-ping {
+    animation: cj-pin-ping 2.8s var(--ease-cinema) infinite;
+  }
+
+  @keyframes cj-pin-ping {
+    0% { transform: scale(0.45); opacity: 0.85; }
+    70%, 100% { transform: scale(1.5); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cj-trace { display: none; }
+    .cj-pin-ping { animation: none; }
+    .cj-plate { transition: none !important; transform: none !important; }
+  }
+
   /* Custom scrollbar - desktop only */
   @media (pointer: fine) {
     ::-webkit-scrollbar {

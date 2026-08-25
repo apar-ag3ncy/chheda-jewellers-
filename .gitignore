@@ -32,3 +32,6 @@ yarn-error.log*
 .idea
 .vscode/*
 !.vscode/extensions.json
+
+# Overpass responses, cached so the map generator need not refetch
+.cache/
