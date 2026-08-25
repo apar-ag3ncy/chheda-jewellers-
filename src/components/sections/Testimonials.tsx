@@ -25,7 +25,7 @@ function Stars({ rating, className }: { rating: number; className?: string }) {
 
 export function Testimonials() {
   return (
-    <Section id="testimonials" spacing="lg" tone="transparent" data-bg="green">
+    <Section id="testimonials" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
         <SectionHeading
           eyebrow="Kind words"
@@ -35,7 +35,7 @@ export function Testimonials() {
           className="mx-auto items-center text-center"
         />
 
-        <Reveal className="mx-auto mt-8 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-line-strong bg-green-soft/40 px-5 py-3 sm:px-6">
+        <Reveal className="mx-auto mt-8 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-line-strong bg-white/55 px-5 py-3 sm:px-6">
           <span className="font-body text-lg font-semibold tabular-nums text-text-strong">
             {reviewsSummary.rating.toFixed(1)}
           </span>
@@ -61,7 +61,7 @@ export function Testimonials() {
               key={t.id}
               delay={(i % 2) * 0.06}
               as="figure"
-              className="flex h-full flex-col justify-between rounded-[var(--radius-brand)] border border-line bg-green-soft/25 p-8 md:p-10"
+              className="flex h-full flex-col justify-between rounded-[var(--radius-brand)] border border-line bg-white/45 p-8 md:p-10"
             >
               <blockquote className="font-display text-[clamp(1.3rem,2.2vw,1.7rem)] font-light italic leading-snug text-text-strong">
                 <span aria-hidden className="text-gold">“</span>

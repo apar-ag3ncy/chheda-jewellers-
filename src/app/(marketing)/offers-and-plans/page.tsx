@@ -102,7 +102,7 @@ export default function OffersAndPlansPage() {
       </Section>
 
       {/* How it works */}
-      <Section spacing="lg" tone="deep">
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <Reveal as="p" className="u-eyebrow mb-10">
             How the Monthly Plan works
@@ -131,10 +131,10 @@ export default function OffersAndPlansPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button href="/enquire?intent=plans" variant="primary" size="lg" withArrow>
+              <Button href="/enquire?intent=plans" variant="onLight" size="lg" withArrow>
                 Book an appointment
               </Button>
-              <Button href="/live-gold-rate" variant="ghost" size="lg">
+              <Button href="/live-gold-rate" variant="onLight" size="lg">
                 Check today&rsquo;s rate
               </Button>
             </div>

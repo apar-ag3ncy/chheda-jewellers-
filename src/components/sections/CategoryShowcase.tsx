@@ -122,7 +122,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
       </Section>
 
       {/* The Edit — a curated gallery of six pieces */}
-      <Section spacing="lg" tone="deep">
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <SectionHeading
             eyebrow={`The ${category.name} Edit`}
@@ -157,7 +157,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
             ))}
           </div>
           <Reveal className="mt-14 flex justify-center">
-            <Button href="/enquire" variant="outline" size="lg" withArrow>
+            <Button href="/enquire" variant="onLight" size="lg" withArrow>
               Book a viewing
             </Button>
           </Reveal>

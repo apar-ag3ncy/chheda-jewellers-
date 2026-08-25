@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 
 export function Stories() {
   return (
-    <Section id="stories" spacing="lg" tone="transparent" data-bg="maroon">
+    <Section id="stories" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
         <SectionHeading
           eyebrow="Stories by Chheda"
@@ -52,7 +52,7 @@ export function Stories() {
                     {story.excerpt}
                   </Reveal>
                   <Reveal delay={0.15} className="mt-8">
-                    <Button href={story.href} variant="ghost" withArrow>
+                    <Button href={story.href} variant="onLight" withArrow>
                       Read the story
                     </Button>
                   </Reveal>

@@ -61,38 +61,43 @@ export const siteConfig = {
   },
 
   /**
-   * Two branches. Designed location section, not raw embeds.
-   * TODO(client): confirm exact addresses, phones, hours, coordinates.
+   * Two branches — real localities (Vile Parle East · Trinity Square, and
+   * Ghatkopar East · near Khau Galli). TODO(client): confirm door numbers,
+   * phones, hours and the exact map pins.
    */
   branches: [
     {
       id: "vile-parle",
       name: "Chheda Jewellers — Vile Parle",
-      area: "Vile Parle",
-      addressLines: ["Ground Floor, Chheda House", "Vile Parle (West)"], // TODO(client)
+      area: "Vile Parle East",
+      addressLines: ["Trinity Square", "Vile Parle (East)"],
       city: "Mumbai",
       state: "Maharashtra",
-      pincode: "400056", // TODO(client)
+      pincode: "400057",
       phone: "+91 22 0000 0000", // TODO(client)
       hours: "Mon–Sun · 11:00 AM – 8:30 PM", // TODO(client)
-      coordinates: { lat: 19.0968, lng: 72.8465 }, // approx Vile Parle — TODO(client)
+      // Trinity Square, Vile Parle East — near the station. TODO(client):
+      // confirm the exact door pin.
+      coordinates: { lat: 19.0993, lng: 72.8506 },
       directionsUrl:
-        "https://www.google.com/maps/search/?api=1&query=Chheda+Jewellers+Vile+Parle",
+        "https://www.google.com/maps/search/?api=1&query=Chheda+Jewellers+Trinity+Square+Vile+Parle+East",
       verified: false,
     },
     {
-      id: "second-branch",
-      name: "Chheda Jewellers — Second Branch",
-      area: "Mumbai", // TODO(client): which locality?
-      addressLines: ["Second Branch Address", "Mumbai"], // TODO(client)
+      id: "ghatkopar",
+      name: "Chheda Jewellers — Ghatkopar",
+      area: "Ghatkopar East",
+      addressLines: ["Near Khau Galli, M.G. Road", "Ghatkopar (East)"],
       city: "Mumbai",
       state: "Maharashtra",
-      pincode: "400000", // TODO(client)
+      pincode: "400077",
       phone: "+91 22 0000 0000", // TODO(client)
       hours: "Mon–Sun · 11:00 AM – 8:30 PM", // TODO(client)
-      coordinates: { lat: 19.076, lng: 72.8777 }, // TODO(client)
+      // M.G. Road by Khau Galli, Ghatkopar East. TODO(client): confirm the
+      // exact door pin.
+      coordinates: { lat: 19.081, lng: 72.9092 },
       directionsUrl:
-        "https://www.google.com/maps/search/?api=1&query=Chheda+Jewellers+Mumbai",
+        "https://www.google.com/maps/search/?api=1&query=Chheda+Jewellers+Khau+Galli+Ghatkopar+East",
       verified: false,
     },
   ],

@@ -15,9 +15,8 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 const TONES: Record<string, string> = {
   green: "#0B3A2D", // A — primary brand
   deep: "#06241B", // deepened emerald
-  maroon: "#440002", // B — secondary
-  // C — the warm light interlude. Only ever on TEXT-LED sections, which set
-  // their own dark type; never behind photography, which it would wash out.
+  // The warm light interlude. Sections on it scope themselves .u-on-light so
+  // every nested token flips dark; photography sits in framed plates on it.
   beige: "#F1E6CE",
 };
 

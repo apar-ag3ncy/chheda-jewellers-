@@ -126,7 +126,7 @@ export default function JournalPage() {
       </Section>
 
       {/* ── Until then ────────────────────────────────────────────────── */}
-      <Section spacing="lg" tone="deep">
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-16">
             <div className="md:col-span-6">
@@ -138,10 +138,10 @@ export default function JournalPage() {
                 them. It is the same journal, published a frame at a time.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <Button href={siteConfig.socials.instagram} variant="primary" withArrow>
+                <Button href={siteConfig.socials.instagram} variant="onLight" withArrow>
                   Follow {siteConfig.socials.instagramHandle}
                 </Button>
-                <Button href="/chheda-promise" variant="ghost">
+                <Button href="/chheda-promise" variant="onLight">
                   Read the promise instead
                 </Button>
               </div>

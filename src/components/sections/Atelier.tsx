@@ -31,8 +31,8 @@ export function Atelier() {
   return (
     <section
       id="atelier"
-      data-bg="deep"
-      className="relative w-full overflow-hidden bg-green-deep py-20 md:py-32"
+      data-bg="beige"
+      className="u-on-light relative w-full overflow-hidden py-20 md:py-32"
     >
       <Container>
         {/* ── Heading ───────────────────────────────────────────────── */}
@@ -177,7 +177,7 @@ export function Atelier() {
         </div>
 
         <Reveal className="mt-20 flex flex-wrap items-center gap-4">
-          <Button href="/bespoke" variant="primary" size="lg" withArrow>
+          <Button href="/bespoke" variant="onLight" size="lg" withArrow>
             Start a commission
           </Button>
         </Reveal>

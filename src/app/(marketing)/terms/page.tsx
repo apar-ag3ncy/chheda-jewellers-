@@ -36,7 +36,7 @@ export default function TermsPage() {
   return (
     <>
       <PageHeader eyebrow="Legal" title="Terms of Use" />
-      <Section spacing="md" tone="green">
+      <Section spacing="md" tone="light" className="u-on-light">
         <Container>
           <div className="max-w-2xl">
             <p className="mb-10 rounded-[var(--radius-brand)] border border-line bg-green-soft/20 p-5 font-body text-[0.82rem] leading-relaxed text-text-muted">

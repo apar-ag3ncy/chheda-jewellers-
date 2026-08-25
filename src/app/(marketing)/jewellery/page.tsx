@@ -99,7 +99,7 @@ export default function JewelleryPage() {
       </Section>
 
       {/* ── The other axis ────────────────────────────────────────────── */}
-      <Section spacing="lg" tone="deep">
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <div className="flex flex-col items-start justify-between gap-6 border-b border-line pb-6 md:flex-row md:items-end">
             <SectionHeading
@@ -107,7 +107,7 @@ export default function JewelleryPage() {
               title={"Or start from\n*the occasion*"}
               size="md"
             />
-            <Button href="/edits" variant="ghost" withArrow>
+            <Button href="/edits" variant="onLight" withArrow>
               All five edits
             </Button>
           </div>
