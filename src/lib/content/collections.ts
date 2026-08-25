@@ -1,18 +1,17 @@
 import type { ImageAsset } from "@/types/content";
 
 /**
- * THE CAMPAIGN WALL - the Collections section as a poster series.
+ * THE CAMPAIGN WALL - the Collections section as a bento of frames.
  *
- * Nine frames from the house archive, hung edge to edge like a wall of
- * campaign posters, every tile carrying the same small house slate the way a
- * jewellery maison stamps every ad it runs. Frames alternate portraits and
- * close product studies, and none is used anywhere else on the site.
+ * Nine frames from the house archive, laid into mixed tile sizes. The section
+ * carries no words at all, so the `focus` hint on each image is doing real
+ * work: a tile can be cropped to a tall portrait, a wide landscape or a square
+ * depending on where it lands in the bento, and the hint is what keeps the
+ * subject in frame through all three. None of these frames is used elsewhere.
  */
 export interface CampaignTile {
   id: string;
   image: ImageAsset;
-  /** The piece, named - revealed on hover like a plate caption. */
-  caption: string;
 }
 
 export const campaignWall: CampaignTile[] = [
@@ -23,7 +22,6 @@ export const campaignWall: CampaignTile[] = [
       alt: "A model in a rose-pink sari wearing a sapphire-drop polki choker in a palace colonnade",
       focus: "50% 24%",
     },
-    caption: "The sapphire choker",
   },
   {
     id: "kundan-haar",
@@ -32,7 +30,6 @@ export const campaignWall: CampaignTile[] = [
       alt: "A close study of a kundan and ruby-bead haar against red silk",
       focus: "50% 40%",
     },
-    caption: "Kundan & ruby haar",
   },
   {
     id: "matha-patti",
@@ -41,7 +38,6 @@ export const campaignWall: CampaignTile[] = [
       alt: "A bride in champagne gold with a pearl matha patti, holding a lotus",
       focus: "50% 22%",
     },
-    caption: "The pearl matha patti",
   },
   {
     id: "bridal-set",
@@ -50,7 +46,6 @@ export const campaignWall: CampaignTile[] = [
       alt: "A seated bride in red wearing the full gold bridal set",
       focus: "50% 26%",
     },
-    caption: "The bridal set",
   },
   {
     id: "cocktail-ring",
@@ -59,7 +54,6 @@ export const campaignWall: CampaignTile[] = [
       alt: "A polki cocktail ring worn on a hand resting against sheer embroidery",
       focus: "50% 45%",
     },
-    caption: "The polki cocktail ring",
   },
   {
     id: "vine-diamonds",
@@ -68,7 +62,6 @@ export const campaignWall: CampaignTile[] = [
       alt: "A profile in dark studio light wearing vine-set diamond earrings, a red rose below",
       focus: "50% 30%",
     },
-    caption: "Vine-set diamonds",
   },
   {
     id: "chandbali-set",
@@ -77,7 +70,6 @@ export const campaignWall: CampaignTile[] = [
       alt: "A model in peach and pink organza wearing a polki choker and chandbalis in evening sun",
       focus: "50% 24%",
     },
-    caption: "The chandbali set",
   },
   {
     id: "jadau-twice",
@@ -86,7 +78,6 @@ export const campaignWall: CampaignTile[] = [
       alt: "Two brides in deep maroon jadau sets, seated among clay urns",
       focus: "50% 35%",
     },
-    caption: "Jadau, twice over",
   },
   {
     id: "gold-going-places",
@@ -95,6 +86,5 @@ export const campaignWall: CampaignTile[] = [
       alt: "A model in red with a gold haar leaning on a vintage car under a low sun",
       focus: "50% 30%",
     },
-    caption: "Gold, going places",
   },
 ];
