@@ -230,8 +230,13 @@ export function Vitrine() {
         </div>
 
         {/* ── The switches - the rest of the case ─────────────────────── */}
+        {/* Plain toggle buttons, not role="tablist"/"tab". These declared the
+            ARIA tabs pattern while implementing none of it - no tabpanel, no
+            aria-controls, no roving tabindex, no arrow keys - which tells a
+            screen-reader user to expect behaviour that is not there. A pressed
+            toggle is what these actually are, and it is honest. */}
         <div
-          role="tablist"
+          role="group"
           aria-label="Choose a piece"
           className="mx-auto flex shrink-0 items-center justify-center gap-3"
         >
@@ -241,8 +246,7 @@ export function Vitrine() {
               <button
                 key={p.id}
                 type="button"
-                role="tab"
-                aria-selected={on}
+                aria-pressed={on}
                 aria-label={`${p.name} - ${p.detail}`}
                 onClick={() => setActive(i)}
                 className={cn(

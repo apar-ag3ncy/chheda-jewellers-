@@ -43,8 +43,11 @@ const PINS = siteConfig.branches.map((b) => {
  * bare stripe on the right.
  */
 const ANCHOR = {
-  x: (PINS[0]!.left + PINS[1]!.left) / 2,
-  y: (PINS[0]!.top + PINS[1]!.top) / 2,
+  // Averaged over however many pins exist, not over exactly two. The literal
+  // PINS[0]!/PINS[1]! crashed the whole homepage at import time the moment a
+  // third shop was added or one removed.
+  x: PINS.reduce((n, p) => n + p.left, 0) / Math.max(PINS.length, 1),
+  y: PINS.reduce((n, p) => n + p.top, 0) / Math.max(PINS.length, 1),
 };
 
 const TILT = 2.5;
@@ -255,7 +258,9 @@ export function MumbaiPoster({
               onClick={() => onActivate(i)}
               aria-label={`Show the ${p.area} boutique`}
               aria-pressed={active === i}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full p-3 outline-none focus-visible:ring-2 focus-visible:ring-gold-light"
+              // p-3 gave a 34px target; the dot stays the same size, the hit area
+              // grows to clear the 44px minimum.
+              className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-gold-light"
             >
               <span
                 aria-hidden

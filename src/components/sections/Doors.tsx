@@ -105,7 +105,9 @@ export function Doors() {
         </div>
 
         <div className="mt-10 grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[180px] md:mt-16 md:auto-rows-[210px] md:grid-cols-4 md:gap-4">
-          {DOORS.slice(0, 5).map((door, i) => (
+          {/* Split by count, not by literal 5/[5]: editing DOORS used to
+              silently drop a tile or crash on an index that no longer exists. */}
+          {DOORS.slice(0, DOORS.length - 1).map((door, i) => (
             <BentoTile key={door.href} door={door} delay={i * 0.05} />
           ))}
 
@@ -125,7 +127,9 @@ export function Doors() {
             </Link>
           </Reveal>
 
-          <BentoTile door={DOORS[5]!} delay={0.3} />
+          {DOORS.length > 0 ? (
+            <BentoTile door={DOORS[DOORS.length - 1]!} delay={0.3} />
+          ) : null}
         </div>
       </Container>
     </Section>

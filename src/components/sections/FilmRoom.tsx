@@ -81,8 +81,8 @@ export function FilmRoom() {
             aria-label={`${ringFilm.name} - drag, or use the arrow keys, to turn it`}
             aria-valuemin={0}
             aria-valuemax={360}
-            aria-valuenow={0}
-            aria-valuetext="Rotate to see every side"
+            aria-valuenow={scrub.angle}
+            aria-valuetext={`${scrub.angle} degrees`}
             {...scrub.handlers}
             className="relative mt-[clamp(1rem,3svh,2.5rem)] aspect-[4/5] w-[min(78vw,clamp(15rem,52svh,26rem))] cursor-grab touch-pan-y select-none outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-4 focus-visible:ring-offset-bg active:cursor-grabbing"
           >

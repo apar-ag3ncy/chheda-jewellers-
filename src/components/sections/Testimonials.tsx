@@ -4,7 +4,9 @@ import { Reveal } from "@/components/motion/Reveal";
 
 function Stars({ rating, className }: { rating: number; className?: string }) {
   return (
-    <span className={className} aria-label={`${rating} out of 5 stars`}>
+    // role="img" is what makes the aria-label count: on a bare span the
+    // label is not reliably exposed and the rating can announce as nothing.
+    <span className={className} role="img" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}

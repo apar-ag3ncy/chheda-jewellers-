@@ -33,7 +33,10 @@ export function Footer() {
       <Link
         href="/"
         aria-label={`${siteConfig.name} - home`}
-        className="group block h-full w-full outline-none"
+        // outline-none with no replacement made the last tab stop on every
+        // page invisible to a keyboard user. An inset ring reads against the
+        // photograph without needing an offset the full-bleed panel has no room for.
+        className="group block h-full w-full outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold-light"
       >
         <Image
           src="/media/footer/sign-off.jpg"
