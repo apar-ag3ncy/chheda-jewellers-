@@ -13,11 +13,11 @@
  * network in the poster describes the coastline better than an outline did.
  */
 
-export const MAP_VIEW = { w: 420.0, h: 776 } as const;
+export const MAP_VIEW = { w: 1243.0, h: 776 } as const;
 
 export const MAP_BOUNDS = {
-  west: 72.76401,
-  east: 72.99375,
+  west: 72.7,
+  east: 73.38,
   south: 18.88016,
   north: 19.28148,
   /** cos(mid-latitude) - the horizontal scale correction used at generation. */

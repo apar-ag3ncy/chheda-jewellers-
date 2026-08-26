@@ -26,14 +26,20 @@ OUT_HOT = "public/media/map/mumbai-network-hot.svg"
 OUT_TRACE = "src/lib/mumbai-arterials.ts"
 
 # Must match src/lib/mumbai-geo.ts exactly, or the pins drift off their streets.
-W, H = 420.0, 776.0
-WEST, EAST, SOUTH, NORTH, KX = 72.76401, 72.99375, 18.88016, 19.28148, 0.945058
+# Landscape frame: the full latitude of Greater Mumbai, longitude widened east
+# across Thane Creek to Navi Mumbai (and a sliver of sea on the west), so the
+# whole city fits a 16:10 viewport at full height.
+W, H = 1243.0, 776.0
+WEST, EAST, SOUTH, NORTH, KX = 72.70, 73.38, 18.88016, 19.28148, 0.945058
 BBOX = f"{SOUTH},{WEST},{NORTH},{EAST}"
 SCALE = 3  # emit integer coords at 3x, so ~19 m of precision survives rounding
 
 # layer            overpass filter                                        tol  min-span
 LAYERS = [
-    ("texture",  '["highway"~"^(residential|unclassified|living_street)$"]', 1.20, 0.9),
+    # Tolerance and min-span are set for the landscape frame: the wider bbox
+    # tripled the residential network, and at full-city display scale the
+    # extra vertices are invisible - they only cost wire weight.
+    ("texture",  '["highway"~"^(residential|unclassified|living_street)$"]', 1.9, 1.6),
     ("fabric",   '["highway"~"^(secondary|tertiary)$"]',                     0.35, 0.8),
     ("rail",     '["railway"="rail"]["service"!~"."]',                       0.18, 0.5),
     ("arterial", '["highway"~"^(motorway|trunk|primary)$"]',                 0.16, 0.4),
@@ -89,7 +95,9 @@ def fetch(name, filt):
     """Overpass, cached on disk. These four queries take minutes and the data
     changes on the scale of months, so a re-run should not hit the API."""
     os.makedirs(CACHE, exist_ok=True)
-    path = os.path.join(CACHE, name + ".json")
+    # The bbox is part of the key: widening the frame must invalidate the
+    # portrait-era responses, or the new map silently loses the new east.
+    path = os.path.join(CACHE, f"{name}-{BBOX.replace(',', '_')}.json")
     if os.path.exists(path):
         with open(path) as f:
             return json.load(f)

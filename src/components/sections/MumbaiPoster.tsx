@@ -9,15 +9,16 @@ import { cn } from "@/lib/cn";
 /**
  * THE MUMBAI COVER - the map as a full-screen landscape.
  *
- * The generated SVG is a portrait of the whole city (420x776); the section
- * shows a LANDSCAPE band of it, cover-cropped and anchored just off the two
- * shops. The crop is not object-fit: pins, the torch layer and the trace
- * overlay must all stay glued to the geography, and object-cover would slide
- * the image under absolutely-positioned children. Instead everything map-
- * anchored lives in one "cover box" - a div locked to the map's aspect,
- * forced to at least viewport size on both axes, translated so the pin
- * midpoint (50.4%, 47.7%) sits at the viewport centre. Checked at phone,
- * tablet and desktop: both shops stay on screen at every one.
+ * The generated SVG is a LANDSCAPE of the whole metropolis (1243x776,
+ * ~16:10): the full latitude of Greater Mumbai, longitude widened east
+ * across Thane Creek to Navi Mumbai, a sliver of sea on the west. On a
+ * typical desktop the entire city is on screen at once. The crop is not
+ * object-fit: pins, the torch layer and the trace overlay must all stay
+ * glued to the geography, and object-cover would slide the image under
+ * absolutely-positioned children. Everything map-anchored lives in one
+ * "cover box" - a div locked to the map's aspect, forced to at least
+ * viewport size on both axes, offset so the pin midpoint sits as close to
+ * the viewport centre as the box's edges allow.
  *
  * Same features as the plate this replaces: the cursor torch lighting the
  * roads (cover-box px coordinates now, since the box outgrows the viewport),
@@ -32,7 +33,13 @@ const PINS = siteConfig.branches.map((b) => {
   return { id: b.id, area: b.area, left: (x / MAP_VIEW.w) * 100, top: (y / MAP_VIEW.h) * 100 };
 });
 
-/** Where the cover crop anchors: the midpoint of the two pins. */
+/**
+ * Where the cover crop anchors when the box outgrows the viewport: the
+ * midpoint of the two pins. In the landscape map that point sits at ~26% x -
+ * well off centre - so the offset must be CLAMPED to the box edges. A plain
+ * CSS translate would shift an exact-fit box off the viewport and leave a
+ * bare stripe on the right.
+ */
 const ANCHOR = {
   x: (PINS[0]!.left + PINS[1]!.left) / 2,
   y: (PINS[0]!.top + PINS[1]!.top) / 2,
@@ -93,6 +100,27 @@ export function MumbaiPoster({
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
+  // Position the cover box: anchor point at viewport centre, clamped so the
+  // box never exposes a gap. Re-runs on resize.
+  useEffect(() => {
+    const outer = outerRef.current;
+    const box = boxRef.current;
+    if (!outer || !box) return;
+    const place = () => {
+      const vw = outer.clientWidth;
+      const vh = outer.clientHeight;
+      const bw = box.offsetWidth;
+      const bh = box.offsetHeight;
+      const ox = Math.min(Math.max((ANCHOR.x / 100) * bw - vw / 2, 0), Math.max(bw - vw, 0));
+      const oy = Math.min(Math.max((ANCHOR.y / 100) * bh - vh / 2, 0), Math.max(bh - vh, 0));
+      box.style.transform = `translate(${-ox}px, ${-oy}px)`;
+    };
+    place();
+    const ro = new ResizeObserver(place);
+    ro.observe(outer);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <div
       ref={outerRef}
@@ -108,12 +136,11 @@ export function MumbaiPoster({
       {/* ── The cover box: everything anchored to the geography ───────── */}
       <div
         ref={boxRef}
-        className="absolute left-1/2 top-1/2"
+        className="absolute left-0 top-0"
         style={{
           aspectRatio: `${MAP_VIEW.w} / ${MAP_VIEW.h}`,
           minWidth: "100%",
           minHeight: "100%",
-          transform: `translate(-${ANCHOR.x}%, -${ANCHOR.y}%)`,
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
