@@ -20,7 +20,10 @@
      from --beige, which is the text colour on green and must not shift.
      Warm on purpose: against deep emerald a paler value reads as plain white,
      so the cream carries enough yellow to still read as BEIGE on dark. */
-  --cream: #f1e6ce;
+  /* The light ground for every beige section. Warmer than a neutral
+     cream - 72% saturation against the old 56%, same lightness - so the
+     paper bands read golden rather than grey. */
+  --cream: #f6e7c8;
   --white: #ffffff;
   --offwhite: #f7f3ec; /* soft white - large surfaces, headings */
 
