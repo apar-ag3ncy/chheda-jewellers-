@@ -64,7 +64,7 @@ export default function JournalPage() {
   return (
     <>
       <PagePlate
-        folio="VI"
+        folio="V"
         eyebrow="The Journal"
         title={"The contents,\nbefore the issue"}
         intro="A journal of craft, method and the families who wear us. The first pieces are being written and photographed - until they land, here is exactly what is coming."

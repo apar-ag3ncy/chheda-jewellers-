@@ -24,6 +24,11 @@ import { cn } from "@/lib/cn";
  * State is deliberately in memory only: nothing is stored, nothing is tracked,
  * and the copy-out button hands the list to the customer rather than to us.
  */
+/** Small-number words, so the headline can be written rather than numeric. */
+const WORDS: Record<number, string> = {
+  4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten",
+};
+
 export function Checklist() {
   const [ticked, setTicked] = useState<Set<string>>(new Set());
   const [copied, setCopied] = useState(false);
@@ -82,7 +87,7 @@ export function Checklist() {
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="max-w-md font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
-                  Seven questions.
+                  {WORDS[counterChecks.length] ?? counterChecks.length} questions.
                   <br />
                   Ask us first.
                 </h2>

@@ -84,7 +84,7 @@ export default function InvestorsPage() {
   return (
     <>
       <PagePlate
-        folio="V"
+        folio="IV"
         eyebrow="Investor relations"
         title={"Partner with a house\nbuilt on trust"}
         intro="We are shaping the next chapter of Chheda Jewellers - the same business, run the same way, with the systems to do it at more than two counters."

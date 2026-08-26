@@ -65,7 +65,7 @@ export default function LiveGoldRatePage() {
   return (
     <>
       <PagePlate
-        folio="IV"
+        folio="III"
         eyebrow="Live Gold Rate"
         title={"Today's gold rate"}
         intro="An indicative reference for 22K and 24K gold in Mumbai, refreshed through the day. Always confirm the applicable rate in-store before a purchase."

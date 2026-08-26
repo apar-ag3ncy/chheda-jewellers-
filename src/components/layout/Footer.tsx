@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
-import { siteConfig } from "@/config/site";
+import { siteConfig, houseLines } from "@/config/site";
 import { Monogram } from "@/components/ui/Monogram";
 
 /**
@@ -25,7 +25,7 @@ import { Monogram } from "@/components/ui/Monogram";
  * The panel is one link home, which keeps it navigable without adding any
  * visible chrome back.
  */
-const [houseName, houseSuffix] = siteConfig.name.split(" ");
+const [houseName, houseSuffix] = houseLines();
 
 export function Footer() {
   return (

@@ -137,3 +137,13 @@ export function contactIsReal(): boolean {
   };
   return meaningful(siteConfig.contact.phoneHref) && meaningful(siteConfig.contact.whatsappHref);
 }
+
+/**
+ * The brand name split into the two lines the wordmark and the sign-off both
+ * set it on. Implemented twice before, and both copies silently discarded
+ * anything past the second word - so a three-word name would have lost one.
+ */
+export function houseLines(): [string, string] {
+  const [first, ...rest] = siteConfig.name.split(" ");
+  return [first ?? siteConfig.name, rest.join(" ")];
+}
