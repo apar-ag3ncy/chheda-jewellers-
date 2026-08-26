@@ -111,10 +111,18 @@ export function Hallmark() {
                 <g
                   onMouseEnter={() => setActive(0)}
                   onFocus={() => setActive(0)}
+                  onClick={() => setActive(0)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActive(0);
+                    }
+                  }}
                   tabIndex={0}
                   role="button"
+                  aria-pressed={active === 0}
                   aria-label={hallmarkMarks[0]!.label}
-                  className="cursor-pointer outline-none"
+                  className="cursor-pointer outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
                   opacity={active === 0 ? 1 : 0.55}
                   style={{ transition: "opacity .45s var(--ease-lux)" }}
                 >
@@ -135,10 +143,18 @@ export function Hallmark() {
                 <g
                   onMouseEnter={() => setActive(1)}
                   onFocus={() => setActive(1)}
+                  onClick={() => setActive(1)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActive(1);
+                    }
+                  }}
                   tabIndex={0}
                   role="button"
+                  aria-pressed={active === 1}
                   aria-label={hallmarkMarks[1]!.label}
-                  className="cursor-pointer outline-none"
+                  className="cursor-pointer outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
                   opacity={active === 1 ? 1 : 0.55}
                   style={{ transition: "opacity .45s var(--ease-lux)" }}
                 >
@@ -170,10 +186,18 @@ export function Hallmark() {
                 <g
                   onMouseEnter={() => setActive(2)}
                   onFocus={() => setActive(2)}
+                  onClick={() => setActive(2)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActive(2);
+                    }
+                  }}
                   tabIndex={0}
                   role="button"
+                  aria-pressed={active === 2}
                   aria-label={hallmarkMarks[2]!.label}
-                  className="cursor-pointer outline-none"
+                  className="cursor-pointer outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
                   opacity={active === 2 ? 1 : 0.55}
                   style={{ transition: "opacity .45s var(--ease-lux)" }}
                 >

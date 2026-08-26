@@ -89,7 +89,12 @@ export function Hero() {
       className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-green-deep"
       aria-roledescription="carousel"
       aria-label={`${siteConfig.name} featured`}
+      // Focus pauses as well as hover: the slide remounts its whole copy
+      // block every 6.4s, so a keyboard user reading or tabbing inside it
+      // had the element under them destroyed mid-interaction.
+      onFocusCapture={() => setPaused(true)}
       onMouseEnter={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
       onMouseLeave={() => setPaused(false)}
     >
       {/* Slide layers - CSS crossfade, inside one transform host so the

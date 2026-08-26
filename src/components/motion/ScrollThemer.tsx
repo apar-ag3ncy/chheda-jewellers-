@@ -12,14 +12,25 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
  * Fully static under prefers-reduced-motion (colour still tracks the section,
  * it just snaps instead of easing).
  */
-const TONES: Record<string, string> = {
-  green: "#0B3A2D", // A - primary brand
-  deep: "#06241B", // deepened emerald
-  maroon: "#440002", // B - the oxblood interlude, one band per scroll
+/**
+ * Each ground names the token that defines it rather than repeating its hex.
+ * The colours used to be duplicated here, which meant warming the cream in
+ * tokens.css left this layer painting the old one - the section would flip
+ * shade at whatever scroll position this trigger fired.
+ */
+const TONE_VARS: Record<string, string> = {
+  green: "--bg",
+  deep: "--bg-deep",
   // The warm light interlude. Sections on it scope themselves .u-on-light so
   // every nested token flips dark; photography sits in framed plates on it.
-  beige: "#F1E6CE",
+  beige: "--cream",
 };
+
+function toneColor(name: string | undefined): string {
+  const root = getComputedStyle(document.documentElement);
+  const read = (v: string) => root.getPropertyValue(v).trim();
+  return read(TONE_VARS[name ?? "green"] ?? TONE_VARS.green!) || read("--bg");
+}
 
 export function ScrollThemer({ children }: { children: ReactNode }) {
   const scope = useRef<HTMLDivElement>(null);
@@ -33,7 +44,7 @@ export function ScrollThemer({ children }: { children: ReactNode }) {
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       sections.forEach((sec) => {
-        const color = TONES[sec.dataset.bg ?? "green"] ?? TONES.green;
+        const color = toneColor(sec.dataset.bg);
         ScrollTrigger.create({
           trigger: sec,
           start: "top 55%",
@@ -58,8 +69,7 @@ export function ScrollThemer({ children }: { children: ReactNode }) {
       <div
         ref={canvas}
         aria-hidden
-        className="fixed inset-0 -z-10"
-        style={{ backgroundColor: TONES.green }}
+        className="fixed inset-0 -z-10 bg-bg"
       />
       {children}
     </div>

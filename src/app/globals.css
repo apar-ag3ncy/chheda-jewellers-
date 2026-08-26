@@ -253,7 +253,9 @@
   .u-on-light {
     --text: color-mix(in srgb, var(--green) 82%, transparent);
     --text-strong: var(--green-deep);
-    --text-muted: color-mix(in srgb, var(--green) 62%, transparent);
+    /* 72%, not 62%: at 62 the muted text measured 3.7:1 on the cream,
+       under the 4.5 AA needs for body copy. 72 clears it at 4.9. */
+    --text-muted: color-mix(in srgb, var(--green) 72%, transparent);
     --line: color-mix(in srgb, var(--maroon) 16%, transparent);
     --line-strong: color-mix(in srgb, var(--maroon) 34%, transparent);
     --gold: var(--gold-deep);

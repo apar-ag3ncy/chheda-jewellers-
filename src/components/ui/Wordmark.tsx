@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import { siteConfig } from "@/config/site";
+import { siteConfig, houseLines } from "@/config/site";
 
 type WordmarkProps = {
   className?: string;
@@ -18,7 +18,7 @@ export function Wordmark({
   layout = "stacked",
   tone = "beige",
 }: WordmarkProps) {
-  const [first, second] = siteConfig.name.split(" ");
+  const [first, second] = houseLines();
   const toneClass =
     tone === "gold" ? "u-gold-text" : tone === "dark" ? "text-green" : "text-text-strong";
 

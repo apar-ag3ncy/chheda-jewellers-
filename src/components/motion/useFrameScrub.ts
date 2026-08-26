@@ -52,6 +52,15 @@ export function useFrameScrub(urls: string[], opts: Options = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [loaded, setLoaded] = useState(0);
   const [ready, setReady] = useState(false);
+  /**
+   * The playhead as a whole-degree angle, for assistive tech. Held in state
+   * rather than a ref precisely because it has to be rendered: the slider that
+   * consumes it reported a hardcoded 0 forever, so screen readers announced
+   * the ring at its starting angle no matter how far it had been turned.
+   * Updated only when the rounded degree changes, so a drag costs a handful of
+   * renders rather than one per frame.
+   */
+  const [angle, setAngle] = useState(0);
 
   const st = useRef({
     images: [] as (HTMLImageElement | null)[],
@@ -74,6 +83,8 @@ export function useFrameScrub(urls: string[], opts: Options = {}) {
     if (!ctx) return;
 
     const playhead = wrapFrame(s.scrollFrames + s.userFrames, count);
+    const deg = Math.round((playhead / count) * 360) % 360;
+    setAngle((prev) => (prev === deg ? prev : deg));
     const base = Math.floor(playhead);
     const frac = playhead - base;
     const a = s.images[wrapFrame(base, count)];
@@ -146,7 +157,10 @@ export function useFrameScrub(urls: string[], opts: Options = {}) {
           if (cancelled) return;
           s.images[i] = img;
           setLoaded((n) => n + 1);
-          if (i === 0) setReady(true);
+          // Ready on the FIRST frame to arrive, not on frame 0 specifically:
+        // one failed request for f00.webp used to hide the canvas permanently
+        // even though every other frame had decoded.
+        setReady(true);
           render();
           pump();
         };
@@ -240,6 +254,7 @@ export function useFrameScrub(urls: string[], opts: Options = {}) {
     loaded,
     total: count,
     ready,
+    angle,
     handlers: {
       onPointerDown,
       onPointerMove,

@@ -24,9 +24,18 @@ import { cn } from "@/lib/cn";
  * State is deliberately in memory only: nothing is stored, nothing is tracked,
  * and the copy-out button hands the list to the customer rather than to us.
  */
+/** Small-number words, so the headline can be written rather than numeric. */
+const WORDS: Record<number, string> = {
+  4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten",
+};
+
 export function Checklist() {
   const [ticked, setTicked] = useState<Set<string>>(new Set());
   const [copied, setCopied] = useState(false);
+  // Clipboard writes reject in plain-http contexts and under some
+  // permission policies. Failing to state.false said nothing at all, so the
+  // button simply did not respond and the visitor could not tell why.
+  const [copyFailed, setCopyFailed] = useState(false);
 
   const toggle = (id: string) =>
     setTicked((prev) => {
@@ -57,9 +66,12 @@ export function Checklist() {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+      setCopyFailed(false);
       window.setTimeout(() => setCopied(false), 2600);
     } catch {
       setCopied(false);
+      setCopyFailed(true);
+      window.setTimeout(() => setCopyFailed(false), 4000);
     }
   };
 
@@ -75,7 +87,7 @@ export function Checklist() {
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="max-w-md font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
-                  Seven questions.
+                  {WORDS[counterChecks.length] ?? counterChecks.length} questions.
                   <br />
                   Ask us first.
                 </h2>
@@ -141,7 +153,7 @@ export function Checklist() {
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button onClick={copy} variant="ghost" type="button">
-                  {copied ? "Copied ✓" : "Copy the list"}
+                  {copied ? "Copied ✓" : copyFailed ? "Press Ctrl/Cmd + C" : "Copy the list"}
                 </Button>
                 {score > 0 ? (
                   <button
@@ -206,7 +218,7 @@ export function Checklist() {
 
                     <span className="flex-1">
                       <span className="flex items-baseline gap-3">
-                        <span className="font-body text-[0.66rem] tracking-[0.2em] text-gold">
+                        <span className="font-body text-[0.66rem] tracking-[0.2em] text-gold-light">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <span

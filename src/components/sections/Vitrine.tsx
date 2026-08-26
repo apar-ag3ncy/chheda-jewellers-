@@ -37,7 +37,7 @@ type Ground = {
 /** The house's three grounds - dark, light, dark. */
 const EMERALD: Ground = { bg: "bg-green", sheen: "rgba(255,236,200,0.42)" };
 const CREAM: Ground = { bg: "bg-cream", light: true, sheen: "rgba(255,255,255,0.55)" };
-const MAROON: Ground = { bg: "bg-maroon", sheen: "rgba(255,228,190,0.40)" };
+const NOIR: Ground = { bg: "bg-green-deep", sheen: "rgba(255,228,190,0.40)" };
 
 const PIECES = [
   {
@@ -77,7 +77,7 @@ const PIECES = [
     maxW: "min(64vw, 20rem)",
     tilt: { x: 7, y: -7 },
     sheenAt: "68%",
-    ground: MAROON,
+    ground: NOIR,
   },
 ] as const;
 
@@ -230,8 +230,13 @@ export function Vitrine() {
         </div>
 
         {/* ── The switches - the rest of the case ─────────────────────── */}
+        {/* Plain toggle buttons, not role="tablist"/"tab". These declared the
+            ARIA tabs pattern while implementing none of it - no tabpanel, no
+            aria-controls, no roving tabindex, no arrow keys - which tells a
+            screen-reader user to expect behaviour that is not there. A pressed
+            toggle is what these actually are, and it is honest. */}
         <div
-          role="tablist"
+          role="group"
           aria-label="Choose a piece"
           className="mx-auto flex shrink-0 items-center justify-center gap-3"
         >
@@ -241,8 +246,7 @@ export function Vitrine() {
               <button
                 key={p.id}
                 type="button"
-                role="tab"
-                aria-selected={on}
+                aria-pressed={on}
                 aria-label={`${p.name} - ${p.detail}`}
                 onClick={() => setActive(i)}
                 className={cn(

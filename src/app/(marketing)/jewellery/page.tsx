@@ -2,11 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import { categoryList } from "@/lib/content/categories";
-import { edits } from "@/lib/content/edits";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
 import { Section, Container } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -14,7 +12,7 @@ import { cn } from "@/lib/cn";
 export const metadata = pageMetadata({
   title: "All Jewellery",
   description:
-    "Explore the House of Chheda - heritage gold, certified diamonds and regal polki, plus five occasion edits and a bespoke atelier. Editorial collections made to be worn and inherited.",
+    "Explore the House of Chheda - heritage gold, certified diamonds and regal polki, and a bespoke atelier. Editorial collections made to be worn and inherited.",
   path: "/jewellery",
 });
 
@@ -27,7 +25,6 @@ export const metadata = pageMetadata({
  * rooms are interchangeable; they are not, and a grid that says so is doing
  * real work rather than decorating.
  *
- * The page then hands off to the second axis (the edits) and to the atelier,
  * so every route out of the house index is visible from one screen.
  */
 export default function JewelleryPage() {
@@ -50,7 +47,7 @@ export default function JewelleryPage() {
         }}
         meta={[
           { label: "Rooms", value: "Gold · Diamond · Polki" },
-          { label: "Edits", value: `${edits.length} occasions` },
+          { label: "Boutiques", value: "Two in Mumbai" },
           { label: "Purity", value: "BIS hallmarked, always" },
           { label: "Made to order", value: "6-10 weeks" },
         ]}
@@ -99,57 +96,6 @@ export default function JewelleryPage() {
           </div>
         </Container>
       </Section>
-
-      {/* ── The other axis ────────────────────────────────────────────── */}
-      <Section spacing="lg" tone="light" className="u-on-light">
-        <Container>
-          <div className="flex flex-col items-start justify-between gap-6 border-b border-line pb-6 md:flex-row md:items-end">
-            <SectionHeading
-              eyebrow="The other way in"
-              title={"Or start from\nthe occasion"}
-              size="md"
-            />
-            <Button href="/edits" variant="onLight" withArrow>
-              All five edits
-            </Button>
-          </div>
-
-          {/* A ruled strip - five edits in a single scannable row, sized to
-              the name rather than boxed into equal tiles. */}
-          <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {edits.map((e, i) => (
-              <Reveal as="li" key={e.slug} delay={i * 0.05}>
-                <Link
-                  href={`/edits/${e.slug}`}
-                  className="group flex h-full flex-col justify-between border-t border-line pt-4 transition-colors duration-500 hover:border-line-strong"
-                >
-                  <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden bg-green">
-                    <Image
-                      src={e.gallery[0]!.src}
-                      alt={e.gallery[0]!.alt}
-                      placeholder="blur"
-                      blurDataURL={EMERALD_LQIP}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="object-cover grayscale transition-all duration-[1500ms] ease-[var(--ease-cinema)] group-hover:grayscale-0"
-                      style={{ objectPosition: e.gallery[0]!.focus ?? "50% 28%" }}
-                    />
-                  </div>
-                  <div>
-                    <span className="font-body text-[0.6rem] tracking-[0.2em] text-gold">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="mt-1.5 block font-display text-[1.35rem] font-light leading-tight text-text-strong">
-                      {e.name}
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </ul>
-        </Container>
-      </Section>
-
 
       {/* ── Bespoke + visit ───────────────────────────────────────────── */}
       <Section spacing="lg" tone="green">

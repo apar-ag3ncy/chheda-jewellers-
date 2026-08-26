@@ -1,5 +1,6 @@
 "use client";
 
+import { categories } from "@/lib/content/categories";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import Link from "next/link";
@@ -11,12 +12,22 @@ import { cn } from "@/lib/cn";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 /** One type - diamonds - presented as an editorial catalogue cover. */
-const pieces = [
-  { src: "/media/categories/diamond/d1.jpg", name: "Solitaire", alt: "Diamond necklace in soft light" },
-  { src: "/media/categories/diamond/d4.jpg", name: "Brilliance", alt: "Model in a green gown with a diamond necklace" },
-  { src: "/media/categories/diamond/d2.jpg", name: "Statement", alt: "Diamond earrings and ring in dramatic light" },
-  { src: "/media/categories/diamond/d6.jpg", name: "Eternity", alt: "Diamonds catching the light against dark tones" },
-];
+/**
+ * Sourced from the diamond room rather than re-declared. These four frames
+ * already live in categories.ts with their own alt text, and the copies here
+ * had drifted from it - two of the four described the same photograph
+ * differently. Only the chapter names belong to this section.
+ */
+const CHAPTER_NAMES = ["Solitaire", "Brilliance", "Statement", "Eternity"] as const;
+const pieces = CHAPTER_NAMES.map((chapterName, i) => {
+  const frame = categories.diamond.gallery[i];
+  return {
+    src: frame?.src ?? "",
+    alt: frame?.alt ?? "",
+    focus: frame?.focus,
+    name: chapterName,
+  };
+});
 
 export function DiamondEdit() {
   const root = useRef<HTMLElement>(null);
@@ -76,8 +87,8 @@ export function DiamondEdit() {
     <section
       ref={root}
       id="diamond-edit"
-      data-bg="maroon"
-      className="relative w-full overflow-hidden bg-maroon py-20 md:py-28 lg:min-h-screen lg:py-0"
+      data-bg="deep"
+      className="relative w-full overflow-hidden bg-green-deep py-20 md:py-28 lg:min-h-screen lg:py-0"
     >
       <div className="grid grid-cols-1 lg:min-h-screen lg:grid-cols-[42%_58%]">
         {/* ── Editorial left panel ── */}
@@ -123,7 +134,7 @@ export function DiamondEdit() {
             data-edit-line
             className="mt-10 font-body text-[0.72rem] uppercase leading-relaxed tracking-[0.18em] text-text-muted"
           >
-            <p className="text-gold">By appointment</p>
+            <p className="text-gold-light">By appointment</p>
             <p className="mt-2">{siteConfig.branches[0]?.area} · {siteConfig.branches[0]?.city}</p>
             <p className="mt-2 normal-case tracking-normal">{siteConfig.contact.email}</p>
           </div>

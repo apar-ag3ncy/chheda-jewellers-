@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
-import { siteConfig } from "@/config/site";
+import { siteConfig, houseLines } from "@/config/site";
 import { Monogram } from "@/components/ui/Monogram";
 
 /**
@@ -25,7 +25,7 @@ import { Monogram } from "@/components/ui/Monogram";
  * The panel is one link home, which keeps it navigable without adding any
  * visible chrome back.
  */
-const [houseName, houseSuffix] = siteConfig.name.split(" ");
+const [houseName, houseSuffix] = houseLines();
 
 export function Footer() {
   return (
@@ -33,7 +33,10 @@ export function Footer() {
       <Link
         href="/"
         aria-label={`${siteConfig.name} - home`}
-        className="group block h-full w-full outline-none"
+        // outline-none with no replacement made the last tab stop on every
+        // page invisible to a keyboard user. An inset ring reads against the
+        // photograph without needing an offset the full-bleed panel has no room for.
+        className="group block h-full w-full outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold-light"
       >
         <Image
           src="/media/footer/sign-off.jpg"

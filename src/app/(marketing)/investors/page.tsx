@@ -53,7 +53,12 @@ const pillars = [
 const position = [
   { label: "Founded", value: "Mumbai" },
   { label: "Boutiques", value: "Two" },
-  { label: "Customer rating", value: `${reviewsSummary.rating.toFixed(1)} / 5` },
+  // Every other surface honours reviewsSummary.verified; this one published
+  // the rating as a hard fact to the audience least forgiving of an unaudited
+  // number. Until the reviews are real it states the two shops instead.
+  reviewsSummary.verified
+    ? { label: "Customer rating", value: `${reviewsSummary.rating.toFixed(1)} / 5` }
+    : { label: "Boutiques", value: `${siteConfig.branches.length} in Mumbai` },
   { label: "Categories", value: "Gold · Diamond · Polki" },
 ];
 
@@ -79,7 +84,7 @@ export default function InvestorsPage() {
   return (
     <>
       <PagePlate
-        folio="V"
+        folio="IV"
         eyebrow="Investor relations"
         title={"Partner with a house\nbuilt on trust"}
         intro="We are shaping the next chapter of Chheda Jewellers - the same business, run the same way, with the systems to do it at more than two counters."
@@ -182,7 +187,7 @@ export default function InvestorsPage() {
                 How we run the counter
               </Button>
             </Reveal>
-            <p className="mt-9 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+            <p className="mt-9 font-body text-[0.72rem] leading-relaxed text-text-muted">
               Nothing on this page is an offer of securities or an invitation to
               invest.
             </p>

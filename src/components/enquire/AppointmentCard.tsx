@@ -106,7 +106,12 @@ export function AppointmentCard({
             <dd
               className={cn(
                 "mt-1.5 font-display text-[1.1rem] font-light leading-tight transition-colors duration-500",
-                r.muted ? "text-text-muted/50" : "text-text-strong",
+                // Full --text-muted, not /50. This is the dash standing in for
+                // a field the visitor has not answered - at half strength it
+                // measured about 2.4:1 and was barely visible. The contrast
+                // against filled rows still reads, because those use
+                // --text-strong, not because this one is faded out.
+                r.muted ? "text-text-muted" : "text-text-strong",
               )}
             >
               {r.value}

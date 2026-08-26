@@ -13,7 +13,7 @@ export const jewelleryTypes: JewelleryType[] = [
       alt: "Model wearing a layered gold and polki bridal necklace",
       focus: "50% 32%",
     },
-    href: "/jewellery",
+    href: "/jewellery/gold",
   },
   {
     id: "earrings",
@@ -26,7 +26,7 @@ export const jewelleryTypes: JewelleryType[] = [
       alt: "Close portrait showing ornate chandbali earrings and maang tikka",
       focus: "50% 30%",
     },
-    href: "/jewellery",
+    href: "/jewellery/diamond",
   },
   {
     id: "rings",
@@ -39,7 +39,7 @@ export const jewelleryTypes: JewelleryType[] = [
       alt: "Hand adorned with statement rings resting against embroidered fabric",
       focus: "50% 45%",
     },
-    href: "/jewellery",
+    href: "/jewellery/diamond",
   },
   {
     id: "hathphool",
@@ -52,6 +52,6 @@ export const jewelleryTypes: JewelleryType[] = [
       alt: "Hathphool hand ornament with bangles worn by a model",
       focus: "50% 40%",
     },
-    href: "/jewellery",
+    href: "/jewellery/polki",
   },
 ];

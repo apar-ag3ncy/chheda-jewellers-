@@ -7,27 +7,27 @@ import { MAP_TRACE_VIEW, MAP_TRACES } from "@/lib/mumbai-arterials";
 import { cn } from "@/lib/cn";
 
 /**
- * THE MUMBAI PLATE - a map you can put your hand on.
+ * THE MUMBAI COVER - the map as a full-screen landscape.
  *
- * The geometry is a static SVG (see scripts/generate-mumbai-map.py), which is
- * the only affordable way to ship eighteen thousand streets. The problem with
- * a static SVG is that it is a picture: nothing about it answers the pointer.
- * Three things fix that, none of which require inlining 486 KB of paths.
+ * The generated SVG is a LANDSCAPE of the whole metropolis (1243x776,
+ * ~16:10): the full latitude of Greater Mumbai, longitude widened east
+ * across Thane Creek to Navi Mumbai, a sliver of sea on the west. On a
+ * typical desktop the entire city is on screen at once. The crop is not
+ * object-fit: pins, the torch layer and the trace overlay must all stay
+ * glued to the geography, and object-cover would slide the image under
+ * absolutely-positioned children. Everything map-anchored lives in one
+ * "fit box" - a div locked to the map's aspect, sized in JS so landscape
+ * viewports contain the whole city and portrait ones cover, offset so the
+ * midpoint of the two shops lands at the viewport centre. The frame itself
+ * is cut around that midpoint, so on a landscape screen the shops sit dead
+ * centre with the full metropolis around them.
  *
- *   1. THE TORCH. A second SVG holding only the lit roads is stacked on the
- *      base and masked to a soft circle at the cursor. Moving the pointer
- *      lights the actual arterials underneath it - the roads brighten, the
- *      picture does not.
- *   2. THE TRACE. The sixteen longest arterials are inlined (2 KB) and run a
- *      dash animation, so light travels the length of the Western Express and
- *      the Eastern Freeway whether or not anyone is pointing at them.
- *   3. THE TILT. The plate is a real 3D surface: `preserve-3d` with a pointer
- *      driven rotation, and the pins are pushed 30px toward the viewer on the
- *      Z axis. They genuinely stand off the map and parallax against it, and
- *      each drops a shadow that slides as the plate turns.
- *
- * All three are pointer-driven, so all three are inert on touch and under
- * `prefers-reduced-motion`, where the plate is exactly the flat poster it was.
+ * Same features as the plate this replaces: the cursor torch lighting the
+ * roads (cover-box px coordinates now, since the box outgrows the viewport),
+ * light running the longest arterials, breathing gold pins, labels on their
+ * own plates. The 3D tilt survives at reduced amplitude with a compensating
+ * scale, so the full-bleed edges never peel off the viewport. All pointer
+ * work is gated on a fine pointer and no reduced-motion preference.
  */
 
 const PINS = siteConfig.branches.map((b) => {
@@ -35,13 +35,28 @@ const PINS = siteConfig.branches.map((b) => {
   return { id: b.id, area: b.area, left: (x / MAP_VIEW.w) * 100, top: (y / MAP_VIEW.h) * 100 };
 });
 
-const CENTRE = {
-  lat: (siteConfig.branches[0]!.coordinates.lat + siteConfig.branches[1]!.coordinates.lat) / 2,
-  lng: (siteConfig.branches[0]!.coordinates.lng + siteConfig.branches[1]!.coordinates.lng) / 2,
+/**
+ * Where the cover crop anchors when the box outgrows the viewport: the
+ * midpoint of the two pins. In the landscape map that point sits at ~26% x -
+ * well off centre - so the offset must be CLAMPED to the box edges. A plain
+ * CSS translate would shift an exact-fit box off the viewport and leave a
+ * bare stripe on the right.
+ */
+const ANCHOR = {
+  // Averaged over however many pins exist, not over exactly two. The literal
+  // PINS[0]!/PINS[1]! crashed the whole homepage at import time the moment a
+  // third shop was added or one removed.
+  x: PINS.reduce((n, p) => n + p.left, 0) / Math.max(PINS.length, 1),
+  y: PINS.reduce((n, p) => n + p.top, 0) / Math.max(PINS.length, 1),
 };
 
-/** Degrees of tilt at the far edge. Past ~7 the type starts to keystone. */
-const TILT = 5;
+/**
+ * The plate does not tilt, scale or move. It used to rotate a couple of
+ * degrees under the pointer, which read as the whole map shaking every time
+ * the cursor crossed it - and any transform on the plate also has to be paid
+ * for with a compensating scale that crops the map. A map should sit still;
+ * the life in this one comes from the light, not from the geography moving.
+ */
 
 export function MumbaiPoster({
   active,
@@ -50,35 +65,31 @@ export function MumbaiPoster({
   active: number;
   onActivate: (i: number) => void;
 }) {
-  const plateRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
   const frame = useRef(0);
   const [live, setLive] = useState(false);
   const [lit, setLit] = useState(false);
 
-  // Pointer effects need a real pointer and a user who wants motion. Both are
-  // checked once on mount rather than per event.
   useEffect(() => {
-    const ok =
+    setLive(
       window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setLive(ok);
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    );
   }, []);
 
   const onMove = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
       if (!live) return;
-      const el = plateRef.current;
-      if (!el) return;
-      const { left, top, width, height } = el.getBoundingClientRect();
-      const px = (e.clientX - left) / width;
-      const py = (e.clientY - top) / height;
-      // One write per frame - pointermove fires far faster than the compositor.
+      const box = boxRef.current;
+      if (!box) return;
+      const b = box.getBoundingClientRect();
       cancelAnimationFrame(frame.current);
       frame.current = requestAnimationFrame(() => {
-        el.style.setProperty("--mx", `${px * 100}%`);
-        el.style.setProperty("--my", `${py * 100}%`);
-        el.style.setProperty("--ry", `${(px - 0.5) * 2 * TILT}deg`);
-        el.style.setProperty("--rx", `${(0.5 - py) * 2 * TILT}deg`);
+        // Torch coordinates in cover-box pixels - the box is bigger than the
+        // viewport, so percentages of the section would miss the roads.
+        box.style.setProperty("--mx", `${e.clientX - b.left}px`);
+        box.style.setProperty("--my", `${e.clientY - b.top}px`);
       });
     },
     [live],
@@ -86,155 +97,147 @@ export function MumbaiPoster({
 
   const onLeave = useCallback(() => {
     cancelAnimationFrame(frame.current);
-    const el = plateRef.current;
-    if (el) {
-      el.style.setProperty("--rx", "0deg");
-      el.style.setProperty("--ry", "0deg");
-    }
     setLit(false);
   }, []);
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
+  // Position the cover box: anchor point at viewport centre, clamped so the
+  // box never exposes a gap. Re-runs on resize.
+  useEffect(() => {
+    const outer = outerRef.current;
+    const box = boxRef.current;
+    if (!outer || !box) return;
+    /**
+     * One axis: how far to pull the box so the anchor sits at the viewport
+     * centre. When the box is larger than the viewport the offset is clamped
+     * so no edge is ever exposed; when it is smaller the box is simply
+     * centred and the surplus becomes letterbox.
+     */
+    const axis = (anchorPct: number, boxSize: number, viewSize: number) => {
+      if (boxSize < viewSize) return (boxSize - viewSize) / 2;
+      const ideal = (anchorPct / 100) * boxSize - viewSize / 2;
+      return Math.min(Math.max(ideal, 0), boxSize - viewSize);
+    };
+
+    const place = () => {
+      const vw = outer.clientWidth;
+      const vh = outer.clientHeight;
+      if (!vw || !vh) return;
+      // Landscape viewports CONTAIN the map, so the whole city is on screen -
+      // sea, island, creek and mainland. The letterbox is invisible because
+      // the map's own edge fades to the same --green-deep the section is
+      // painted in. Portrait viewports would contain down to a thin band, so
+      // they cover instead: the sea and the mainland crop away and the dense
+      // middle - which is where both shops are - fills the screen.
+      // COVER at every size. Containing the map left letterbox bars and put
+      // the SVG's own edge on screen, so the section read as a photograph
+      // pasted onto a panel rather than as a window onto the city. Covering
+      // pushes every edge off-screen; the frame is cut around the two shops,
+      // so what crops away is sea and outer mainland, never the city.
+      const scale = Math.max(vw / MAP_VIEW.w, vh / MAP_VIEW.h);
+      const bw = MAP_VIEW.w * scale;
+      const bh = MAP_VIEW.h * scale;
+      // The CSS min-width/min-height:100% below is only a pre-hydration
+      // fallback. It has to be released here: min-width beats width, so
+      // leaving it set pins the box to viewport size and silently defeats
+      // the contain fit - the map looks cropped no matter what width says.
+      box.style.minWidth = "0px";
+      box.style.minHeight = "0px";
+      box.style.width = `${bw}px`;
+      box.style.height = `${bh}px`;
+      box.style.transform = `translate(${-axis(ANCHOR.x, bw, vw)}px, ${-axis(ANCHOR.y, bh, vh)}px)`;
+    };
+    place();
+    const ro = new ResizeObserver(place);
+    ro.observe(outer);
+    return () => ro.disconnect();
+  }, []);
+
   return (
-    <div style={{ perspective: "1600px" }}>
+    <div
+      ref={outerRef}
+      onPointerMove={onMove}
+      onPointerEnter={() => live && setLit(true)}
+      onPointerLeave={onLeave}
+      className="cj-plate u-on-dark absolute inset-0 overflow-hidden bg-green-deep"
+
+    >
+      {/* ── The cover box: everything anchored to the geography ───────── */}
       <div
-        ref={plateRef}
-        onPointerMove={onMove}
-        onPointerEnter={() => live && setLit(true)}
-        onPointerLeave={onLeave}
-        className="cj-plate u-on-dark relative"
+        ref={boxRef}
+        className="absolute left-0 top-0"
         style={{
-          transformStyle: "preserve-3d",
-          transform: "rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))",
-          transition: "transform 600ms var(--ease-cinema)",
+          aspectRatio: `${MAP_VIEW.w} / ${MAP_VIEW.h}`,
+          minWidth: "100%",
+          minHeight: "100%",
         }}
       >
-        {/* Everything that is the map itself, clipped to the plate. The pins
-            live outside this box: overflow-hidden flattens 3D children, and
-            they need their Z translation to survive. */}
-        <div className="relative overflow-hidden rounded-[var(--radius-brand)] bg-green-deep shadow-[0_30px_70px_-30px_rgba(4,23,15,0.85)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/media/map/mumbai-network.svg"
+          alt="Street map of Greater Mumbai, its arterial roads and suburban railway lines drawn in gold and white on deep green"
+          width={MAP_VIEW.w}
+          height={MAP_VIEW.h}
+          loading="lazy"
+          decoding="async"
+          className="block h-full w-full"
+        />
+
+        {/* The torch: lit roads under the cursor. */}
+        {live ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
-            src="/media/map/mumbai-network.svg"
-            alt="Street map of Greater Mumbai, its arterial roads and suburban railway lines drawn in gold and white on deep green"
-            width={MAP_VIEW.w}
-            height={MAP_VIEW.h}
+            src="/media/map/mumbai-network-hot.svg"
+            alt=""
+            aria-hidden
             loading="lazy"
             decoding="async"
-            className="block w-full"
-          />
-
-          {/* ── The torch: the lit roads, revealed under the cursor ────── */}
-          {live ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src="/media/map/mumbai-network-hot.svg"
-              alt=""
-              aria-hidden
-              loading="lazy"
-              decoding="async"
-              className={cn(
-                "pointer-events-none absolute inset-0 block h-full w-full transition-opacity duration-500",
-                lit ? "opacity-100" : "opacity-0",
-              )}
-              style={{
-                // A tight pool. At the 34% first tried, the reveal covered
-                // most of the plate and read as "the picture got brighter"
-                // rather than "these roads lit up".
-                WebkitMaskImage:
-                  "radial-gradient(circle at var(--mx,50%) var(--my,50%), #000 0%, #000 4%, transparent 22%)",
-                maskImage:
-                  "radial-gradient(circle at var(--mx,50%) var(--my,50%), #000 0%, #000 4%, transparent 22%)",
-              }}
-            />
-          ) : null}
-
-          {/* ── The trace: light running the longest arterials ─────────── */}
-          <svg
-            aria-hidden
-            viewBox={`0 0 ${MAP_TRACE_VIEW.w} ${MAP_TRACE_VIEW.h}`}
-            preserveAspectRatio="none"
-            className="cj-trace pointer-events-none absolute inset-0 h-full w-full"
-          >
-            {/* White, and wider than the road beneath it. In gold at road
-                  width the streak simply merged into the arterial it was
-                  running along and read as nothing. */}
-            <g fill="none" stroke="#ffffff" strokeLinecap="round">
-              {MAP_TRACES.map((d, i) => (
-                <path
-                  key={i}
-                  d={d}
-                  pathLength={1}
-                  strokeWidth={5.5}
-                  style={{ animationDelay: `${(i % 8) * 1.1}s` }}
-                />
-              ))}
-            </g>
-          </svg>
-
-          {/* Corner vignette, so the plate reads as a printed poster. */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
+            className={cn(
+              "pointer-events-none absolute inset-0 block h-full w-full transition-opacity duration-500",
+              lit ? "opacity-100" : "opacity-0",
+            )}
             style={{
-              background:
-                "radial-gradient(120% 78% at 50% 34%, transparent 42%, rgba(4,23,15,0.55) 100%), linear-gradient(to bottom, transparent 58%, rgba(4,23,15,0.88) 100%)",
+              WebkitMaskImage:
+                "radial-gradient(circle min(22rem,30vw) at var(--mx,50%) var(--my,50%), #000 0%, #000 18%, transparent 100%)",
+              maskImage:
+                "radial-gradient(circle min(22rem,30vw) at var(--mx,50%) var(--my,50%), #000 0%, #000 18%, transparent 100%)",
             }}
           />
+        ) : null}
 
-          {/* Sheen - light raking across glass as the plate turns. */}
-          {live ? (
-            <div
-              aria-hidden
-              className={cn(
-                "pointer-events-none absolute inset-0 mix-blend-soft-light transition-opacity duration-700",
-                lit ? "opacity-100" : "opacity-0",
-              )}
-              style={{
-                background:
-                  "radial-gradient(34% 20% at var(--mx,50%) var(--my,50%), rgba(255,234,203,0.30), transparent 72%)",
-              }}
-            />
-          ) : null}
+        {/* Light running the longest arterials. */}
+        <svg
+          aria-hidden
+          viewBox={`0 0 ${MAP_TRACE_VIEW.w} ${MAP_TRACE_VIEW.h}`}
+          preserveAspectRatio="none"
+          className="cj-trace pointer-events-none absolute inset-0 h-full w-full"
+        >
+          <g fill="none" stroke="#ffffff" strokeLinecap="round">
+            {MAP_TRACES.map((d, i) => (
+              <path key={i} d={d} pathLength={1} strokeWidth={5.5} style={{ animationDelay: `${(i % 8) * 1.1}s` }} />
+            ))}
+          </g>
+        </svg>
 
-          {/* ── The plate's lockup ─────────────────────────────────────── */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 px-6 pb-6 text-center md:px-8 md:pb-8">
-            <p className="-mr-[0.42em] font-body text-[clamp(1.1rem,3.4vw,1.9rem)] font-light uppercase leading-none tracking-[0.42em] text-offwhite">
-              Mumbai
-            </p>
-            <span aria-hidden className="mx-auto mt-3 block h-px w-16 bg-gold-light/45 md:w-20" />
-            <p className="mt-3 font-body text-[0.58rem] uppercase tracking-[0.3em] text-beige/75">
-              {siteConfig.branches.length} doors &middot; India
-            </p>
-            <p className="mt-2 font-body text-[0.54rem] tabular-nums tracking-[0.14em] text-beige/50">
-              {CENTRE.lat.toFixed(4)}&deg; N / {CENTRE.lng.toFixed(4)}&deg; E
-            </p>
-          </div>
-
-          <p className="pointer-events-none absolute bottom-2 right-3 font-body text-[0.5rem] tracking-[0.08em] text-beige/40">
-            &copy; OpenStreetMap contributors
-          </p>
-        </div>
-
-        {/* ── The two doors, standing off the surface ─────────────────── */}
-        {PINS.map((p, i) => (
+        {/* Sheen following the cursor, in the same px space as the torch. */}
+        {live ? (
           <div
-            key={p.id}
-            className="absolute"
-            style={{ left: `${p.left}%`, top: `${p.top}%`, transformStyle: "preserve-3d" }}
-          >
-            {/* The shadow stays on the map plane, so it slides out from under
-                the pin as the plate turns. That parallax is the whole trick. */}
-            <span
-              aria-hidden
-              className={cn(
-                "absolute left-1/2 top-1/2 block rounded-full bg-[#04170f] blur-[3px] transition-all duration-500",
-                active === i ? "h-3 w-3 opacity-70" : "h-2.5 w-2.5 opacity-55",
-              )}
-              style={{ transform: "translate(-50%,-50%) translateY(6px)" }}
-            />
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute inset-0 mix-blend-soft-light transition-opacity duration-700",
+              lit ? "opacity-100" : "opacity-0",
+            )}
+            style={{
+              background:
+                "radial-gradient(circle min(26rem,36vw) at var(--mx,50%) var(--my,50%), rgba(255,234,203,0.30), transparent 72%)",
+            }}
+          />
+        ) : null}
 
+        {/* ── The two doors ─────────────────────────────────────────── */}
+        {PINS.map((p, i) => (
+          <div key={p.id} className="absolute" style={{ left: `${p.left}%`, top: `${p.top}%` }}>
             <button
               type="button"
               onMouseEnter={() => onActivate(i)}
@@ -242,10 +245,10 @@ export function MumbaiPoster({
               onClick={() => onActivate(i)}
               aria-label={`Show the ${p.area} boutique`}
               aria-pressed={active === i}
-              className="cj-pin absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full p-3 outline-none focus-visible:ring-2 focus-visible:ring-gold-light"
-              style={{ transform: "translate(-50%,-50%) translateZ(30px)" }}
+              // p-3 gave a 34px target; the dot stays the same size, the hit area
+              // grows to clear the 44px minimum.
+              className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-gold-light"
             >
-              {/* Two rings, breathing out from the dot. */}
               <span
                 aria-hidden
                 className={cn(
@@ -256,8 +259,8 @@ export function MumbaiPoster({
               <span
                 aria-hidden
                 className={cn(
-                  "absolute inset-0 m-auto rounded-full border border-gold-light transition-all duration-[900ms] ease-[var(--ease-cinema)]",
-                  active === i ? "h-8 w-8 scale-100 opacity-80" : "h-8 w-8 scale-50 opacity-0",
+                  "absolute inset-0 m-auto h-8 w-8 rounded-full border border-gold-light transition-all duration-[900ms] ease-[var(--ease-cinema)]",
+                  active === i ? "scale-100 opacity-80" : "scale-50 opacity-0",
                 )}
               />
               <span
@@ -270,9 +273,6 @@ export function MumbaiPoster({
                 )}
               />
             </button>
-
-            {/* The label needs a plate of its own - set straight onto the map
-                it falls into the road network and stops being readable. */}
             <span
               className={cn(
                 "pointer-events-none absolute left-1/2 top-1/2 mt-5 -translate-x-1/2 whitespace-nowrap rounded-[3px] border px-2.5 py-1 font-body text-[0.6rem] font-medium uppercase leading-none tracking-[0.16em] backdrop-blur-[3px] transition-all duration-500",
@@ -280,13 +280,43 @@ export function MumbaiPoster({
                   ? "border-gold-light/45 bg-[#04170f]/92 text-gold-light shadow-[0_6px_18px_-6px_rgba(4,23,15,0.9)]"
                   : "border-beige/15 bg-[#04170f]/78 text-beige/90",
               )}
-              style={{ transform: "translate(-50%,0) translateZ(30px)" }}
             >
               {p.area}
             </span>
           </div>
         ))}
       </div>
+
+      {/* ── Viewport-fixed dressing: vignette, lockup, credit ─────────── */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            // The bottom fades to FULLY OPAQUE --green-deep, the exact colour the
+            // footer's own top edge fades in from. The seam between two stacked
+            // full-screen sections then falls inside one flat field of the same
+            // green and cannot be seen. It used to stop at 80% of a different
+            // dark, so roads ran to the edge and hit a hard line.
+            // Feathers all four viewport edges into --green-deep so the map
+            // dissolves into the sections above and below instead of ending
+            // on a visible line. The bottom reaches full opacity, which is
+            // what makes the seam into the footer disappear.
+            "linear-gradient(to right, var(--green-deep) 0%, transparent 14%, transparent 86%, var(--green-deep) 100%), radial-gradient(130% 96% at 50% 45%, transparent 48%, color-mix(in srgb, var(--green-deep) 62%, transparent) 100%), linear-gradient(to bottom, var(--green-deep) 0%, transparent 16%, transparent 56%, var(--green-deep) 97%)",
+        }}
+      />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 px-6 pb-[14svh] text-center md:pb-[16svh]">
+        <p className="-mr-[0.42em] font-body text-[clamp(1.2rem,2.6vw,2rem)] font-light uppercase leading-none tracking-[0.42em] text-offwhite">
+          Mumbai
+        </p>
+        <span aria-hidden className="mx-auto mt-3 block h-px w-16 bg-gold-light/45 md:w-20" />
+        <p className="mt-3 font-body text-[0.58rem] uppercase tracking-[0.3em] text-beige/75">
+          {siteConfig.branches.length} doors &middot; India
+        </p>
+      </div>
+      <p className="pointer-events-none absolute bottom-3 right-4 font-body text-[0.5rem] tracking-[0.08em] text-beige/40">
+        &copy; OpenStreetMap contributors
+      </p>
     </div>
   );
 }

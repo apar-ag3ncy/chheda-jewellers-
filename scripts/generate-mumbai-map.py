@@ -25,15 +25,32 @@ OUT = "public/media/map/mumbai-network.svg"
 OUT_HOT = "public/media/map/mumbai-network-hot.svg"
 OUT_TRACE = "src/lib/mumbai-arterials.ts"
 
-# Must match src/lib/mumbai-geo.ts exactly, or the pins drift off their streets.
-W, H = 420.0, 776.0
-WEST, EAST, SOUTH, NORTH, KX = 72.76401, 72.99375, 18.88016, 19.28148, 0.945058
-BBOX = f"{SOUTH},{WEST},{NORTH},{EAST}"
+# The RENDER frame. Must match src/lib/mumbai-geo.ts exactly, or the pins
+# drift off their streets.
+#
+# Centred on the midpoint of the two shops (19.09270 N, 72.88005 E) so they
+# sit dead centre of the plate, then widened symmetrically to 16:10. Because
+# the shops are only ~10 km from the west coast, centring them in a landscape
+# frame necessarily puts open sea on the left - about a third of the width.
+# That is real geography, and the Arabian Sea reads as deliberate negative
+# space against the density on the right.
+W, H = 1242.0, 776.0
+WEST, EAST, SOUTH, NORTH, KX = 72.56044, 73.19966, 18.90392, 19.28148, 0.945058
+
+# The FETCH window is deliberately larger and independent of the frame: it is
+# the Overpass query and the cache key, so re-framing the map costs nothing.
+# Everything outside the render frame is clipped at projection time, and the
+# sea west of 72.70 has no ways to lose.
+F_SOUTH, F_WEST, F_NORTH, F_EAST = 18.88016, 72.70, 19.28148, 73.38
+BBOX = f"{F_SOUTH},{F_WEST},{F_NORTH},{F_EAST}"
 SCALE = 3  # emit integer coords at 3x, so ~19 m of precision survives rounding
 
 # layer            overpass filter                                        tol  min-span
 LAYERS = [
-    ("texture",  '["highway"~"^(residential|unclassified|living_street)$"]', 1.20, 0.9),
+    # Tolerance and min-span are set for the landscape frame: the wider bbox
+    # tripled the residential network, and at full-city display scale the
+    # extra vertices are invisible - they only cost wire weight.
+    ("texture",  '["highway"~"^(residential|unclassified|living_street)$"]', 1.9, 1.6),
     ("fabric",   '["highway"~"^(secondary|tertiary)$"]',                     0.35, 0.8),
     ("rail",     '["railway"="rail"]["service"!~"."]',                       0.18, 0.5),
     ("arterial", '["highway"~"^(motorway|trunk|primary)$"]',                 0.16, 0.4),
@@ -89,7 +106,9 @@ def fetch(name, filt):
     """Overpass, cached on disk. These four queries take minutes and the data
     changes on the scale of months, so a re-run should not hit the API."""
     os.makedirs(CACHE, exist_ok=True)
-    path = os.path.join(CACHE, name + ".json")
+    # The bbox is part of the key: widening the frame must invalidate the
+    # portrait-era responses, or the new map silently loses the new east.
+    path = os.path.join(CACHE, f"{name}-{BBOX.replace(',', '_')}.json")
     if os.path.exists(path):
         with open(path) as f:
             return json.load(f)
@@ -228,7 +247,7 @@ def main():
         f'<defs><radialGradient id="g" cx="46%" cy="33%" r="80%">'
         f'<stop offset="0%" stop-color="#17573f"/>'
         f'<stop offset="42%" stop-color="#0d4030"/>'
-        f'<stop offset="100%" stop-color="#04170f"/></radialGradient></defs>'
+        f'<stop offset="100%" stop-color="#06241b"/></radialGradient></defs>'
         f'<rect width="{vw}" height="{vh}" fill="url(#g)"/>'
         f'<g fill="none" stroke-linecap="round" stroke-linejoin="round">'
         f'<path d="{built["texture"]}" stroke="{BEIGE}" stroke-width="{tw}" opacity="{to}"/>'
@@ -259,7 +278,7 @@ def main():
                 else f'<defs><radialGradient id="g" cx="46%" cy="33%" r="80%">'
                 f'<stop offset="0%" stop-color="#17573f"/>'
                 f'<stop offset="42%" stop-color="#0d4030"/>'
-                f'<stop offset="100%" stop-color="#04170f"/></radialGradient></defs>'
+                f'<stop offset="100%" stop-color="#06241b"/></radialGradient></defs>'
                 f'<rect width="{vw}" height="{vh}" fill="url(#g)"/>'
             )
             + f'<g fill="none" stroke-linecap="round" stroke-linejoin="round">'

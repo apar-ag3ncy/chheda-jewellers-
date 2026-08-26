@@ -6,9 +6,8 @@ import { pageMetadata } from "@/lib/seo";
  * THE METAL ROOMS - /jewellery/gold, /jewellery/diamond, /jewellery/polki.
  *
  * One dynamic route instead of three hand-copied folders: the pages were
- * identical except for a literal, and the sibling axis (/edits/[slug])
- * already established the convention. `dynamicParams = false` turns any
- * other slug into a hard 404 rather than a soft one, exactly as on /edits.
+ * identical except for a literal. `dynamicParams = false` turns any
+ * other slug into a hard 404 rather than a soft one.
  */
 
 export const dynamicParams = false;

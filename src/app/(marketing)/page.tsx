@@ -4,7 +4,6 @@ import {
   Doors,
   ChhedaPromise,
   JewelleryTypes,
-  EditsRail,
   Stories,
   Manifesto,
   Collections,
@@ -24,35 +23,25 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * Homepage - the single-scroll cinematic journey, rendered FROM
  * `config/nav.ts` so the choreography is data, not JSX surgery.
  *
- * The order is one continuous hand-off - each section answers the question
- * the one above it raises, so the scroll reads as a single story instead of
- * a stack of modules:
+ * The order: the word (ChhedaPromise), the work (Collections), hold one
+ * piece (FilmRoom), the house by object (JewelleryTypes), the counter
+ * (Vitrine), the people pieces are made for (Stories), the newest argument
+ * (DiamondEdit), what 480 families say (Testimonials), the belief
+ * (Manifesto), its answer (Atelier), the plan (MonthlyPlan), every door
+ * (Doors), the circle (CommunityStrip) - and then the city itself: the
+ * full-screen Mumbai map with the two addresses closes the scroll into the
+ * sign-off footer, so the last thing a visitor holds is where to find us.
  *
- *   the work (Collections) - "who are these people?" answered in pictures -
- *   then the word (ChhedaPromise), then the two ways in standing together
- *   (JewelleryTypes by object, EditsRail by occasion), then "stop browsing,
- *   hold one" (FilmRoom), the people pieces are made for (Stories), the
- *   counter (Vitrine), what 480 families say about that counter
- *   (Testimonials), the house's newest argument (DiamondEdit), the silence
- *   that answers it (Manifesto: "we do not sell ornaments"), the piece that
- *   doesn't exist yet (Atelier), how it becomes affordable (MonthlyPlan),
- *   where we are (Branches), and how to stay close (CommunityStrip).
- *
- * Three adjacencies are load-bearing: Stories between the two long
- * interactives so they never run back to back; Manifesto directly after
- * DiamondEdit so the silence lands as a rebuttal; Atelier directly under the
- * manifesto it answers. The ask corridor - plan, map, community - is
- * unbroken at the end: nothing after the address pulls the visitor back
- * into browsing.
- *
- * Doors closes the scroll - a bento of the site's doorways, and the page's
- * last working navigation before the link-less sign-off footer.
- */
+ * The painted grounds strictly alternate, dark emerald first, cream on the
+ * even beats - two darks never touch, which is also why Manifesto sits at
+ * arm's length from DiamondEdit. The two long interactives (FilmRoom,
+ * Vitrine) are separated by JewelleryTypes. Branches and the footer are
+ * full-bleed imagery, outside the alternation, like the hero.
+  */
 const SECTIONS: Record<HomepageSection, ComponentType> = {
   hero: Hero,
   "chheda-promise": ChhedaPromise,
   "jewellery-types": JewelleryTypes,
-  edits: EditsRail,
   stories: Stories,
   manifesto: Manifesto,
   collections: Collections,

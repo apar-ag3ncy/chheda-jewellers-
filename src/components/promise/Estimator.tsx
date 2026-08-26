@@ -6,6 +6,7 @@ import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { formatNumberIN } from "@/lib/format";
 import type { GoldRateResponse } from "@/lib/gold-rate";
+import { FALLBACK_22K as FALLBACK_RATE, fetchGoldRate } from "@/lib/gold-rate-client";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/cn";
 
@@ -31,8 +32,6 @@ import { cn } from "@/lib/cn";
  * reads as the bill being recalculated rather than replaced.
  */
 
-/** Illustrative fallback so the section is complete before the rate lands. */
-const FALLBACK_RATE = 7740;
 
 /** Purity in parts per thousand - the number stamped next to the karat. */
 const KARATS = [
@@ -52,8 +51,7 @@ export function Estimator() {
 
   useEffect(() => {
     let active = true;
-    fetch("/api/gold-rate")
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("rate"))))
+    fetchGoldRate()
       .then((d: GoldRateResponse) => {
         const r22 = d.rates.find((x) => x.karat === "22K");
         if (active && r22) setRate(r22.pricePerGram);
@@ -244,7 +242,9 @@ export function Estimator() {
                 <Row
                   label="Net gold weight"
                   sub="The gold only - stones and thread weighed out"
-                  value={`${weight.toFixed(3)} g`}
+                  // The slider steps in 0.5g, so three decimals implied a precision the
+                  // control cannot express - and disagreed with the value shown above it.
+                  value={`${weight.toFixed(1)} g`}
                 />
                 <Row
                   label={`Today's ${karat} rate`}

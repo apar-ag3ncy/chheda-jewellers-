@@ -1,3 +1,4 @@
+import { BRAND_EMERALD } from "@/config/site";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { fontVariables } from "@/lib/fonts";
@@ -13,7 +14,7 @@ import { flags } from "@/config/flags";
 export const metadata: Metadata = baseMetadata;
 
 export const viewport: Viewport = {
-  themeColor: "#0b3a2d",
+  themeColor: BRAND_EMERALD,
   colorScheme: "dark",
 };
 

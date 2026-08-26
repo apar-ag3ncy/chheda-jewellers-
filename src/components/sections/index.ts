@@ -1,7 +1,6 @@
 export { Hero } from "./Hero";
 export { ChhedaPromise } from "./ChhedaPromise";
 export { JewelleryTypes } from "./JewelleryTypes";
-export { EditsRail } from "./EditsRail";
 export { Stories } from "./Stories";
 export { Manifesto } from "./Manifesto";
 export { Collections } from "./Collections";

@@ -7,12 +7,13 @@ import { Monogram } from "@/components/ui/Monogram";
 import { cn } from "@/lib/cn";
 
 /**
- * THE DOORS - a bento of everywhere the house can take you, closing the
- * scroll just before the sign-off.
+ * THE DOORS - a bento of everywhere the house can take you. CommunityStrip
+ * follows as the last painted band, and the full-screen Mumbai map closes
+ * the scroll after it - so the page ends on the two addresses.
  *
  * Mixed tile sizes are the point: a bento reads as a cabinet of different
  * drawers, not a gallery. Every tile is a real doorway - the two metal rooms,
- * the bridal edit, the edits index, the atelier - plus one quiet tile that is
+ * the bridal consult, the journal, the atelier - plus one quiet tile that is
  * not a photograph at all: the monogram on deep emerald, asking the only
  * question that matters at the end of a visit. Since the footer below is now
  * a pure sign-off with no links, this grid is also the page's last working
@@ -34,9 +35,9 @@ type Door = {
 
 const DOORS: Door[] = [
   {
-    href: "/edits/bridal",
+    href: "/enquire?intent=bridal",
     label: "Bridal",
-    note: "The long day",
+    note: "Plan the long day",
     src: "/media/doors/bridal.jpg",
     alt: "A bride in deep red holding a rose, wearing an emerald-set polki collar",
     focus: "50% 20%",
@@ -61,9 +62,12 @@ const DOORS: Door[] = [
     span: "col-span-1 row-span-1",
   },
   {
-    href: "/edits",
-    label: "The Edits",
-    note: "Five occasions",
+    // Same frame, new door: the tile that led to the occasion edits now
+    // leads to the journal, which keeps the bento's geometry and gives the
+    // journal a second inbound link.
+    href: "/journal",
+    label: "The Journal",
+    note: "Stories from the house",
     src: "/media/doors/edits.jpg",
     alt: "A wedding tableau - the couple and family in gold, seated by a carved throne",
     focus: "50% 30%",
@@ -91,7 +95,7 @@ const DOORS: Door[] = [
 
 export function Doors() {
   return (
-    <Section id="doors" spacing="lg" tone="transparent" data-bg="green">
+    <Section id="doors" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
         <div className="flex items-baseline justify-between gap-6 border-b border-line pb-5">
           <p className="u-eyebrow">Keep exploring</p>
@@ -101,7 +105,9 @@ export function Doors() {
         </div>
 
         <div className="mt-10 grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[180px] md:mt-16 md:auto-rows-[210px] md:grid-cols-4 md:gap-4">
-          {DOORS.slice(0, 5).map((door, i) => (
+          {/* Split by count, not by literal 5/[5]: editing DOORS used to
+              silently drop a tile or crash on an index that no longer exists. */}
+          {DOORS.slice(0, DOORS.length - 1).map((door, i) => (
             <BentoTile key={door.href} door={door} delay={i * 0.05} />
           ))}
 
@@ -109,7 +115,7 @@ export function Doors() {
           <Reveal delay={0.25} className="col-span-1 row-span-1">
             <Link
               href="/enquire"
-              className="group flex h-full w-full flex-col items-center justify-center gap-4 rounded-[var(--radius-brand)] border border-line-strong bg-green-deep p-5 text-center transition-colors duration-500 hover:border-gold"
+              className="u-on-dark group flex h-full w-full flex-col items-center justify-center gap-4 rounded-[var(--radius-brand)] border border-line-strong bg-green-deep p-5 text-center transition-colors duration-500 hover:border-gold"
             >
               <Monogram className="h-10 w-10 transition-transform duration-[900ms] ease-[var(--ease-cinema)] group-hover:rotate-[30deg]" />
               <span className="font-display text-[1.15rem] font-light leading-snug text-text-strong">
@@ -121,7 +127,9 @@ export function Doors() {
             </Link>
           </Reveal>
 
-          <BentoTile door={DOORS[5]!} delay={0.3} />
+          {DOORS.length > 0 ? (
+            <BentoTile door={DOORS[DOORS.length - 1]!} delay={0.3} />
+          ) : null}
         </div>
       </Container>
     </Section>
@@ -133,7 +141,7 @@ function BentoTile({ door, delay }: { door: Door; delay: number }) {
     <Reveal delay={delay} className={cn(door.span)}>
       <Link
         href={door.href}
-        className="group relative block h-full w-full overflow-hidden rounded-[var(--radius-brand)] bg-green-deep"
+        className="u-on-dark group relative block h-full w-full overflow-hidden rounded-[var(--radius-brand)] bg-green-deep"
       >
         <Image
           src={door.src}

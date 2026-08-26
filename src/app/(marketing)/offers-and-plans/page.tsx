@@ -24,7 +24,7 @@ export default function OffersAndPlansPage() {
   return (
     <>
       <PagePlate
-        folio="III"
+        folio="II"
         eyebrow="Offers & Plans"
         title={"Save toward\nsomething lasting"}
         intro="No jargon, no fine-print traps. Straightforward ways to plan for the piece that marks your milestone."
@@ -141,7 +141,7 @@ export default function OffersAndPlansPage() {
             </div>
           </div>
 
-          <p className="mt-10 font-body text-[0.72rem] leading-relaxed text-text-muted/70">
+          <p className="mt-10 font-body text-[0.72rem] leading-relaxed text-text-muted">
             Plan terms shown are indicative and pending confirmation. Full{" "}
             <Link
               href="/terms"

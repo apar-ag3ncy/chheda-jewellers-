@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { siteConfig } from "@/config/site";
-import { edits } from "@/lib/content/edits";
+import { siteConfig, contactIsReal } from "@/config/site";
 import {
   GUEST_OPTIONS,
   INTENTS,
@@ -52,7 +51,6 @@ export function BookingFlow() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const startedRef = useRef(false);
 
-  const editSlug = params.get("edit") ?? undefined;
   const intentParam = params.get("intent");
 
   const [draft, setDraft] = useState({
@@ -82,7 +80,6 @@ export function BookingFlow() {
     setDraft((d) => (d.date ? d : { ...d, date: earliestDate(now) }));
   }, []);
 
-  // Deep links: an edit page sends `?edit=bridal`, the atelier sends
   // `?intent=bespoke`. Both pre-answer step one so the customer starts at the
   // question they have not been asked yet.
   useEffect(() => {
@@ -92,24 +89,29 @@ export function BookingFlow() {
     if (intentParam && known.includes(intentParam)) {
       setDraft((d) => ({ ...d, intent: intentParam as Intent }));
       setStep(1);
-    } else if (editSlug && edits.some((e) => e.slug === editSlug)) {
-      setDraft((d) => ({
-        ...d,
-        intent: editSlug === "bridal" ? "bridal" : "browse",
-      }));
-      setStep(1);
     }
-  }, [intentParam, editSlug]);
+  }, [intentParam]);
 
   // Move focus to the new step's heading so keyboard and screen-reader users
   // land where the content changed rather than at the top of the document.
+  //
+  // This must NOT fire on mount. It used to share `startedRef` with the
+  // deep-link effect above, which sets that ref to true while mounting - so
+  // the guard was already open on the very first run and /enquire stole focus
+  // and scrolled past its own hero for everyone, on every visit. A ref of its
+  // own, flipped after the first run, is the actual "not the first time" test.
+  const stepSettledRef = useRef(false);
   useEffect(() => {
-    if (startedRef.current) headingRef.current?.focus();
+    if (!stepSettledRef.current) {
+      stepSettledRef.current = true;
+      return;
+    }
+    headingRef.current?.focus();
   }, [step]);
 
   const full: EnquiryDraft = useMemo(
-    () => ({ ...draft, editSlug, reference }),
-    [draft, editSlug, reference],
+    () => ({ ...draft, reference }),
+    [draft, reference],
   );
 
   const message = useMemo(() => buildEnquiry(full), [full]);
@@ -326,7 +328,7 @@ export function BookingFlow() {
                   onChange={(e) => set("date", e.target.value)}
                   aria-invalid={Boolean(errors.date)}
                   aria-describedby={errors.date ? "date-error" : undefined}
-                  className="w-full max-w-xs rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong transition-colors focus:border-gold focus:outline-none [color-scheme:dark]"
+                  className="w-full max-w-xs rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong transition-colors focus:border-gold focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light [color-scheme:dark]"
                 />
                 {errors.date ? <FieldError id="date-error">{errors.date}</FieldError> : null}
               </div>
@@ -339,6 +341,7 @@ export function BookingFlow() {
                   onChange={(v) => set("slot", v)}
                   options={SLOTS.map((s) => ({ value: s, label: s }))}
                   compact
+                  errorId={errors.slot ? "slot-error" : undefined}
                 />
                 {errors.slot ? <FieldError id="slot-error">{errors.slot}</FieldError> : null}
               </div>
@@ -411,7 +414,7 @@ export function BookingFlow() {
                     value={draft.notes}
                     onChange={(e) => set("notes", e.target.value)}
                     placeholder="A budget, a deadline, a photograph you want to show us…"
-                    className="w-full resize-y rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong placeholder:text-text-muted/60 focus:border-gold focus:outline-none"
+                    className="w-full resize-y rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong placeholder:text-text-muted focus:border-gold focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
                   />
                 </div>
               </div>
@@ -481,7 +484,7 @@ export function BookingFlow() {
               Change something
             </button>
 
-            <p className="mt-8 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+            <p className="mt-8 font-body text-[0.72rem] leading-relaxed text-text-muted">
               Contact details are used to confirm this appointment and are not
               added to any mailing list. Nothing is stored on this website - see
               the{" "}
@@ -514,20 +517,28 @@ export function BookingFlow() {
           <p className="mt-5 font-body text-[0.76rem] font-light leading-relaxed text-text-muted">
             Prefer to speak to someone?{" "}
             <a
-              href={siteConfig.contact.phoneHref}
+              href={contactIsReal() ? siteConfig.contact.phoneHref : `mailto:${siteConfig.contact.email}`}
               className="text-gold-light underline underline-offset-4"
             >
-              {siteConfig.contact.phone}
+              {contactIsReal() ? siteConfig.contact.phone : siteConfig.contact.email}
             </a>
-            {" · "}
-            <a
-              href={siteConfig.contact.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold-light underline underline-offset-4"
-            >
-              WhatsApp
-            </a>
+            {/* Only offered when there is a real number to reach. The
+                degraded version used to point at /enquire - the page the
+                visitor is already on - and open it in a new tab, labelled
+                "WhatsApp". */}
+            {contactIsReal() ? (
+              <>
+                {" · "}
+                <a
+                  href={siteConfig.contact.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold-light underline underline-offset-4"
+                >
+                  WhatsApp
+                </a>
+              </>
+            ) : null}
           </p>
         </div>
       </aside>
@@ -609,6 +620,7 @@ function ChipGroup({
   onChange,
   options,
   compact = false,
+  errorId,
 }: {
   legend: string;
   name: string;
@@ -616,9 +628,14 @@ function ChipGroup({
   onChange: (v: string) => void;
   options: { value: string; label: string; note?: string }[];
   compact?: boolean;
+  /** id of the FieldError describing this group, so it is announced. */
+  errorId?: string;
 }) {
   return (
-    <fieldset className="border-0 p-0">
+    // Every other field wires aria-describedby to its error; this group
+    // rendered an error with an id that nothing pointed at, so screen-reader
+    // users were told a slot was missing by a message they never heard.
+    <fieldset className="border-0 p-0" aria-describedby={errorId} aria-invalid={Boolean(errorId)}>
       <legend className="u-eyebrow mb-4 text-[0.62rem]">{legend}</legend>
       <div className="flex flex-wrap gap-2.5">
         {options.map((o) => (
@@ -706,7 +723,10 @@ function Field({
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "w-full rounded-[var(--radius-brand)] border bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong transition-colors focus:outline-none",
+          // A border tint is not a focus indicator, and in the error state the
+          // border does not change on focus at all - focused and unfocused were
+          // pixel-identical. A real 2px ring satisfies WCAG 2.2 focus-appearance.
+          "w-full rounded-[var(--radius-brand)] border bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong transition-colors focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light",
           error ? "border-maroon-soft focus:border-maroon-soft" : "border-line focus:border-gold",
         )}
       />

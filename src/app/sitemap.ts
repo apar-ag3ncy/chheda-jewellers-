@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
-import { edits } from "@/lib/content/edits";
 import { categoryList } from "@/lib/content/categories";
 
 type Freq = "daily" | "weekly" | "monthly";
@@ -16,12 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/jewellery", priority: 0.9, freq: "monthly" },
     ...categoryList.map((c) => ({
       path: `/jewellery/${c.slug}`,
-      priority: 0.8,
-      freq: "monthly" as Freq,
-    })),
-    { path: "/edits", priority: 0.9, freq: "monthly" },
-    ...edits.map((e) => ({
-      path: `/edits/${e.slug}`,
       priority: 0.8,
       freq: "monthly" as Freq,
     })),
