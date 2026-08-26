@@ -16,9 +16,11 @@ import { cn } from "@/lib/cn";
  * object-fit: pins, the torch layer and the trace overlay must all stay
  * glued to the geography, and object-cover would slide the image under
  * absolutely-positioned children. Everything map-anchored lives in one
- * "cover box" - a div locked to the map's aspect, forced to at least
- * viewport size on both axes, offset so the pin midpoint sits as close to
- * the viewport centre as the box's edges allow.
+ * "fit box" - a div locked to the map's aspect, sized in JS so landscape
+ * viewports contain the whole city and portrait ones cover, offset so the
+ * midpoint of the two shops lands at the viewport centre. The frame itself
+ * is cut around that midpoint, so on a landscape screen the shops sit dead
+ * centre with the full metropolis around them.
  *
  * Same features as the plate this replaces: the cursor torch lighting the
  * roads (cover-box px coordinates now, since the box outgrows the viewport),
@@ -46,6 +48,15 @@ const ANCHOR = {
 };
 
 const TILT = 2.5;
+
+/**
+ * The plate is scaled up slightly so a tilt never peels its edges off the
+ * viewport. When the map is CONTAINED that scale would crop the very thing
+ * containment exists to show, so the contain fit is inset by more than the
+ * scale takes back - which also leaves the city a margin of sea to breathe in.
+ */
+const TILT_SCALE = 1.05;
+const CONTAIN_INSET = 0.94;
 
 export function MumbaiPoster({
   active,
@@ -106,14 +117,43 @@ export function MumbaiPoster({
     const outer = outerRef.current;
     const box = boxRef.current;
     if (!outer || !box) return;
+    /**
+     * One axis: how far to pull the box so the anchor sits at the viewport
+     * centre. When the box is larger than the viewport the offset is clamped
+     * so no edge is ever exposed; when it is smaller the box is simply
+     * centred and the surplus becomes letterbox.
+     */
+    const axis = (anchorPct: number, boxSize: number, viewSize: number) => {
+      if (boxSize < viewSize) return (boxSize - viewSize) / 2;
+      const ideal = (anchorPct / 100) * boxSize - viewSize / 2;
+      return Math.min(Math.max(ideal, 0), boxSize - viewSize);
+    };
+
     const place = () => {
       const vw = outer.clientWidth;
       const vh = outer.clientHeight;
-      const bw = box.offsetWidth;
-      const bh = box.offsetHeight;
-      const ox = Math.min(Math.max((ANCHOR.x / 100) * bw - vw / 2, 0), Math.max(bw - vw, 0));
-      const oy = Math.min(Math.max((ANCHOR.y / 100) * bh - vh / 2, 0), Math.max(bh - vh, 0));
-      box.style.transform = `translate(${-ox}px, ${-oy}px)`;
+      if (!vw || !vh) return;
+      // Landscape viewports CONTAIN the map, so the whole city is on screen -
+      // sea, island, creek and mainland. The letterbox is invisible because
+      // the map's own edge fades to the same --green-deep the section is
+      // painted in. Portrait viewports would contain down to a thin band, so
+      // they cover instead: the sea and the mainland crop away and the dense
+      // middle - which is where both shops are - fills the screen.
+      const landscape = vw >= vh;
+      const scale = landscape
+        ? Math.min(vw / MAP_VIEW.w, vh / MAP_VIEW.h) * CONTAIN_INSET
+        : Math.max(vw / MAP_VIEW.w, vh / MAP_VIEW.h);
+      const bw = MAP_VIEW.w * scale;
+      const bh = MAP_VIEW.h * scale;
+      // The CSS min-width/min-height:100% below is only a pre-hydration
+      // fallback. It has to be released here: min-width beats width, so
+      // leaving it set pins the box to viewport size and silently defeats
+      // the contain fit - the map looks cropped no matter what width says.
+      box.style.minWidth = "0px";
+      box.style.minHeight = "0px";
+      box.style.width = `${bw}px`;
+      box.style.height = `${bh}px`;
+      box.style.transform = `translate(${-axis(ANCHOR.x, bw, vw)}px, ${-axis(ANCHOR.y, bh, vh)}px)`;
     };
     place();
     const ro = new ResizeObserver(place);
@@ -129,7 +169,7 @@ export function MumbaiPoster({
       onPointerLeave={onLeave}
       className="cj-plate u-on-dark absolute inset-0 overflow-hidden bg-green-deep"
       style={{
-        transform: "scale(1.05) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))",
+        transform: `scale(${TILT_SCALE}) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))`,
         transition: "transform 700ms var(--ease-cinema)",
       }}
     >

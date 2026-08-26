@@ -25,13 +25,24 @@ OUT = "public/media/map/mumbai-network.svg"
 OUT_HOT = "public/media/map/mumbai-network-hot.svg"
 OUT_TRACE = "src/lib/mumbai-arterials.ts"
 
-# Must match src/lib/mumbai-geo.ts exactly, or the pins drift off their streets.
-# Landscape frame: the full latitude of Greater Mumbai, longitude widened east
-# across Thane Creek to Navi Mumbai (and a sliver of sea on the west), so the
-# whole city fits a 16:10 viewport at full height.
-W, H = 1243.0, 776.0
-WEST, EAST, SOUTH, NORTH, KX = 72.70, 73.38, 18.88016, 19.28148, 0.945058
-BBOX = f"{SOUTH},{WEST},{NORTH},{EAST}"
+# The RENDER frame. Must match src/lib/mumbai-geo.ts exactly, or the pins
+# drift off their streets.
+#
+# Centred on the midpoint of the two shops (19.09015 N, 72.87990 E) so they
+# sit dead centre of the plate, then widened symmetrically to 16:10. Because
+# the shops are only ~10 km from the west coast, centring them in a landscape
+# frame necessarily puts open sea on the left - about a third of the width.
+# That is real geography, and the Arabian Sea reads as deliberate negative
+# space against the density on the right.
+W, H = 1242.0, 776.0
+WEST, EAST, SOUTH, NORTH, KX = 72.5560, 73.2038, 18.89882, 19.28148, 0.945058
+
+# The FETCH window is deliberately larger and independent of the frame: it is
+# the Overpass query and the cache key, so re-framing the map costs nothing.
+# Everything outside the render frame is clipped at projection time, and the
+# sea west of 72.70 has no ways to lose.
+F_SOUTH, F_WEST, F_NORTH, F_EAST = 18.88016, 72.70, 19.28148, 73.38
+BBOX = f"{F_SOUTH},{F_WEST},{F_NORTH},{F_EAST}"
 SCALE = 3  # emit integer coords at 3x, so ~19 m of precision survives rounding
 
 # layer            overpass filter                                        tol  min-span
@@ -236,7 +247,7 @@ def main():
         f'<defs><radialGradient id="g" cx="46%" cy="33%" r="80%">'
         f'<stop offset="0%" stop-color="#17573f"/>'
         f'<stop offset="42%" stop-color="#0d4030"/>'
-        f'<stop offset="100%" stop-color="#04170f"/></radialGradient></defs>'
+        f'<stop offset="100%" stop-color="#06241b"/></radialGradient></defs>'
         f'<rect width="{vw}" height="{vh}" fill="url(#g)"/>'
         f'<g fill="none" stroke-linecap="round" stroke-linejoin="round">'
         f'<path d="{built["texture"]}" stroke="{BEIGE}" stroke-width="{tw}" opacity="{to}"/>'
@@ -267,7 +278,7 @@ def main():
                 else f'<defs><radialGradient id="g" cx="46%" cy="33%" r="80%">'
                 f'<stop offset="0%" stop-color="#17573f"/>'
                 f'<stop offset="42%" stop-color="#0d4030"/>'
-                f'<stop offset="100%" stop-color="#04170f"/></radialGradient></defs>'
+                f'<stop offset="100%" stop-color="#06241b"/></radialGradient></defs>'
                 f'<rect width="{vw}" height="{vh}" fill="url(#g)"/>'
             )
             + f'<g fill="none" stroke-linecap="round" stroke-linejoin="round">'
