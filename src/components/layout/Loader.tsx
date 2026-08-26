@@ -21,13 +21,38 @@ const SEEN_KEY = "cj_loader_seen";
  * lifts. Adding a second shape would make it a logo animation; keeping it to
  * light keeps it cinema.
  *
- * Fast by design: ~3.4s end to end, once per session, skipped entirely under
+ * ~5.5s end to end, skippable at any moment (click, tap or any key), once
+ * per session, skipped entirely under
  * prefers-reduced-motion, and never gating content from crawlers (the page is
  * fully rendered beneath this fixed overlay).
  */
+/**
+ * Storage access is not merely possibly-undefined - it THROWS in Chrome with
+ * site data blocked, in a sandboxed iframe, and in Firefox with dom.storage
+ * disabled. An unguarded read here threw before the timeline was built, so the
+ * loader never ran, never lifted, and left body scroll locked for the whole
+ * visit. Both helpers fail closed: the intro simply plays again.
+ */
+function readSeen(): boolean {
+  try {
+    return sessionStorage.getItem(SEEN_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function writeSeen(): void {
+  try {
+    sessionStorage.setItem(SEEN_KEY, "1");
+  } catch {
+    /* storage blocked - the intro will simply play again next navigation */
+  }
+}
+
 export function Loader() {
   const root = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
+  const skipRef = useRef<(() => void) | null>(null);
   const mono = useRef<HTMLDivElement>(null);
   const bloom = useRef<HTMLDivElement>(null);
 
@@ -37,12 +62,12 @@ export function Loader() {
       if (!el) return;
 
       const seen =
-        typeof sessionStorage !== "undefined" && sessionStorage.getItem(SEEN_KEY);
+        readSeen();
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       if (seen || reduce) {
         gsap.set(el, { display: "none" });
-        if (reduce && !seen) sessionStorage.setItem(SEEN_KEY, "1");
+        if (reduce && !seen) writeSeen();
         return;
       }
 
@@ -53,7 +78,7 @@ export function Loader() {
       document.body.style.overflow = "hidden";
 
       const finish = () => {
-        sessionStorage.setItem(SEEN_KEY, "1");
+        writeSeen();
         document.body.style.overflow = "";
         gsap.set(el, { display: "none" });
       };
@@ -68,6 +93,32 @@ export function Loader() {
           finish();
         },
       });
+
+      // Skip. A returning visitor is never shown this, but a first-time
+      // visitor should not be held for five and a half seconds with no way
+      // out. Any click, tap or key runs the curtain out fast rather than
+      // cutting, so leaving early still looks composed.
+      const skip = () => {
+        if (tl.progress() > 0.92) return;
+        detachSkip();
+        tl.kill();
+        window.clearTimeout(safety);
+        gsap
+          .timeline({ onComplete: finish })
+          .to(stage.current, { autoAlpha: 0, duration: 0.34, ease: "power2.in" }, 0)
+          .to(el, { yPercent: -100, duration: 0.5, ease: "veil" }, 0.06);
+      };
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Tab") return; // let a keyboard user reach the button itself
+        skip();
+      };
+      const detachSkip = () => {
+        el.removeEventListener("pointerdown", skip);
+        window.removeEventListener("keydown", onKey);
+      };
+      skipRef.current = skip;
+      el.addEventListener("pointerdown", skip);
+      window.addEventListener("keydown", onKey);
 
       // ── The turn ────────────────────────────────────────────────────────
       // Scale and rotation share one duration and one curve, so the mark reads
@@ -139,6 +190,8 @@ export function Loader() {
       );
 
       return () => {
+        skipRef.current = null;
+        detachSkip();
         window.clearTimeout(safety);
         document.body.style.overflow = "";
       };
@@ -150,8 +203,17 @@ export function Loader() {
     <div
       ref={root}
       className="cj-loader fixed inset-0 z-[100] overflow-hidden bg-green-deep"
-      aria-hidden
     >
+      {/* The overlay itself is decorative, but the way out must not be: a real
+          button, first in the tab order, for anyone who cannot click a
+          backdrop or wait. */}
+      <button
+        type="button"
+        onClick={() => skipRef.current?.()}
+        className="absolute right-4 top-4 z-10 rounded-full border border-line px-4 py-2 font-body text-[0.62rem] uppercase tracking-[0.18em] text-beige/80 outline-none transition-colors hover:border-gold hover:text-text-strong focus-visible:ring-2 focus-visible:ring-gold-light md:right-6 md:top-6"
+      >
+        Skip
+      </button>
       {/* soft emerald depth */}
       <div className="u-vignette pointer-events-none absolute inset-0 opacity-70" />
 

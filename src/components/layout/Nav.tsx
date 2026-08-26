@@ -314,8 +314,63 @@ function MobileMenu({
   pathname: string;
   onClose: () => void;
 }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const restoreRef = useRef<HTMLElement | null>(null);
+
+  /**
+   * The menu is an opaque full-screen overlay, so while it is open it must
+   * behave like a modal dialog. `inert` below already seals it when CLOSED;
+   * this handles the open state, where focus could previously tab straight
+   * out of the last link and into the page hidden behind it, and where Escape
+   * did nothing because the nav's own key handler is on an element this panel
+   * is rendered outside of.
+   */
+  useEffect(() => {
+    if (!open) {
+      restoreRef.current?.focus?.();
+      restoreRef.current = null;
+      return;
+    }
+    restoreRef.current = document.activeElement as HTMLElement | null;
+    const panel = panelRef.current;
+    const focusables = () =>
+      Array.from(
+        panel?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      ).filter((el) => el.offsetParent !== null);
+
+    focusables()[0]?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0]!;
+      const last = items[items.length - 1]!;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
   return (
     <div
+      ref={panelRef}
+      role="dialog"
+      aria-modal={open}
+      aria-label="Menu"
       className={cn("pointer-events-none fixed inset-0 z-40 lg:hidden", open ? "pointer-events-auto" : "")}
       aria-hidden={!open}
       inert={!open}

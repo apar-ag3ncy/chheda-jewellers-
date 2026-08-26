@@ -21,6 +21,12 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Chat with ${siteConfig.name} on WhatsApp`}
+      // Hidden by opacity until the scroll threshold, so it must also leave
+      // the tab order and the accessibility tree - otherwise a keyboard user
+      // at the top of any page can focus and activate a control that is not
+      // there. Nav.tsx already does exactly this for its menu items.
+      tabIndex={visible ? 0 : -1}
+      aria-hidden={!visible}
       className={cn(
         "group fixed bottom-5 right-5 z-30 flex items-center gap-2 rounded-full border border-line-strong bg-[var(--green-glass)] px-3.5 py-3 backdrop-blur-xl transition-all duration-500 ease-[var(--ease-lux)] hover:border-gold md:bottom-7 md:right-7",
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0",
