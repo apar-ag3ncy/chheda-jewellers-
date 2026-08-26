@@ -50,16 +50,13 @@ const ANCHOR = {
   y: PINS.reduce((n, p) => n + p.top, 0) / Math.max(PINS.length, 1),
 };
 
-const TILT = 2.5;
-
 /**
- * The plate is scaled up slightly so a tilt never peels its edges off the
- * viewport. When the map is CONTAINED that scale would crop the very thing
- * containment exists to show, so the contain fit is inset by more than the
- * scale takes back - which also leaves the city a margin of sea to breathe in.
+ * The plate does not tilt, scale or move. It used to rotate a couple of
+ * degrees under the pointer, which read as the whole map shaking every time
+ * the cursor crossed it - and any transform on the plate also has to be paid
+ * for with a compensating scale that crops the map. A map should sit still;
+ * the life in this one comes from the light, not from the geography moving.
  */
-const TILT_SCALE = 1.05;
-const CONTAIN_INSET = 0.94;
 
 export function MumbaiPoster({
   active,
@@ -84,10 +81,8 @@ export function MumbaiPoster({
   const onMove = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
       if (!live) return;
-      const outer = outerRef.current;
       const box = boxRef.current;
-      if (!outer || !box) return;
-      const o = outer.getBoundingClientRect();
+      if (!box) return;
       const b = box.getBoundingClientRect();
       cancelAnimationFrame(frame.current);
       frame.current = requestAnimationFrame(() => {
@@ -95,8 +90,6 @@ export function MumbaiPoster({
         // viewport, so percentages of the section would miss the roads.
         box.style.setProperty("--mx", `${e.clientX - b.left}px`);
         box.style.setProperty("--my", `${e.clientY - b.top}px`);
-        outer.style.setProperty("--ry", `${((e.clientX - o.left) / o.width - 0.5) * 2 * TILT}deg`);
-        outer.style.setProperty("--rx", `${(0.5 - (e.clientY - o.top) / o.height) * 2 * TILT}deg`);
       });
     },
     [live],
@@ -104,11 +97,6 @@ export function MumbaiPoster({
 
   const onLeave = useCallback(() => {
     cancelAnimationFrame(frame.current);
-    const outer = outerRef.current;
-    if (outer) {
-      outer.style.setProperty("--rx", "0deg");
-      outer.style.setProperty("--ry", "0deg");
-    }
     setLit(false);
   }, []);
 
@@ -142,10 +130,12 @@ export function MumbaiPoster({
       // painted in. Portrait viewports would contain down to a thin band, so
       // they cover instead: the sea and the mainland crop away and the dense
       // middle - which is where both shops are - fills the screen.
-      const landscape = vw >= vh;
-      const scale = landscape
-        ? Math.min(vw / MAP_VIEW.w, vh / MAP_VIEW.h) * CONTAIN_INSET
-        : Math.max(vw / MAP_VIEW.w, vh / MAP_VIEW.h);
+      // COVER at every size. Containing the map left letterbox bars and put
+      // the SVG's own edge on screen, so the section read as a photograph
+      // pasted onto a panel rather than as a window onto the city. Covering
+      // pushes every edge off-screen; the frame is cut around the two shops,
+      // so what crops away is sea and outer mainland, never the city.
+      const scale = Math.max(vw / MAP_VIEW.w, vh / MAP_VIEW.h);
       const bw = MAP_VIEW.w * scale;
       const bh = MAP_VIEW.h * scale;
       // The CSS min-width/min-height:100% below is only a pre-hydration
@@ -171,10 +161,7 @@ export function MumbaiPoster({
       onPointerEnter={() => live && setLit(true)}
       onPointerLeave={onLeave}
       className="cj-plate u-on-dark absolute inset-0 overflow-hidden bg-green-deep"
-      style={{
-        transform: `scale(${TILT_SCALE}) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))`,
-        transition: "transform 700ms var(--ease-cinema)",
-      }}
+
     >
       {/* ── The cover box: everything anchored to the geography ───────── */}
       <div
@@ -311,7 +298,11 @@ export function MumbaiPoster({
             // full-screen sections then falls inside one flat field of the same
             // green and cannot be seen. It used to stop at 80% of a different
             // dark, so roads ran to the edge and hit a hard line.
-            "radial-gradient(120% 90% at 50% 42%, transparent 52%, color-mix(in srgb, var(--green-deep) 50%, transparent) 100%), linear-gradient(to bottom, color-mix(in srgb, var(--green-deep) 35%, transparent) 0%, transparent 18%, transparent 58%, var(--green-deep) 97%)",
+            // Feathers all four viewport edges into --green-deep so the map
+            // dissolves into the sections above and below instead of ending
+            // on a visible line. The bottom reaches full opacity, which is
+            // what makes the seam into the footer disappear.
+            "linear-gradient(to right, var(--green-deep) 0%, transparent 14%, transparent 86%, var(--green-deep) 100%), radial-gradient(130% 96% at 50% 45%, transparent 48%, color-mix(in srgb, var(--green-deep) 62%, transparent) 100%), linear-gradient(to bottom, var(--green-deep) 0%, transparent 16%, transparent 56%, var(--green-deep) 97%)",
         }}
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 px-6 pb-[14svh] text-center md:pb-[16svh]">
