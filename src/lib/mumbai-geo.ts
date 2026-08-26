@@ -16,9 +16,9 @@
 export const MAP_VIEW = { w: 1242.0, h: 776 } as const;
 
 export const MAP_BOUNDS = {
-  west: 72.556,
-  east: 73.2038,
-  south: 18.89882,
+  west: 72.56044,
+  east: 73.19966,
+  south: 18.90392,
   north: 19.28148,
   /** cos(mid-latitude) - the horizontal scale correction used at generation. */
   kx: 0.945058,

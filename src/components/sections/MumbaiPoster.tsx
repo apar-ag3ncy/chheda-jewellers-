@@ -301,10 +301,15 @@ export function MumbaiPoster({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 42%, transparent 52%, rgba(4,23,15,0.5) 100%), linear-gradient(to bottom, rgba(4,23,15,0.35) 0%, transparent 18%, transparent 70%, rgba(4,23,15,0.8) 100%)",
+            // The bottom fades to FULLY OPAQUE --green-deep, the exact colour the
+            // footer's own top edge fades in from. The seam between two stacked
+            // full-screen sections then falls inside one flat field of the same
+            // green and cannot be seen. It used to stop at 80% of a different
+            // dark, so roads ran to the edge and hit a hard line.
+            "radial-gradient(120% 90% at 50% 42%, transparent 52%, color-mix(in srgb, var(--green-deep) 50%, transparent) 100%), linear-gradient(to bottom, color-mix(in srgb, var(--green-deep) 35%, transparent) 0%, transparent 18%, transparent 58%, var(--green-deep) 97%)",
         }}
       />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 px-6 pb-8 text-center md:pb-10">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 px-6 pb-[14svh] text-center md:pb-[16svh]">
         <p className="-mr-[0.42em] font-body text-[clamp(1.2rem,2.6vw,2rem)] font-light uppercase leading-none tracking-[0.42em] text-offwhite">
           Mumbai
         </p>

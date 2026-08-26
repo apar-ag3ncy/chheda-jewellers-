@@ -60,7 +60,7 @@ export function Loader() {
 
       // Safety net: fires even if the GSAP ticker is throttled (e.g. the tab
       // opened in the background), so scroll never stays locked.
-      const safety = window.setTimeout(finish, 6500);
+      const safety = window.setTimeout(finish, 8200);
 
       const tl = gsap.timeline({
         onComplete: () => {
@@ -72,7 +72,7 @@ export function Loader() {
       // ── The turn ────────────────────────────────────────────────────────
       // Scale and rotation share one duration and one curve, so the mark reads
       // as a single object arriving - not as a stack of separate tweens.
-      const SPIN = 2.9;
+      const SPIN = 3.6;
 
       tl.fromTo(
         mono.current,
@@ -118,8 +118,8 @@ export function Loader() {
       tl.fromTo(
         bloom.current,
         { autoAlpha: 0, scale: 0.55 },
-        { autoAlpha: 1, scale: 1, duration: 1.5, ease: "power2.out" },
-        SPIN - 1.5,
+        { autoAlpha: 1, scale: 1, duration: 1.7, ease: "power2.out" },
+        SPIN - 1.7,
       ).to(
         bloom.current,
         { autoAlpha: 0.35, duration: 0.7, ease: "power2.inOut" },
@@ -130,11 +130,11 @@ export function Loader() {
       // A held breath after the lock, then the emerald curtain leaves. The
       // mark travels slower than the curtain, so it is still settling as the
       // hero arrives underneath - the two scenes overlap instead of cutting.
-      const EXIT = SPIN + 0.34;
-      tl.to(el, { yPercent: -100, duration: 1.15, ease: "veil" }, EXIT);
+      const EXIT = SPIN + 0.5;
+      tl.to(el, { yPercent: -100, duration: 1.6, ease: "veil" }, EXIT);
       tl.to(
         stage.current,
-        { yPercent: -34, scale: 1.06, duration: 1.15, ease: "veil" },
+        { yPercent: -30, scale: 1.05, duration: 1.9, ease: "veil" },
         EXIT,
       );
 

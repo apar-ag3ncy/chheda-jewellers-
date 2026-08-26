@@ -28,14 +28,14 @@ OUT_TRACE = "src/lib/mumbai-arterials.ts"
 # The RENDER frame. Must match src/lib/mumbai-geo.ts exactly, or the pins
 # drift off their streets.
 #
-# Centred on the midpoint of the two shops (19.09015 N, 72.87990 E) so they
+# Centred on the midpoint of the two shops (19.09270 N, 72.88005 E) so they
 # sit dead centre of the plate, then widened symmetrically to 16:10. Because
 # the shops are only ~10 km from the west coast, centring them in a landscape
 # frame necessarily puts open sea on the left - about a third of the width.
 # That is real geography, and the Arabian Sea reads as deliberate negative
 # space against the density on the right.
 W, H = 1242.0, 776.0
-WEST, EAST, SOUTH, NORTH, KX = 72.5560, 73.2038, 18.89882, 19.28148, 0.945058
+WEST, EAST, SOUTH, NORTH, KX = 72.56044, 73.19966, 18.90392, 19.28148, 0.945058
 
 # The FETCH window is deliberately larger and independent of the frame: it is
 # the Overpass query and the cache key, so re-framing the map costs nothing.

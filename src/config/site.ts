@@ -78,7 +78,7 @@ export const siteConfig = {
       hours: "Mon-Sun · 11:00 AM - 8:30 PM", // TODO(client)
       // Trinity Square, Vile Parle East - near the station. TODO(client):
       // confirm the exact door pin.
-      coordinates: { lat: 19.0993, lng: 72.8506 },
+      coordinates: { lat: 19.0999, lng: 72.8503 }, // TODO(client): exact door
       directionsUrl:
         "https://www.google.com/maps/search/?api=1&query=Chheda+Jewellers+Trinity+Square+Vile+Parle+East",
       verified: false,
@@ -95,7 +95,7 @@ export const siteConfig = {
       hours: "Mon-Sun · 11:00 AM - 8:30 PM", // TODO(client)
       // M.G. Road by Khau Galli, Ghatkopar East. TODO(client): confirm the
       // exact door pin.
-      coordinates: { lat: 19.081, lng: 72.9092 },
+      coordinates: { lat: 19.0855, lng: 72.9098 }, // TODO(client): exact door
       directionsUrl:
         "https://www.google.com/maps/search/?api=1&query=Chheda+Jewellers+Khau+Galli+Ghatkopar+East",
       verified: false,
