@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
@@ -10,7 +10,6 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
  * Disabled entirely under prefers-reduced-motion (native scroll takes over).
  */
 export function SmoothScroll({ children }: { children: ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
   const pathname = usePathname();
 
   // Recompute ScrollTrigger positions after client-side navigations so a new
@@ -56,7 +55,6 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       syncTouch: false,
       touchMultiplier: 1.6,
     });
-    lenisRef.current = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -70,7 +68,6 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       window.removeEventListener("load", onLoad);
       gsap.ticker.remove(raf);
       lenis.destroy();
-      lenisRef.current = null;
     };
   }, []);
 

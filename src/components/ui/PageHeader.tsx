@@ -1,3 +1,4 @@
+import { emphasise } from "@/components/ui/SectionHeading";
 import type { ReactNode } from "react";
 import { Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
@@ -35,9 +36,11 @@ export function PageHeader({
           ) : null}
           <Reveal delay={0.05}>
             <h1 className="font-display text-[clamp(2.6rem,6.5vw,5rem)] font-light leading-[0.98]">
+              {/* Through emphasise(), like every other display heading: without
+                  it a *italic* phrase in a title renders as literal asterisks. */}
               {title.split("\n").map((l, i) => (
                 <span key={i} className="block">
-                  {l}
+                  {emphasise(l)}
                 </span>
               ))}
             </h1>
