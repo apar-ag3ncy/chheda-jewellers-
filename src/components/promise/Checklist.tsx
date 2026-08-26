@@ -206,7 +206,7 @@ export function Checklist() {
 
                     <span className="flex-1">
                       <span className="flex items-baseline gap-3">
-                        <span className="font-body text-[0.66rem] tracking-[0.2em] text-gold">
+                        <span className="font-body text-[0.66rem] tracking-[0.2em] text-gold-light">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <span

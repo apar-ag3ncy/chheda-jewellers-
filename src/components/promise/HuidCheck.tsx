@@ -47,7 +47,7 @@ export function HuidCheck() {
           spellCheck={false}
           maxLength={6}
           aria-describedby="huid-note"
-          className="w-40 rounded-[var(--radius-brand)] border border-line bg-green-deep/45 px-4 py-3 font-body text-[1rem] uppercase tracking-[0.28em] text-text-strong placeholder:tracking-[0.28em] placeholder:text-text-muted/45 focus:border-gold focus:outline-none"
+          className="w-40 rounded-[var(--radius-brand)] border border-line bg-green-deep/45 px-4 py-3 font-body text-[1rem] uppercase tracking-[0.28em] text-text-strong placeholder:tracking-[0.28em] placeholder:text-text-muted focus:border-gold focus:outline-none"
         />
 
         {/* Six ticks, one per character - the field tells you how far you are
@@ -90,7 +90,7 @@ export function HuidCheck() {
         </a>
       ) : null}
 
-      <p className="mt-5 border-t border-line pt-4 font-body text-[0.7rem] font-light leading-relaxed text-text-muted/80">
+      <p className="mt-5 border-t border-line pt-4 font-body text-[0.7rem] font-light leading-relaxed text-text-muted">
         This field checks the format only. We do not look your code up, store
         it, or send it anywhere - a jeweller confirming its own hallmarks would
         prove nothing.

@@ -199,7 +199,7 @@ export default function BespokePage() {
             </Button>
           </Reveal>
 
-          <p className="mt-8 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+          <p className="mt-8 font-body text-[0.72rem] leading-relaxed text-text-muted">
             Deposit terms and lead times above are indicative and confirmed in
             writing before any work begins.
           </p>

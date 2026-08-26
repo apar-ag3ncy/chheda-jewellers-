@@ -123,7 +123,7 @@ export function DiamondEdit() {
             data-edit-line
             className="mt-10 font-body text-[0.72rem] uppercase leading-relaxed tracking-[0.18em] text-text-muted"
           >
-            <p className="text-gold">By appointment</p>
+            <p className="text-gold-light">By appointment</p>
             <p className="mt-2">{siteConfig.branches[0]?.area} · {siteConfig.branches[0]?.city}</p>
             <p className="mt-2 normal-case tracking-normal">{siteConfig.contact.email}</p>
           </div>

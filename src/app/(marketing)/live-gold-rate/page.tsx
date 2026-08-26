@@ -119,7 +119,7 @@ export default function LiveGoldRatePage() {
                 </Button>
               </div>
 
-              <p className="mt-6 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+              <p className="mt-6 font-body text-[0.72rem] leading-relaxed text-text-muted">
                 The rate shown is indicative, not an offer to sell - the full
                 wording lives in the{" "}
                 <Link

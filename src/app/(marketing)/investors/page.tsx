@@ -187,7 +187,7 @@ export default function InvestorsPage() {
                 How we run the counter
               </Button>
             </Reveal>
-            <p className="mt-9 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+            <p className="mt-9 font-body text-[0.72rem] leading-relaxed text-text-muted">
               Nothing on this page is an offer of securities or an invitation to
               invest.
             </p>

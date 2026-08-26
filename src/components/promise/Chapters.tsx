@@ -50,7 +50,7 @@ export function Chapters() {
               delay={i * 0.04}
               className="flex items-baseline gap-5 border-t border-line py-4 last:border-b"
             >
-              <span className="font-body text-[0.68rem] tracking-[0.2em] text-gold">
+              <span className="font-body text-[0.68rem] tracking-[0.2em] text-gold-light">
                 {row.n}
               </span>
               <span className="flex-1 font-display text-[length:var(--step-1)] font-light text-text-strong">
@@ -102,7 +102,7 @@ export function Chapters() {
                   className="border-t border-line py-10 first:border-t-0 first:pt-0 md:py-16"
                 >
                   <Reveal delay={0.04}>
-                    <span className="font-body text-[0.68rem] tracking-[0.2em] text-gold">
+                    <span className="font-body text-[0.68rem] tracking-[0.2em] text-gold-light">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h2 className="mt-4 font-display text-[length:var(--step-3)] font-light leading-[var(--leading-3)] text-text-strong">

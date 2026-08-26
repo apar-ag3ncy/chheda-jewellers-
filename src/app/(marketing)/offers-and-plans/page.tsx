@@ -141,7 +141,7 @@ export default function OffersAndPlansPage() {
             </div>
           </div>
 
-          <p className="mt-10 font-body text-[0.72rem] leading-relaxed text-text-muted/70">
+          <p className="mt-10 font-body text-[0.72rem] leading-relaxed text-text-muted">
             Plan terms shown are indicative and pending confirmation. Full{" "}
             <Link
               href="/terms"

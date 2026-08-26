@@ -413,7 +413,7 @@ export function BookingFlow() {
                     value={draft.notes}
                     onChange={(e) => set("notes", e.target.value)}
                     placeholder="A budget, a deadline, a photograph you want to show us…"
-                    className="w-full resize-y rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong placeholder:text-text-muted/60 focus:border-gold focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
+                    className="w-full resize-y rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong placeholder:text-text-muted focus:border-gold focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
                   />
                 </div>
               </div>
@@ -483,7 +483,7 @@ export function BookingFlow() {
               Change something
             </button>
 
-            <p className="mt-8 font-body text-[0.72rem] leading-relaxed text-text-muted/75">
+            <p className="mt-8 font-body text-[0.72rem] leading-relaxed text-text-muted">
               Contact details are used to confirm this appointment and are not
               added to any mailing list. Nothing is stored on this website - see
               the{" "}

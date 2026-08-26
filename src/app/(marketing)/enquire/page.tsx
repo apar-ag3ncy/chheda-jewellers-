@@ -192,7 +192,7 @@ export default function EnquirePage() {
                 phone number is where the privacy note must be reachable -
                 the booking flow's own link only exists after interaction. */}
             <Reveal delay={0.16}>
-              <p className="mt-6 font-body text-[0.7rem] font-light leading-relaxed text-text-muted/80">
+              <p className="mt-6 font-body text-[0.7rem] font-light leading-relaxed text-text-muted">
                 Your details go only toward this appointment - see the{" "}
                 <Link
                   href="/privacy"
