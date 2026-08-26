@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { siteConfig } from "@/config/site";
+import { siteConfig, contactIsReal } from "@/config/site";
 import { MumbaiPoster } from "@/components/sections/MumbaiPoster";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
@@ -71,11 +71,14 @@ export function Branches() {
                 >
                   Get directions
                 </Link>
+                {/* Until real numbers are published, a Call button would dial
+                    a placeholder and fail silently. Offer the booking form
+                    instead, which reaches a real inbox. */}
                 <Link
-                  href={`tel:${b.phone.replace(/\s+/g, "")}`}
+                  href={contactIsReal() ? `tel:${b.phone.replace(/\s+/g, "")}` : "/enquire"}
                   className="inline-flex min-h-[38px] items-center rounded-full border border-line px-3.5 py-1.5 font-body text-[0.6rem] uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-text-strong"
                 >
-                  Call
+                  {contactIsReal() ? "Call" : "Book a visit"}
                 </Link>
               </div>
             </div>

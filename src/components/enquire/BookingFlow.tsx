@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { siteConfig } from "@/config/site";
+import { siteConfig, contactIsReal } from "@/config/site";
 import {
   GUEST_OPTIONS,
   INTENTS,
@@ -505,14 +505,14 @@ export function BookingFlow() {
           <p className="mt-5 font-body text-[0.76rem] font-light leading-relaxed text-text-muted">
             Prefer to speak to someone?{" "}
             <a
-              href={siteConfig.contact.phoneHref}
+              href={contactIsReal() ? siteConfig.contact.phoneHref : `mailto:${siteConfig.contact.email}`}
               className="text-gold-light underline underline-offset-4"
             >
-              {siteConfig.contact.phone}
+              {contactIsReal() ? siteConfig.contact.phone : siteConfig.contact.email}
             </a>
             {" · "}
             <a
-              href={siteConfig.contact.whatsappHref}
+              href={contactIsReal() ? siteConfig.contact.whatsappHref : "/enquire"}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gold-light underline underline-offset-4"

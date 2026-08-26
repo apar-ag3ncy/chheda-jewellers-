@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { siteConfig } from "@/config/site";
+import { siteConfig, contactIsReal } from "@/config/site";
 import { cn } from "@/lib/cn";
 
 /** Persistent floating WhatsApp / chat button. Appears after first scroll. */
@@ -17,7 +17,7 @@ export function WhatsAppButton() {
 
   return (
     <a
-      href={siteConfig.contact.whatsappHref}
+      href={contactIsReal() ? siteConfig.contact.whatsappHref : "/enquire"}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Chat with ${siteConfig.name} on WhatsApp`}

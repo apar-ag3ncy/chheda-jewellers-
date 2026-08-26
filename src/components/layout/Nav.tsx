@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { primaryNav } from "@/config/nav";
 import { flags } from "@/config/flags";
-import { siteConfig } from "@/config/site";
+import { siteConfig, contactIsReal } from "@/config/site";
 import { cn } from "@/lib/cn";
 import { Monogram } from "@/components/ui/Monogram";
 import { Wordmark } from "@/components/ui/Wordmark";
@@ -287,7 +287,7 @@ export function Nav() {
             <InstagramIcon className="h-4 w-4" />
           </a>
           <a
-            href={siteConfig.contact.whatsappHref}
+            href={contactIsReal() ? siteConfig.contact.whatsappHref : "/enquire"}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp"

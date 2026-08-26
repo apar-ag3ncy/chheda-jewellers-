@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { GoldRateTicker } from "@/components/ui/GoldRateTicker";
-import { siteConfig } from "@/config/site";
+import { siteConfig, contactIsReal } from "@/config/site";
 
 export const metadata = pageMetadata({
   title: "Live Gold Rate",
@@ -114,7 +114,7 @@ export default function LiveGoldRatePage() {
                 <Button href="/chheda-promise#estimate" variant="primary" withArrow>
                   Turn it into a bill
                 </Button>
-                <Button href={siteConfig.contact.whatsappHref} variant="ghost">
+                <Button href={contactIsReal() ? siteConfig.contact.whatsappHref : "/enquire"} variant="ghost">
                   Ask us
                 </Button>
               </div>

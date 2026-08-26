@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site";
+import { siteConfig, contactIsReal } from "@/config/site";
 
 /**
  * THE ENQUIRY SEAM.
@@ -191,6 +191,10 @@ export function enquiryUrl(d: EnquiryDraft, channel: Channel): string {
       subject,
     )}&body=${encodeURIComponent(body)}`;
   }
+  // Until a real WhatsApp number is published, sending to wa.me would post the
+  // whole appointment into a number that does not exist and tell the customer
+  // it went through. Fall back to the mail channel, which reaches a real inbox.
+  if (!contactIsReal()) return enquiryUrl(d, "email");
   // wa.me expects the number without punctuation.
   const number = siteConfig.contact.whatsappHref.replace(/\D/g, "");
   return `https://wa.me/${number}?text=${encodeURIComponent(body)}`;

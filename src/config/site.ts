@@ -41,7 +41,14 @@ export const siteConfig = {
 
   locale: "en_IN",
 
-  /** TODO(client): confirm all contact details. */
+  /**
+   * TODO(client): confirm all contact details.
+   *
+   * Until they are confirmed these are placeholder digits, and anything that
+   * would DIAL or MESSAGE them has to degrade instead of firing into the void.
+   * `contactIsReal()` below is the single test for that - derived from the
+   * numbers rather than a second flag someone can forget to flip.
+   */
   contact: {
     phone: "+91 22 0000 0000", // TODO(client)
     phoneHref: "tel:+912200000000", // TODO(client)
@@ -105,3 +112,28 @@ export const siteConfig = {
 
 export type SiteConfig = typeof siteConfig;
 export type Branch = (typeof siteConfig.branches)[number];
+
+/**
+ * Are the published phone/WhatsApp details real yet?
+ *
+ * Derived, not declared: a placeholder is a number whose digits are all zeros
+ * after the country code. This cannot drift out of sync with the data the way
+ * a hand-maintained boolean would - the day a real number is pasted in, every
+ * call and WhatsApp affordance on the site turns itself back on.
+ */
+export function contactIsReal(): boolean {
+  // A placeholder betrays itself with a long run of one repeated digit
+  // ("+91 22 0000 0000"). Testing for six in a row catches every filler we
+  // use without rejecting a real number - no Indian subscriber number has a
+  // run that long. Checking "all digits identical" is NOT enough: the STD
+  // code in front of the zeros defeats it.
+  const meaningful = (v: string) => {
+    const d = v.replace(/\D/g, "");
+    // Indian numbers are exactly ten subscriber digits, with or without the
+    // 91 country code in front. Anything else is a stub, and degrading is the
+    // safe direction: better to route to email than to dial a wrong number.
+    const full = d.startsWith("91") ? d.length === 12 : d.length === 10;
+    return full && !/(\d)\1{5,}/.test(d);
+  };
+  return meaningful(siteConfig.contact.phoneHref) && meaningful(siteConfig.contact.whatsappHref);
+}
