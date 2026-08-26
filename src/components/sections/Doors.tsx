@@ -7,8 +7,9 @@ import { Monogram } from "@/components/ui/Monogram";
 import { cn } from "@/lib/cn";
 
 /**
- * THE DOORS - a bento of everywhere the house can take you, closing the
- * scroll just before the sign-off.
+ * THE DOORS - a bento of everywhere the house can take you, the page's
+ * last working navigation. CommunityStrip follows it as the closing dark
+ * band, so the grounds keep their strict cream-dark alternation.
  *
  * Mixed tile sizes are the point: a bento reads as a cabinet of different
  * drawers, not a gallery. Every tile is a real doorway - the two metal rooms,
@@ -94,7 +95,7 @@ const DOORS: Door[] = [
 
 export function Doors() {
   return (
-    <Section id="doors" spacing="lg" tone="transparent" data-bg="green">
+    <Section id="doors" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
         <div className="flex items-baseline justify-between gap-6 border-b border-line pb-5">
           <p className="u-eyebrow">Keep exploring</p>
@@ -112,7 +113,7 @@ export function Doors() {
           <Reveal delay={0.25} className="col-span-1 row-span-1">
             <Link
               href="/enquire"
-              className="group flex h-full w-full flex-col items-center justify-center gap-4 rounded-[var(--radius-brand)] border border-line-strong bg-green-deep p-5 text-center transition-colors duration-500 hover:border-gold"
+              className="u-on-dark group flex h-full w-full flex-col items-center justify-center gap-4 rounded-[var(--radius-brand)] border border-line-strong bg-green-deep p-5 text-center transition-colors duration-500 hover:border-gold"
             >
               <Monogram className="h-10 w-10 transition-transform duration-[900ms] ease-[var(--ease-cinema)] group-hover:rotate-[30deg]" />
               <span className="font-display text-[1.15rem] font-light leading-snug text-text-strong">
@@ -136,7 +137,7 @@ function BentoTile({ door, delay }: { door: Door; delay: number }) {
     <Reveal delay={delay} className={cn(door.span)}>
       <Link
         href={door.href}
-        className="group relative block h-full w-full overflow-hidden rounded-[var(--radius-brand)] bg-green-deep"
+        className="u-on-dark group relative block h-full w-full overflow-hidden rounded-[var(--radius-brand)] bg-green-deep"
       >
         <Image
           src={door.src}

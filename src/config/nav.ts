@@ -82,12 +82,12 @@ export const homepageSections = [
   "vitrine",
   "testimonials",
   "diamond-edit",
-  "manifesto",
   "atelier",
-  "monthly-plan",
+  "manifesto",
   "branches",
-  "community",
+  "monthly-plan",
   "doors",
+  "community",
 ] as const;
 
 export type HomepageSection = (typeof homepageSections)[number];

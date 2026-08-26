@@ -37,7 +37,7 @@ type Ground = {
 /** The house's three grounds - dark, light, dark. */
 const EMERALD: Ground = { bg: "bg-green", sheen: "rgba(255,236,200,0.42)" };
 const CREAM: Ground = { bg: "bg-cream", light: true, sheen: "rgba(255,255,255,0.55)" };
-const MAROON: Ground = { bg: "bg-maroon", sheen: "rgba(255,228,190,0.40)" };
+const NOIR: Ground = { bg: "bg-green-deep", sheen: "rgba(255,228,190,0.40)" };
 
 const PIECES = [
   {
@@ -77,7 +77,7 @@ const PIECES = [
     maxW: "min(64vw, 20rem)",
     tilt: { x: 7, y: -7 },
     sheenAt: "68%",
-    ground: MAROON,
+    ground: NOIR,
   },
 ] as const;
 

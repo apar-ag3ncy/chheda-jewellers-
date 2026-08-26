@@ -76,8 +76,8 @@ export function DiamondEdit() {
     <section
       ref={root}
       id="diamond-edit"
-      data-bg="maroon"
-      className="relative w-full overflow-hidden bg-maroon py-20 md:py-28 lg:min-h-screen lg:py-0"
+      data-bg="deep"
+      className="relative w-full overflow-hidden bg-green-deep py-20 md:py-28 lg:min-h-screen lg:py-0"
     >
       <div className="grid grid-cols-1 lg:min-h-screen lg:grid-cols-[42%_58%]">
         {/* ── Editorial left panel ── */}

@@ -7,10 +7,11 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 
 export function JewelleryTypes() {
-  // Maroon, not deep: with the occasion rail gone this section borders
-  // FilmRoom, which is deep - and the page keeps its oxblood band.
+  // Beige: the page's grounds strictly alternate dark emerald and cream,
+  // and this section sits between two darks. The tiles are photographs on
+  // deep gradients, so each re-scopes itself u-on-dark below.
   return (
-    <Section id="jewellery-types" spacing="lg" tone="transparent" data-bg="maroon">
+    <Section id="jewellery-types" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
@@ -36,7 +37,7 @@ export function JewelleryTypes() {
             >
               <Link
                 href={type.href}
-                className="group relative block aspect-[3/4] overflow-hidden bg-green-deep"
+                className="u-on-dark group relative block aspect-[3/4] overflow-hidden bg-green-deep"
               >
                 <Image
                   src={type.image.src}

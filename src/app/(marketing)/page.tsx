@@ -36,15 +36,10 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  *   doesn't exist yet (Atelier), how it becomes affordable (MonthlyPlan),
  *   where we are (Branches), and how to stay close (CommunityStrip).
  *
- * Three adjacencies are load-bearing: Stories between the two long
- * interactives so they never run back to back; Manifesto directly after
- * DiamondEdit so the silence lands as a rebuttal; Atelier directly under the
- * manifesto it answers. The ask corridor - plan, map, community - is
- * unbroken at the end: nothing after the address pulls the visitor back
- * into browsing.
- *
- * Doors closes the scroll - a bento of the site's doorways, and the page's
- * last working navigation before the link-less sign-off footer.
+ * Stories still sits between the two long interactives so they never run
+ * back to back, and the ask corridor at the end is unbroken. Doors is the
+ * page's last working navigation before the link-less sign-off footer;
+ * CommunityStrip after it is the soft ask, not a detour.
  */
 const SECTIONS: Record<HomepageSection, ComponentType> = {
   hero: Hero,
