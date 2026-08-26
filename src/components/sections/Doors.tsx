@@ -7,9 +7,9 @@ import { Monogram } from "@/components/ui/Monogram";
 import { cn } from "@/lib/cn";
 
 /**
- * THE DOORS - a bento of everywhere the house can take you, the page's
- * last working navigation. CommunityStrip follows it as the closing dark
- * band, so the grounds keep their strict cream-dark alternation.
+ * THE DOORS - a bento of everywhere the house can take you. CommunityStrip
+ * follows as the last painted band, and the full-screen Mumbai map closes
+ * the scroll after it - so the page ends on the two addresses.
  *
  * Mixed tile sizes are the point: a bento reads as a cabinet of different
  * drawers, not a gallery. Every tile is a real doorway - the two metal rooms,

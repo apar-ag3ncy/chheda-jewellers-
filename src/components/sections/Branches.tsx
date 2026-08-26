@@ -8,7 +8,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
 /**
- * VISIT THE HOUSE - one full-screen landscape of the city, nothing else.
+ * VISIT THE HOUSE - one full-screen landscape of the city, nothing else,
+ * closing the scroll: the last section before the sign-off footer, so the
+ * page ends on the map and the two addresses.
  *
  * The section is a single 100svh cover: the map fills it edge to edge and
  * the two address cards float compact at the top right, paper on the dark
