@@ -8,24 +8,6 @@ import { Reveal } from "@/components/motion/Reveal";
 import { useStickyScene } from "@/components/motion/useStickyScene";
 import { cn } from "@/lib/cn";
 
-/** One plate per chapter - the image turns as you read, like a monograph. */
-const PLATES = [
-  {
-    src: "/media/promise/promise-01.jpg",
-    alt: "A quiet portrait in fine gold jewellery",
-    focus: "50% 28%",
-  },
-  {
-    src: "/media/promise/plate-02.jpg",
-    alt: "Stacked gold bangles and a jewelled nath, photographed close enough to see the setting",
-    focus: "50% 38%",
-  },
-  {
-    src: "/media/promise/plate-03.jpg",
-    alt: "A matha-patti and layered polki necklace framed by roses",
-    focus: "50% 28%",
-  },
-];
 
 export function Chapters() {
   // Same primitive as the atelier and the edit lookbook, so all three sticky
@@ -67,11 +49,11 @@ export function Chapters() {
         <div ref={rootRef} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-green-deep md:sticky md:top-28">
-              {PLATES.map((p, i) => (
+              {promiseStory.chapters.map((c, i) => (
                 <Image
-                  key={p.src}
-                  src={p.src}
-                  alt={p.alt}
+                  key={c.plate.src}
+                  src={c.plate.src}
+                  alt={c.plate.alt}
                   placeholder="blur"
                   blurDataURL={EMERALD_LQIP}
                   fill
@@ -83,7 +65,7 @@ export function Chapters() {
                     i === 0 ? "opacity-100" : "opacity-0",
                     active === i ? "md:opacity-100" : "md:opacity-0",
                   )}
-                  style={{ objectPosition: p.focus }}
+                  style={{ objectPosition: c.plate.focus }}
                 />
               ))}
               {/* plate number, like a printed monograph */}

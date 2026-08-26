@@ -1,5 +1,6 @@
 "use client";
 
+import { categories } from "@/lib/content/categories";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import Link from "next/link";
@@ -11,12 +12,22 @@ import { cn } from "@/lib/cn";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 /** One type - diamonds - presented as an editorial catalogue cover. */
-const pieces = [
-  { src: "/media/categories/diamond/d1.jpg", name: "Solitaire", alt: "Diamond necklace in soft light" },
-  { src: "/media/categories/diamond/d4.jpg", name: "Brilliance", alt: "Model in a green gown with a diamond necklace" },
-  { src: "/media/categories/diamond/d2.jpg", name: "Statement", alt: "Diamond earrings and ring in dramatic light" },
-  { src: "/media/categories/diamond/d6.jpg", name: "Eternity", alt: "Diamonds catching the light against dark tones" },
-];
+/**
+ * Sourced from the diamond room rather than re-declared. These four frames
+ * already live in categories.ts with their own alt text, and the copies here
+ * had drifted from it - two of the four described the same photograph
+ * differently. Only the chapter names belong to this section.
+ */
+const CHAPTER_NAMES = ["Solitaire", "Brilliance", "Statement", "Eternity"] as const;
+const pieces = CHAPTER_NAMES.map((chapterName, i) => {
+  const frame = categories.diamond.gallery[i];
+  return {
+    src: frame?.src ?? "",
+    alt: frame?.alt ?? "",
+    focus: frame?.focus,
+    name: chapterName,
+  };
+});
 
 export function DiamondEdit() {
   const root = useRef<HTMLElement>(null);

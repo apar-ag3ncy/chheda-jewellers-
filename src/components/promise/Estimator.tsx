@@ -242,7 +242,9 @@ export function Estimator() {
                 <Row
                   label="Net gold weight"
                   sub="The gold only - stones and thread weighed out"
-                  value={`${weight.toFixed(3)} g`}
+                  // The slider steps in 0.5g, so three decimals implied a precision the
+                  // control cannot express - and disagreed with the value shown above it.
+                  value={`${weight.toFixed(1)} g`}
                 />
                 <Row
                   label={`Today's ${karat} rate`}

@@ -39,16 +39,25 @@ export const promiseStory = {
   chapters: [
     {
       id: "roots",
+      /* The plate that turns beside this chapter. Co-located so the two
+         cannot fall out of step - they used to be parallel arrays. */
+      plate: { src: "/media/promise/promise-01.jpg", alt: "A quiet portrait in fine gold jewellery", focus: "50% 28%" },
       title: "Roots in the neighbourhood",
       body: "We began the way the best jewellers do - one family at a time, in a lane where everyone knew our name. Word travelled by trust, not advertising, and that is still how most of Mumbai finds their way to us.",
     },
     {
       id: "hand",
+      /* The plate that turns beside this chapter. Co-located so the two
+         cannot fall out of step - they used to be parallel arrays. */
+      plate: { src: "/media/promise/plate-02.jpg", alt: "Stacked gold bangles and a jewelled nath, photographed close enough to see the setting", focus: "50% 38%" },
       title: "The hand behind the piece",
       body: "Behind the vitrine is a workshop. Wax is carved, gold is drawn into wire, stones are set under a loupe. Nothing here is anonymous - a piece leaves us only when the karigar who made it would wear it themselves.",
     },
     {
       id: "forever",
+      /* The plate that turns beside this chapter. Co-located so the two
+         cannot fall out of step - they used to be parallel arrays. */
+      plate: { src: "/media/promise/plate-03.jpg", alt: "A matha-patti and layered polki necklace framed by roses", focus: "50% 28%" },
       title: "Made to be inherited",
       body: "Fashion changes; an heirloom does not. We design for the long arc of a family - jewellery that a daughter will one day open a velvet box to find, and understand exactly why it was kept.",
     },
