@@ -50,8 +50,9 @@ const DISCLAIMER =
  * A gentle time-based drift makes the widget feel alive without a live feed.
  * TODO(client): set a live provider + key in .env to replace these.
  */
-const BASE_24K = 8450;
-const PURITY_22K = 22 / 24;
+/** Shared with lib/gold-rate-client so the browser fallback cannot drift. */
+export const BASE_24K = 8450;
+export const PURITY_22K = 22 / 24;
 
 function indicativeRates(): GoldRate[] {
   const now = new Date();

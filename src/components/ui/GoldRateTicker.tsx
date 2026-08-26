@@ -4,29 +4,9 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 import { formatNumberIN } from "@/lib/format";
 import type { GoldRateResponse } from "@/lib/gold-rate";
+import { fetchGoldRate } from "@/lib/gold-rate-client";
 
 type Variant = "compact" | "full";
-
-/**
- * Shared, deduped fetch - the widget renders in more than one place (nav,
- * mobile menu); this ensures a single network request per page load. Cleared
- * on failure so a transient error isn't cached forever.
- */
-let ratePromise: Promise<GoldRateResponse> | null = null;
-function fetchRate(): Promise<GoldRateResponse> {
-  if (!ratePromise) {
-    ratePromise = fetch("/api/gold-rate")
-      .then((r) => {
-        if (!r.ok) throw new Error("gold-rate request failed");
-        return r.json() as Promise<GoldRateResponse>;
-      })
-      .catch((err) => {
-        ratePromise = null;
-        throw err;
-      });
-  }
-  return ratePromise;
-}
 
 /**
  * Live (indicative) gold-rate widget. Reads through the app's own Route
@@ -44,7 +24,7 @@ export function GoldRateTicker({
 
   useEffect(() => {
     let active = true;
-    fetchRate()
+    fetchGoldRate()
       .then((d) => active && setData(d))
       .catch(() => active && setError(true));
     return () => {

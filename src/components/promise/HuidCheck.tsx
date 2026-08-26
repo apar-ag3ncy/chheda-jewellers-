@@ -23,7 +23,11 @@ export function HuidCheck() {
   const [value, setValue] = useState("");
   const cleaned = value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
   const complete = cleaned.length === 6;
-  const valid = HUID.test(cleaned);
+  // The sanitiser above already strips everything that is not A-Z0-9 and
+  // caps at six, so HUID.test(cleaned) was always true once complete and the
+  // "that does not look like a HUID" branch was unreachable. Validate what
+  // the visitor actually TYPED, which is the thing that can be wrong.
+  const valid = HUID.test(cleaned) && value.trim().toUpperCase().replace(/\s+/g, "") === cleaned;
 
   return (
     <div className="rounded-[var(--radius-brand)] border border-line bg-green-soft/20 p-6 md:p-7">

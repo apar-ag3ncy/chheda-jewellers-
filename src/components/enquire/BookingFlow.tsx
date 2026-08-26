@@ -341,6 +341,7 @@ export function BookingFlow() {
                   onChange={(v) => set("slot", v)}
                   options={SLOTS.map((s) => ({ value: s, label: s }))}
                   compact
+                  errorId={errors.slot ? "slot-error" : undefined}
                 />
                 {errors.slot ? <FieldError id="slot-error">{errors.slot}</FieldError> : null}
               </div>
@@ -619,6 +620,7 @@ function ChipGroup({
   onChange,
   options,
   compact = false,
+  errorId,
 }: {
   legend: string;
   name: string;
@@ -626,9 +628,14 @@ function ChipGroup({
   onChange: (v: string) => void;
   options: { value: string; label: string; note?: string }[];
   compact?: boolean;
+  /** id of the FieldError describing this group, so it is announced. */
+  errorId?: string;
 }) {
   return (
-    <fieldset className="border-0 p-0">
+    // Every other field wires aria-describedby to its error; this group
+    // rendered an error with an id that nothing pointed at, so screen-reader
+    // users were told a slot was missing by a message they never heard.
+    <fieldset className="border-0 p-0" aria-describedby={errorId} aria-invalid={Boolean(errorId)}>
       <legend className="u-eyebrow mb-4 text-[0.62rem]">{legend}</legend>
       <div className="flex flex-wrap gap-2.5">
         {options.map((o) => (
