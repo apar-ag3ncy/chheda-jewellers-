@@ -53,7 +53,12 @@ const pillars = [
 const position = [
   { label: "Founded", value: "Mumbai" },
   { label: "Boutiques", value: "Two" },
-  { label: "Customer rating", value: `${reviewsSummary.rating.toFixed(1)} / 5` },
+  // Every other surface honours reviewsSummary.verified; this one published
+  // the rating as a hard fact to the audience least forgiving of an unaudited
+  // number. Until the reviews are real it states the two shops instead.
+  reviewsSummary.verified
+    ? { label: "Customer rating", value: `${reviewsSummary.rating.toFixed(1)} / 5` }
+    : { label: "Boutiques", value: `${siteConfig.branches.length} in Mumbai` },
   { label: "Categories", value: "Gold · Diamond · Polki" },
 ];
 

@@ -162,8 +162,14 @@ export default function LiveGoldRatePage() {
       <Section spacing="lg" tone="deep">
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+            {/* This used to read "Rather buy at a rate you fixed months
+                ago?", which is the opposite of what the plan does: the
+                Monthly Plan redeems AT THE DAY'S RATE and adds a bonus on
+                maturity - it does not lock a rate in. Promising a rate lock
+                here and denying it on the plan page is the kind of thing a
+                customer discovers at the counter. */}
             <h2 className="max-w-xl font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)]">
-              Rather buy at a rate you fixed months ago?
+              Rather put a little aside each month?
             </h2>
             <Button href="/offers-and-plans" variant="primary" size="lg" withArrow>
               The Monthly Plan

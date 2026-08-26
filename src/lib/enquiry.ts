@@ -208,7 +208,17 @@ export function validate(d: Partial<EnquiryDraft>): Record<string, string> {
   if (digits.length < 10) errors.phone = "A 10-digit mobile number, so we can confirm.";
   if (d.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email))
     errors.email = "That email address doesn't look right.";
-  if (!d.date) errors.date = "Pick a day.";
+  // The input's min/max are a hint, not a guarantee - they are trivially
+  // bypassed and unsupported on some browsers, which let a past date through
+  // to a composed, sent booking. Bound it here, where sending is decided.
+  if (!d.date) {
+    errors.date = "Pick a day.";
+  } else {
+    const now = new Date();
+    const day = d.date;
+    if (day < earliestDate(now)) errors.date = "Pick a day from tomorrow onward.";
+    else if (day > latestDate(now)) errors.date = "That is further ahead than we book - pick a nearer day.";
+  }
   if (!d.slot) errors.slot = "Pick a time.";
   return errors;
 }

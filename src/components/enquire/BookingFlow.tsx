@@ -94,8 +94,19 @@ export function BookingFlow() {
 
   // Move focus to the new step's heading so keyboard and screen-reader users
   // land where the content changed rather than at the top of the document.
+  //
+  // This must NOT fire on mount. It used to share `startedRef` with the
+  // deep-link effect above, which sets that ref to true while mounting - so
+  // the guard was already open on the very first run and /enquire stole focus
+  // and scrolled past its own hero for everyone, on every visit. A ref of its
+  // own, flipped after the first run, is the actual "not the first time" test.
+  const stepSettledRef = useRef(false);
   useEffect(() => {
-    if (startedRef.current) headingRef.current?.focus();
+    if (!stepSettledRef.current) {
+      stepSettledRef.current = true;
+      return;
+    }
+    headingRef.current?.focus();
   }, [step]);
 
   const full: EnquiryDraft = useMemo(
