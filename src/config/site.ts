@@ -147,3 +147,11 @@ export function houseLines(): [string, string] {
   const [first, ...rest] = siteConfig.name.split(" ");
   return [first ?? siteConfig.name, rest.join(" ")];
 }
+
+/**
+ * The brand emerald as a literal, for the handful of places that cannot read
+ * a CSS custom property: the web manifest, the browser theme colour, and the
+ * root error boundary (which must render before any stylesheet is guaranteed).
+ * Everything else uses the --green token. Keep in step with tokens.css.
+ */
+export const BRAND_EMERALD = "#0b3a2d";

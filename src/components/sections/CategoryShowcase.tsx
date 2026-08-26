@@ -124,7 +124,6 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
       <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <SectionHeading
-            // "Edit" is the reserved occasion-axis word - a room gallery is not one.
             eyebrow={`Inside the ${category.name} room`}
             title={`A closer look at\nour ${category.name.toLowerCase()} room`}
             intro="A small selection from the counter - a sense of the range, the finish, and the feeling. Every piece is one-of-a-kind; come in to see them in the light."

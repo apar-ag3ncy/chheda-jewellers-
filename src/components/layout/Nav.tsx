@@ -220,7 +220,9 @@ export function Nav() {
                     : "pointer-events-none translate-y-2 opacity-0",
                 )}
               >
-                <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                {/* One column: the second navigation axis this was built for was
+                    removed, and a two-column grid left half the panel empty. */}
+                <div className="grid grid-cols-1 gap-x-8 gap-y-6">
                   {groups.map((group) => (
                     <div key={group.title}>
                       <div className="mb-3 flex items-baseline justify-between border-b border-line pb-2">

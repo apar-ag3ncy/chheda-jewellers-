@@ -185,7 +185,12 @@ export default function EnquirePage() {
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mt-9 font-body text-[0.68rem] uppercase tracking-[0.24em] text-text-muted">
-                {siteConfig.branches.map((b) => b.area).join(" · ")}
+                {/* The addresses, not just the locality names. This is the
+                    page whose entire job is getting someone through a door,
+                    and it named only the two neighbourhoods. */}
+                {siteConfig.branches
+                  .map((b) => `${b.area} - ${b.addressLines.join(", ")}`)
+                  .join("  ·  ")}
               </p>
             </Reveal>
             {/* Server-rendered on purpose: the page that collects a name and
