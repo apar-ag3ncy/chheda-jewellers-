@@ -27,6 +27,10 @@ import { cn } from "@/lib/cn";
 export function Checklist() {
   const [ticked, setTicked] = useState<Set<string>>(new Set());
   const [copied, setCopied] = useState(false);
+  // Clipboard writes reject in plain-http contexts and under some
+  // permission policies. Failing to state.false said nothing at all, so the
+  // button simply did not respond and the visitor could not tell why.
+  const [copyFailed, setCopyFailed] = useState(false);
 
   const toggle = (id: string) =>
     setTicked((prev) => {
@@ -57,9 +61,12 @@ export function Checklist() {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+      setCopyFailed(false);
       window.setTimeout(() => setCopied(false), 2600);
     } catch {
       setCopied(false);
+      setCopyFailed(true);
+      window.setTimeout(() => setCopyFailed(false), 4000);
     }
   };
 
@@ -141,7 +148,7 @@ export function Checklist() {
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button onClick={copy} variant="ghost" type="button">
-                  {copied ? "Copied ✓" : "Copy the list"}
+                  {copied ? "Copied ✓" : copyFailed ? "Press Ctrl/Cmd + C" : "Copy the list"}
                 </Button>
                 {score > 0 ? (
                   <button

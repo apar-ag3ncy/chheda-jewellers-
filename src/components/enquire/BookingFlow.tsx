@@ -521,15 +521,23 @@ export function BookingFlow() {
             >
               {contactIsReal() ? siteConfig.contact.phone : siteConfig.contact.email}
             </a>
-            {" · "}
-            <a
-              href={contactIsReal() ? siteConfig.contact.whatsappHref : "/enquire"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold-light underline underline-offset-4"
-            >
-              WhatsApp
-            </a>
+            {/* Only offered when there is a real number to reach. The
+                degraded version used to point at /enquire - the page the
+                visitor is already on - and open it in a new tab, labelled
+                "WhatsApp". */}
+            {contactIsReal() ? (
+              <>
+                {" · "}
+                <a
+                  href={siteConfig.contact.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold-light underline underline-offset-4"
+                >
+                  WhatsApp
+                </a>
+              </>
+            ) : null}
           </p>
         </div>
       </aside>
