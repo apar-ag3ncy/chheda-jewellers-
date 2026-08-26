@@ -75,7 +75,11 @@ export function Nav() {
 
   const handleEnter = (label: string, hasChildren: boolean) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    if (hasChildren) setOpenMenu(label);
+    // Moving to a sibling item must CLOSE the open panel, not leave it
+    // hanging: this only ever set a new label, so arriving on an item with no
+    // children left the previous 780px panel covering the page until the
+    // pointer left the whole nav shell.
+    setOpenMenu(hasChildren ? label : null);
   };
   const handleLeave = () => {
     closeTimer.current = setTimeout(() => setOpenMenu(null), 120);

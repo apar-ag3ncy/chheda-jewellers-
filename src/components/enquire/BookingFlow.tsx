@@ -328,7 +328,7 @@ export function BookingFlow() {
                   onChange={(e) => set("date", e.target.value)}
                   aria-invalid={Boolean(errors.date)}
                   aria-describedby={errors.date ? "date-error" : undefined}
-                  className="w-full max-w-xs rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong transition-colors focus:border-gold focus:outline-none [color-scheme:dark]"
+                  className="w-full max-w-xs rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong transition-colors focus:border-gold focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light [color-scheme:dark]"
                 />
                 {errors.date ? <FieldError id="date-error">{errors.date}</FieldError> : null}
               </div>
@@ -413,7 +413,7 @@ export function BookingFlow() {
                     value={draft.notes}
                     onChange={(e) => set("notes", e.target.value)}
                     placeholder="A budget, a deadline, a photograph you want to show us…"
-                    className="w-full resize-y rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong placeholder:text-text-muted/60 focus:border-gold focus:outline-none"
+                    className="w-full resize-y rounded-[var(--radius-brand)] border border-line bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong placeholder:text-text-muted/60 focus:border-gold focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
                   />
                 </div>
               </div>
@@ -708,7 +708,10 @@ function Field({
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "w-full rounded-[var(--radius-brand)] border bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong transition-colors focus:outline-none",
+          // A border tint is not a focus indicator, and in the error state the
+          // border does not change on focus at all - focused and unfocused were
+          // pixel-identical. A real 2px ring satisfies WCAG 2.2 focus-appearance.
+          "w-full rounded-[var(--radius-brand)] border bg-green-soft/20 px-4 py-3 font-body text-[0.95rem] font-light text-text-strong transition-colors focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light",
           error ? "border-maroon-soft focus:border-maroon-soft" : "border-line focus:border-gold",
         )}
       />
