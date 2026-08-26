@@ -3,25 +3,21 @@
 import Link from "next/link";
 import { useState } from "react";
 import { siteConfig } from "@/config/site";
-import { Section, Container } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MumbaiPoster } from "@/components/sections/MumbaiPoster";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
 /**
- * VISIT THE HOUSE - the two doors, and a map of the city they are in.
+ * VISIT THE HOUSE - one full-screen landscape of the city, nothing else.
  *
- * The plate itself is `MumbaiPoster`: real OpenStreetMap geometry, a cursor
- * torch that lights the roads, and pins that stand off the surface in 3D.
- * This section owns only the pairing - which branch is active, and the
- * addresses that sit beside the map.
+ * The section is a single 100svh cover: the map fills it edge to edge and
+ * the two address cards float compact at the top right, paper on the dark
+ * plate. No heading, no columns - the map is the section.
  *
- * The plate is dark and the section is cream, because branches sits between
- * a green section and a deep one and can be neither. The addresses stay
- * outside the plate on cream: they are the part of this section with a job
- * to do, and they are sticky because the poster runs taller than the
- * viewport.
+ * Ground note: this is full-bleed imagery, like the hero and the sign-off
+ * footer, so it sits outside the strict cream/dark alternation the painted
+ * sections keep. data-bg="deep" matches the map's darkest edge so the
+ * scroll themer's crossfade into and out of the section is invisible.
  *
  * Map data (c) OpenStreetMap contributors, ODbL.
  */
@@ -30,87 +26,65 @@ export function Branches() {
   const [active, setActive] = useState(0);
 
   return (
-    <Section
+    <section
       id="branches"
-      spacing="lg"
-      tone="transparent"
-      data-bg="beige"
-      className="u-on-light"
+      data-bg="deep"
+      className="relative h-[100svh] w-full overflow-hidden"
+      style={{ perspective: "1600px" }}
     >
-      <Container>
-        <SectionHeading
-          eyebrow="Visit the house"
-          title={"Vile Parle &\nGhatkopar"}
-          intro="Come sit with us over chai - no appointment needed, though we love it when you book ahead."
-          size="md"
-        />
+      <MumbaiPoster active={active} onActivate={setActive} />
 
-        <div className="mt-14 grid grid-cols-1 items-start gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-14">
-          {/* ── The poster ───────────────────────────────────────────── */}
-          <Reveal variant="mask" className="lg:col-span-6">
-            <MumbaiPoster active={active} onActivate={setActive} />
-          </Reveal>
-
-          {/* ── The addresses, on cream where they can be read ────────── */}
-          {/* Sticky: the poster is a 1:1.85 portrait and runs taller than the
-              viewport, so the addresses ride alongside it instead of scrolling
-              away and leaving a column of empty cream. */}
-          <div className="lg:col-span-6 lg:sticky lg:top-28">
-            <ul className="flex flex-col gap-5">
-              {siteConfig.branches.map((b, i) => (
-                <Reveal as="li" key={b.id} delay={i * 0.06}>
-                  <div
-                    className={cn(
-                      "rounded-[var(--radius-brand)] border p-7 transition-colors duration-[400ms] md:p-8",
-                      active === i
-                        ? "border-line-strong bg-white/65"
-                        : "border-line bg-white/40",
-                    )}
-                    onMouseEnter={() => setActive(i)}
-                    onFocus={() => setActive(i)}
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <h3 className="font-display text-2xl font-light text-text-strong md:text-[1.7rem]">
-                        {b.area}
-                      </h3>
-                      <span className="mt-1 font-body text-[0.7rem] tracking-[0.16em] text-gold">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <p className="mt-3 font-body text-[0.9rem] font-light leading-relaxed text-text-muted">
-                      {b.addressLines.join(", ")}, {b.city} {b.pincode}
-                    </p>
-                    <p className="mt-3 font-body text-[0.82rem] tracking-wide text-text-muted">
-                      {b.hours}
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-3">
-                      <Link
-                        href={b.directionsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex min-h-[44px] items-center rounded-full border border-line-strong px-5 py-2.5 font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-strong transition-colors hover:border-gold hover:bg-gold/10"
-                      >
-                        Get directions
-                      </Link>
-                      <Link
-                        href={`tel:${b.phone.replace(/\s+/g, "")}`}
-                        className="inline-flex min-h-[44px] items-center rounded-full border border-line px-5 py-2.5 font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-text-strong"
-                      >
-                        Call
-                      </Link>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </ul>
-            {siteConfig.branches.some((b) => !b.verified) ? (
-              <p className="mt-5 font-body text-[0.72rem] leading-relaxed text-text-muted">
-                Phone numbers and hours pending confirmation.
+      {/* ── The two doors, top right, paper on the plate ─────────────── */}
+      <div className="u-on-light absolute right-4 top-4 flex w-[min(21rem,calc(100vw-2rem))] flex-col gap-2.5 md:right-6 md:top-6">
+        {siteConfig.branches.map((b, i) => (
+          <Reveal key={b.id} delay={i * 0.08} variant="slide" x={24}>
+            <div
+              className={cn(
+                "rounded-[var(--radius-brand)] border p-4 backdrop-blur-[6px] transition-all duration-[400ms] md:p-5",
+                active === i
+                  ? "border-gold/50 bg-cream/95 shadow-[0_18px_40px_-18px_rgba(4,23,15,0.8)]"
+                  : "border-line bg-cream/80",
+              )}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <h3 className="font-display text-lg font-light leading-none text-text-strong md:text-xl">
+                  {b.area}
+                </h3>
+                <span className="font-body text-[0.6rem] tracking-[0.16em] text-gold">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <p className="mt-2 font-body text-[0.76rem] font-light leading-relaxed text-text-muted">
+                {b.addressLines.join(", ")}, {b.city} {b.pincode}
               </p>
-            ) : null}
-          </div>
-        </div>
-      </Container>
-    </Section>
+              <p className="mt-1.5 font-body text-[0.7rem] tracking-wide text-text-muted">{b.hours}</p>
+              <div className="mt-3.5 flex flex-wrap gap-2">
+                <Link
+                  href={b.directionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[38px] items-center rounded-full border border-line-strong px-3.5 py-1.5 font-body text-[0.6rem] uppercase tracking-[0.14em] text-text-strong transition-colors hover:border-gold hover:bg-gold/10"
+                >
+                  Get directions
+                </Link>
+                <Link
+                  href={`tel:${b.phone.replace(/\s+/g, "")}`}
+                  className="inline-flex min-h-[38px] items-center rounded-full border border-line px-3.5 py-1.5 font-body text-[0.6rem] uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-text-strong"
+                >
+                  Call
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+        {siteConfig.branches.some((b) => !b.verified) ? (
+          <p className="self-end rounded-full bg-[#04170f]/60 px-2.5 py-1 font-body text-[0.6rem] leading-none text-beige/80 backdrop-blur-[3px]">
+            Phone numbers and hours pending confirmation.
+          </p>
+        ) : null}
+      </div>
+    </section>
   );
 }
