@@ -20,14 +20,13 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * Homepage - the single-scroll cinematic journey, rendered FROM
  * `config/nav.ts` so the choreography is data, not JSX surgery.
  *
- * The order: the work styled (Collections), the pieces themselves on glass
- * (Vitrine), the house by object (JewelleryTypes), then the word
- * (ChhedaPromise) - shown before it is claimed. Then the people the pieces
- * are made for (Stories), hold one yourself (FilmRoom), what 480
- * families say (Testimonials), the newest argument (DiamondEdit), the
- * circle (CommunityStrip), how it is paid for (MonthlyPlan) - and then the city itself: the full-screen Mumbai
- * map with both addresses closes the scroll into the sign-off, so the last
- * thing a visitor holds is where to find us.
+ * The order: the work styled (Collections), the house's newest collection
+ * (DiamondEdit), the house by object (JewelleryTypes), the pieces themselves
+ * on glass (Vitrine), the people they are made for (Stories), then the word
+ * (ChhedaPromise) - shown before it is claimed - what 480 families say
+ * (Testimonials), hold one yourself (FilmRoom), the circle (CommunityStrip),
+ * how it is paid for (MonthlyPlan), and then the city itself: the
+ * full-screen map with both addresses closes the scroll into the sign-off.
  *
  * The painted grounds strictly alternate, cream first. Two of the same never
  * touch, which is the constraint the order is solved against as much as the
