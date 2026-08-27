@@ -1,10 +1,12 @@
+import { ScrollRail } from "@/components/motion/ScrollRail";
+import { SplitLines } from "@/components/motion/SplitLines";
+import { cn } from "@/lib/cn";
 import Link from "next/link";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import type { CategoryPage } from "@/types/content";
 import { categoryList } from "@/lib/content/categories";
 import { Section, Container } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Button } from "@/components/ui/Button";
@@ -21,17 +23,52 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         <Container>
           {/* h1, because the hero band that used to carry it is gone and a
               page still needs exactly one top-level heading. */}
-          <SectionHeading
-            as="h1"
-            eyebrow={`Inside the ${category.name} room`}
-            title={`Pieces from the\n${category.name.toLowerCase()} counter`}
-            intro="A small selection, named as we name them in the shop. Every piece is one of a kind - what is on the counter changes, so treat these as the range rather than a catalogue."
-            size="lg"
-          />
+          <div className="max-w-3xl">
+            <Reveal as="p" className="u-eyebrow mb-5">
+              Inside the {category.name} room
+            </Reveal>
+            {/* SplitLines rather than SectionHeading: this is the page's
+                arrival now that the hero band is gone, and it should land a
+                line at a time instead of all at once. */}
+            <SplitLines delay={0.04}>
+              <h1 className="font-display text-[length:var(--step-5)] font-light leading-[var(--leading-5)] tracking-[var(--tracking-5)] text-text-strong">
+                <span className="block">Pieces from the</span>
+                <span className="block">{category.name.toLowerCase()} counter</span>
+              </h1>
+            </SplitLines>
+            <Reveal
+              as="p"
+              delay={0.12}
+              className="mt-6 max-w-xl font-body text-[length:var(--step-0)] font-light leading-relaxed text-text-muted"
+            >
+              A small selection, named as we name them in the shop. Every piece
+              is one of a kind - what is on the counter changes, so treat these
+              as the range rather than a catalogue.
+            </Reveal>
+          </div>
 
-          <ul className="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-            {category.picks.map((pick, i) => (
-              <Reveal as="li" key={pick.id} delay={(i % 3) * 0.06} className="group">
+          <div className="relative mt-16 md:mt-24">
+            {/* The rail sits in the left gutter on wide screens only, where
+                there is room for it outside the grid. */}
+            <ScrollRail
+              count={category.picks.length}
+              className="pointer-events-none absolute -left-10 top-0 hidden h-full xl:block"
+            />
+
+            <ul className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+              {category.picks.map((pick, i) => (
+                <Reveal
+                  as="li"
+                  key={pick.id}
+                  delay={(i % 3) * 0.08}
+                  variant="mask"
+                  className={cn(
+                    "group",
+                    // Middle column rides lower, so the grid reads as a hung
+                    // arrangement rather than a spreadsheet of equal cells.
+                    i % 3 === 1 && "lg:mt-16",
+                  )}
+                >
                 <article>
                   <div className="relative overflow-hidden rounded-[var(--radius-brand)] bg-green-deep shadow-[0_3px_8px_rgba(6,36,27,0.16),0_18px_38px_-14px_rgba(6,36,27,0.42)]">
                     <ParallaxImage
@@ -85,11 +122,22 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
                     </span>
                   </Link>
                 </article>
-              </Reveal>
-            ))}
-          </ul>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
 
-          <Reveal className="mt-16 flex flex-wrap items-center justify-center gap-4">
+          {/* The room's own closing line - it used to sit under the signature
+              blocks, which are gone, and it is the only sentence on the page
+              written specifically about this metal. */}
+          <Reveal
+            as="p"
+            className="mx-auto mt-24 max-w-xl text-center font-display text-[length:var(--step-2)] font-light italic leading-snug text-text-strong"
+          >
+            {category.note}
+          </Reveal>
+
+          <Reveal className="mt-12 flex flex-wrap items-center justify-center gap-4">
             <Button href="/enquire" variant="onLight" size="lg" withArrow>
               Book a viewing
             </Button>
