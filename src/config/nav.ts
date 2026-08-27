@@ -81,11 +81,10 @@ export const homepageSections = [
   "stories",
   "film-room",
   "testimonials",
-  "manifesto",
-  "atelier",
   "diamond-edit",
-  "community",
+  "atelier",
   "monthly-plan",
+  "community",
   "branches",
 ] as const;
 

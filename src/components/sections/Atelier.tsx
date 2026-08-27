@@ -10,8 +10,10 @@ import { emphasise } from "@/components/ui/SectionHeading";
 /**
  * THE ATELIER - the bespoke invitation, kept short by design.
  *
- * It answers, in one breath, the question the manifesto above it raises: the
- * claim, one photograph, and the door. The four steps of the commission live on /bespoke; the
+ * One breath: the claim, one photograph, and the door. It follows the
+ * Diamond Edit, so a visitor who has just been shown the house's most
+ * finished collection is offered the opposite - the piece that does not
+ * exist yet. The four steps of the commission live on /bespoke; the
  * homepage no longer walks through them.
  */
 export function Atelier() {

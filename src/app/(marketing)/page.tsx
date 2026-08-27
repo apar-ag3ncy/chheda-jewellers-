@@ -4,7 +4,6 @@ import {
   ChhedaPromise,
   JewelleryTypes,
   Stories,
-  Manifesto,
   Collections,
   Atelier,
   DiamondEdit,
@@ -22,27 +21,28 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * Homepage - the single-scroll cinematic journey, rendered FROM
  * `config/nav.ts` so the choreography is data, not JSX surgery.
  *
- * The order: the word (ChhedaPromise), the work (Collections), hold one
- * piece (FilmRoom), the house by object (JewelleryTypes), the counter
- * (Vitrine), the people pieces are made for (Stories), the newest argument
- * (DiamondEdit), what 480 families say (Testimonials), the belief
- * (Manifesto), its answer (Atelier), the plan (MonthlyPlan), every door
- * (Doors), the circle (CommunityStrip) - and then the city itself: the
- * full-screen Mumbai map with the two addresses closes the scroll into the
- * sign-off footer, so the last thing a visitor holds is where to find us.
+ * The order: the work (Collections), then the word (ChhedaPromise), the
+ * house by object (JewelleryTypes), the counter (Vitrine), the people the
+ * pieces are made for (Stories), hold one yourself (FilmRoom), what 480
+ * families say (Testimonials), the newest argument (DiamondEdit), the piece
+ * that does not exist yet (Atelier), how it is paid for (MonthlyPlan), the
+ * circle (CommunityStrip) - and then the city itself: the full-screen Mumbai
+ * map with both addresses closes the scroll into the sign-off, so the last
+ * thing a visitor holds is where to find us.
  *
- * The painted grounds strictly alternate, dark emerald first, cream on the
- * even beats - two darks never touch, which is also why Manifesto sits at
- * arm's length from DiamondEdit. The two long interactives (FilmRoom,
- * Vitrine) are separated by JewelleryTypes. Branches and the footer are
- * full-bleed imagery, outside the alternation, like the hero.
+ * The painted grounds strictly alternate, cream first. Two of the same never
+ * touch, which is the constraint the order is solved against as much as the
+ * narrative - a run beginning cream only alternates on an even count, so
+ * adding or removing a section means re-solving it, not just splicing.
+ * The two long interactives (FilmRoom, Vitrine) are held apart by Stories.
+ * The hero, the map and the sign-off photograph are full-bleed imagery and
+ * take no part in the alternation.
   */
 const SECTIONS: Record<HomepageSection, ComponentType> = {
   hero: Hero,
   "chheda-promise": ChhedaPromise,
   "jewellery-types": JewelleryTypes,
   stories: Stories,
-  manifesto: Manifesto,
   collections: Collections,
   atelier: Atelier,
   "diamond-edit": DiamondEdit,
