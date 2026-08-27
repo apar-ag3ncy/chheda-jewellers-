@@ -97,14 +97,12 @@ export function Doors() {
   return (
     <Section id="doors" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
       <Container>
-        <div className="flex items-baseline justify-between gap-6 border-b border-line pb-5">
-          <p className="u-eyebrow">Keep exploring</p>
-          <p className="hidden font-body text-[0.72rem] font-light text-text-muted sm:block">
-            Every door below is open
-          </p>
-        </div>
-
-        <div className="mt-10 grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[180px] md:mt-16 md:auto-rows-[210px] md:grid-cols-4 md:gap-4">
+        {/* No header. "Keep exploring" shared a rule with "Every door below is
+            open", so dropping the label alone would have left that note
+            hanging off a divider with nothing opposite it. The bento carries
+            its own labels on every tile and needs no introduction - the same
+            reasoning as the campaign wall. */}
+        <div className="grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[180px] md:auto-rows-[210px] md:grid-cols-4 md:gap-4">
           {/* Split by count, not by literal 5/[5]: editing DOORS used to
               silently drop a tile or crash on an index that no longer exists. */}
           {DOORS.slice(0, DOORS.length - 1).map((door, i) => (
