@@ -22,17 +22,22 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  *
  * The order: the work styled (Collections), the house by object
  * (JewelleryTypes), the word (ChhedaPromise), the pieces themselves on glass
- * (Vitrine), the people they are made for (Stories), hold one yourself
- * (FilmRoom), what 480 families say (Testimonials), the newest collection
- * (DiamondEdit), how it is paid for (MonthlyPlan), the circle
- * (CommunityStrip) - and then the city itself: the full-screen map with both
- * addresses closes the scroll into the sign-off.
+ * (Vitrine), the people they are made for (Stories), what 480 families say
+ * (Testimonials), the newest collection (DiamondEdit), how it is paid for
+ * (MonthlyPlan), hold one yourself (FilmRoom), the circle (CommunityStrip) -
+ * and then the city itself: the full-screen map with both addresses closes
+ * the scroll into the sign-off.
  *
- * NOTE: three pairs of neighbours currently share a ground - Collections into
- * JewelleryTypes, ChhedaPromise into Vitrine, and DiamondEdit into
- * MonthlyPlan. The owner asked for these exact positions, so the ordering
- * takes precedence over the cream/dark alternation here. Do not "fix" it by
- * moving sections; if it needs solving, re-ground one section instead.
+ * NOTE: read the grounds off data-bg, not off "light vs dark" - there are
+ * THREE painted grounds, and green/deep are two of them. The dark run here
+ * (green, deep, deep, green, deep) alternates properly because ChhedaPromise
+ * and MonthlyPlan sit on green while Vitrine, DiamondEdit and FilmRoom sit on
+ * deep; treating them all as one "dark" reports collisions that are not there.
+ *
+ * Two pairs genuinely share an identical ground, both beige:
+ *   Collections -> JewelleryTypes, and Stories -> Testimonials.
+ * The owner asked for these exact positions, so the ordering takes precedence.
+ * Do not "fix" either by moving a section - re-ground one instead.
  *
  * The painted grounds strictly alternate, cream first. Two of the same never
  * touch, which is the constraint the order is solved against as much as the
