@@ -24,7 +24,8 @@ export const metadata = pageMetadata({
 /**
  * /bespoke - the commission, end to end.
  *
- * The homepage Atelier section sells the idea; this page removes the reasons
+ * The homepage no longer carries a bespoke teaser, so this page does both
+ * jobs: it sells the idea and then removes the reasons
  * not to do it. Hence the order: the two ways a commission actually starts
  * (and remaking inherited gold comes FIRST for most families, so it is given
  * equal billing), then the four steps as a numbered document, then the four
