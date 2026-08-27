@@ -38,8 +38,12 @@ eq("complete draft has no errors",
   validate({ name: "Priya", phone: "9820098200", date: "2026-09-01", slot: "11:00 AM" }), {});
 
 console.log("── REFERENCES ─────────────────────────────────────────────");
-const refs = new Set(Array.from({ length: 200 }, () => makeReference()));
-eq("references are unique across 200 draws", refs.size, 200);
+// 2000 is roughly a year of bookings. At the original four characters this
+// collided about five times here, which is five customers a year sharing an
+// appointment reference.
+const refs = new Set(Array.from({ length: 2000 }, () => makeReference()));
+eq("references unique across a year of bookings", refs.size, 2000);
+eq("reference shape", /^CJ-[ACDEFHJKLMNPRTUVWXY349]{6}$/.test(makeReference()), true);
 
 console.log("── FRAME SCRUB MATHS ──────────────────────────────────────");
 eq("clamp below floor", clampFrame(-5, 72), 0);
