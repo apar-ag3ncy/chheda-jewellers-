@@ -20,7 +20,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
  */
 const CHAPTER_NAMES = ["Solitaire", "Brilliance", "Statement", "Eternity"] as const;
 const pieces = CHAPTER_NAMES.map((chapterName, i) => {
-  const frame = categories.diamond.gallery[i];
+  const frame = categories.diamond.picks[i]?.image;
   return {
     src: frame?.src ?? "",
     alt: frame?.alt ?? "",

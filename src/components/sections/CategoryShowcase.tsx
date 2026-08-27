@@ -120,42 +120,74 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         </Container>
       </Section>
 
-      {/* The Edit - a curated gallery of six pieces */}
+      {/* ── The picks - named pieces, not a bare image grid ──────────── */}
       <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <SectionHeading
             eyebrow={`Inside the ${category.name} room`}
-            title={`A closer look at\nour ${category.name.toLowerCase()} room`}
-            intro="A small selection from the counter - a sense of the range, the finish, and the feeling. Every piece is one-of-a-kind; come in to see them in the light."
+            title={`Pieces from the\n${category.name.toLowerCase()} counter`}
+            intro="A small selection, named as we name them in the shop. Every piece is one of a kind - what is on the counter changes, so treat these as the range rather than a catalogue."
             size="lg"
           />
-          <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
-            {category.gallery.map((img, i) => (
-              <figure
-                key={img.src}
-                className={cn(
-                  "group relative overflow-hidden rounded-[var(--radius-brand)]",
-                  i % 3 === 1 && "md:mt-14",
-                )}
-              >
-                <ParallaxImage
-                  src={img.src}
-                  alt={img.alt}
-                  focus={img.focus}
-                  className="aspect-[4/5] w-full"
-                  intensity={0.08}
-                  sizes="(max-width: 768px) 50vw, 30vw"
-                />
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute left-4 top-4 font-body text-[0.7rem] tracking-[0.2em] text-gold-light opacity-0 transition-opacity duration-500 group-hover:opacity-90"
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              </figure>
+
+          <ul className="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+            {category.picks.map((pick, i) => (
+              <Reveal as="li" key={pick.id} delay={(i % 3) * 0.06} className="group">
+                <article>
+                  <div className="relative overflow-hidden rounded-[var(--radius-brand)] bg-green-deep shadow-[0_3px_8px_rgba(6,36,27,0.16),0_18px_38px_-14px_rgba(6,36,27,0.42)]">
+                    <ParallaxImage
+                      src={pick.image.src}
+                      alt={pick.image.alt}
+                      focus={pick.image.focus}
+                      className="aspect-[4/5] w-full"
+                      intensity={0.06}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
+                    />
+                    {/* The room's own mark, so a saved or shared frame still
+                        says whose counter it came from. */}
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute right-3 top-3 rounded-full bg-[#04170f]/70 px-2.5 py-1 font-body text-[0.5rem] uppercase tracking-[0.22em] text-beige/85 backdrop-blur-[2px]"
+                    >
+                      {category.name}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 flex items-baseline justify-between gap-3">
+                    <h3 className="font-display text-[1.35rem] font-light leading-tight text-text-strong">
+                      {pick.name}
+                    </h3>
+                    <span
+                      aria-hidden
+                      className="shrink-0 font-body text-[0.62rem] tracking-[0.18em] text-gold"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 font-body text-[0.68rem] uppercase tracking-[0.16em] text-gold">
+                    {pick.spec}
+                  </p>
+                  <p className="mt-2.5 font-body text-[0.88rem] font-light leading-relaxed text-text-muted">
+                    {pick.note}
+                  </p>
+
+                  {/* Enquire, never "add to cart" - the house does not sell
+                      from the page, and each of these is one of a kind. */}
+                  <Link
+                    href={`/enquire?intent=browse&piece=${encodeURIComponent(pick.name)}`}
+                    className="mt-4 inline-flex min-h-[44px] items-center gap-2 font-body text-[0.66rem] uppercase tracking-[0.16em] text-text-strong underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-gold"
+                  >
+                    Ask to see this
+                    <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
+                      &rarr;
+                    </span>
+                  </Link>
+                </article>
+              </Reveal>
             ))}
-          </div>
-          <Reveal className="mt-14 flex justify-center">
+          </ul>
+
+          <Reveal className="mt-16 flex flex-wrap items-center justify-center gap-4">
             <Button href="/enquire" variant="onLight" size="lg" withArrow>
               Book a viewing
             </Button>
