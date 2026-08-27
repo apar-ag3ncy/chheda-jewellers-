@@ -1,3 +1,4 @@
+import { NextStep } from "@/components/ui/NextStep";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { pageMetadata } from "@/lib/seo";
@@ -181,6 +182,12 @@ export default function JournalPage() {
           </div>
         </Container>
       </Section>
+      <NextStep
+        eyebrow="While the writing is commissioned"
+        title="The rest of the house is already open."
+        primary={{ href: "/jewellery", label: "See the jewellery" }}
+        secondary={{ href: "/chheda-promise", label: "The Chheda Promise" }}
+      />
     </>
   );
 }

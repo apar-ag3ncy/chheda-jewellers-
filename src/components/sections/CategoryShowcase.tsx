@@ -1,3 +1,4 @@
+import { NextStep } from "@/components/ui/NextStep";
 import { ScrollRail } from "@/components/motion/ScrollRail";
 import { SplitLines } from "@/components/motion/SplitLines";
 import { cn } from "@/lib/cn";
@@ -197,6 +198,16 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
           </Link>
         </Container>
       </Section>
+      {/* The cross-links above move sideways between rooms; without this the
+          page is a loop - gold to diamond to polki and back. This is the way
+          out of the loop, and the same band every other page ends on. */}
+      <NextStep
+        tone="deep"
+        eyebrow={`When the ${category.name.toLowerCase()} room is the one`}
+        title="Nothing here photographs the way it looks in the hand."
+        primary={{ href: "/enquire", label: "Book a viewing" }}
+        secondary={{ href: "/chheda-promise", label: "How we price it" }}
+      />
     </>
   );
 }

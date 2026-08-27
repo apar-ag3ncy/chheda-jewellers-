@@ -1,3 +1,4 @@
+import { NextStep } from "@/components/ui/NextStep";
 import Link from "next/link";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
@@ -138,6 +139,12 @@ export default function JewelleryPage() {
           </div>
         </Container>
       </Section>
+      <NextStep
+        eyebrow="When you have chosen a room"
+        title="See it in the light, on the day that suits you."
+        primary={{ href: "/enquire", label: "Book a viewing" }}
+        secondary={{ href: "/chheda-promise", label: "How we price it" }}
+      />
     </>
   );
 }
