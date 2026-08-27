@@ -86,7 +86,6 @@ export const homepageSections = [
   "diamond-edit",
   "community",
   "monthly-plan",
-  "doors",
   "branches",
 ] as const;
 

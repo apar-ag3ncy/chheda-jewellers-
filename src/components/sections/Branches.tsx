@@ -16,10 +16,14 @@ import { cn } from "@/lib/cn";
  * the two address cards float compact at the top right, paper on the dark
  * plate. No heading, no columns - the map is the section.
  *
- * Ground note: this is full-bleed imagery, like the hero and the sign-off
- * footer, so it sits outside the strict cream/dark alternation the painted
- * sections keep. data-bg="deep" matches the map's darkest edge so the
- * scroll themer's crossfade into and out of the section is invisible.
+ * Ground note: this carries NO data-bg, deliberately. It is full-bleed
+ * imagery like the hero and the sign-off photograph, and none of those take
+ * part in the painted sections' cream/dark alternation - the map is opaque
+ * and fills the viewport, so whatever the themer holds behind it is never
+ * seen, and its own edges already feather into --green-deep. Giving it a
+ * ground made it the 13th item in a 12-item alternation, which cannot
+ * alternate: with a light section second and this one last, the run only
+ * works on an even count.
  *
  * Map data (c) OpenStreetMap contributors, ODbL.
  */
@@ -30,7 +34,6 @@ export function Branches() {
   return (
     <section
       id="branches"
-      data-bg="deep"
       className="relative h-[100svh] w-full overflow-hidden"
       style={{ perspective: "1600px" }}
     >

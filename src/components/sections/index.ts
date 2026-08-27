@@ -6,7 +6,6 @@ export { Manifesto } from "./Manifesto";
 export { Collections } from "./Collections";
 export { DiamondEdit } from "./DiamondEdit";
 export { FilmRoom } from "./FilmRoom";
-export { Doors } from "./Doors";
 export { Vitrine } from "./Vitrine";
 export { Atelier } from "./Atelier";
 export { CommunityStrip } from "./CommunityStrip";
