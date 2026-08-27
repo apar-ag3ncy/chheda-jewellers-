@@ -11,7 +11,7 @@ import { cn } from "@/lib/cn";
  *
  * Each cutout (Magnific background removal on the house's own footage) gets
  * the screen to itself, and the ground it sits on is the screen: switching
- * pieces washes the entire section between the three colours the brand owns -
+ * pieces washes the entire section between the dark grounds the case owns -
  * emerald, cream, oxblood - which is the effect a real case gives you when the
  * lining changes behind the glass.
  *
@@ -21,7 +21,7 @@ import { cn } from "@/lib/cn";
  * reflection beneath. Nothing tracks the pointer and nothing sways; the only
  * thing that ever moves is what the visitor asks for by pressing a switch.
  *
- * All three stay mounted and cross-dissolve, so a switch is instant (no reload,
+ * Both stay mounted and cross-dissolve, so a switch is instant (no reload,
  * no flash) and the browser only decodes each piece once.
  */
 
