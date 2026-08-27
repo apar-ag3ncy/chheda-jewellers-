@@ -88,8 +88,24 @@ export interface CategoryPage {
     description: string;
     image: ImageAsset;
   }[];
-  /** Curated edit - a handful of pieces that show the category's range. */
-  gallery: ImageAsset[];
+  /**
+   * The picks - a handful of real pieces that show the room's range.
+   *
+   * Named and specified rather than a bare image grid, because a visitor
+   * deciding between three metal rooms needs to know WHAT they are looking
+   * at. Deliberately carries no price and no cart affordance: this is a
+   * showcase, not a storefront, and every piece is one of a kind.
+   */
+  picks: {
+    id: string;
+    /** What the piece is called on the counter. */
+    name: string;
+    /** Metal, stones, technique - what it is made of and how. */
+    spec: string;
+    /** One line on who it is for or when it is worn. */
+    note: string;
+    image: ImageAsset;
+  }[];
   note: string;
 }
 
