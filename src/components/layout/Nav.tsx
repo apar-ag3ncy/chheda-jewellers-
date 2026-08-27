@@ -179,13 +179,6 @@ export function Nav() {
 
           {/* CTA + mobile toggle */}
           <div className="ml-1 flex shrink-0 items-center gap-2">
-            <Link
-              href="/enquire"
-              className="hidden rounded-full bg-green-deep px-4 py-2 font-body text-[0.66rem] uppercase tracking-[0.14em] text-offwhite transition-colors duration-300 hover:bg-green md:inline-flex"
-            >
-              Book Appointment
-            </Link>
-
             <button
               type="button"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -292,9 +285,11 @@ export function Nav() {
           >
             <InstagramIcon className="h-4 w-4" />
           </a>
-          {/* Only while there is a real number. Pointed at /enquire it was
-              still labelled "WhatsApp" and still opened in a new tab, so the
-              icon promised one thing and did another. */}
+          {/* Only while there is a real number. It used to fall back to the
+              booking form while still labelled "WhatsApp" and still opening in
+              a new tab, so the icon promised one thing and did another. That
+              form is gone now, which leaves hiding it as the only honest
+              option until the number is published. */}
           {contactIsReal() ? (
             <a
               href={siteConfig.contact.whatsappHref}
@@ -436,13 +431,6 @@ function MobileMenu({
         <div className="mt-auto pt-10">
           <GoldRateTicker variant="compact" />
           <div className="mt-6 flex flex-wrap gap-4">
-            <Link
-              href="/enquire"
-              onClick={onClose}
-              className="rounded-full border border-line-strong px-5 py-3 font-body text-[0.7rem] uppercase tracking-[0.14em] text-text-strong"
-            >
-              Book Appointment
-            </Link>
             <Link
               href={siteConfig.socials.instagram}
               target="_blank"

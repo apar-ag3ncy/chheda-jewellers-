@@ -72,11 +72,6 @@ export default function BespokePage() {
           <p className="mt-7 max-w-xl font-body text-[1.02rem] font-light leading-relaxed text-text">
             {bespokeIntro.body}
           </p>
-          <div className="mt-9 flex flex-wrap gap-4">
-            <Button href="/enquire?intent=bespoke" variant="primary" size="lg" withArrow>
-              Book a design appointment
-            </Button>
-          </div>
         </Container>
       </section>
 
@@ -192,10 +187,7 @@ export default function BespokePage() {
           </div>
 
           <Reveal className="mt-24 flex flex-wrap items-center gap-4">
-            <Button href="/enquire?intent=bespoke" variant="primary" size="lg" withArrow>
-              Book a design appointment
-            </Button>
-            <Button href="/chheda-promise" variant="ghost" size="lg">
+            <Button href="/chheda-promise" variant="primary" size="lg" withArrow>
               How we price everything else
             </Button>
           </Reveal>

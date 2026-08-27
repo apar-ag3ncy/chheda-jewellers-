@@ -70,7 +70,8 @@ export interface SavingsPlan {
   summary: string;
   highlights: string[];
   features: PlanFeature[];
-  cta: CTA;
+  /** Optional - a plan need not carry an action. */
+  cta?: CTA;
   flagship?: boolean;
 }
 

@@ -128,13 +128,10 @@ export default function JewelleryPage() {
                   Come and sit with us
                 </h2>
                 <p className="mt-4 max-w-sm font-body text-[0.95rem] font-light leading-relaxed text-text-muted">
-                  Book a private viewing and the room, the advisor and the tray
+                  Walk into either shop and the room, the advisor and the tray
                   are yours. Free, and with no obligation to buy.
                 </p>
               </div>
-              <Button href="/enquire" variant="outline" withArrow className="self-start">
-                Book an appointment
-              </Button>
             </Reveal>
           </div>
         </Container>
@@ -142,8 +139,7 @@ export default function JewelleryPage() {
       <NextStep
         eyebrow="When you have chosen a room"
         title="See it in the light, on the day that suits you."
-        primary={{ href: "/enquire", label: "Book a viewing" }}
-        secondary={{ href: "/chheda-promise", label: "How we price it" }}
+        primary={{ href: "/chheda-promise", label: "How we price it" }}
       />
     </>
   );

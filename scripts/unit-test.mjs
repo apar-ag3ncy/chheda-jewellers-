@@ -1,9 +1,13 @@
 /**
- * Unit tests for the pure logic the HTTP suite cannot reach: enquiry
- * validation, frame-scrub maths, and the contact-placeholder predicate.
+ * Unit tests for the pure logic the HTTP suite cannot reach: frame-scrub
+ * maths and the contact-placeholder predicate.
+ *
+ * The enquiry-validation and booking-reference blocks that used to open this
+ * file went with src/lib/enquiry.ts when the booking page was removed. They
+ * are not commented out here - dead tests for deleted code rot silently and
+ * are worse than no tests. Git has them if the page ever returns.
  *   npx tsx scripts/unit-test.mjs
  */
-import { validate, makeReference } from "../src/lib/enquiry.ts";
 import { clampFrame, wrapFrame, keyDelta } from "../src/lib/scrub.ts";
 
 let pass = 0, fail = 0;
@@ -12,40 +16,8 @@ const eq = (name, got, want) => {
   if (a === b) pass++;
   else { fail++; console.log(`  FAIL ${name}\n       got  ${a}\n       want ${b}`); }
 };
-const has = (name, obj, key) => {
-  if (key in obj) pass++;
-  else { fail++; console.log(`  FAIL ${name} - expected an error on "${key}", got ${JSON.stringify(Object.keys(obj))}`); }
-};
-const none = (name, obj, key) => {
-  if (!(key in obj)) pass++;
-  else { fail++; console.log(`  FAIL ${name} - unexpected error on "${key}": ${obj[key]}`); }
-};
 
-console.log("\n── ENQUIRY VALIDATION ─────────────────────────────────────");
-has("empty draft rejects name", validate({}), "name");
-has("empty draft rejects phone", validate({}), "phone");
-has("empty draft rejects date", validate({}), "date");
-has("empty draft rejects slot", validate({}), "slot");
-has("9-digit phone rejected", validate({ phone: "912345678" }), "phone");
-none("10-digit phone accepted", validate({ phone: "9820098200" }), "phone");
-none("spaced phone accepted", validate({ phone: "98200 98200" }), "phone");
-has("blank name rejected", validate({ name: "   " }), "name");
-none("real name accepted", validate({ name: "Priya" }), "name");
-has("malformed email rejected", validate({ email: "not-an-email" }), "email");
-none("valid email accepted", validate({ email: "a@b.co" }), "email");
-none("omitted email is optional", validate({ name: "A" }), "email");
-eq("complete draft has no errors",
-  validate({ name: "Priya", phone: "9820098200", date: "2026-09-01", slot: "11:00 AM" }), {});
-
-console.log("── REFERENCES ─────────────────────────────────────────────");
-// 2000 is roughly a year of bookings. At the original four characters this
-// collided about five times here, which is five customers a year sharing an
-// appointment reference.
-const refs = new Set(Array.from({ length: 2000 }, () => makeReference()));
-eq("references unique across a year of bookings", refs.size, 2000);
-eq("reference shape", /^CJ-[ACDEFHJKLMNPRTUVWXY349]{6}$/.test(makeReference()), true);
-
-console.log("── FRAME SCRUB MATHS ──────────────────────────────────────");
+console.log("\n── FRAME SCRUB MATHS ──────────────────────────────────────");
 eq("clamp below floor", clampFrame(-5, 72), 0);
 eq("clamp above ceiling", clampFrame(99, 72), 71);
 eq("clamp inside range", clampFrame(30, 72), 30);

@@ -199,8 +199,7 @@ export default function InvestorsPage() {
         tone="green"
         eyebrow="Talk to the house"
         title="Every conversation starts the same way - in the room, with the people who run it."
-        primary={{ href: "/enquire?intent=browse", label: "Arrange a conversation" }}
-        secondary={{ href: "/chheda-promise", label: "How we work" }}
+        primary={{ href: "/chheda-promise", label: "How we work" }}
       />
     </>
   );
