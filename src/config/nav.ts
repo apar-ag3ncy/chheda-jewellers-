@@ -61,6 +61,7 @@ export const primaryNav: NavItem[] = [
       },
     ],
   },
+  { label: "Gallery", href: "/gallery" },
   { label: "Chheda Promise", href: "/chheda-promise" },
   { label: "Offers & Plans", href: "/offers-and-plans" },
   { label: "Investors", href: "/investors" },
@@ -74,7 +75,6 @@ export const primaryNav: NavItem[] = [
  */
 export const homepageSections = [
   "hero",
-  "collections",
   "jewellery-types",
   "chheda-promise",
   "vitrine",

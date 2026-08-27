@@ -134,14 +134,6 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/enquire"
-                    className="inline-flex min-h-[44px] items-center font-body text-[0.88rem] font-light text-text-muted transition-colors hover:text-text-strong"
-                  >
-                    Book a viewing
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href={siteConfig.socials.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -153,8 +145,8 @@ export function Footer() {
               </ul>
               {siteConfig.branches.some((b) => !b.verified) ? (
                 <p className="mt-5 max-w-xs font-body text-[0.72rem] leading-relaxed text-text-muted">
-                  Phone numbers and hours are being confirmed - book a viewing
-                  and we will call you back.
+                  Phone numbers and hours are being confirmed. Email us in the
+                  meantime, or come into either shop.
                 </p>
               ) : null}
             </div>

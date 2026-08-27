@@ -36,10 +36,7 @@ export function Signature() {
           </Reveal>
 
           <Reveal delay={0.16} className="mt-12 flex flex-wrap justify-center gap-4">
-            <Button href="/enquire" variant="primary" size="lg" withArrow>
-              Book a visit
-            </Button>
-            <Button href="/jewellery" variant="ghost" size="lg">
+            <Button href="/jewellery" variant="primary" size="lg" withArrow>
               Explore the jewellery
             </Button>
           </Reveal>

@@ -74,15 +74,19 @@ export function Branches() {
                 >
                   Get directions
                 </Link>
-                {/* Until real numbers are published, a Call button would dial
-                    a placeholder and fail silently. Offer the booking form
-                    instead, which reaches a real inbox. */}
-                <Link
-                  href={contactIsReal() ? `tel:${b.phone.replace(/\s+/g, "")}` : "/enquire"}
-                  className="inline-flex min-h-[38px] items-center rounded-full border border-line px-3.5 py-1.5 font-body text-[0.6rem] uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-text-strong"
-                >
-                  {contactIsReal() ? "Call" : "Book a visit"}
-                </Link>
+                {/* Shown only once real numbers are published. It used to
+                    fall back to the booking form; that page is gone, and a
+                    Call button that dials a placeholder fails silently. Get
+                    directions still works either way, so the card is never
+                    left without an action. */}
+                {contactIsReal() ? (
+                  <Link
+                    href={`tel:${b.phone.replace(/\s+/g, "")}`}
+                    className="inline-flex min-h-[38px] items-center rounded-full border border-line px-3.5 py-1.5 font-body text-[0.6rem] uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-text-strong"
+                  >
+                    Call
+                  </Link>
+                ) : null}
               </div>
             </div>
           </Reveal>

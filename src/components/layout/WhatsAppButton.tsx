@@ -4,7 +4,16 @@ import { useEffect, useState } from "react";
 import { siteConfig, contactIsReal } from "@/config/site";
 import { cn } from "@/lib/cn";
 
-/** Persistent floating WhatsApp / chat button. Appears after first scroll. */
+/**
+ * Persistent floating WhatsApp button. Appears after first scroll.
+ *
+ * Renders NOTHING until a real number is published. This used to fall back to
+ * the booking form while the numbers were placeholders; that page is gone, so
+ * there is no honest destination left for the tap. A float button that opens a
+ * chat with a fake number is worse than no button - it looks like a live
+ * channel and silently fails, which is exactly the impression this shop cannot
+ * afford. Publish the real number in siteConfig and it returns on its own.
+ */
 export function WhatsAppButton() {
   const [visible, setVisible] = useState(false);
 
@@ -15,9 +24,12 @@ export function WhatsAppButton() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Hooks first - this early return must not sit above useState/useEffect.
+  if (!contactIsReal()) return null;
+
   return (
     <a
-      href={contactIsReal() ? siteConfig.contact.whatsappHref : "/enquire"}
+      href={siteConfig.contact.whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Chat with ${siteConfig.name} on WhatsApp`}

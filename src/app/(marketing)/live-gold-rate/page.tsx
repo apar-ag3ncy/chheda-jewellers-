@@ -115,9 +115,13 @@ export default function LiveGoldRatePage() {
                 <Button href="/chheda-promise#estimate" variant="primary" withArrow>
                   Turn it into a bill
                 </Button>
-                <Button href={contactIsReal() ? siteConfig.contact.whatsappHref : "/enquire"} variant="ghost">
-                  Ask us
-                </Button>
+                {/* Only once a real number is published - this used to fall
+                    back to the booking form, which no longer exists. */}
+                {contactIsReal() ? (
+                  <Button href={siteConfig.contact.whatsappHref} variant="ghost">
+                    Ask us
+                  </Button>
+                ) : null}
               </div>
 
               <p className="mt-6 font-body text-[0.72rem] leading-relaxed text-text-muted">
@@ -183,7 +187,6 @@ export default function LiveGoldRatePage() {
         eyebrow="A rate is only half the bill"
         title="We will show you the other half, line by line."
         primary={{ href: "/chheda-promise", label: "The Chheda Promise" }}
-        secondary={{ href: "/enquire", label: "Book a viewing" }}
       />
     </>
   );

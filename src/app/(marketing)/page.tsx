@@ -4,7 +4,6 @@ import {
   ChhedaPromise,
   JewelleryTypes,
   Stories,
-  Collections,
   DiamondEdit,
   FilmRoom,
   Vitrine,
@@ -20,8 +19,7 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * Homepage - the single-scroll cinematic journey, rendered FROM
  * `config/nav.ts` so the choreography is data, not JSX surgery.
  *
- * The order: the work styled (Collections), the house by object
- * (JewelleryTypes), the word (ChhedaPromise), the pieces themselves on glass
+ * The order: the house by object (JewelleryTypes), the word (ChhedaPromise), the pieces themselves on glass
  * (Vitrine), the people they are made for (Stories), what 480 families say
  * (Testimonials), the newest collection (DiamondEdit), how it is paid for
  * (MonthlyPlan), hold one yourself (FilmRoom), the circle (CommunityStrip) -
@@ -35,7 +33,11 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * deep; treating them all as one "dark" reports collisions that are not there.
  *
  * Two pairs genuinely share an identical ground, both beige:
- *   Collections -> JewelleryTypes, and Stories -> Testimonials.
+ *   Stories -> Testimonials.
+ *
+ * The campaign wall (Collections) is no longer on this page at all - it is
+ * the whole of /gallery now. It used to open the scroll, where nine large
+ * frames made the homepage a lookbook before the house had said anything.
  * The owner asked for these exact positions, so the ordering takes precedence.
  * Do not "fix" either by moving a section - re-ground one instead.
  *
@@ -52,7 +54,6 @@ const SECTIONS: Record<HomepageSection, ComponentType> = {
   "chheda-promise": ChhedaPromise,
   "jewellery-types": JewelleryTypes,
   stories: Stories,
-  collections: Collections,
   "diamond-edit": DiamondEdit,
   "film-room": FilmRoom,
   vitrine: Vitrine,

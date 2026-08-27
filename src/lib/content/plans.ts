@@ -29,7 +29,6 @@ export const plans: SavingsPlan[] = [
       { label: "Maturity benefit", value: "1 instalment added" },
       { label: "Redemption", value: "Gold, diamond & polki" },
     ],
-    cta: { label: "Enquire about the plan", href: "/enquire?intent=plans" },
     flagship: true,
   },
   {
@@ -47,6 +46,5 @@ export const plans: SavingsPlan[] = [
       { label: "Booking", value: "By appointment" },
       { label: "Includes", value: "Design + fittings" },
     ],
-    cta: { label: "Book a bridal consult", href: "/enquire?intent=bridal" },
   },
 ];

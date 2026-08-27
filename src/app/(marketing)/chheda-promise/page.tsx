@@ -46,8 +46,7 @@ export default function ChhedaPromisePage() {
       <NextStep
         eyebrow="Now you know how we work"
         title="Come and hold us to it."
-        primary={{ href: "/enquire", label: "Book a viewing" }}
-        secondary={{ href: "/jewellery", label: "See the jewellery" }}
+        primary={{ href: "/jewellery", label: "See the jewellery" }}
       />
     </>
   );

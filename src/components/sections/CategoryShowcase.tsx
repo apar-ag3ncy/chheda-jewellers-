@@ -10,7 +10,6 @@ import { categoryList } from "@/lib/content/categories";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
-import { Button } from "@/components/ui/Button";
 
 /** Reusable editorial showcase for a jewellery category (gold/diamond/polki). */
 export function CategoryShowcase({ category }: { category: CategoryPage }) {
@@ -111,17 +110,9 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
                     {pick.note}
                   </p>
 
-                  {/* Enquire, never "add to cart" - the house does not sell
-                      from the page, and each of these is one of a kind. */}
-                  <Link
-                    href={`/enquire?intent=browse&piece=${encodeURIComponent(pick.name)}`}
-                    className="mt-4 inline-flex min-h-[44px] items-center gap-2 font-body text-[0.66rem] uppercase tracking-[0.16em] text-text-strong underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-gold"
-                  >
-                    Ask to see this
-                    <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
-                      &rarr;
-                    </span>
-                  </Link>
+                  {/* No action on a pick, by design. The house does not sell
+                      from the page and each of these is one of a kind, so the
+                      card states the piece and stops there. */}
                 </article>
                 </Reveal>
               ))}
@@ -136,12 +127,6 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
             className="mx-auto mt-24 max-w-xl text-center font-display text-[length:var(--step-2)] font-light italic leading-snug text-text-strong"
           >
             {category.note}
-          </Reveal>
-
-          <Reveal className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <Button href="/enquire" variant="onLight" size="lg" withArrow>
-              Book a viewing
-            </Button>
           </Reveal>
         </Container>
       </Section>
@@ -205,8 +190,7 @@ export function CategoryShowcase({ category }: { category: CategoryPage }) {
         tone="deep"
         eyebrow={`When the ${category.name.toLowerCase()} room is the one`}
         title="Nothing here photographs the way it looks in the hand."
-        primary={{ href: "/enquire", label: "Book a viewing" }}
-        secondary={{ href: "/chheda-promise", label: "How we price it" }}
+        primary={{ href: "/chheda-promise", label: "How we price it" }}
       />
     </>
   );

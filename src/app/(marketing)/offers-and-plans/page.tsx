@@ -73,16 +73,18 @@ export default function OffersAndPlansPage() {
                         </li>
                       ))}
                     </ul>
-                    <div className="mt-8">
-                      <Button
-                        href={plan.cta.href}
-                        variant={plan.flagship ? "primary" : "outline"}
-                        size="lg"
-                        withArrow
-                      >
-                        {plan.cta.label}
-                      </Button>
-                    </div>
+                    {plan.cta ? (
+                      <div className="mt-8">
+                        <Button
+                          href={plan.cta.href}
+                          variant={plan.flagship ? "primary" : "outline"}
+                          size="lg"
+                          withArrow
+                        >
+                          {plan.cta.label}
+                        </Button>
+                      </div>
+                    ) : null}
                   </div>
 
                   <div className="md:col-span-6">
@@ -126,15 +128,12 @@ export default function OffersAndPlansPage() {
                 Ready to begin? Let&rsquo;s talk.
               </h2>
               <p className="mt-3 max-w-md font-body text-[0.92rem] font-light leading-relaxed text-text-muted">
-                Enquiries are personal. Book twenty minutes with an advisor, or
-                message us on WhatsApp, and we&rsquo;ll walk you through it line by
-                line.
+                Enquiries are personal. Come into either shop and an advisor
+                will walk you through it line by line - the instalment, the
+                maturity benefit, and what it buys at the day&rsquo;s rate.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button href="/enquire?intent=plans" variant="onLight" size="lg" withArrow>
-                Book an appointment
-              </Button>
               <Button href="/live-gold-rate" variant="onLight" size="lg">
                 Check today&rsquo;s rate
               </Button>

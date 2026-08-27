@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       freq: "monthly" as Freq,
     })),
     { path: "/bespoke", priority: 0.8, freq: "monthly" },
-    { path: "/enquire", priority: 0.8, freq: "monthly" },
+    { path: "/gallery", priority: 0.8, freq: "monthly" },
     { path: "/chheda-promise", priority: 0.7, freq: "monthly" },
     { path: "/offers-and-plans", priority: 0.7, freq: "monthly" },
     { path: "/live-gold-rate", priority: 0.7, freq: "daily" },

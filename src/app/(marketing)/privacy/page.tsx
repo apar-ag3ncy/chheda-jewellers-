@@ -5,7 +5,7 @@ import { Section, Container } from "@/components/ui/Section";
 
 export const metadata = pageMetadata({
   title: "Privacy Policy",
-  description: `How ${siteConfig.name} collects, uses and protects your information - what we keep when you enquire or book an appointment, who it is shared with, how long it is held, and how to have it removed.`,
+  description: `How ${siteConfig.name} collects, uses and protects your information - what we keep when you contact us, who it is shared with, how long it is held, and how to have it removed.`,
   path: "/privacy",
 });
 
@@ -16,7 +16,7 @@ const sections = [
   },
   {
     h: "How we use it",
-    p: "We use your information only to respond to enquiries, arrange appointments, and, with your consent, to keep you updated about collections and offers. We do not sell your data.",
+    p: "We use your information only to respond to you when you get in touch, and, with your consent, to keep you updated about collections and offers. We do not sell your data.",
   },
   {
     h: "Analytics & cookies",

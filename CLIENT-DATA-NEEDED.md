@@ -17,9 +17,14 @@ Fill these in and the site is launch-ready; nothing else is blocking.
 | `contact.whatsappHref` | `https://wa.me/910000000000` | same, as `wa.me/91XXXXXXXXXX` |
 | `contact.email` | `hello@chhedajewellers.com` | confirm or correct |
 
-> Every Call and WhatsApp affordance currently routes to `/enquire` instead,
-> because `contactIsReal()` detects the placeholder digits. **Paste real
-> numbers and they all switch back on - no code change.**
+> **This is now the most urgent item on the list.** Every Call and WhatsApp
+> affordance used to fall back to the booking form; that page has been
+> removed, so those controls now render as NOTHING until a real number is
+> published - the floating WhatsApp button, the WhatsApp icon in the menu,
+> the Call button on each branch card, and "Ask us" on the gold-rate page.
+> Hiding them is deliberate: a control that dials a placeholder looks like a
+> live channel and fails silently. Publish the numbers and all four return
+> on their own, with no code change.
 
 ## 2. The two shops - BLOCKER
 
