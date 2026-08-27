@@ -79,10 +79,10 @@ export const homepageSections = [
   "chheda-promise",
   "vitrine",
   "stories",
-  "film-room",
   "testimonials",
   "diamond-edit",
   "monthly-plan",
+  "film-room",
   "community",
   "branches",
 ] as const;
