@@ -20,13 +20,19 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * Homepage - the single-scroll cinematic journey, rendered FROM
  * `config/nav.ts` so the choreography is data, not JSX surgery.
  *
- * The order: the work styled (Collections), the house's newest collection
- * (DiamondEdit), the house by object (JewelleryTypes), the pieces themselves
- * on glass (Vitrine), the people they are made for (Stories), then the word
- * (ChhedaPromise) - shown before it is claimed - what 480 families say
- * (Testimonials), hold one yourself (FilmRoom), the circle (CommunityStrip),
- * how it is paid for (MonthlyPlan), and then the city itself: the
- * full-screen map with both addresses closes the scroll into the sign-off.
+ * The order: the work styled (Collections), the house by object
+ * (JewelleryTypes), the word (ChhedaPromise), the pieces themselves on glass
+ * (Vitrine), the people they are made for (Stories), hold one yourself
+ * (FilmRoom), what 480 families say (Testimonials), the newest collection
+ * (DiamondEdit), how it is paid for (MonthlyPlan), the circle
+ * (CommunityStrip) - and then the city itself: the full-screen map with both
+ * addresses closes the scroll into the sign-off.
+ *
+ * NOTE: three pairs of neighbours currently share a ground - Collections into
+ * JewelleryTypes, ChhedaPromise into Vitrine, and DiamondEdit into
+ * MonthlyPlan. The owner asked for these exact positions, so the ordering
+ * takes precedence over the cream/dark alternation here. Do not "fix" it by
+ * moving sections; if it needs solving, re-ground one section instead.
  *
  * The painted grounds strictly alternate, cream first. Two of the same never
  * touch, which is the constraint the order is solved against as much as the

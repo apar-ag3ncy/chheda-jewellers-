@@ -75,15 +75,15 @@ export const primaryNav: NavItem[] = [
 export const homepageSections = [
   "hero",
   "collections",
-  "diamond-edit",
   "jewellery-types",
+  "chheda-promise",
   "vitrine",
   "stories",
-  "chheda-promise",
-  "testimonials",
   "film-room",
-  "community",
+  "testimonials",
+  "diamond-edit",
   "monthly-plan",
+  "community",
   "branches",
 ] as const;
 
