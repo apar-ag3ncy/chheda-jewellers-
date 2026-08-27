@@ -34,27 +34,17 @@ type Ground = {
   sheen: string;
 };
 
-/** The house's three grounds - dark, light, dark. */
+/** The case's grounds. Both are dark: the section declares data-bg="deep"
+ *  and fills the viewport, so a cream piece would have made it read LIGHT
+ *  whenever that piece was selected - and the page's grounds must alternate
+ *  whichever piece a visitor picks, not just on first paint. */
 const EMERALD: Ground = { bg: "bg-green", sheen: "rgba(255,236,200,0.42)" };
-const CREAM: Ground = { bg: "bg-cream", light: true, sheen: "rgba(255,255,255,0.55)" };
 const NOIR: Ground = { bg: "bg-green-deep", sheen: "rgba(255,228,190,0.40)" };
 
+// The kada pair was removed at the owner's request; the case now holds the
+// two ring-scale pieces, which is also why the default ground is emerald
+// rather than whatever the first piece happened to carry.
 const PIECES = [
-  {
-    id: "kada",
-    name: "The Kada Pair",
-    detail: "22K gold · kundan & meena",
-    src: "/media/vitrine/kada.webp",
-    alt: "A pair of jadau kada bangles, lit against deep emerald",
-    /** Sized per piece so a wide band and a tall ring feel equally grand. */
-    maxH: "min(34svh, 20rem)",
-    maxW: "min(82vw, 46rem)",
-    /** Fixed three-quarter angle, in degrees. */
-    tilt: { x: 6, y: -9 },
-    /** Where the sheen crosses the metal, as a background-position. */
-    sheenAt: "72%",
-    ground: EMERALD,
-  },
   {
     id: "rose",
     name: "The Emerald Brooch",
@@ -65,7 +55,7 @@ const PIECES = [
     maxW: "min(74vw, 26rem)",
     tilt: { x: 5, y: 8 },
     sheenAt: "28%",
-    ground: CREAM,
+    ground: EMERALD,
   },
   {
     id: "ring",
