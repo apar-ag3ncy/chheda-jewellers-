@@ -1,6 +1,6 @@
 import type { JewelleryType } from "@/types/content";
 
-/** Types of Jewellery - Necklace · Earrings · Rings · Hathphool. */
+/** Types of Jewellery - Necklace · Earrings · Rings · Haath Paan. */
 export const jewelleryTypes: JewelleryType[] = [
   {
     id: "necklace",
@@ -42,14 +42,15 @@ export const jewelleryTypes: JewelleryType[] = [
     href: "/jewellery/diamond",
   },
   {
+    // id and image filename stay as-is: they are internal keys, not copy.
     id: "hathphool",
-    name: "Hathphool",
+    name: "Haath Paan",
     subtitle: "Ornament of the hand",
     description:
       "The hand-panja that connects ring to bracelet in a single flourish - the most romantic piece a bride wears.",
     image: {
       src: "/media/types/hathphool.jpg",
-      alt: "Hathphool hand ornament with bangles worn by a model",
+      alt: "Haath paan hand ornament with bangles worn by a model",
       focus: "50% 40%",
     },
     href: "/jewellery/polki",
