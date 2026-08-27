@@ -44,8 +44,19 @@ const Lozenge = ({ className }: { className?: string }) => (
 export function CommunityStrip() {
   const arches = community.gallery.slice(0, 5);
 
+  // Cream, not deep. Putting a light section second forces the whole painted
+  // run to start light, and 14 sections only alternate perfectly at 7 and 7 -
+  // so exactly one dark had to become light. This one, because its photograph
+  // sits in a frame rather than full-bleed behind the type, which is what
+  // every other dark section relies on.
   return (
-    <Section id="community" spacing="lg" tone="transparent" data-bg="deep">
+    <Section
+      id="community"
+      spacing="lg"
+      tone="transparent"
+      data-bg="beige"
+      className="u-on-light"
+    >
       <Container>
         {/* ── Ornamental header ── */}
         <div className="flex flex-col items-center text-center">
