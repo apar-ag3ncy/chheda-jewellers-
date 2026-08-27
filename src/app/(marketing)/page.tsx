@@ -21,9 +21,10 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * Homepage - the single-scroll cinematic journey, rendered FROM
  * `config/nav.ts` so the choreography is data, not JSX surgery.
  *
- * The order: the work (Collections), then the word (ChhedaPromise), the
- * house by object (JewelleryTypes), the counter (Vitrine), the people the
- * pieces are made for (Stories), hold one yourself (FilmRoom), what 480
+ * The order: the work styled (Collections), the pieces themselves on glass
+ * (Vitrine), the house by object (JewelleryTypes), then the word
+ * (ChhedaPromise) - shown before it is claimed. Then the people the pieces
+ * are made for (Stories), hold one yourself (FilmRoom), what 480
  * families say (Testimonials), the newest argument (DiamondEdit), the piece
  * that does not exist yet (Atelier), how it is paid for (MonthlyPlan), the
  * circle (CommunityStrip) - and then the city itself: the full-screen Mumbai
