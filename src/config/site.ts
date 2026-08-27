@@ -94,13 +94,13 @@ export const siteConfig = {
       id: "ghatkopar",
       name: "Chheda Jewellers - Ghatkopar",
       area: "Ghatkopar East",
-      addressLines: ["Near Khau Galli, M.G. Road", "Ghatkopar (East)"],
+      addressLines: ["Vardhaman Business Bay", "Khau Galli, Ghatkopar (East)"],
       city: "Mumbai",
       state: "Maharashtra",
       pincode: "400077",
       phone: "+91 22 0000 0000", // TODO(client)
       hours: "Mon-Sun · 11:00 AM - 8:30 PM", // TODO(client)
-      // M.G. Road by Khau Galli, Ghatkopar East. TODO(client): confirm the
+      // Vardhaman Business Bay, Khau Galli, Ghatkopar East. TODO(client): confirm the
       // exact door pin.
       coordinates: { lat: 19.0855, lng: 72.9098 }, // TODO(client): exact door
       directionsUrl:

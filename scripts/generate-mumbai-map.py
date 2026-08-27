@@ -35,7 +35,7 @@ OUT_TRACE = "src/lib/mumbai-arterials.ts"
 # That is real geography, and the Arabian Sea reads as deliberate negative
 # space against the density on the right.
 W, H = 1242.0, 776.0
-WEST, EAST, SOUTH, NORTH, KX = 72.56044, 73.19966, 18.90392, 19.28148, 0.945058
+WEST, EAST, SOUTH, NORTH, KX = 72.64993, 73.11017, 18.95678, 19.22862, 0.945058
 
 # The FETCH window is deliberately larger and independent of the frame: it is
 # the Overpass query and the cache key, so re-framing the map costs nothing.

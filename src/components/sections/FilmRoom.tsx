@@ -25,7 +25,10 @@ import { cn } from "@/lib/cn";
  */
 
 /** Rotations across the section's scroll - gentle, so it reads as slow-motion. */
-const SCROLL_TURNS = 1.15;
+// Softer than a full turn: the ring drifts through about two-thirds of a
+// rotation across the whole section instead of spinning past 360, so the
+// movement reads as a slow settle rather than a wheel being cranked.
+const SCROLL_TURNS = 0.65;
 
 /** Feathers every edge of the frame into the page. */
 const SEAMLESS_MASK =
