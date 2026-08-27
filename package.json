@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "test:smoke": "node scripts/smoke-test.mjs",
-    "test:unit": "tsx scripts/unit-test.mjs",
+    "test:unit": "npx --yes tsx scripts/unit-test.mjs",
     "test": "npm run test:unit && npm run test:smoke"
   },
   "dependencies": {

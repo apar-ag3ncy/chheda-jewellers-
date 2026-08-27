@@ -101,9 +101,14 @@ export const GUEST_OPTIONS = ["Just me", "Two of us", "3-4", "5 or more"] as con
  * during render) so server and client markup can never disagree.
  */
 export function makeReference(): string {
+  // Six characters, not four. The alphabet is 22 glyphs (no O/0, I/1, S/5,
+  // B/8 - a reference gets read aloud over a counter), so four gave 234k
+  // possibilities: at a realistic booking volume that is roughly seven
+  // duplicate references a year, on the one string that identifies an
+  // appointment. Six gives 113 million, which is never.
   const alphabet = "ACDEFHJKLMNPRTUVWXY349";
   let out = "";
-  for (let i = 0; i < 4; i += 1) {
+  for (let i = 0; i < 6; i += 1) {
     out += alphabet[Math.floor(Math.random() * alphabet.length)];
   }
   return `CJ-${out}`;
