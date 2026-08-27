@@ -1,7 +1,6 @@
 import type { ComponentType } from "react";
 import {
   Hero,
-  Doors,
   ChhedaPromise,
   JewelleryTypes,
   Stories,
@@ -53,7 +52,6 @@ const SECTIONS: Record<HomepageSection, ComponentType> = {
   "monthly-plan": MonthlyPlan,
   branches: Branches,
   community: CommunityStrip,
-  doors: Doors,
 };
 
 export default function HomePage() {
