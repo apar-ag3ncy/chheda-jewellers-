@@ -79,15 +79,8 @@ export interface CategoryPage {
   slug: "gold" | "diamond" | "polki";
   name: string;
   eyebrow: string;
-  headline: string;
   intro: string;
   hero: ImageAsset;
-  signatures: {
-    id: string;
-    title: string;
-    description: string;
-    image: ImageAsset;
-  }[];
   /**
    * The picks - a handful of real pieces that show the room's range.
    *

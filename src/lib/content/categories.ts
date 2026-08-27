@@ -9,7 +9,6 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
     slug: "gold",
     name: "Gold",
     eyebrow: "22 Karat Heritage",
-    headline: "Gold that\nremembers",
     intro:
       "The metal at the heart of every Indian family. From featherlight daily wear to the heaviest bridal sets, our 22K gold is hallmarked, hand-finished, and priced at the day's rate - nothing hidden.",
     hero: {
@@ -17,29 +16,6 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
       alt: "Model in a palace corridor wearing a traditional gold necklace",
       focus: "50% 30%",
     },
-    signatures: [
-      {
-        id: "temple",
-        title: "Temple & antique gold",
-        description:
-          "Nakashi and antique-finish work inspired by the temples of the south - deeply carved, timeless.",
-        image: { src: "/media/types/necklace.jpg", alt: "Traditional gold necklace", focus: "50% 30%" },
-      },
-      {
-        id: "everyday",
-        title: "Everyday 22K",
-        description:
-          "Chains, studs and bangles light enough to never take off, built to last a lifetime of wear.",
-        image: { src: "/media/collections/collection-02.jpg", alt: "Everyday gold jewellery", focus: "50% 28%" },
-      },
-      {
-        id: "bridal-gold",
-        title: "Bridal gold",
-        description:
-          "The full sohaag - haar, vaddanam, bangles and jhumkas - for the bride who carries her family's gold.",
-        image: { src: "/media/hero/hero-03.jpg", alt: "Model wearing gold jewellery in daylight", focus: "50% 26%" },
-      },
-    ],
     picks: [
       {
         id: "temple-choker",
@@ -90,7 +66,6 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
     slug: "diamond",
     name: "Diamond",
     eyebrow: "Certified Brilliance",
-    headline: "Light,\nset in place",
     intro:
       "Certified, conflict-free diamonds in settings that move between a boardroom and a black-tie evening. Modern silhouettes for a wardrobe that is anything but traditional.",
     hero: {
@@ -98,29 +73,6 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
       alt: "Model wearing a delicate diamond necklace in soft light",
       focus: "50% 30%",
     },
-    signatures: [
-      {
-        id: "solitaire",
-        title: "Solitaires",
-        description:
-          "The single stone that says everything - graded, certified, and set to catch every angle of light.",
-        image: { src: "/media/community/community-02.jpg", alt: "Diamond jewellery with a rose", focus: "50% 40%" },
-      },
-      {
-        id: "modern",
-        title: "Everyday diamond",
-        description:
-          "Tennis bracelets, line necklaces and studs - quiet brilliance for the days in between the occasions.",
-        image: { src: "/media/collections/collection-03.jpg", alt: "Contemporary diamond necklace", focus: "50% 35%" },
-      },
-      {
-        id: "statement",
-        title: "Statement pieces",
-        description:
-          "Cocktail rings and cuffs designed to be noticed - architectural, contemporary, unmistakably yours.",
-        image: { src: "/media/community/community-06.jpg", alt: "Emerald and diamond statement necklace", focus: "50% 35%" },
-      },
-    ],
     picks: [
       {
         id: "delicate-line",
@@ -171,7 +123,6 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
     slug: "polki",
     name: "Polki",
     eyebrow: "Uncut & Regal",
-    headline: "The court,\nrecreated",
     intro:
       "Uncut diamonds set in gold with the kundan and jadau techniques of the royal ateliers. Polki is India's most regal jewellery - worn by queens, and now by our brides.",
     hero: {
@@ -179,29 +130,6 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
       alt: "Model wearing an elaborate polki and kundan bridal set",
       focus: "50% 28%",
     },
-    signatures: [
-      {
-        id: "bridal-polki",
-        title: "Bridal polki sets",
-        description:
-          "The full rani-haar, choker, maang tikka and earrings - the centrepiece of a bride's day.",
-        image: { src: "/media/hero/hero-01.jpg", alt: "Bridal polki necklace set", focus: "50% 26%" },
-      },
-      {
-        id: "jadau",
-        title: "Jadau & kundan",
-        description:
-          "Stones set in pure gold foil by hand, the way the karigars of Bikaner and Jaipur have always done it.",
-        image: { src: "/media/collections/collection-04.jpg", alt: "Antique-finish jadau jewellery", focus: "50% 30%" },
-      },
-      {
-        id: "meenakari",
-        title: "Meenakari reverse",
-        description:
-          "Turn a polki piece over and find hand-painted enamel - a secret beauty only the wearer knows.",
-        image: { src: "/media/types/earrings.jpg", alt: "Ornate polki chandbali earrings", focus: "50% 30%" },
-      },
-    ],
     picks: [
       {
         id: "bridal-polki",
