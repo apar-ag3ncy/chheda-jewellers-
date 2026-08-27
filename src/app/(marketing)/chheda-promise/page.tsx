@@ -1,3 +1,4 @@
+import { NextStep } from "@/components/ui/NextStep";
 import { promiseIntro } from "@/lib/content/promise";
 import { pageMetadata } from "@/lib/seo";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -42,6 +43,12 @@ export default function ChhedaPromisePage() {
       <Refusals />
       <Checklist />
       <Signature />
+      <NextStep
+        eyebrow="Now you know how we work"
+        title="Come and hold us to it."
+        primary={{ href: "/enquire", label: "Book a viewing" }}
+        secondary={{ href: "/jewellery", label: "See the jewellery" }}
+      />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { NextStep } from "@/components/ui/NextStep";
 import { siteConfig } from "@/config/site";
 import { reviewsSummary } from "@/lib/content/testimonials";
 import { pageMetadata } from "@/lib/seo";
@@ -194,6 +195,13 @@ export default function InvestorsPage() {
           </div>
         </Container>
       </Section>
+      <NextStep
+        tone="green"
+        eyebrow="Talk to the house"
+        title="Every conversation starts the same way - in the room, with the people who run it."
+        primary={{ href: "/enquire?intent=browse", label: "Arrange a conversation" }}
+        secondary={{ href: "/chheda-promise", label: "How we work" }}
+      />
     </>
   );
 }

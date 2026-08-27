@@ -1,3 +1,4 @@
+import { NextStep } from "@/components/ui/NextStep";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
@@ -177,6 +178,13 @@ export default function LiveGoldRatePage() {
           </div>
         </Container>
       </Section>
+      <NextStep
+        tone="green"
+        eyebrow="A rate is only half the bill"
+        title="We will show you the other half, line by line."
+        primary={{ href: "/chheda-promise", label: "The Chheda Promise" }}
+        secondary={{ href: "/enquire", label: "Book a viewing" }}
+      />
     </>
   );
 }
