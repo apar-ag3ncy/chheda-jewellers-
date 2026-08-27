@@ -2,14 +2,17 @@
   "name": "chheda-jewellers",
   "version": "0.1.0",
   "private": true,
-  "description": "Chheda Jewellers — premium editorial jewellery brand experience.",
+  "description": "Chheda Jewellers \u2014 premium editorial jewellery brand experience.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:smoke": "node scripts/smoke-test.mjs",
+    "test:unit": "tsx scripts/unit-test.mjs",
+    "test": "npm run test:unit && npm run test:smoke"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
