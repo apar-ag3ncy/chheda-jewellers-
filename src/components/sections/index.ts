@@ -2,7 +2,6 @@ export { Hero } from "./Hero";
 export { ChhedaPromise } from "./ChhedaPromise";
 export { JewelleryTypes } from "./JewelleryTypes";
 export { Stories } from "./Stories";
-export { Manifesto } from "./Manifesto";
 export { Collections } from "./Collections";
 export { DiamondEdit } from "./DiamondEdit";
 export { FilmRoom } from "./FilmRoom";
