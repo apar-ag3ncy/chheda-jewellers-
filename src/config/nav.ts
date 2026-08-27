@@ -75,9 +75,9 @@ export const primaryNav: NavItem[] = [
 export const homepageSections = [
   "hero",
   "collections",
-  "chheda-promise",
-  "jewellery-types",
   "vitrine",
+  "jewellery-types",
+  "chheda-promise",
   "stories",
   "film-room",
   "testimonials",
