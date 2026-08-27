@@ -4,10 +4,34 @@ import { useRef, type ReactNode } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 /**
- * Seamless scroll-driven background. A single fixed layer sits behind the
- * (transparent) page sections and its colour eases between the brand tones as
- * each `[data-bg]` section reaches the viewport's middle band. Images are
- * opaque and sit above this layer, so photography is never tinted.
+ * Seamless scroll-driven background: the colour behind the (transparent) page
+ * sections eases between the brand tones as each `[data-bg]` section reaches
+ * the viewport's middle band. Images are opaque and sit above it, so
+ * photography is never tinted.
+ *
+ * The colour is tweened on the ROOT ELEMENT, not on a layer of our own. This
+ * used to be a `fixed inset-0 -z-10` div - a full-viewport painted surface
+ * with fifteen thousand pixels of transparent content sliding over it. The
+ * root's background is painted as the canvas background instead, which the
+ * compositor already treats as a base colour. `<html>` was carrying `--bg`
+ * and `<body>` was transparent for exactly this reason, so the visual result
+ * is identical (verified: all nine grounds match their tokens exactly) with
+ * one fewer surface and one fewer element.
+ *
+ * Honesty about the perf claim: this was made while chasing a "scroll is not
+ * smooth" report, and on the machine it was measured on it changed NOTHING -
+ * median scroll frame was 50ms before and after. Do not cite it as an
+ * optimisation. It is kept because it is simpler, not because it is faster.
+ * What that investigation did establish, so nobody repeats it:
+ *   - ScrollTrigger is not the cost. ScrollTrigger.update() measured 0.06ms
+ *     at its worst, and the trigger count self-drops from 90 to 19 after one
+ *     pass because the `once: true` ones kill themselves.
+ *   - The cost is raster, and it scales with pixels: the same scroll measured
+ *     50ms at 420x380 and 82ms at 1440x900 on the same machine.
+ *   - Layer promotion (will-change/transform-gpu on the header, the parallax
+ *     layers, this ground), content-visibility, contain:paint, and killing
+ *     the parallax scrubs outright were each measured and each changed
+ *     nothing. They were tried and reverted; do not re-add them speculatively.
  *
  * Fully static under prefers-reduced-motion (colour still tracks the section,
  * it just snaps instead of easing).
@@ -34,12 +58,11 @@ function toneColor(name: string | undefined): string {
 
 export function ScrollThemer({ children }: { children: ReactNode }) {
   const scope = useRef<HTMLDivElement>(null);
-  const canvas = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const el = canvas.current;
-      if (!el) return;
+      const el = document.documentElement;
+      const base = toneColor("green");
       const sections = gsap.utils.toArray<HTMLElement>("[data-bg]");
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -60,18 +83,17 @@ export function ScrollThemer({ children }: { children: ReactNode }) {
           },
         });
       });
+
+      // The root is shared with every other route, so hand it back on the way
+      // out. Without this a client-side navigation away from the homepage
+      // would strand whatever tone happened to be showing.
+      return () => {
+        gsap.killTweensOf(el);
+        el.style.backgroundColor = base;
+      };
     },
     { scope },
   );
 
-  return (
-    <div ref={scope}>
-      <div
-        ref={canvas}
-        aria-hidden
-        className="fixed inset-0 -z-10 bg-bg"
-      />
-      {children}
-    </div>
-  );
+  return <div ref={scope}>{children}</div>;
 }
