@@ -5,7 +5,6 @@ import {
   JewelleryTypes,
   Stories,
   Collections,
-  Atelier,
   DiamondEdit,
   FilmRoom,
   Vitrine,
@@ -25,9 +24,8 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
  * (Vitrine), the house by object (JewelleryTypes), then the word
  * (ChhedaPromise) - shown before it is claimed. Then the people the pieces
  * are made for (Stories), hold one yourself (FilmRoom), what 480
- * families say (Testimonials), the newest argument (DiamondEdit), the piece
- * that does not exist yet (Atelier), how it is paid for (MonthlyPlan), the
- * circle (CommunityStrip) - and then the city itself: the full-screen Mumbai
+ * families say (Testimonials), the newest argument (DiamondEdit), the
+ * circle (CommunityStrip), how it is paid for (MonthlyPlan) - and then the city itself: the full-screen Mumbai
  * map with both addresses closes the scroll into the sign-off, so the last
  * thing a visitor holds is where to find us.
  *
@@ -45,7 +43,6 @@ const SECTIONS: Record<HomepageSection, ComponentType> = {
   "jewellery-types": JewelleryTypes,
   stories: Stories,
   collections: Collections,
-  atelier: Atelier,
   "diamond-edit": DiamondEdit,
   "film-room": FilmRoom,
   vitrine: Vitrine,
