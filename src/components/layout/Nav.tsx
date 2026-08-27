@@ -292,16 +292,21 @@ export function Nav() {
           >
             <InstagramIcon className="h-4 w-4" />
           </a>
-          <a
-            href={contactIsReal() ? siteConfig.contact.whatsappHref : "/enquire"}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp"
-            tabIndex={expanded ? 0 : -1}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
-          >
-            <WhatsAppIcon className="h-4 w-4" />
-          </a>
+          {/* Only while there is a real number. Pointed at /enquire it was
+              still labelled "WhatsApp" and still opened in a new tab, so the
+              icon promised one thing and did another. */}
+          {contactIsReal() ? (
+            <a
+              href={siteConfig.contact.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              tabIndex={expanded ? 0 : -1}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+            </a>
+          ) : null}
         </div>
       </div>
 

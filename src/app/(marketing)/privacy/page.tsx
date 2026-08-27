@@ -5,7 +5,7 @@ import { Section, Container } from "@/components/ui/Section";
 
 export const metadata = pageMetadata({
   title: "Privacy Policy",
-  description: `How ${siteConfig.name} handles your information.`,
+  description: `How ${siteConfig.name} collects, uses and protects your information - what we keep when you enquire or book an appointment, who it is shared with, how long it is held, and how to have it removed.`,
   path: "/privacy",
 });
 
