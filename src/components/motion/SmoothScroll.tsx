@@ -48,8 +48,12 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       // a fixed fraction toward the target, so fast flicks and slow nudges both
       // decelerate on the same curve instead of restarting a timed tween.
       lerp: 0.075,
-      // Slightly damped wheel so a notch travels a touch less and rides longer.
-      wheelMultiplier: 0.85,
+      // A full notch per notch. This was damped to 0.85, which made every
+      // wheel click travel less than the OS intended - on a 15,000px page that
+      // reads as heavy rather than smooth, and it is the reason the site felt
+      // like work to get around. The glide comes from the lerp above; the
+      // multiplier should not also be fighting the input.
+      wheelMultiplier: 1,
       smoothWheel: true,
       // Native momentum on touch - smoothing it fights the OS and feels laggy.
       syncTouch: false,
