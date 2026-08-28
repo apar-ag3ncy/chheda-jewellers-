@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { heroSlides } from "@/lib/content";
+import type { HeroSlide } from "@/types/content";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -27,6 +28,70 @@ const SLIDE_MS = 6400;
  * Transform and opacity only: no pin, no layout, nothing that can mis-measure
  * against Lenis. Scrubbed, so it is exactly reversible when you scroll back.
  */
+/**
+ * One slide's photograph, art-directed when the slide offers a portrait frame.
+ *
+ * Two <Image> elements toggled with CSS would work visually and cost twice the
+ * bytes - `display: none` does not reliably stop a fetch, and this is the LCP
+ * image on the homepage. <picture> is the element that actually decides:
+ * the browser evaluates the media query first and requests exactly one.
+ *
+ * `getImageProps` is what lets that coexist with next/image - it returns the
+ * srcSet and sizes the optimiser would have produced, which we hand to
+ * <source> instead of letting <Image> render its own <img>. Same AVIF/WebP
+ * negotiation, same responsive widths, one request.
+ */
+function SlideImage({ slide, eager }: { slide: HeroSlide; eager: boolean }) {
+  const common = {
+    fill: true,
+    sizes: "100vw",
+    placeholder: "blur" as const,
+    blurDataURL: EMERALD_LQIP,
+  };
+  const style = {
+    objectPosition: slide.image.focus ?? "50% 40%",
+    // A plate is typography, not a photograph. A 16s creeping zoom across set
+    // type reads as drift and softens every edge, so the Ken Burns is for
+    // photographs only.
+    animation: slide.plate ? undefined : "heroZoom 16s ease-out infinite alternate",
+  };
+
+  if (!slide.imagePortrait) {
+    return (
+      <Image {...common} priority={eager} src={slide.image.src} alt={slide.image.alt} className="object-cover" style={style} />
+    );
+  }
+
+  /**
+   * `priority` is deliberately NOT passed here. It makes Next emit a preload
+   * link, and a preload link cannot carry the media condition that decides
+   * between these two frames - so every phone fetched the 16:9 landscape file
+   * it was never going to display, on top of the portrait one it did. Measured:
+   * two requests, one of them pure waste on the LCP image.
+   *
+   * fetchPriority + loading="eager" give the first slide the same head start
+   * without committing the browser to a file before it has read the <source>
+   * conditions.
+   */
+  const loading = eager ? ("eager" as const) : ("lazy" as const);
+  const land = getImageProps({ ...common, loading, src: slide.image.src, alt: slide.image.alt });
+  const port = getImageProps({ ...common, loading, src: slide.imagePortrait.src, alt: slide.imagePortrait.alt });
+
+  return (
+    <picture>
+      <source media="(orientation: portrait)" srcSet={port.props.srcSet} sizes={port.props.sizes} />
+      <source media="(orientation: landscape)" srcSet={land.props.srcSet} sizes={land.props.sizes} />
+      <img
+        {...land.props}
+        alt={slide.image.alt}
+        fetchPriority={eager ? "high" : undefined}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={style}
+      />
+    </picture>
+  );
+}
+
 export function Hero() {
   const [active, setActive] = useState(0);
   const [reduce, setReduce] = useState(false);
@@ -140,21 +205,7 @@ export function Hero() {
           )}
           aria-hidden={i !== active}
         >
-          <Image
-            src={s.image.src}
-            alt={s.image.alt}
-            placeholder="blur" blurDataURL={EMERALD_LQIP} fill
-            priority={i === 0}
-            sizes="100vw"
-            className="object-cover"
-            style={{
-              objectPosition: s.image.focus ?? "50% 40%",
-              // A plate is typography, not a photograph. A 16s creeping zoom
-              // across set type reads as drift and softens every edge, so the
-              // Ken Burns is for photographs only.
-              animation: s.plate ? undefined : "heroZoom 16s ease-out infinite alternate",
-            }}
-          />
+          <SlideImage slide={s} eager={i === 0} />
         </div>
       ))}
       </div>

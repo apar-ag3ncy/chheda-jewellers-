@@ -25,6 +25,12 @@ export interface HeroSlide {
   headline: string;
   sub?: string;
   image: ImageAsset;
+  /**
+   * An alternative frame for portrait screens - true art direction, not a
+   * different crop of the same file. A wide plate cover-cropped into a phone
+   * loses its own edges; this is the version composed for that shape.
+   */
+  imagePortrait?: ImageAsset;
   cta?: CTA;
   /**
    * Finished artwork that already contains its own typography. Suppresses all
