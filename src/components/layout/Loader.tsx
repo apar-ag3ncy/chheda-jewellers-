@@ -81,6 +81,11 @@ export function Loader() {
         writeSeen();
         document.body.style.overflow = "";
         gsap.set(el, { display: "none" });
+        // Anything timed that sits under the curtain needs to know the
+        // curtain is gone. The hero carousel in particular was counting down
+        // behind it, so its first slide could be most of the way through
+        // before anyone had seen a frame of it.
+        window.dispatchEvent(new CustomEvent("cj:intro-done"));
       };
 
       // Safety net: fires even if the GSAP ticker is throttled (e.g. the tab

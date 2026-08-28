@@ -31,6 +31,7 @@ export function Hero() {
   const [active, setActive] = useState(0);
   const [reduce, setReduce] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
   const section = useRef<HTMLElement>(null);
   const copy = useRef<HTMLDivElement>(null);
   const frames = useRef<HTMLDivElement>(null);
@@ -39,17 +40,47 @@ export function Hero() {
     setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
+  /**
+   * Hold the carousel until the intro curtain is gone.
+   *
+   * The loader runs for about five and a quarter seconds and the slide
+   * interval is 6.4s, both starting at mount - so on a first visit the
+   * opening slide was most of the way through its turn before anyone had
+   * seen it. That matters more now that the first slide is the Ghatkopar
+   * plate: an announcement that has already begun leaving as you arrive is
+   * not an announcement.
+   *
+   * Returning visitors never see the loader (it remembers per session), so
+   * the absence of a curtain means "start now" rather than "wait forever".
+   * The timeout is the belt to that braces: the loader has its own 8.2s
+   * safety net, and if the event is ever missed the carousel still runs.
+   */
+  useEffect(() => {
+    const curtain = document.querySelector(".cj-loader");
+    if (!curtain || getComputedStyle(curtain).display === "none") {
+      setIntroDone(true);
+      return;
+    }
+    const done = () => setIntroDone(true);
+    window.addEventListener("cj:intro-done", done);
+    const net = window.setTimeout(done, 9000);
+    return () => {
+      window.removeEventListener("cj:intro-done", done);
+      window.clearTimeout(net);
+    };
+  }, []);
+
   // Autoplay. Disabled under reduced motion or when paused; `active` in the
   // deps restarts the timer on every change so a manually-selected slide gets
   // a full interval before advancing (WCAG 2.2.2 pause control below).
   useEffect(() => {
-    if (reduce || paused) return;
+    if (reduce || paused || !introDone) return;
     const id = setInterval(
       () => setActive((a) => (a + 1) % heroSlides.length),
       SLIDE_MS,
     );
     return () => clearInterval(id);
-  }, [reduce, paused, active]);
+  }, [reduce, paused, active, introDone]);
 
   useGSAP(
     () => {
@@ -118,7 +149,10 @@ export function Hero() {
             className="object-cover"
             style={{
               objectPosition: s.image.focus ?? "50% 40%",
-              animation: "heroZoom 16s ease-out infinite alternate",
+              // A plate is typography, not a photograph. A 16s creeping zoom
+              // across set type reads as drift and softens every edge, so the
+              // Ken Burns is for photographs only.
+              animation: s.plate ? undefined : "heroZoom 16s ease-out infinite alternate",
             }}
           />
         </div>
@@ -130,7 +164,13 @@ export function Hero() {
           the image reads clean (no edge vignette). */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className={cn(
+          "pointer-events-none absolute inset-0 transition-opacity duration-[1300ms] ease-[var(--ease-lux)]",
+          // Fades out with the crossfade rather than snapping. The scrim is
+          // here to keep OUR headline legible; a plate has no headline, and
+          // the gradient's darkest corner lands exactly on the monogram.
+          slide.plate && "opacity-0",
+        )}
         style={{
           background:
             "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 64%, transparent) 0%, color-mix(in srgb, var(--green-deep) 24%, transparent) 32%, transparent 52%), radial-gradient(130% 115% at 8% 94%, color-mix(in srgb, var(--green-deep) 48%, transparent) 0%, transparent 60%)",
@@ -143,13 +183,22 @@ export function Hero() {
         ref={copy}
         className="u-container relative flex h-full flex-col justify-end pb-24 will-change-transform md:justify-center md:pb-0 md:pt-16"
       >
+        {slide.plate ? (
+          /* Nothing is drawn over a plate - it already says everything it
+             needs to. The heading is still emitted, so the document keeps
+             exactly one h1 no matter which frame the carousel is on, and the
+             announcement still reaches a screen reader. */
+          <h1 className="sr-only">{slide.headline}</h1>
+        ) : (
         <div key={active} className="max-w-2xl">
+          {slide.eyebrow ? (
           <p
             className="u-eyebrow mb-6"
             style={{ animation: "fadeRise 0.8s var(--ease-lux) both", animationDelay: "0.1s" }}
           >
             {slide.eyebrow}
           </p>
+          ) : null}
           <h1 className="font-display text-[clamp(2.4rem,8.5vw,6.6rem)] font-light leading-[0.98]">
             {slide.headline.split("\n").map((line, i) => (
               <span key={i} className="block overflow-hidden py-[0.02em]">
@@ -165,12 +214,14 @@ export function Hero() {
               </span>
             ))}
           </h1>
+          {slide.sub ? (
           <p
             className="mt-7 max-w-md font-body text-[1rem] font-light leading-relaxed text-text"
             style={{ animation: "fadeRise 0.8s var(--ease-lux) both", animationDelay: "0.55s" }}
           >
             {slide.sub}
           </p>
+          ) : null}
           {slide.cta ? (
             <div
               className="mt-9"
@@ -182,6 +233,7 @@ export function Hero() {
             </div>
           ) : null}
         </div>
+        )}
       </div>
 
       {/* Slide dots + pause control */}
@@ -227,10 +279,16 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll hint */}
+      {/* Scroll hint. Fades with the crossfade on a plate - it is the last
+          piece of the site's own voice on screen, it sits dead centre under
+          the monogram, and the brief for a plate is that nothing of ours is
+          written over it. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
+        className={cn(
+          "pointer-events-none absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 transition-opacity duration-[1300ms] ease-[var(--ease-lux)] md:flex",
+          slide.plate && "opacity-0",
+        )}
       >
         <span className="font-body text-[0.62rem] uppercase tracking-[0.24em] text-text-muted">
           Scroll

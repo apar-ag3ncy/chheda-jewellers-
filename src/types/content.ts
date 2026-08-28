@@ -14,11 +14,23 @@ export interface ImageAsset {
 
 export interface HeroSlide {
   id: string;
-  eyebrow: string;
+  /** Omitted on a plate - the artwork already carries its own words. */
+  eyebrow?: string;
+  /**
+   * Always required, but rendered two different ways: as the display h1 on a
+   * normal slide, and screen-reader-only on a plate. The page must never be
+   * left without an h1 just because a carousel happens to be on a given
+   * frame, so the heading exists on every slide whether or not it is drawn.
+   */
   headline: string;
-  sub: string;
+  sub?: string;
   image: ImageAsset;
   cta?: CTA;
+  /**
+   * Finished artwork that already contains its own typography. Suppresses all
+   * site copy, the text scrim and the Ken Burns drift for as long as it shows.
+   */
+  plate?: boolean;
 }
 
 export interface CTA {
