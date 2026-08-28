@@ -127,51 +127,66 @@ export const categories: Record<CategoryPage["slug"], CategoryPage> = {
       "Uncut diamonds set in gold with the kundan and jadau techniques of the royal ateliers. Polki is India's most regal jewellery - worn by queens, and now by our brides.",
     hero: {
       src: "/media/categories/polki.jpg",
-      alt: "Model wearing an elaborate polki and kundan bridal set",
-      focus: "50% 28%",
+      alt: "Model in profile wearing a polki choker and matching drop earrings",
+      focus: "50% 32%",
     },
+    /**
+     * Every frame here is from the house's own July 2024 campaign - a set of
+     * 58 negatives that had never been used anywhere on the site. They are
+     * chosen for CONTRAST rather than for being individually prettiest: a
+     * detail crop, then four different grounds (blue, black, deep red,
+     * ivory), then a pair of earrings rather than a seventh necklace. Six
+     * frames of the same shot at the same distance is a lookbook page; this
+     * is meant to read as six different pieces, which is what it is.
+     *
+     * The files are named for the piece rather than p1..p6, which is not
+     * tidiness: the previous frames lived at those exact paths, and
+     * /_next/image URLs carry no content hash, so anyone who had already
+     * loaded the page would have kept seeing the old photographs out of their
+     * browser cache. New names, new URLs, no stale frames.
+     */
     picks: [
       {
-        id: "bridal-polki",
+        id: "sapphire-choker",
+        name: "The Sapphire Choker",
+        spec: "Polki · sapphire drop · 22K gold",
+        note: "Close enough to count the settings - which is the point of polki.",
+        image: { src: "/media/categories/polki/sapphire-choker.jpg", alt: "Close study of a polki choker with a sapphire drop and matching earrings", focus: "50% 52%" },
+      },
+      {
+        id: "evening-choker",
+        name: "The Evening Choker",
+        spec: "Polki · kundan setting",
+        note: "Polki against colour, where the uncut stones catch the most light.",
+        image: { src: "/media/categories/polki/evening-choker.jpg", alt: "Model in royal blue wearing a polki and kundan choker", focus: "50% 30%" },
+      },
+      {
+        id: "midnight-set",
+        name: "The Midnight Set",
+        spec: "Polki · jadau work · 22K gold",
+        note: "The set that does not need a wedding to be worn.",
+        image: { src: "/media/categories/polki/midnight-set.jpg", alt: "Model in black wearing a polki choker in low light", focus: "50% 34%" },
+      },
+      {
+        id: "bridal-red",
         name: "The Bridal Polki",
-        spec: "Uncut diamonds · 22K gold",
-        note: "Uncut stones, set the way they were found.",
-        image: { src: "/media/categories/polki/p1.jpg", alt: "Close portrait in polki bridal jewellery", focus: "50% 28%" },
+        spec: "Polki · kundan · maang tikka",
+        note: "Choker and tikka made as one, for the day they are worn together.",
+        image: { src: "/media/categories/polki/bridal-red.jpg", alt: "Bride in deep red wearing a polki choker and maang tikka", focus: "50% 30%" },
       },
       {
-        id: "full-suite",
-        name: "The Full Suite",
-        spec: "Polki · kundan · pearl",
-        note: "Everything the day needs, made to match.",
-        image: { src: "/media/categories/polki/p2.jpg", alt: "Bride seated in a palace setting in full polki", focus: "50% 28%" },
+        id: "ivory-suite",
+        name: "The Ivory Suite",
+        spec: "Polki · pearl · uncut diamond",
+        note: "Pearl strung through the polki, for the lighter half of a wedding.",
+        image: { src: "/media/categories/polki/ivory-suite.jpg", alt: "Model in ivory wearing a polki necklace strung with pearl", focus: "50% 30%" },
       },
       {
-        id: "layered-kundan",
-        name: "Layered Kundan Haar",
-        spec: "Polki · kundan · emerald beads",
-        note: "Three lengths, so the neckline is never bare.",
-        image: { src: "/media/categories/polki/p3.jpg", alt: "Layered polki and kundan bridal necklace", focus: "50% 28%" },
-      },
-      {
-        id: "maroon-set",
-        name: "The Maroon Set",
-        spec: "Polki · ruby · 22K gold",
-        note: "Built against deep red, where polki reads warmest.",
-        image: { src: "/media/categories/polki/p4.jpg", alt: "Bride in maroon wearing a polki set", focus: "50% 28%" },
-      },
-      {
-        id: "standing-set",
-        name: "The Ceremony Set",
-        spec: "Polki · jadau work",
-        note: "Heavy on purpose - it is worn for one long day.",
-        image: { src: "/media/categories/polki/p5.jpg", alt: "Standing bride adorned in polki jewellery", focus: "50% 28%" },
-      },
-      {
-        id: "antique-finish",
-        name: "Antique-Finish Polki",
-        spec: "Polki · oxidised 22K gold",
-        note: "Finished to look inherited from the first day.",
-        image: { src: "/media/categories/polki/p6.jpg", alt: "Bride holding a rose in antique-finish polki", focus: "50% 28%" },
+        id: "drop-earrings",
+        name: "The Long Drops",
+        spec: "Polki · 22K gold · hand-strung",
+        note: "Long enough to move when you do - worn without a necklace.",
+        image: { src: "/media/categories/polki/drop-earrings.jpg", alt: "Profile study of a long polki drop earring", focus: "56% 34%" },
       },
     ],
     note: "Polki is graded by the quality of its uncut stones and the finesse of the setting - we will walk you through both.",
