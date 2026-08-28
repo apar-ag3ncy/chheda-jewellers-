@@ -210,9 +210,18 @@ export function Nav() {
               <div
                 key={item.label}
                 onMouseEnter={() => handleEnter(item.label, true)}
+                onMouseMove={(e) => {
+                  // Two CSS variable writes, no React state and no layout -
+                  // the specular follows the pointer without re-rendering the
+                  // menu on every mousemove.
+                  const el = e.currentTarget;
+                  const r = el.getBoundingClientRect();
+                  el.style.setProperty("--gx", `${((e.clientX - r.left) / r.width) * 100}%`);
+                  el.style.setProperty("--gy", `${((e.clientY - r.top) / r.height) * 100}%`);
+                }}
                 inert={openMenu !== item.label}
                 className={cn(
-                  "absolute left-1/2 top-[calc(100%+12px)] w-[min(94vw,860px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-line-strong bg-[var(--green-glass)] p-5 backdrop-blur-2xl transition-all duration-[420ms] ease-[var(--ease-lux)]",
+                  "cj-liquid-glass absolute left-1/2 top-[calc(100%+12px)] w-[min(94vw,860px)] -translate-x-1/2 overflow-hidden rounded-[1.4rem] p-5 transition-all duration-[420ms] ease-[var(--ease-lux)]",
                   openMenu === item.label
                     ? "pointer-events-auto translate-y-0 opacity-100"
                     : "pointer-events-none translate-y-2 opacity-0",

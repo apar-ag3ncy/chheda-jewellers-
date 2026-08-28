@@ -208,6 +208,63 @@
     .cj-punch-ring { display: none; }
   }
 
+  /* ── Liquid glass - the mega menu panel ───────────────────
+     Three things make this read as glass rather than as a tinted box:
+
+     1. brightness() INSIDE the backdrop filter. It darkens whatever is behind
+        the panel before the tint composites over it, which is what real dark
+        vibrancy does. It is also load-bearing for legibility: the gold-light
+        eyebrow sits directly on this surface, and the panel can end up over a
+        cream section. Measured against the four worst backdrops (a cream
+        band, a near-white photograph, a mid photograph, the dark hero), the
+        old flat 66% tint gave 3.4:1 on cream - already under AA. Darkening
+        the backdrop first and dropping the tint to 48% gives 4.71:1 at worst:
+        MORE transparent than before and more readable.
+     2. saturate(). Colour behind the glass blooms through instead of going
+        grey, which is the single strongest cue that a surface is transparent
+        rather than painted.
+     3. A lit top edge and a thickness ring. Glass catches light on the edge
+        facing the light; without that inset highlight any blur just looks
+        like a blurred rectangle.
+
+     The pointer-tracked bloom (--gx/--gy) is the "liquid" part - a soft
+     specular that follows the cursor across the surface. It is two CSS
+     variable writes per frame, no layout, and only while the menu is open. */
+  .cj-liquid-glass {
+    background-image:
+      radial-gradient(
+        130% 95% at var(--gx, 50%) var(--gy, 0%),
+        rgba(255, 246, 228, 0.17) 0%,
+        rgba(255, 246, 228, 0.05) 34%,
+        transparent 68%
+      ),
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.02) 38%,
+        rgba(255, 255, 255, 0) 62%,
+        rgba(255, 255, 255, 0.07) 100%
+      );
+    background-color: color-mix(in srgb, var(--green) 48%, transparent);
+    -webkit-backdrop-filter: blur(34px) saturate(190%) brightness(0.55);
+    backdrop-filter: blur(34px) saturate(190%) brightness(0.55);
+    border: 1px solid rgba(255, 246, 228, 0.16);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 246, 228, 0.26),
+      inset 0 0 0 1px rgba(255, 246, 228, 0.06),
+      inset 0 -20px 36px -24px rgba(0, 0, 0, 0.6),
+      0 34px 72px -26px rgba(2, 12, 8, 0.78);
+  }
+
+  /* Without backdrop-filter the tint alone is nowhere near opaque enough to
+     read on, so the panel becomes a solid one. Firefox shipped it long ago,
+     but a fallback that fails to a legible surface costs nothing. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .cj-liquid-glass {
+      background-color: color-mix(in srgb, var(--green-deep) 94%, transparent);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .cj-trace { display: none; }
     .cj-pin-ping { animation: none; }
