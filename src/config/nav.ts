@@ -8,7 +8,14 @@
 export type NavChild = {
   label: string;
   href: string;
-  description?: string;
+  /**
+   * The one frame that stands for this category. The mega menu is a row of
+   * pictures rather than a list of sentences - a jeweller's categories are
+   * told apart by eye long before they are told apart by a description, and
+   * "22K heritage gold, handcrafted" was doing less work than the photograph
+   * it sat next to.
+   */
+  image?: { src: string; alt: string; focus?: string };
 };
 
 /** A titled column inside a mega menu. */
@@ -35,27 +42,42 @@ export const primaryNav: NavItem[] = [
     groups: [
       {
         title: "By metal",
-        note: "What it is made of",
         items: [
           {
             label: "Gold",
             href: "/jewellery/gold",
-            description: "22K heritage gold, handcrafted",
+            image: {
+              src: "/media/categories/gold/g3.jpg",
+              alt: "A 22K gold choker and jhumkas worn against red",
+              focus: "50% 44%",
+            },
           },
           {
             label: "Diamond",
             href: "/jewellery/diamond",
-            description: "Certified brilliance, modern lines",
+            image: {
+              src: "/media/categories/diamond/d3.jpg",
+              alt: "A diamond drop earring and cocktail ring in low studio light",
+              focus: "54% 30%",
+            },
           },
           {
             label: "Polki",
             href: "/jewellery/polki",
-            description: "Uncut diamonds, regal Kundan work",
+            image: {
+              src: "/media/categories/polki/sapphire-choker.jpg",
+              alt: "A polki choker set with a sapphire drop, seen close",
+              focus: "50% 54%",
+            },
           },
           {
             label: "Bespoke",
             href: "/bespoke",
-            description: "Drawn for one person - or remade from your own gold",
+            image: {
+              src: "/media/bespoke/01.jpg",
+              alt: "Hands fastening a heavy gold necklace at a fitting",
+              focus: "50% 42%",
+            },
           },
         ],
       },

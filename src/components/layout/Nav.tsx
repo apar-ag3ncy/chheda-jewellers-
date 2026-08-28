@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { primaryNav } from "@/config/nav";
@@ -195,9 +196,13 @@ export function Nav() {
           </div>
 
           {/* Mega dropdown (desktop) - hangs below the beige capsule.
-              Items that declare `groups` render the house's two navigation
-              axes side by side: BY METAL (what it is made of) and BY OCCASION
-              (where you are wearing it). Neither nests inside the other. */}
+              A horizontal row of frames: one photograph per category, the
+              name set on the frame. It used to be a vertical list where each
+              line carried a description ("22K heritage gold, handcrafted"),
+              which is the wrong instrument - a jeweller's categories are told
+              apart by eye long before they are told apart by a sentence, and
+              the descriptions were competing with the only thing that
+              actually distinguishes them. */}
           {primaryNav.map((item) => {
             const groups = item.groups;
             if (!groups?.length) return null;
@@ -207,62 +212,81 @@ export function Nav() {
                 onMouseEnter={() => handleEnter(item.label, true)}
                 inert={openMenu !== item.label}
                 className={cn(
-                  "absolute left-1/2 top-[calc(100%+12px)] w-[min(94vw,780px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-line-strong bg-[var(--green-glass)] p-5 backdrop-blur-2xl transition-all duration-[420ms] ease-[var(--ease-lux)]",
+                  "absolute left-1/2 top-[calc(100%+12px)] w-[min(94vw,860px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-line-strong bg-[var(--green-glass)] p-5 backdrop-blur-2xl transition-all duration-[420ms] ease-[var(--ease-lux)]",
                   openMenu === item.label
                     ? "pointer-events-auto translate-y-0 opacity-100"
                     : "pointer-events-none translate-y-2 opacity-0",
                 )}
               >
-                {/* One column: the second navigation axis this was built for was
-                    removed, and a two-column grid left half the panel empty. */}
-                <div className="grid grid-cols-1 gap-x-8 gap-y-6">
-                  {groups.map((group) => (
-                    <div key={group.title}>
-                      <div className="mb-3 flex items-baseline justify-between border-b border-line pb-2">
-                        {group.href ? (
+                {groups.map((group) => (
+                  <div key={group.title}>
+                    <div className="mb-4 flex items-baseline justify-between border-b border-line pb-2">
+                      {group.href ? (
+                        <Link
+                          href={group.href}
+                          className="u-eyebrow text-[0.62rem] transition-colors hover:text-gold"
+                        >
+                          {group.title} <span aria-hidden>&rarr;</span>
+                        </Link>
+                      ) : (
+                        <span className="u-eyebrow text-[0.62rem]">{group.title}</span>
+                      )}
+                    </div>
+
+                    {/* A row of frames, not a list of sentences. Four columns
+                        on any width the capsule itself survives, so the row
+                        never reflows into a ragged second line. */}
+                    <ul className="grid grid-cols-4 gap-3">
+                      {group.items.map((child) => (
+                        <li key={child.href}>
                           <Link
-                            href={group.href}
-                            className="u-eyebrow text-[0.62rem] transition-colors hover:text-gold"
+                            href={child.href}
+                            tabIndex={openMenu === item.label ? 0 : -1}
+                            className="group/card block overflow-hidden rounded-xl outline-none ring-gold-light transition-colors focus-visible:ring-2"
                           >
-                            {group.title} <span aria-hidden>&rarr;</span>
-                          </Link>
-                        ) : (
-                          <span className="u-eyebrow text-[0.62rem]">{group.title}</span>
-                        )}
-                        {group.note ? (
-                          <span className="font-body text-[0.66rem] font-light italic text-text-muted">
-                            {group.note}
-                          </span>
-                        ) : null}
-                      </div>
-                      <ul className="flex flex-col">
-                        {group.items.map((child) => (
-                          <li key={child.href}>
-                            <Link
-                              href={child.href}
-                              className="group/item flex items-baseline gap-3 rounded-lg px-2 py-2 transition-colors duration-300 hover:bg-white/[0.06]"
-                            >
-                              <span className="font-display text-[1.35rem] font-light leading-tight text-text-strong">
+                            {child.image ? (
+                              <span className="relative block aspect-[3/4] overflow-hidden rounded-xl bg-green-deep">
+                                <Image
+                                  src={child.image.src}
+                                  alt=""
+                                  fill
+                                  sizes="(max-width: 900px) 24vw, 200px"
+                                  className="object-cover transition-transform duration-[900ms] ease-[var(--ease-lux)] group-hover/card:scale-[1.06]"
+                                  style={{ objectPosition: child.image.focus ?? "50% 45%" }}
+                                />
+                                {/* Just enough foot to carry the name. The
+                                    label sits ON the frame rather than under
+                                    it so all four read as one row of pictures
+                                    instead of four captioned blocks. */}
+                                <span
+                                  aria-hidden
+                                  className="absolute inset-x-0 bottom-0 h-2/5"
+                                  style={{
+                                    background:
+                                      "linear-gradient(to top, color-mix(in srgb, var(--green-deep) 92%, transparent) 0%, transparent 100%)",
+                                  }}
+                                />
+                                <span className="absolute inset-x-0 bottom-0 flex flex-col items-center pb-3">
+                                  <span className="font-display text-[1.05rem] font-light leading-none text-text-strong">
+                                    {child.label}
+                                  </span>
+                                  <span
+                                    aria-hidden
+                                    className="mt-1.5 block h-px w-0 bg-gold-light transition-all duration-500 ease-[var(--ease-lux)] group-hover/card:w-7"
+                                  />
+                                </span>
+                              </span>
+                            ) : (
+                              <span className="block rounded-xl px-2 py-2 font-display text-[1.05rem] font-light text-text-strong">
                                 {child.label}
                               </span>
-                              {child.description ? (
-                                <span className="hidden flex-1 truncate font-body text-[0.7rem] font-light leading-relaxed text-text-muted sm:block">
-                                  {child.description}
-                                </span>
-                              ) : null}
-                              <span
-                                aria-hidden
-                                className="translate-x-0 text-[0.7rem] text-gold opacity-0 transition-all duration-300 group-hover/item:translate-x-0.5 group-hover/item:opacity-100"
-                              >
-                                &rarr;
-                              </span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
+                            )}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             );
           })}
