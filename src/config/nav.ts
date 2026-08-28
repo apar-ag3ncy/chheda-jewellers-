@@ -56,9 +56,14 @@ export const primaryNav: NavItem[] = [
             label: "Diamond",
             href: "/jewellery/diamond",
             image: {
-              src: "/media/categories/diamond/d3.jpg",
-              alt: "A diamond drop earring and cocktail ring in low studio light",
-              focus: "54% 30%",
+              /* A crop made for this card rather than a reuse of a page
+                 image. Every full frame in the diamond set is a portrait
+                 first and a piece of jewellery second, so at 196px they all
+                 read as "a face" - this is cut to the neck and the pendant,
+                 with nothing above the chin. */
+              src: "/media/categories/diamond/nav-diamond.jpg",
+              alt: "A diamond chain carrying a diamond-set emerald pendant",
+              focus: "50% 50%",
             },
           },
           {
