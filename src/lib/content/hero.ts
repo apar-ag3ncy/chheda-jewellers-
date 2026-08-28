@@ -7,6 +7,33 @@ import type { HeroSlide } from "@/types/content";
  */
 export const heroSlides: HeroSlide[] = [
   {
+    /**
+     * The Ghatkopar opening. A finished plate: every word is already in the
+     * artwork, so `plate` strips the site's own copy, scrim and drift while
+     * it shows and lets the picture speak by itself. The headline below is
+     * never drawn - it exists so the page still has exactly one h1 on this
+     * frame, and so the announcement reaches a screen reader.
+     *
+     * The artwork was delivered at 1920x600 and is served here at 1920x960:
+     * a full-screen hero on a 375px phone would otherwise have cover-cropped
+     * the sides hard enough to clip "GHATKOPAR". The 360 extra rows are the
+     * plate's own row 0 and row 599 replicated, so both seams measure 0/255
+     * and the content sits dead-centre.
+     *
+     * TODO(client): this is a dated announcement - it reads "4th September
+     * 2026". Drop this slide once the shop has opened; nothing else needs to
+     * change.
+     */
+    id: "ghatkopar-opening",
+    headline: "Coming to Ghatkopar this Janmashtami - 4th September 2026",
+    image: {
+      src: "/media/hero/hero-00-ghatkopar.png",
+      alt: "Coming to Ghatkopar this Janmashtami, 4th September 2026 - Chheda Jewellers Limited. A gold-draped storefront lit by a single beam, reflected in still water.",
+      focus: "50% 50%",
+    },
+    plate: true,
+  },
+  {
     id: "heirloom",
     eyebrow: "For a generation in Mumbai",
     headline: "Heirlooms\nin the making",
