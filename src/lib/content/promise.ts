@@ -19,6 +19,7 @@ export const promiseValues: PromiseValue[] = [
       "Verify it live in the BIS Care app",
     ],
     image: { src: "/media/categories/gold/g3.jpg", focus: "50% 46%" },
+    band: { src: "/media/promise/band-purity.jpg" },
   },
   {
     id: "transparency",
@@ -31,6 +32,7 @@ export const promiseValues: PromiseValue[] = [
       "Stones weighed and priced separately",
     ],
     image: { src: "/media/categories/diamond/nav-diamond.jpg", focus: "50% 50%" },
+    band: { src: "/media/promise/promise-band.jpg" },
   },
   {
     id: "craft",
@@ -43,6 +45,7 @@ export const promiseValues: PromiseValue[] = [
       "Finished only when its maker would wear it",
     ],
     image: { src: "/media/bespoke/01.jpg", focus: "50% 42%" },
+    band: { src: "/media/promise/band-craft.jpg" },
   },
   {
     id: "buyback",
@@ -55,6 +58,7 @@ export const promiseValues: PromiseValue[] = [
       "A relationship that outlasts the bill",
     ],
     image: { src: "/media/categories/polki/sapphire-choker.jpg", focus: "50% 54%" },
+    band: { src: "/media/promise/band-trust.jpg" },
   },
 ];
 
