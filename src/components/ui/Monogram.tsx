@@ -11,6 +11,13 @@ type MonogramProps = {
   className?: string;
   /** "gold" uses the brand gradient; "current" inherits currentColor. */
   tone?: "gold" | "current";
+  /**
+   * Stroke width in viewBox units (400-wide canvas). The artwork is drawn as
+   * hairline filled shapes, which dissolve below ~50px rendered size; a
+   * same-paint stroke inflates every line outward without redrawing the
+   * paths. ~4 reads as "bold" at nav scale.
+   */
+  weight?: number;
   title?: string;
   /** Renders as decorative (aria-hidden) when no title is provided. */
   decorative?: boolean;
@@ -25,6 +32,7 @@ export function Monogram({
   tone = "gold",
   title,
   decorative = true,
+  weight = 0,
 }: MonogramProps) {
   const gid = "cj-gold-gradient";
   const fill = tone === "gold" ? `url(#${gid})` : "currentColor";
@@ -38,6 +46,8 @@ export function Monogram({
       aria-hidden={labelled ? undefined : true}
       aria-label={labelled ? title : undefined}
       fill={fill}
+      stroke={weight > 0 ? fill : undefined}
+      strokeWidth={weight > 0 ? weight : undefined}
     >
       {title && !decorative ? <title>{title}</title> : null}
       {/* The gradient itself is defined once, globally, by <BrandDefs /> in the

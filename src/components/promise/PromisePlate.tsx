@@ -5,49 +5,29 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import type { PromiseValue } from "@/types/content";
 
 /**
- * The Chheda Promise, rendered the way a jeweller actually makes a promise:
- * struck into metal.
+ * The Chheda Promise - four numbered marks beside their undertakings.
  *
- * A hallmark is the one claim in this trade that cannot be talked away - it is
- * a punch driven into gold under pressure, and it either survives inspection
- * or it does not. So rather than set four values as a bulleted list, the
- * section is a blank gold plate and each value is a mark struck into it: the
- * punch falls, the metal takes it, the plate rings, and only then does the
- * wording set beside it.
+ * Each mark is a disc of liquid glass with a gold numeral: transparent to the
+ * ground behind it, a white-lit top edge, and a soft interior so it reads as
+ * a material rather than a badge. (An earlier pass drew these as punches
+ * struck into a copper bar; the bar read as an odd fitting between the text
+ * columns and is gone.)
  *
- * What is struck is the NUMERAL, not a pictogram. An earlier pass put a small
- * icon in each punch face and it fought the section: four line drawings in a
- * column pulled the eye away from the wording they were meant to introduce,
- * and no icon set survives being shrunk to 30px on a phone without turning
- * into decoration. A number struck into metal is what a real mark looks like
- * anyway, and it reads at any size.
- *
- * The marks are a DEVICE, not a literal description of our stamping - the
- * ledger header says "what it binds us to" precisely so nothing here reads as
- * a claim about a physical punch we apply. The one real hallmark claim on this
- * site lives on /chheda-promise, where it is explained and made checkable.
- *
- * Motion notes:
- * - The strike is `power4.in` - almost all the travel happens in the last few
- *   frames. That acceleration is the whole illusion; an ease-out punch reads
- *   as a fade-in and the metal stops feeling hard.
- * - The recoil moves the PLATE, not the mark. A struck object kicks; the thing
- *   striking it stops dead. Reversing those two is what makes fake impacts
- *   look fake.
- * - Every animated property is transform/opacity, so a strike costs no layout
- *   and no React render - the sheen is a CSS custom property written straight
- *   to the node.
+ * The strike survives as choreography: the numeral falls in on power4.in -
+ * nearly all its travel in the last frames, which is what makes it feel
+ * dropped rather than faded - the glass condenses beneath it, a gold ring
+ * rings outward, and only then does the wording set. Everything animated is
+ * transform/opacity; a strike costs no layout and no React render. Under
+ * prefers-reduced-motion every element is simply present, unmoving.
  */
 
 export function PromisePlate({ values }: { values: PromiseValue[] }) {
   const root = useRef<HTMLDivElement>(null);
-  const bar = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const el = root.current;
-      const plate = bar.current;
-      if (!el || !plate) return;
+      if (!el) return;
 
       const rows = gsap.utils.toArray<HTMLElement>(el.querySelectorAll("[data-row]"));
       const mm = gsap.matchMedia();
@@ -73,27 +53,10 @@ export function PromisePlate({ values }: { values: PromiseValue[] }) {
             });
             gsap.set(el.querySelectorAll("[data-dent]"), { opacity: 1 });
             gsap.set(el.querySelectorAll("[data-ring]"), { opacity: 0 });
-            plate.style.setProperty("--sheen", "50%");
             return;
           }
 
           const triggers: ScrollTrigger[] = [];
-
-          // The light travelling down polished metal as the section passes.
-          triggers.push(
-            ScrollTrigger.create({
-              trigger: el,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 0.8,
-              onUpdate: (self) => {
-                plate.style.setProperty(
-                  "--sheen",
-                  `${(self.progress * 128 - 14).toFixed(1)}%`,
-                );
-              },
-            }),
-          );
 
           rows.forEach((row) => {
             const punch = row.querySelector<HTMLElement>("[data-punch]");
@@ -121,16 +84,13 @@ export function PromisePlate({ values }: { values: PromiseValue[] }) {
               duration: 0.3,
               ease: "power4.in",
             })
-              // Impact: the depression appears under the mark in a single frame.
-              .to(dent, { opacity: 1, duration: 0.01 }, ">")
-              // The plate takes the blow and settles - 2px, four beats, done
-              // inside a fifth of a second.
-              .to(
-                plate,
-                { y: 2.5, duration: 0.05, repeat: 3, yoyo: true, ease: "none" },
-                "<",
+              // Impact: the glass condenses under the numeral in one beat.
+              .fromTo(
+                dent,
+                { opacity: 0, scale: 1.25 },
+                { opacity: 1, scale: 1, duration: 0.22, ease: "power3.out" },
+                ">-0.02",
               )
-              .set(plate, { y: 0 })
               // Metal ringing outward.
               .to(ring, { opacity: 0.5, scale: 1, duration: 0.06, ease: "none" }, "<")
               .to(
@@ -176,13 +136,6 @@ export function PromisePlate({ values }: { values: PromiseValue[] }) {
       </div>
 
       <div className="relative mt-4">
-        {/* The blank. Drawn gold, chamfered at the corners like a cut ingot. */}
-        <div
-          ref={bar}
-          aria-hidden
-          className="cj-plate-bar absolute inset-y-0 left-0 w-[60px] md:w-[112px]"
-        />
-
         <ul className="relative py-6 md:py-8">
           {values.map((value, i) => (
             <li
@@ -196,19 +149,19 @@ export function PromisePlate({ values }: { values: PromiseValue[] }) {
                   <span
                     data-ring
                     aria-hidden
-                    className="cj-punch-ring absolute inset-0 block"
+                    className="cj-punch-ring absolute inset-0 block rounded-full"
                   />
                   {/* The depression, revealed on impact - it cannot exist
                         before the punch lands. */}
                   <span
                     data-dent
                     aria-hidden
-                    className="cj-punch-dent absolute inset-0 block"
+                    className="cj-glass-chip absolute inset-0 block rounded-full"
                   />
                   <span
                     data-punch
                     aria-hidden
-                    className="cj-punch font-display absolute inset-0 grid place-items-center text-[1.12rem] leading-none font-light tabular-nums md:text-[1.75rem]"
+                    className="cj-glass-numeral font-display absolute inset-0 grid place-items-center text-[1.12rem] leading-none font-light tabular-nums md:text-[1.75rem]"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>

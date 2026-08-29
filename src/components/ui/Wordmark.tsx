@@ -7,6 +7,8 @@ type WordmarkProps = {
   layout?: "stacked" | "inline";
   /** "dark" = deep green, for use on light (beige) surfaces. */
   tone?: "beige" | "gold" | "dark";
+  /** "regular" thickens both lines - for small sizes where light dissolves. */
+  weight?: "light" | "regular";
 };
 
 /**
@@ -17,6 +19,7 @@ export function Wordmark({
   className,
   layout = "stacked",
   tone = "beige",
+  weight = "light",
 }: WordmarkProps) {
   const [first, second] = houseLines();
   const toneClass =
@@ -43,7 +46,11 @@ export function Wordmark({
       aria-label={siteConfig.name}
     >
       <span
-        className={cn("font-body font-light uppercase", toneClass)}
+        className={cn(
+          "font-body uppercase",
+          weight === "regular" ? "font-normal" : "font-light",
+          toneClass,
+        )}
         style={{ letterSpacing: "0.3em", fontSize: "1em" }}
       >
         {first}

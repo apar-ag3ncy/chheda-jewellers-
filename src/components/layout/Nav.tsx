@@ -135,9 +135,9 @@ export function Nav() {
             <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-b from-green to-green-deep shadow-[inset_0_1px_1px_rgba(240,207,170,0.28),0_3px_10px_-3px_rgba(0,0,0,0.45)] ring-1 ring-gold/45 transition-all duration-500 ease-[var(--ease-lux)] group-hover:ring-gold md:h-[3.25rem] md:w-[3.25rem]">
               {/* 74%, not 66%: at 44px the mandala's inner rings dissolved and
                   the seal read as a dark dot. Bigger disc, bigger mark. */}
-              <Monogram className="h-[74%] w-[74%]" />
+              <Monogram className="h-[74%] w-[74%]" weight={4} />
             </span>
-            <Wordmark layout="stacked" tone="dark" className="hidden text-[17px] sm:flex" />
+            <Wordmark layout="stacked" tone="dark" weight="regular" className="hidden text-[18px] sm:flex" />
           </Link>
 
           {/* Desktop links */}
@@ -156,10 +156,10 @@ export function Nav() {
                     aria-haspopup={hasChildren ? "true" : undefined}
                     aria-expanded={hasChildren ? openMenu === item.label : undefined}
                     className={cn(
-                      "inline-flex items-center gap-1.5 px-3 py-2 font-body text-[0.7rem] uppercase tracking-[0.15em] transition-colors duration-300",
+                      "inline-flex items-center gap-1.5 px-3 py-2 font-body text-[0.76rem] font-medium uppercase tracking-[0.13em] transition-colors duration-300",
                       isActive(item.href)
                         ? "text-maroon"
-                        : "text-[color-mix(in_srgb,var(--green)_78%,transparent)] hover:text-green",
+                        : "text-green hover:text-maroon",
                     )}
                   >
                     {item.label}
