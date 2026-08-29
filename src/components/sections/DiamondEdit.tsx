@@ -19,12 +19,24 @@ import { gsap, useGSAP } from "@/lib/gsap";
  * differently. Only the chapter names belong to this section.
  */
 const CHAPTER_NAMES = ["Solitaire", "Brilliance", "Statement", "Eternity"] as const;
+
+/**
+ * Focus per STRIP, not per photograph. The content file's focus values are
+ * tuned for the diamond page's 3:4 cards; these bands are ~4.6:1, which
+ * keeps only a narrow horizontal slice - at the card values the slice landed
+ * on the model's eyes and the earring fell off the bottom. Chosen against
+ * rendered strip previews so every band shows its piece whole: the necklace
+ * and rings (63%), the violet earring (45%), the diamond ear cuff (45%),
+ * the layered necklaces on green (47%).
+ */
+const STRIP_FOCUS = ["50% 63%", "50% 45%", "50% 45%", "50% 47%"] as const;
+
 const pieces = CHAPTER_NAMES.map((chapterName, i) => {
   const frame = categories.diamond.picks[i]?.image;
   return {
     src: frame?.src ?? "",
     alt: frame?.alt ?? "",
-    focus: frame?.focus,
+    focus: STRIP_FOCUS[i] ?? "50% 45%",
     name: chapterName,
   };
 });
@@ -188,7 +200,7 @@ export function DiamondEdit() {
                   placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                   sizes="(max-width: 1024px) 100vw, 58vw"
                   className="object-cover grayscale transition-all duration-[900ms] ease-[var(--ease-lux)] group-hover/piece:grayscale-0 group-hover/piece:scale-[1.04]"
-                  style={{ objectPosition: i === 1 ? "50% 30%" : "50% 40%" }}
+                  style={{ objectPosition: p.focus }}
                 />
                 <div
                   aria-hidden
