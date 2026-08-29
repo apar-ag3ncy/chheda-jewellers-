@@ -122,7 +122,7 @@ export function Nav() {
               setMobileOpen(false);
             }
           }}
-          className="relative z-10 flex items-center gap-1 rounded-full border border-[color-mix(in_srgb,var(--maroon)_26%,transparent)] bg-cream px-3 py-1.5 shadow-[0_18px_46px_-22px_rgba(0,0,0,0.6)] md:gap-2 md:px-4 md:py-2"
+          className="relative z-10 flex items-center gap-1 rounded-full border border-[color-mix(in_srgb,var(--maroon)_26%,transparent)] bg-cream px-3 py-2 shadow-[0_18px_46px_-22px_rgba(0,0,0,0.6)] md:gap-2 md:px-5 md:py-2.5"
         >
           {/* Brand */}
           <Link
@@ -132,10 +132,12 @@ export function Nav() {
           >
             {/* Jeweller's-seal medallion - gold mandala on a gold-rimmed
                 emerald disc, so the brand gold stays luminous on beige. */}
-            <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-b from-green to-green-deep shadow-[inset_0_1px_1px_rgba(240,207,170,0.28),0_3px_10px_-3px_rgba(0,0,0,0.45)] ring-1 ring-gold/45 transition-all duration-500 ease-[var(--ease-lux)] group-hover:ring-gold md:h-11 md:w-11">
-              <Monogram className="h-[66%] w-[66%]" />
+            <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-b from-green to-green-deep shadow-[inset_0_1px_1px_rgba(240,207,170,0.28),0_3px_10px_-3px_rgba(0,0,0,0.45)] ring-1 ring-gold/45 transition-all duration-500 ease-[var(--ease-lux)] group-hover:ring-gold md:h-[3.25rem] md:w-[3.25rem]">
+              {/* 74%, not 66%: at 44px the mandala's inner rings dissolved and
+                  the seal read as a dark dot. Bigger disc, bigger mark. */}
+              <Monogram className="h-[74%] w-[74%]" />
             </span>
-            <Wordmark layout="stacked" tone="dark" className="hidden text-[15px] sm:flex" />
+            <Wordmark layout="stacked" tone="dark" className="hidden text-[17px] sm:flex" />
           </Link>
 
           {/* Desktop links */}
