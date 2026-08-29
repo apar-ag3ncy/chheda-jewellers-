@@ -1,7 +1,6 @@
 import { NextStep } from "@/components/ui/NextStep";
-import { promiseIntro } from "@/lib/content/promise";
 import { pageMetadata } from "@/lib/seo";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { PromiseCover } from "@/components/promise/PromiseCover";
 import { Chapters } from "@/components/promise/Chapters";
 import { Hallmark } from "@/components/promise/Hallmark";
 import { Estimator } from "@/components/promise/Estimator";
@@ -32,11 +31,7 @@ export const metadata = pageMetadata({
 export default function ChhedaPromisePage() {
   return (
     <>
-      <PageHeader
-        eyebrow={promiseIntro.eyebrow}
-        title={promiseIntro.headline}
-        intro={promiseIntro.body}
-      />
+      <PromiseCover />
       <Chapters />
       <Hallmark />
       <Estimator />

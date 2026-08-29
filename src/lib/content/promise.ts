@@ -70,11 +70,11 @@ export const promiseStory = {
 
 /** Contents index, rendered as an archival ruled table. */
 export const promiseIndex = [
-  { n: "01", label: "The house", note: "Where the name comes from" },
-  { n: "02", label: "The mark on the metal", note: "How to read a hallmark" },
-  { n: "03", label: "What you actually pay for", note: "A bill, itemised" },
-  { n: "04", label: "What we do not do", note: "Stated plainly" },
-  { n: "05", label: "Take this with you", note: "Seven questions for any counter" },
+  { n: "01", label: "The house", note: "Where the name comes from", href: "#house" },
+  { n: "02", label: "The mark on the metal", note: "How to read a hallmark", href: "#hallmark" },
+  { n: "03", label: "What you actually pay for", note: "A bill, itemised", href: "#estimate" },
+  { n: "04", label: "What we do not do", note: "Stated plainly", href: "#refusals" },
+  { n: "05", label: "Take this with you", note: "Seven questions for any counter", href: "#checklist" },
 ] as const;
 
 /**

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { promiseIndex, promiseStory } from "@/lib/content/promise";
+import { promiseStory } from "@/lib/content/promise";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
@@ -18,33 +18,11 @@ export function Chapters() {
   });
 
   return (
-    <Section spacing="lg" tone="green">
+    <Section id="house" spacing="lg" tone="green">
       <Container>
-        {/* ── The index - reframes the page as a document of record ── */}
-        <Reveal as="p" className="u-eyebrow mb-6">
-          Contents
-        </Reveal>
-        <ol className="mb-20 max-w-2xl md:mb-28">
-          {promiseIndex.map((row, i) => (
-            <Reveal
-              as="li"
-              key={row.n}
-              delay={i * 0.04}
-              className="flex items-baseline gap-5 border-t border-line py-4 last:border-b"
-            >
-              <span className="font-body text-[0.68rem] tracking-[0.2em] text-gold-light">
-                {row.n}
-              </span>
-              <span className="flex-1 font-display text-[length:var(--step-1)] font-light text-text-strong">
-                {row.label}
-              </span>
-              <span className="hidden font-body text-[0.78rem] font-light text-text-muted sm:block">
-                {row.note}
-              </span>
-            </Reveal>
-          ))}
-        </ol>
-
+        {/* The contents table lived here until the cover took it over - an
+            index you meet a full screen after the title is read as scenery,
+            and this one now links to its chapters from up there. */}
         {/* ── Chapters, with a plate that turns ── */}
         <div ref={rootRef} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
