@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { primaryNav } from "@/config/nav";
 import { flags } from "@/config/flags";
-import { siteConfig, contactIsReal } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/cn";
 import { Monogram } from "@/components/ui/Monogram";
 import { Wordmark } from "@/components/ui/Wordmark";
@@ -296,7 +296,7 @@ export function Nav() {
         <div
           className={cn(
             "hidden items-center overflow-hidden whitespace-nowrap transition-all duration-[750ms] ease-[var(--ease-lux)] md:flex",
-            expanded ? "max-w-[140px] gap-1 px-2 opacity-100" : "pointer-events-none max-w-0 gap-0 px-0 opacity-0",
+            expanded ? "max-w-[160px] gap-1 px-2 opacity-100" : "pointer-events-none max-w-0 gap-0 px-0 opacity-0",
           )}
         >
           <a
@@ -305,27 +305,24 @@ export function Nav() {
             rel="noopener noreferrer"
             aria-label="Instagram"
             tabIndex={expanded ? 0 : -1}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
           >
-            <InstagramIcon className="h-4 w-4" />
+            <InstagramIcon className="h-[1.35rem] w-[1.35rem]" />
           </a>
-          {/* Only while there is a real number. It used to fall back to the
-              booking form while still labelled "WhatsApp" and still opening in
-              a new tab, so the icon promised one thing and did another. That
-              form is gone now, which leaves hiding it as the only honest
-              option until the number is published. */}
-          {contactIsReal() ? (
-            <a
-              href={siteConfig.contact.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              tabIndex={expanded ? 0 : -1}
-              className="flex h-9 w-9 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-            </a>
-          ) : null}
+          {/* Shown unconditionally by the owner's request. NOTE: until the
+              real number lands in siteConfig this opens a chat with the
+              placeholder - publishing the number (CLIENT-DATA-NEEDED.md,
+              item 1) is what makes this button truthful. */}
+          <a
+            href={siteConfig.contact.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            tabIndex={expanded ? 0 : -1}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
+          >
+            <WhatsAppIcon className="h-[1.35rem] w-[1.35rem]" />
+          </a>
         </div>
       </div>
 
