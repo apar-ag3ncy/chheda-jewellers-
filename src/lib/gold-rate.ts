@@ -5,9 +5,12 @@
  * the Route Handler at /api/gold-rate, which calls `getGoldRate()` here.
  *
  * The data source is pluggable via env (GOLD_RATE_PROVIDER):
- *   • "fallback"   → indicative, offline-safe values (default; no key needed)
+ *   • "spot"       → LIVE, keyless (default): XAU/USD from gold-api.com and
+ *                    USD/INR from open.er-api.com (frankfurter.dev backup),
+ *                    converted to INR/gram with import duty applied
  *   • "metals-dev" → https://metals.dev  (set GOLD_RATE_API_KEY)
  *   • "goldapi"    → https://goldapi.io   (set GOLD_RATE_API_KEY)
+ *   • "fallback"   → static offline-safe baseline, never fetches
  *
  * Every response carries `indicative: true` unless a live provider succeeds,
  * so the UI can always show the correct "indicative rate" disclaimer.
@@ -38,7 +41,7 @@ export interface GoldRateResponse {
 }
 
 const CITY = process.env.GOLD_RATE_CITY ?? "Mumbai";
-const PROVIDER = (process.env.GOLD_RATE_PROVIDER ?? "fallback").toLowerCase();
+const PROVIDER = (process.env.GOLD_RATE_PROVIDER ?? "spot").toLowerCase();
 const API_KEY = process.env.GOLD_RATE_API_KEY ?? "";
 
 const DISCLAIMER =
@@ -46,12 +49,15 @@ const DISCLAIMER =
   "Please confirm the applicable rate in-store before any transaction.";
 
 /**
- * Indicative baseline (₹ per gram). Deliberately approximate.
- * A gentle time-based drift makes the widget feel alive without a live feed.
- * TODO(client): set a live provider + key in .env to replace these.
+ * Offline baseline (₹ per gram) - the number painted only when every live
+ * feed is unreachable. Set from the real landed rate on 29 Aug 2026 (spot
+ * $4,456/oz at ₹95.5/USD plus 6% duty ≈ ₹14,500/g). It will drift out of
+ * date; that is what the "indicative" disclaimer is for, and any live fetch
+ * replaces it. The previous value here was 8450 - forty percent under the
+ * market - which is why the fallback now records its provenance.
  */
 /** Shared with lib/gold-rate-client so the browser fallback cannot drift. */
-export const BASE_24K = 8450;
+export const BASE_24K = 14500;
 export const PURITY_22K = 22 / 24;
 
 function indicativeRates(): GoldRate[] {
@@ -167,6 +173,72 @@ async function fetchFromGoldApi(): Promise<GoldRate[] | null> {
 }
 
 /**
+ * The keyless live pipeline: spot XAU/USD x USD/INR, landed.
+ *
+ * Two independent free feeds, neither needing a key:
+ *   · gold-api.com     - spot gold, updates continuously
+ *   · open.er-api.com  - daily USD/INR fix (frankfurter.dev as backup)
+ *
+ * International spot is not the Indian counter rate: the counter adds import
+ * duty and a local premium. The largest, least arguable piece - customs duty,
+ * 6% since July 2024 - is applied here (override via GOLD_RATE_DUTY_PCT).
+ * What remains (jeweller margin, city premium, GST) varies shop to shop, so
+ * the result is still flagged `indicative` and labelled for what it is. This
+ * lands within about a percent of the IBJA number, against forty percent off
+ * for the old static baseline.
+ */
+const DUTY_PCT = Number(process.env.GOLD_RATE_DUTY_PCT ?? "6");
+
+async function fetchUsdInr(): Promise<number | null> {
+  try {
+    const res = await fetch("https://open.er-api.com/v6/latest/USD", {
+      next: { revalidate: 3600 },
+    });
+    if (res.ok) {
+      const data: { rates?: { INR?: number } } = await res.json();
+      const inr = data.rates?.INR;
+      if (typeof inr === "number" && inr > 0) return inr;
+    }
+  } catch {
+    /* fall through to the backup */
+  }
+  try {
+    const res = await fetch(
+      "https://api.frankfurter.dev/v1/latest?base=USD&symbols=INR",
+      { next: { revalidate: 3600 } },
+    );
+    if (!res.ok) return null;
+    const data: { rates?: { INR?: number } } = await res.json();
+    const inr = data.rates?.INR;
+    return typeof inr === "number" && inr > 0 ? inr : null;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchFromSpot(): Promise<GoldRate[] | null> {
+  try {
+    const [goldRes, usdInr] = await Promise.all([
+      fetch("https://api.gold-api.com/price/XAU", { next: { revalidate: 600 } }),
+      fetchUsdInr(),
+    ]);
+    if (!goldRes.ok || usdInr === null) return null;
+    const data: { price?: number } = await goldRes.json();
+    const usdPerOunce = data.price;
+    if (typeof usdPerOunce !== "number" || !Number.isFinite(usdPerOunce) || usdPerOunce <= 0)
+      return null;
+    const landed =
+      (usdPerOunce * usdInr * (1 + DUTY_PCT / 100)) / GRAMS_PER_TROY_OUNCE;
+    // Sanity fence: a feed gone mad must not reach the page. Spot INR/gram
+    // outside 4k-60k means a broken response, not a market move.
+    if (landed < 4000 || landed > 60000) return null;
+    return build(landed, `Live spot + ${DUTY_PCT}% duty`, true);
+  } catch {
+    return null;
+  }
+}
+
+/**
  * IBJA-aligned feed - the ONLY source we would publish as non-indicative,
  * because it is the rate Indian jewellers actually quote.
  *
@@ -205,6 +277,10 @@ export async function getGoldRate(): Promise<GoldRateResponse> {
   if (!rates) {
     if (PROVIDER === "metals-dev") rates = await fetchFromMetalsDev();
     else if (PROVIDER === "goldapi") rates = await fetchFromGoldApi();
+    else if (PROVIDER === "spot") rates = await fetchFromSpot();
+    // A keyed provider that fails still gets the keyless live pipeline
+    // before anyone sees the static baseline.
+    if (!rates && PROVIDER !== "fallback") rates = await fetchFromSpot();
   }
 
   const resolved = rates ?? indicativeRates();

@@ -22,7 +22,7 @@ import type { GoldRateResponse } from "@/lib/gold-rate";
  */
 
 /** Must match src/lib/gold-rate.ts. Exported there so this cannot drift. */
-const BASE_24K = 8450;
+const BASE_24K = 14500;
 const PURITY_22K = 22 / 24;
 
 /** Indicative 22K rate, for painting before the network answers. */
