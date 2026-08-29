@@ -59,14 +59,20 @@ export function Footer() {
           className="group flex flex-col items-center outline-none focus-visible:ring-2 focus-visible:ring-gold-light"
         >
           <Monogram className="h-[clamp(2.1rem,3.6vw,3.4rem)] w-[clamp(2.1rem,3.6vw,3.4rem)] transition-opacity duration-[var(--dur-slow)] ease-[var(--ease-lux)] group-hover:opacity-90" />
+          {/* Wide tracking puts its spacing AFTER the last letter, so a
+              centred box shows the glyphs left of centre. The old fix was a
+              negative right margin, which centres the glyphs but leaves the
+              box hanging visibly right; padding-left of the same size
+              balances the trailing space instead, so the glyph run AND the
+              box are both dead centre. */}
           <span
-            className="mt-[clamp(0.6rem,1.4vw,1.1rem)] block -mr-[0.26em] font-body font-light uppercase leading-[0.86] tracking-[0.26em] text-text-strong"
+            className="mt-[clamp(0.6rem,1.4vw,1.1rem)] block pl-[0.26em] font-body font-light uppercase leading-[0.86] tracking-[0.26em] text-text-strong"
             style={{ fontSize: "clamp(2.3rem,10.5vw,10.5rem)" }}
           >
             {houseName}
           </span>
           <span
-            className="mt-[clamp(0.4rem,0.9vw,0.8rem)] block -mr-[0.52em] font-body font-light uppercase text-beige/85"
+            className="mt-[clamp(0.4rem,0.9vw,0.8rem)] block pl-[0.52em] font-body font-light uppercase text-beige/85"
             style={{ fontSize: "clamp(0.6rem,1.25vw,1.2rem)", letterSpacing: "0.52em" }}
           >
             {houseSuffix}

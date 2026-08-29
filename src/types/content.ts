@@ -52,6 +52,8 @@ export interface PromiseValue {
   points?: string[];
   /** The frame on the mark's dock chip - jewellery only, never a face. */
   image?: { src: string; focus?: string };
+  /** The wide band (~2.4:1) the section's hero crossfades to while hovered. */
+  band?: { src: string; focus?: string };
 }
 
 export interface JewelleryType {
