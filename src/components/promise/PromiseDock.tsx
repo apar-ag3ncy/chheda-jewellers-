@@ -82,6 +82,35 @@ export function PromiseDock() {
               "linear-gradient(to top, color-mix(in srgb, var(--green) 78%, transparent) 0%, transparent 100%)",
           }}
         />
+        {/* ── The hovered mark's frame, standing on the band ──────────
+            Appears only while a chip is held - a small plate propped on the
+            photograph the way a jeweller stands a card in the vitrine.
+            Keyed by mark so moving along the dock replays the settle; gone
+            entirely at rest, so the band opens uncluttered. */}
+        {shown?.image ? (
+          <div
+            key={shown.id}
+            aria-hidden
+            className="pointer-events-none absolute right-4 top-4 hidden w-40 overflow-hidden rounded-[var(--radius-brand)] border-2 border-cream/90 shadow-[0_22px_48px_-16px_rgba(0,0,0,0.75)] md:block lg:w-48"
+            style={{
+              transform: "rotate(2.5deg)",
+              animation: "fadeRise 0.45s var(--ease-lux) both",
+            }}
+          >
+            <Image
+              src={shown.image.src}
+              alt=""
+              width={384}
+              height={288}
+              className="aspect-[4/3] w-full object-cover"
+              style={{ objectPosition: shown.image.focus ?? "50% 50%" }}
+            />
+            <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#04170f]/85 to-transparent px-3 pb-2 pt-6 font-body text-[0.58rem] uppercase tracking-[0.18em] text-gold-light">
+              {shown.title}
+            </span>
+          </div>
+        ) : null}
+
         <div className="absolute inset-x-0 -bottom-7 md:-bottom-8">
           <Dock aria-label="The four marks of the promise">
             {promiseValues.map((v, i) => (
