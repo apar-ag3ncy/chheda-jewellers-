@@ -155,9 +155,10 @@
   .cj-glass-numeral {
     background-image: linear-gradient(
       160deg,
-      var(--gold-light) 0%,
-      var(--gold) 55%,
-      var(--gold-deep) 115%
+      #fff0d6 0%,
+      var(--gold-light) 34%,
+      var(--gold) 78%,
+      var(--gold-deep) 125%
     );
     -webkit-background-clip: text;
     background-clip: text;
