@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FooterGround } from "@/components/layout/FooterGround";
 import { siteConfig, houseLines, contactIsReal } from "@/config/site";
-import { Container } from "@/components/ui/Section";
 import { Monogram } from "@/components/ui/Monogram";
 
 /**
@@ -17,12 +16,16 @@ import { Monogram } from "@/components/ui/Monogram";
  * ground you read on. See FooterGround for the blur, the scrim and the seam
  * with the map above it.
  *
- * The three blocks are CENTRED, not spread. `justify-between` pushed the name
- * to the ceiling and the legal line to the floor and left two lakes of empty
- * green in between - on a 900px screen the gaps came out at ~125px each,
- * which read as three unrelated things rather than one sign-off. Centring
- * with a fixed gap keeps them as one block and puts the leftover height in
- * the margins, where it belongs.
+ * The three blocks are SPREAD, and the wordmark is sized so spreading works.
+ * An earlier pass centred them because the type was small enough that
+ * `justify-between` left ~125px lakes between blocks; then, on wide screens,
+ * centring pooled all the leftover height under the legal line instead - a
+ * third of the viewport of empty green below the last row, which read as an
+ * unfinished page. The actual fix is scale, not alignment: the name is now
+ * large enough to own the top third, so justify-between distributes what
+ * little remains into the two seams and every band of the screen is doing
+ * work. The content also spreads into a wider rail (1600px) than the site
+ * container, because a footer is a full-stop, not a column of text.
  *
  * The padding is asymmetric on purpose: the top has to clear the floating
  * nav, the bottom only has to breathe, so matching them would push the block
@@ -48,30 +51,30 @@ export function Footer() {
     <footer className="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-green-deep">
       <FooterGround />
 
-      <Container className="relative flex flex-1 flex-col justify-center gap-6 pt-[126px] pb-[44px] md:gap-11 md:pt-[120px] md:pb-[96px]">
+      <div className="relative z-[1] mx-auto flex w-full max-w-[1600px] flex-1 flex-col justify-between gap-5 px-5 pt-[120px] pb-8 md:gap-10 md:px-12 md:pt-[132px] md:pb-11">
         {/* ── The name ─────────────────────────────────────────────── */}
         <Link
           href="/"
           aria-label={`${siteConfig.name} - home`}
           className="group flex flex-col items-center outline-none focus-visible:ring-2 focus-visible:ring-gold-light"
         >
-          <Monogram className="h-[clamp(1.7rem,3vw,2.6rem)] w-[clamp(1.7rem,3vw,2.6rem)] transition-opacity duration-[var(--dur-slow)] ease-[var(--ease-lux)] group-hover:opacity-90" />
+          <Monogram className="h-[clamp(2.1rem,3.6vw,3.4rem)] w-[clamp(2.1rem,3.6vw,3.4rem)] transition-opacity duration-[var(--dur-slow)] ease-[var(--ease-lux)] group-hover:opacity-90" />
           <span
             className="mt-[clamp(0.6rem,1.4vw,1.1rem)] block -mr-[0.26em] font-body font-light uppercase leading-[0.86] tracking-[0.26em] text-text-strong"
-            style={{ fontSize: "clamp(1.9rem,9.4vw,7.4rem)" }}
+            style={{ fontSize: "clamp(2.3rem,10.5vw,10.5rem)" }}
           >
             {houseName}
           </span>
           <span
             className="mt-[clamp(0.4rem,0.9vw,0.8rem)] block -mr-[0.52em] font-body font-light uppercase text-beige/85"
-            style={{ fontSize: "clamp(0.52rem,1.05vw,0.95rem)", letterSpacing: "0.52em" }}
+            style={{ fontSize: "clamp(0.6rem,1.25vw,1.2rem)", letterSpacing: "0.52em" }}
           >
             {houseSuffix}
           </span>
         </Link>
 
         {/* ── The particulars ──────────────────────────────────────── */}
-        <div className="grid grid-cols-2 gap-x-5 gap-y-5 md:grid-cols-12 md:gap-10">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-12 md:gap-14">
           {siteConfig.branches.map((b) => (
             <address key={b.id} className="not-italic md:col-span-4">
               <p className="u-eyebrow mb-2 text-gold-light">{b.area}</p>
@@ -158,7 +161,7 @@ export function Footer() {
             </Link>
           </div>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }
