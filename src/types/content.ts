@@ -48,6 +48,10 @@ export interface PromiseValue {
   id: string;
   title: string;
   description: string;
+  /** Up to three short proofs, shown by the homepage dock while its mark is hovered. */
+  points?: string[];
+  /** The frame on the mark's dock chip - jewellery only, never a face. */
+  image?: { src: string; focus?: string };
 }
 
 export interface JewelleryType {
