@@ -62,7 +62,7 @@ export function MumbaiPoster({
   active,
   onActivate,
 }: {
-  active: number;
+  active: number | null;
   onActivate: (i: number) => void;
 }) {
   const outerRef = useRef<HTMLDivElement>(null);
@@ -240,8 +240,12 @@ export function MumbaiPoster({
           <div key={p.id} className="absolute" style={{ left: `${p.left}%`, top: `${p.top}%` }}>
             <button
               type="button"
-              onMouseEnter={() => onActivate(i)}
-              onFocus={() => onActivate(i)}
+              /* Click only, deliberately. Hover used to open the card,
+                  which meant crossing the map with a pointer flashed panels
+                  in and out at the screen edge - and made it impossible to
+                  LOOK at the map without operating it. A pin is a button;
+                  the card is its answer. (Enter/Space fire click on a
+                  button, so the keyboard path is unchanged.) */
               onClick={() => onActivate(i)}
               aria-label={`Show the ${p.area} boutique`}
               aria-pressed={active === i}
