@@ -9,8 +9,9 @@ const CJ_PATH =
 
 type MonogramProps = {
   className?: string;
-  /** "gold" uses the brand gradient; "current" inherits currentColor. */
-  tone?: "gold" | "current";
+  /** "gold" uses the brand gradient; "bright" a two-stop light gold that
+   * survives small sizes; "current" inherits currentColor. */
+  tone?: "gold" | "bright" | "current";
   /**
    * Stroke width in viewBox units (400-wide canvas). The artwork is drawn as
    * hairline filled shapes, which dissolve below ~50px rendered size; a
@@ -34,8 +35,12 @@ export function Monogram({
   decorative = true,
   weight = 0,
 }: MonogramProps) {
-  const gid = "cj-gold-gradient";
-  const fill = tone === "gold" ? `url(#${gid})` : "currentColor";
+  const fill =
+    tone === "gold"
+      ? "url(#cj-gold-gradient)"
+      : tone === "bright"
+        ? "url(#cj-gold-bright)"
+        : "currentColor";
   const labelled = Boolean(title) && !decorative;
 
   return (

@@ -36,6 +36,15 @@ export function BrandDefs() {
           <stop offset="0.88" stopColor="#c9854d" />
           <stop offset="1" stopColor="#9b583b" />
         </linearGradient>
+        {/* Two stops only, both light. The seven-stop gradient above is the
+            wordmark's shimmer and reads beautifully at display size - but at
+            nav scale (~34px) its dark bronze ends swallow half the mandala's
+            hairlines against the emerald disc. This one never drops below
+            the mid gold, so every line of the mark stays lit at small size. */}
+        <linearGradient id="cj-gold-bright" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#f6dcb4" />
+          <stop offset="1" stopColor="#c68d61" />
+        </linearGradient>
       </defs>
     </svg>
   );
