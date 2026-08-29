@@ -67,8 +67,8 @@ export function PromiseDock() {
       {/* ── The metal, wide ─────────────────────────────────────────── */}
       <div className="relative mt-10 md:mt-14">
         <ParallaxImage
-          src="/media/promise/promise-band.jpg"
-          alt="A diamond chain carrying a diamond-set emerald pendant"
+          src="/media/promise/band-trust.jpg"
+          alt="A polki and pearl choker set with pink stones, filling the frame"
           focus="50% 45%"
           intensity={0.07}
           className="aspect-[21/9] w-full md:aspect-[3/1]"
@@ -78,7 +78,9 @@ export function PromiseDock() {
             One full-bleed layer per mark, stacked over the base band and
             crossfaded by opacity - the base never unmounts, so unhovering
             falls back to it with the same ease, and the first hover costs
-            no fetch stall (all four are mounted and lazy-loaded). These are
+            no fetch stall (all four are mounted and lazy-loaded). The choker
+            band doubles as the resting image by the owner's choice, so
+            hovering the fourth mark simply holds the default. These are
             purpose-cut 2.4:1 bands from the same masters as the chips, not
             the chips' portrait crops - a portrait cover-cropped to 3:1
             keeps a sliver; these keep the jewellery. */}
