@@ -30,9 +30,10 @@ import { cn } from "@/lib/cn";
  * - DockItem takes an `href` and renders a real <Link> filling the chip -
  *   the original was a role="button" div with a tabIndex and no action, which
  *   is a control that promises and does nothing;
- * - panel and chips speak the site's liquid-glass language (the same
- *   .cj-liquid-glass / .cj-glass-chip surfaces as the nav menu and the
- *   promise marks) instead of the original's gray-50/neutral-900;
+ * - panel and chips wear the nav's own livery instead of the original's
+ *   gray-50/neutral-900: the beige capsule with its maroon-tinted border,
+ *   and inside it the gold-rimmed emerald medallion - the dock reads as a
+ *   row of the site's own seals on the site's own capsule;
  * - under prefers-reduced-motion the magnification is disabled outright and
  *   labels show on focus/hover without translation - the dock degrades to a
  *   row of even chips, which is all it ever is semantically.
@@ -118,7 +119,8 @@ export function Dock({
           mouseX.set(Infinity);
         }}
         className={cn(
-          "cj-liquid-glass mx-auto flex w-fit items-end gap-3 rounded-2xl px-4 pb-2.5",
+          // The nav capsule's recipe: cream, maroon-tinted border, deep soft shadow.
+          "mx-auto flex w-fit items-end gap-3 rounded-full border border-[color-mix(in_srgb,var(--maroon)_26%,transparent)] bg-cream px-4 pb-2.5 shadow-[0_18px_46px_-22px_rgba(0,0,0,0.6)]",
           className,
         )}
         style={{ height: panelHeight }}
@@ -160,7 +162,8 @@ export function DockItem({ children, className, href, label }: DockItemProps) {
       onHoverStart={() => isHovered.set(1)}
       onHoverEnd={() => isHovered.set(0)}
       className={cn(
-        "cj-glass-chip relative inline-flex aspect-square items-center justify-center rounded-full",
+        // The nav medallion's recipe: emerald disc, gold rim, lit top edge.
+        "relative inline-flex aspect-square items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-green to-green-deep ring-1 ring-gold/50 shadow-[inset_0_1px_1px_rgba(240,207,170,0.3),0_4px_12px_-4px_rgba(0,0,0,0.5)]",
         className,
       )}
     >

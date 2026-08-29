@@ -89,7 +89,7 @@ export function ChhedaPromise() {
                 >
                   <DockLabel>{v.title}</DockLabel>
                   <DockIcon>
-                    <span className="cj-glass-numeral font-display text-[1.05rem] font-light leading-none tabular-nums">
+                    <span className="cj-glass-numeral font-display text-[1.15rem] font-semibold leading-none tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </DockIcon>
