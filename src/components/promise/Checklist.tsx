@@ -76,7 +76,7 @@ export function Checklist() {
   };
 
   return (
-    <Section spacing="lg" tone="green">
+    <Section id="checklist" spacing="lg" tone="green">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* ── The pitch ────────────────────────────────────────────── */}

@@ -51,6 +51,7 @@ export function Hallmark() {
   return (
     <Section
       as="section"
+      id="hallmark"
       spacing="lg"
       tone="deep"
       className="relative overflow-hidden"
