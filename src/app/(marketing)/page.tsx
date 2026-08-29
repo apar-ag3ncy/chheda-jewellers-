@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import { LegacyStrip } from "@/components/sections/LegacyStrip";
 import {
   Hero,
   ChhedaPromise,
@@ -51,6 +52,7 @@ import { ScrollThemer } from "@/components/motion/ScrollThemer";
   */
 const SECTIONS: Record<HomepageSection, ComponentType> = {
   hero: Hero,
+  legacy: LegacyStrip,
   "chheda-promise": ChhedaPromise,
   "jewellery-types": JewelleryTypes,
   stories: Stories,

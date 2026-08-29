@@ -208,6 +208,43 @@
     .cj-punch-ring { display: none; }
   }
 
+  /* ── The legacy ribbon ────────────────────────────────────
+     Two constant animations: the track walks left by exactly half its own
+     width (two identical halves -> a mathematically seamless loop), and the
+     gold gradient's position sweeps so a highlight travels along the
+     letterforms. Durations are deliberately unrelated (67s / 11s) so the
+     shine never syncs with the loop and the pair cannot develop a visible
+     rhythm. */
+  .cj-legacy-track {
+    animation: cj-legacy-walk 67s linear infinite;
+  }
+
+  @keyframes cj-legacy-walk {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .cj-legacy-gold {
+    background-image: var(--grad-gold);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: cj-legacy-shine 11s ease-in-out infinite;
+    /* The gradient's darkest stop over deep green is the floor: 4.6:1,
+       measured - decorative display text needs 3:1. */
+  }
+
+  @keyframes cj-legacy-shine {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cj-legacy-track { animation: none; }
+    .cj-legacy-gold  { animation: none; background-position: 50% 50%; }
+  }
+
   /* ── Liquid glass - the mega menu panel ───────────────────
      Three things make this read as glass rather than as a tinted box:
 
@@ -241,8 +278,8 @@
             layer, so the specular below cannot lighten the label back out. */
       linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.46) 0px,
-        rgba(0, 0, 0, 0.46) 72px,
+        rgba(0, 0, 0, 0.56) 0px,
+        rgba(0, 0, 0, 0.56) 72px,
         transparent 152px
       ),
       /* 2. The specular that follows the pointer - the liquid part. White,
@@ -258,23 +295,23 @@
             has moved at all. */
       linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.15) 0%,
-        rgba(255, 255, 255, 0.04) 38%,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.02) 38%,
         rgba(255, 255, 255, 0) 62%,
-        rgba(255, 255, 255, 0.1) 100%
+        rgba(255, 255, 255, 0.05) 100%
       );
     /* No brand tint. The panel takes its colour from whatever is behind it -
        which is the whole point of glass. The only darkening is neutral: a
        10% black wash plus the brightness below, so the surface can carry
        white type over a cream section without ever going green. */
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.04);
     /* Less blur than a frosted panel would use, deliberately: at 34px you see
        only colour, and a surface you cannot see THROUGH does not read as
        transparent. 24px keeps shapes recognisable behind it. saturate() stops
        those shapes going grey; brightness() is the colourless way to keep the
        surface dark enough to sit type on. */
-    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(0.72);
-    backdrop-filter: blur(24px) saturate(180%) brightness(0.72);
+    -webkit-backdrop-filter: blur(18px) saturate(170%) brightness(0.85);
+    backdrop-filter: blur(18px) saturate(170%) brightness(0.85);
     border: 1px solid rgba(255, 255, 255, 0.22);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.36),
