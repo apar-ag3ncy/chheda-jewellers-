@@ -213,14 +213,23 @@
      swept, so a highlight travels along the letterforms while the words
      stand still. */
   .cj-legacy-gold {
-    background-image: var(--grad-gold);
+    /* Not --grad-gold: that ramp bottoms out at gold-deep, which is 2.4:1 on
+       the strip's lifted maroon centre. This one starts at --gold (4.7:1
+       there, 5.9:1 on the plain maroon) so no stop of the sweep ever dips
+       below the 3:1 a decorative display line needs. */
+    background-image: linear-gradient(
+      100deg,
+      var(--gold) 0%,
+      var(--gold-light) 30%,
+      #fff2da 50%,
+      var(--gold-light) 70%,
+      var(--gold) 100%
+    );
     background-size: 300% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: cj-legacy-shine 11s ease-in-out infinite;
-    /* The gradient's darkest stop over deep green is the floor: 4.6:1,
-       measured - decorative display text needs 3:1. */
   }
 
   @keyframes cj-legacy-shine {
