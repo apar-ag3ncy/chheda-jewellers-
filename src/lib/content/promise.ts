@@ -13,24 +13,48 @@ export const promiseValues: PromiseValue[] = [
     title: "Hallmarked purity",
     description:
       "Every piece carries a BIS hallmark. What we say is 22 karat, is 22 karat - verifiable, always.",
+    points: [
+      "Every piece BIS-hallmarked",
+      "916 stamped into the metal itself",
+      "Verify it live in the BIS Care app",
+    ],
+    image: { src: "/media/categories/gold/g3.jpg", focus: "50% 46%" },
   },
   {
     id: "transparency",
     title: "Transparent pricing",
     description:
       "Gold at the day's rate, making charges shown openly. No riddles, no surprises at the counter.",
+    points: [
+      "Gold billed at the day's rate",
+      "Making charges named before you decide",
+      "Stones weighed and priced separately",
+    ],
+    image: { src: "/media/categories/diamond/nav-diamond.jpg", focus: "50% 50%" },
   },
   {
     id: "craft",
     title: "Handcrafted by artisans",
     description:
       "Karigars who have shaped gold for decades, working each setting by hand the way it has always been done.",
+    points: [
+      "Karigars with decades at the bench",
+      "Every setting worked by hand",
+      "Finished only when its maker would wear it",
+    ],
+    image: { src: "/media/bespoke/01.jpg", focus: "50% 42%" },
   },
   {
     id: "buyback",
     title: "Lifetime of trust",
     description:
       "Fair exchange and buy-back, cleaning and care - a relationship that outlasts the purchase.",
+    points: [
+      "Fair exchange and buy-back, stated",
+      "Cleaning and care for the piece's whole life",
+      "A relationship that outlasts the bill",
+    ],
+    image: { src: "/media/categories/polki/sapphire-choker.jpg", focus: "50% 54%" },
   },
 ];
 
