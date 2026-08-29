@@ -213,17 +213,19 @@
      swept, so a highlight travels along the letterforms while the words
      stand still. */
   .cj-legacy-gold {
-    /* Not --grad-gold: that ramp bottoms out at gold-deep, which is 2.4:1 on
-       the strip's lifted maroon centre. This one starts at --gold (4.7:1
-       there, 5.9:1 on the plain maroon) so no stop of the sweep ever dips
-       below the 3:1 a decorative display line needs. */
+    /* Dark-gold ramp for the cream ground. Light gold on cream is 1.3:1 -
+       invisible - so the letters run from a burnished bronze anchor
+       (gold-deep pulled 45% toward the maroon, 7.9:1) through gold-deep
+       (4.6:1), and the shine is the lighter #ae6f4c mid-stop (3.3:1)
+       passing through. No stop of the sweep goes under 3:1, and the resting
+       centre under reduced motion sits on gold-deep, not the highlight. */
     background-image: linear-gradient(
       100deg,
-      var(--gold) 0%,
-      var(--gold-light) 30%,
-      #fff2da 50%,
-      var(--gold-light) 70%,
-      var(--gold) 100%
+      #732f21 0%,
+      var(--gold-deep) 32%,
+      #ae6f4c 50%,
+      var(--gold-deep) 68%,
+      #732f21 100%
     );
     background-size: 300% 100%;
     -webkit-background-clip: text;

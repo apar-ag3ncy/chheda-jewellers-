@@ -21,14 +21,13 @@ import { Monogram } from "@/components/ui/Monogram";
  * that continues past the viewport, which is what makes it feel like part of
  * the page's fabric instead of a box on it.
  *
- * THE GROUND IS THE BRAND'S OTHER COLOUR. Everything on this page is green
- * or cream, and a strip that matched them disappeared into the wallpaper. The
- * maroon is the house's declared secondary and is used almost nowhere - and
- * gold script on deep maroon is the oldest pairing in the trade: the velvet
- * lining of a jewel case. The layers below build that velvet rather than a
- * flat fill: a centre glow as the nap catching light, darker corners as the
- * fold shadows, and a hairline of light along the top edge where the fabric
- * turns.
+ * THE GROUND IS SATIN PAPER, not velvet. On the brand cream, with a soft
+ * centre sheen and gently shaded edges - the card inside the jewel box
+ * rather than its lining. The gold flips DARK to sit on it: light-gold
+ * letterforms measure 1.3:1 on cream and simply vanish, so the ribbon's ramp
+ * runs from a burnished near-bronze anchor through gold-deep, and the
+ * travelling shine is the lighter mid-stop passing through - embossed and
+ * catching light, never gilded flat.
  *
  * Carries no data-bg, like the hero above it: it paints its own opaque
  * ground and takes no part in the themer's alternation.
@@ -37,31 +36,35 @@ export function LegacyStrip() {
   return (
     <section
       id="legacy"
-      className="relative w-full overflow-hidden border-y border-gold/30"
+      className="relative w-full overflow-hidden border-y border-gold-deep/30"
       style={{
         background:
-          /* nap glow, then fold shadows, then the cloth itself */
-          "radial-gradient(120% 200% at 50% 50%, color-mix(in srgb, var(--maroon-soft) 85%, var(--gold) 15%) 0%, transparent 55%)," +
-          "radial-gradient(60% 130% at 6% 50%, rgba(0,0,0,0.5) 0%, transparent 60%)," +
-          "radial-gradient(60% 130% at 94% 50%, rgba(0,0,0,0.5) 0%, transparent 60%)," +
-          "linear-gradient(180deg, var(--maroon-soft) 0%, var(--maroon) 34%, var(--maroon) 66%, color-mix(in srgb, var(--maroon) 82%, #000) 100%)",
+          /* centre sheen, edge shading, then the paper itself */
+          "radial-gradient(120% 220% at 50% 50%, #fdf3dd 0%, transparent 58%)," +
+          "radial-gradient(60% 130% at 5% 50%, rgba(154,86,58,0.14) 0%, transparent 60%)," +
+          "radial-gradient(60% 130% at 95% 50%, rgba(154,86,58,0.14) 0%, transparent 60%)," +
+          "linear-gradient(180deg, #efdfbc 0%, var(--cream) 36%, var(--cream) 64%, #eaD8b2 100%)",
         boxShadow:
-          "inset 0 1px 0 rgba(240,207,170,0.32), inset 0 -1px 0 rgba(0,0,0,0.55), inset 0 12px 26px -18px rgba(240,207,170,0.18)",
+          "inset 0 1px 0 rgba(255,252,244,0.9), inset 0 -1px 0 rgba(154,86,58,0.22), inset 0 -10px 24px -18px rgba(154,86,58,0.28)",
       }}
     >
       <div className="flex items-center justify-center gap-4 px-5 py-5 md:gap-7 md:py-6">
         <span
           aria-hidden
-          className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/40 to-gold/60"
+          className="h-px flex-1 bg-gradient-to-r from-transparent via-gold-deep/35 to-gold-deep/55"
         />
-        <Monogram className="h-4 w-4 shrink-0 opacity-70 md:h-5 md:w-5" />
+        <span aria-hidden className="shrink-0" style={{ filter: "brightness(0.62) saturate(1.2)" }}>
+          <Monogram className="h-4 w-4 opacity-80 md:h-5 md:w-5" />
+        </span>
         <h2 className="cj-legacy-gold shrink-0 whitespace-nowrap text-center font-display text-[clamp(1.15rem,3.4vw,2rem)] font-light tracking-[0.12em]">
           Carrying legacy since 1991
         </h2>
-        <Monogram className="h-4 w-4 shrink-0 opacity-70 md:h-5 md:w-5" />
+        <span aria-hidden className="shrink-0" style={{ filter: "brightness(0.62) saturate(1.2)" }}>
+          <Monogram className="h-4 w-4 opacity-80 md:h-5 md:w-5" />
+        </span>
         <span
           aria-hidden
-          className="h-px flex-1 bg-gradient-to-l from-transparent via-gold/40 to-gold/60"
+          className="h-px flex-1 bg-gradient-to-l from-transparent via-gold-deep/35 to-gold-deep/55"
         />
       </div>
     </section>
