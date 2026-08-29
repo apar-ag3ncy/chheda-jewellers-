@@ -249,31 +249,40 @@ export function MumbaiPoster({
               onClick={() => onActivate(i)}
               aria-label={`Show the ${p.area} boutique`}
               aria-pressed={active === i}
-              // p-3 gave a 34px target; the dot stays the same size, the hit area
-              // grows to clear the 44px minimum.
-              className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-gold-light"
+              className="group/pin absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-gold-light"
             >
+              {/* The idle ping runs on BOTH pins now, not only the active one -
+                  it is the "this is a button" signal, and a signal shown only
+                  after the button has been found is no signal at all. */}
               <span
                 aria-hidden
-                className={cn(
-                  "cj-pin-ping absolute inset-0 m-auto h-9 w-9 rounded-full border border-gold-light/70",
-                  active === i ? "block" : "hidden",
-                )}
+                className="cj-pin-ping absolute inset-0 m-auto h-12 w-12 rounded-full border border-gold-light/70"
               />
               <span
                 aria-hidden
                 className={cn(
-                  "absolute inset-0 m-auto h-8 w-8 rounded-full border border-gold-light transition-all duration-[900ms] ease-[var(--ease-cinema)]",
+                  "absolute inset-0 m-auto h-11 w-11 rounded-full border border-gold-light transition-all duration-[900ms] ease-[var(--ease-cinema)]",
                   active === i ? "scale-100 opacity-80" : "scale-50 opacity-0",
                 )}
               />
+              {/* Soft standing halo so the pin reads lit even between pings;
+                  brightens on hover to answer the pointer. */}
               <span
                 aria-hidden
                 className={cn(
-                  "block rounded-full bg-gold-light transition-all duration-500 ease-[var(--ease-cinema)]",
+                  "absolute inset-0 m-auto rounded-full transition-all duration-500 ease-[var(--ease-cinema)]",
+                  "h-10 w-10 bg-[radial-gradient(circle,rgba(240,207,170,0.4)_0%,rgba(240,207,170,0.12)_45%,transparent_72%)]",
+                  "group-hover/pin:scale-125 group-hover/pin:opacity-100",
+                  active === i ? "opacity-100" : "opacity-75",
+                )}
+              />
+              <span
+                aria-hidden
+                className={cn(
+                  "block rounded-full bg-gold-light transition-all duration-500 ease-[var(--ease-cinema)] group-hover/pin:scale-110",
                   active === i
-                    ? "h-3.5 w-3.5 shadow-[0_0_0_3px_rgba(4,23,15,0.75),0_0_16px_5px_rgba(240,207,170,0.85),0_0_36px_12px_rgba(198,141,97,0.45)]"
-                    : "h-2.5 w-2.5 shadow-[0_0_0_3px_rgba(4,23,15,0.7),0_0_12px_3px_rgba(240,207,170,0.5)]",
+                    ? "h-[1.35rem] w-[1.35rem] shadow-[0_0_0_4px_rgba(4,23,15,0.75),0_0_22px_8px_rgba(240,207,170,0.9),0_0_52px_18px_rgba(198,141,97,0.5)]"
+                    : "h-[1.1rem] w-[1.1rem] shadow-[0_0_0_4px_rgba(4,23,15,0.7),0_0_18px_6px_rgba(240,207,170,0.75),0_0_40px_14px_rgba(198,141,97,0.35)]",
                 )}
               />
             </button>
