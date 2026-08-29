@@ -209,21 +209,9 @@
   }
 
   /* ── The legacy ribbon ────────────────────────────────────
-     Two constant animations: the track walks left by exactly half its own
-     width (two identical halves -> a mathematically seamless loop), and the
-     gold gradient's position sweeps so a highlight travels along the
-     letterforms. Durations are deliberately unrelated (67s / 11s) so the
-     shine never syncs with the loop and the pair cannot develop a visible
-     rhythm. */
-  .cj-legacy-track {
-    animation: cj-legacy-walk 67s linear infinite;
-  }
-
-  @keyframes cj-legacy-walk {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-
+     One animation: the gold gradient is drawn at 3x width and its position
+     swept, so a highlight travels along the letterforms while the words
+     stand still. */
   .cj-legacy-gold {
     background-image: var(--grad-gold);
     background-size: 300% 100%;
@@ -241,8 +229,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .cj-legacy-track { animation: none; }
-    .cj-legacy-gold  { animation: none; background-position: 50% 50%; }
+    .cj-legacy-gold { animation: none; background-position: 50% 50%; }
   }
 
   /* ── Liquid glass - the mega menu panel ───────────────────
