@@ -130,8 +130,16 @@ for (const [r, h] of Object.entries(pages)) {
   check(`no em/en dashes ${r}`, !/[–—]/.test(text), "found a long dash");
   check(`no lorem ${r}`, !/lorem ipsum/i.test(text), "placeholder copy");
   check(`no undefined/NaN ${r}`, !/\b(undefined|NaN|\[object Object\])\b/.test(text), "leaked value");
-  check(`no dead tel/wa ${r}`, !/tel:\+?9?1?2?200000000|wa\.me\/910000000000/.test(h),
-    "placeholder contact link is live");
+  // The nav's WhatsApp icon links the placeholder number BY OWNER DECISION
+  // (they want the icon present now; the real number replaces it via
+  // CLIENT-DATA-NEEDED.md item 1). So the placeholder wa.me link is allowed
+  // exactly once per page - the nav - and any second occurrence, or any
+  // placeholder tel:, still fails: those would be new dishonest affordances,
+  // not the sanctioned one.
+  const waCount = (h.match(/wa\.me\/910000000000/g) ?? []).length;
+  check(`no dead tel/wa ${r}`,
+    !/tel:\+?9?1?2?200000000/.test(h) && waCount <= 1,
+    "placeholder contact link beyond the sanctioned nav icon");
 }
 check("no cart UI anywhere",
   !Object.values(pages).some((h) => /add to (cart|bag)|"quantity"|checkout/i.test(h.replace(/<script[\s\S]*?<\/script>/g, ""))),
