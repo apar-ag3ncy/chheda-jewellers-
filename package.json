@@ -2,7 +2,7 @@
   "name": "chheda-jewellers",
   "version": "0.1.0",
   "private": true,
-  "description": "Chheda Jewellers \u2014 premium editorial jewellery brand experience.",
+  "description": "Chheda Jewellers — premium editorial jewellery brand experience.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "class-variance-authority": "^0.7.1",
+    "framer-motion": "^13.1.1",
     "gsap": "^3.13.0",
     "lenis": "^1.1.18",
     "next": "^15.1.6",

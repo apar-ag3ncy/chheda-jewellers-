@@ -6,6 +6,7 @@ import { categoryList } from "@/lib/content/categories";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
 import { Section, Container } from "@/components/ui/Section";
+import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -53,6 +54,38 @@ export default function JewelleryPage() {
           { label: "Made to order", value: "6-10 weeks" },
         ]}
       />
+
+      {/* ── The rooms, on the dock ──────────────────────────────────────
+          The same magnifying dock as the homepage promise marks, here with
+          the four rooms' own photographs as the chips. It duplicates the
+          mosaic below on purpose: the mosaic is for reading, this is for
+          people who already know which door they want. */}
+      <Section spacing="none" tone="green" aria-label="Jump to a room">
+        <Container className="-mt-2 pb-2 md:pb-4">
+          <Dock aria-label="The rooms">
+            {[
+              { href: "/jewellery/gold", label: "Gold", src: "/media/categories/gold/g3.jpg", pos: "50% 44%" },
+              { href: "/jewellery/diamond", label: "Diamond", src: "/media/categories/diamond/nav-diamond.jpg", pos: "50% 50%" },
+              { href: "/jewellery/polki", label: "Polki", src: "/media/categories/polki/sapphire-choker.jpg", pos: "50% 54%" },
+              { href: "/bespoke", label: "Bespoke", src: "/media/bespoke/01.jpg", pos: "50% 42%" },
+            ].map((room) => (
+              <DockItem key={room.href} href={room.href} label={room.label}>
+                <DockLabel>{room.label}</DockLabel>
+                <DockIcon className="overflow-hidden rounded-full">
+                  <Image
+                    src={room.src}
+                    alt=""
+                    width={96}
+                    height={96}
+                    className="h-full w-full rounded-full object-cover"
+                    style={{ objectPosition: room.pos }}
+                  />
+                </DockIcon>
+              </DockItem>
+            ))}
+          </Dock>
+        </Container>
+      </Section>
 
       {/* ── The mosaic ────────────────────────────────────────────────── */}
       <Section spacing="md" tone="green">
