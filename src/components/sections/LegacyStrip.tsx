@@ -21,14 +21,33 @@ import { Monogram } from "@/components/ui/Monogram";
  * that continues past the viewport, which is what makes it feel like part of
  * the page's fabric instead of a box on it.
  *
+ * THE GROUND IS THE BRAND'S OTHER COLOUR. Everything on this page is green
+ * or cream, and a strip that matched them disappeared into the wallpaper. The
+ * maroon is the house's declared secondary and is used almost nowhere - and
+ * gold script on deep maroon is the oldest pairing in the trade: the velvet
+ * lining of a jewel case. The layers below build that velvet rather than a
+ * flat fill: a centre glow as the nap catching light, darker corners as the
+ * fold shadows, and a hairline of light along the top edge where the fabric
+ * turns.
+ *
  * Carries no data-bg, like the hero above it: it paints its own opaque
- * deep-green ground and takes no part in the themer's alternation.
+ * ground and takes no part in the themer's alternation.
  */
 export function LegacyStrip() {
   return (
     <section
       id="legacy"
-      className="relative w-full overflow-hidden border-y border-gold/25 bg-green-deep"
+      className="relative w-full overflow-hidden border-y border-gold/30"
+      style={{
+        background:
+          /* nap glow, then fold shadows, then the cloth itself */
+          "radial-gradient(120% 200% at 50% 50%, color-mix(in srgb, var(--maroon-soft) 85%, var(--gold) 15%) 0%, transparent 55%)," +
+          "radial-gradient(60% 130% at 6% 50%, rgba(0,0,0,0.5) 0%, transparent 60%)," +
+          "radial-gradient(60% 130% at 94% 50%, rgba(0,0,0,0.5) 0%, transparent 60%)," +
+          "linear-gradient(180deg, var(--maroon-soft) 0%, var(--maroon) 34%, var(--maroon) 66%, color-mix(in srgb, var(--maroon) 82%, #000) 100%)",
+        boxShadow:
+          "inset 0 1px 0 rgba(240,207,170,0.32), inset 0 -1px 0 rgba(0,0,0,0.55), inset 0 12px 26px -18px rgba(240,207,170,0.18)",
+      }}
     >
       <div className="flex items-center justify-center gap-4 px-5 py-5 md:gap-7 md:py-6">
         <span
