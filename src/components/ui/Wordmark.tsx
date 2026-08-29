@@ -7,8 +7,8 @@ type WordmarkProps = {
   layout?: "stacked" | "inline";
   /** "dark" = deep green, for use on light (beige) surfaces. */
   tone?: "beige" | "gold" | "dark";
-  /** "regular" thickens both lines - for small sizes where light dissolves. */
-  weight?: "light" | "regular";
+  /** Heavier steps for small sizes, where light strokes dissolve. */
+  weight?: "light" | "regular" | "semibold";
 };
 
 /**
@@ -48,7 +48,11 @@ export function Wordmark({
       <span
         className={cn(
           "font-body uppercase",
-          weight === "regular" ? "font-normal" : "font-light",
+          weight === "semibold"
+            ? "font-semibold"
+            : weight === "regular"
+              ? "font-normal"
+              : "font-light",
           toneClass,
         )}
         style={{ letterSpacing: "0.3em", fontSize: "1em" }}

@@ -137,7 +137,7 @@ export function Nav() {
                   the seal read as a dark dot. Bigger disc, bigger mark. */}
               <Monogram tone="bright" className="h-[74%] w-[74%]" weight={4} />
             </span>
-            <Wordmark layout="stacked" tone="dark" weight="regular" className="hidden text-[18px] sm:flex" />
+            <Wordmark layout="stacked" tone="dark" weight="semibold" className="hidden text-[18px] sm:flex" />
           </Link>
 
           {/* Desktop links */}
@@ -163,17 +163,6 @@ export function Nav() {
                     )}
                   >
                     {item.label}
-                    {hasChildren ? (
-                      <span
-                        aria-hidden
-                        className={cn(
-                          "text-[0.55rem] transition-transform duration-300",
-                          openMenu === item.label && "rotate-180",
-                        )}
-                      >
-                        ▾
-                      </span>
-                    ) : null}
                   </Link>
                 </li>
               );
