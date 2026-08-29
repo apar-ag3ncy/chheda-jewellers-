@@ -125,82 +125,44 @@
     70%, 100% { transform: scale(1.5); opacity: 0; }
   }
 
-  /* ── The Chheda Promise: a gold blank, struck ──────────────
-     Metal is read from its LIGHTING, not its hue - a flat fill in gold
-     colour looks like mustard paper. Three layers do the work:
-     1. a vertical sheen ramp (the drawn length of the bar),
-     2. a horizontal cross-light (dark edges, bright core) which is what
-        makes a flat rectangle read as a rounded bar,
-     3. a travelling specular band driven from scroll via --sheen.
-     Corners are chamfered rather than rounded: a cut blank has facets, and
-     a fully rounded bar reads as a UI rail instead of a piece of metal. */
-  .cj-plate-bar {
-    --sheen: 50%;
+  /* ── The Chheda Promise: liquid-glass marks ────────────────
+     A disc of glass with a gold numeral. Same material language as the nav
+     panel (.cj-liquid-glass): no colour of its own - a neutral wash, a
+     white-lit top edge, saturate() so the ground blooms through - so the
+     chip reads as glass over the page rather than a painted badge. */
+  .cj-glass-chip {
+    background-color: rgba(255, 255, 255, 0.05);
     background-image:
-      linear-gradient(
-        180deg,
-        transparent calc(var(--sheen) - 13%),
-        rgba(255, 245, 226, 0.5) var(--sheen),
-        transparent calc(var(--sheen) + 13%)
-      ),
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.42) 0%,
-        rgba(0, 0, 0, 0.1) 14%,
-        rgba(255, 244, 224, 0.34) 38%,
-        rgba(0, 0, 0, 0.06) 66%,
-        rgba(0, 0, 0, 0.46) 100%
-      ),
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--gold-deep) 84%, var(--gold)) 0%,
-        color-mix(in srgb, var(--gold) 70%, var(--cream)) 9%,
-        color-mix(in srgb, var(--gold-light) 44%, var(--cream)) 24%,
-        color-mix(in srgb, var(--gold) 66%, var(--cream)) 42%,
-        color-mix(in srgb, var(--gold-deep) 52%, var(--gold)) 51%,
-        color-mix(in srgb, var(--gold) 68%, var(--cream)) 60%,
-        color-mix(in srgb, var(--gold-light) 40%, var(--cream)) 84%,
-        color-mix(in srgb, var(--gold-deep) 86%, var(--gold)) 100%
+      radial-gradient(
+        90% 90% at 32% 22%,
+        rgba(255, 255, 255, 0.28) 0%,
+        rgba(255, 255, 255, 0.05) 42%,
+        transparent 70%
       );
-    clip-path: polygon(
-      0 11px, 11px 0, calc(100% - 11px) 0, 100% 11px,
-      100% calc(100% - 11px), calc(100% - 11px) 100%, 11px 100%, 0 calc(100% - 11px)
-    );
+    -webkit-backdrop-filter: blur(10px) saturate(170%) brightness(1.08);
+    backdrop-filter: blur(10px) saturate(170%) brightness(1.08);
+    border: 1px solid rgba(255, 246, 228, 0.28);
     box-shadow:
-      inset 1px 0 0 rgba(255, 240, 214, 0.28),
-      inset -1px 0 0 rgba(0, 0, 0, 0.4),
-      0 22px 60px -28px rgba(0, 0, 0, 0.75);
-  }
-
-  /* The struck depression. Shadow at the TOP lip and a highlight at the
-     bottom - the inverse of a raised boss, which is the only cue that
-     separates "pressed in" from "sitting on top". */
-  .cj-punch-dent {
-    border-radius: 26%;
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--gold-deep) 78%, #000) 0%,
-      color-mix(in srgb, var(--gold-deep) 34%, var(--gold)) 62%,
-      color-mix(in srgb, var(--gold) 52%, var(--cream)) 100%
-    );
-    box-shadow:
-      inset 0 4px 7px rgba(0, 0, 0, 0.62),
-      inset 0 -2px 3px rgba(255, 246, 228, 0.42),
-      0 1px 0 rgba(255, 246, 228, 0.3);
-  }
-
-  /* The ring the blank gives off. Scaled and faded from JS. */
-  .cj-punch-ring {
-    border-radius: 26%;
-    border: 1px solid rgba(255, 244, 224, 0.8);
+      inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      inset 0 -8px 14px -10px rgba(0, 0, 0, 0.55),
+      0 14px 30px -14px rgba(0, 0, 0, 0.6);
     will-change: transform, opacity;
   }
 
-  /* The glyph sits INSIDE the dent, so it takes the same lighting: dark
-     metal with one lit edge along the bottom of every stroke. */
-  .cj-punch {
-    color: color-mix(in srgb, var(--green-deep) 82%, #000);
-    filter: drop-shadow(0 1px 0 rgba(255, 246, 228, 0.44));
+  /* The numeral: brand gold, lit. A static gradient (not the sweep - four
+     shimmering numbers beside body text would be noise) with a faint warm
+     glow so it carries at 18px on the phone grid. */
+  .cj-glass-numeral {
+    background-image: linear-gradient(
+      160deg,
+      var(--gold-light) 0%,
+      var(--gold) 55%,
+      var(--gold-deep) 115%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 8px rgba(240, 207, 170, 0.35));
     will-change: transform, opacity;
   }
 
