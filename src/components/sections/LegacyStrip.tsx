@@ -21,13 +21,14 @@ import { Monogram } from "@/components/ui/Monogram";
  * that continues past the viewport, which is what makes it feel like part of
  * the page's fabric instead of a box on it.
  *
- * THE GROUND IS SATIN PAPER, not velvet. On the brand cream, with a soft
- * centre sheen and gently shaded edges - the card inside the jewel box
- * rather than its lining. The gold flips DARK to sit on it: light-gold
- * letterforms measure 1.3:1 on cream and simply vanish, so the ribbon's ramp
- * runs from a burnished near-bronze anchor through gold-deep, and the
- * travelling shine is the lighter mid-stop passing through - embossed and
- * catching light, never gilded flat.
+ * THE GROUND IS THE GOLD ITSELF - the same two colours as the nav seal's
+ * bright gradient (gold-light into gold), swept diagonally so the band reads
+ * as one drawn sheet of metal from edge to edge. A slow specular travels
+ * along it (the strip's own background position, not an overlay element), so
+ * the metal carries light the way the ribbon's lettering used to. The
+ * lettering flips to the house emerald: deep green struck into gold is the
+ * jewel box turned inside out, and it is the highest-contrast pairing the
+ * palette owns (about 6:1 at the gradient's darkest end).
  *
  * Carries no data-bg, like the hero above it: it paints its own opaque
  * ground and takes no part in the themer's alternation.
@@ -36,35 +37,25 @@ export function LegacyStrip() {
   return (
     <section
       id="legacy"
-      className="relative w-full overflow-hidden border-y border-gold-deep/30"
-      style={{
-        background:
-          /* centre sheen, edge shading, then the paper itself */
-          "radial-gradient(120% 220% at 50% 50%, #fdf3dd 0%, transparent 58%)," +
-          "radial-gradient(60% 130% at 5% 50%, rgba(154,86,58,0.14) 0%, transparent 60%)," +
-          "radial-gradient(60% 130% at 95% 50%, rgba(154,86,58,0.14) 0%, transparent 60%)," +
-          "linear-gradient(180deg, #efdfbc 0%, var(--cream) 36%, var(--cream) 64%, #eaD8b2 100%)",
-        boxShadow:
-          "inset 0 1px 0 rgba(255,252,244,0.9), inset 0 -1px 0 rgba(154,86,58,0.22), inset 0 -10px 24px -18px rgba(154,86,58,0.28)",
-      }}
+      className="cj-legacy-strip relative w-full overflow-hidden border-y border-gold-deep/45"
     >
       <div className="flex items-center justify-center gap-4 px-5 py-5 md:gap-7 md:py-6">
         <span
           aria-hidden
-          className="h-px flex-1 bg-gradient-to-r from-transparent via-gold-deep/35 to-gold-deep/55"
+          className="h-px flex-1 bg-gradient-to-r from-transparent via-green-deep/30 to-green-deep/55"
         />
-        <span aria-hidden className="shrink-0" style={{ filter: "brightness(0.62) saturate(1.2)" }}>
+        <span aria-hidden className="shrink-0" style={{ filter: "brightness(0.35) saturate(0.9)" }}>
           <Monogram className="h-4 w-4 opacity-80 md:h-5 md:w-5" />
         </span>
         <h2 className="cj-legacy-gold shrink-0 whitespace-nowrap text-center font-display text-[clamp(1.15rem,3.4vw,2rem)] font-light tracking-[0.12em]">
           Carrying legacy since 1991
         </h2>
-        <span aria-hidden className="shrink-0" style={{ filter: "brightness(0.62) saturate(1.2)" }}>
+        <span aria-hidden className="shrink-0" style={{ filter: "brightness(0.35) saturate(0.9)" }}>
           <Monogram className="h-4 w-4 opacity-80 md:h-5 md:w-5" />
         </span>
         <span
           aria-hidden
-          className="h-px flex-1 bg-gradient-to-l from-transparent via-gold-deep/35 to-gold-deep/55"
+          className="h-px flex-1 bg-gradient-to-l from-transparent via-green-deep/30 to-green-deep/55"
         />
       </div>
     </section>
