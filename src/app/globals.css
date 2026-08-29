@@ -232,54 +232,60 @@
      variable writes per frame, no layout, and only while the menu is open. */
   .cj-liquid-glass {
     background-image:
-      /* 1. The density band. Glass is thicker where it catches the light, and
-            this is also what lets the rest of the panel be genuinely
-            transparent: the gold-light eyebrow sits in this band, so its
-            contrast does not depend on the tint below. Measured over a cream
-            section - the worst backdrop on the site - it holds 5.03:1 while
-            the body of the panel is only 22% tinted. It is the FIRST layer
-            because the specular below must not lighten the label back out. */
+      /* 1. The density band. Neutral black, like the rest of this surface -
+            no brand colour anywhere on the panel. It exists so the gold-light
+            eyebrow carries its own contrast and the other 300px of glass do
+            not have to be dense on its behalf. Measured over the four worst
+            backdrops on the site (a cream band, a near-white photograph, a
+            mid photograph, the dark hero) it holds 5.2:1 at worst. First
+            layer, so the specular below cannot lighten the label back out. */
       linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--green-deep) 50%, transparent) 0px,
-        color-mix(in srgb, var(--green-deep) 50%, transparent) 72px,
+        rgba(0, 0, 0, 0.46) 0px,
+        rgba(0, 0, 0, 0.46) 72px,
         transparent 152px
       ),
-      /* 2. The specular that follows the pointer - the liquid part. */
+      /* 2. The specular that follows the pointer - the liquid part. White,
+            not warm: this is light reflecting off a surface, not a tint in
+            the material. */
       radial-gradient(
         130% 95% at var(--gx, 50%) var(--gy, 0%),
-        rgba(255, 246, 228, 0.2) 0%,
-        rgba(255, 246, 228, 0.06) 34%,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.06) 34%,
         transparent 68%
       ),
       /* 3. A fixed diagonal sheen, so it reads as glass before the pointer
             has moved at all. */
       linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.14) 0%,
-        rgba(255, 255, 255, 0.03) 38%,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.04) 38%,
         rgba(255, 255, 255, 0) 62%,
-        rgba(255, 255, 255, 0.09) 100%
+        rgba(255, 255, 255, 0.1) 100%
       );
-    background-color: color-mix(in srgb, var(--green) 22%, transparent);
+    /* No brand tint. The panel takes its colour from whatever is behind it -
+       which is the whole point of glass. The only darkening is neutral: a
+       10% black wash plus the brightness below, so the surface can carry
+       white type over a cream section without ever going green. */
+    background-color: rgba(0, 0, 0, 0.1);
     /* Less blur than a frosted panel would use, deliberately: at 34px you see
        only colour, and a surface you cannot see THROUGH does not read as
-       transparent. 24px keeps shapes recognisable behind it. The saturate is
-       what stops those shapes going grey, and the brightness keeps the whole
-       surface dark enough to sit white type on. */
-    -webkit-backdrop-filter: blur(24px) saturate(210%) brightness(0.72);
-    backdrop-filter: blur(24px) saturate(210%) brightness(0.72);
-    border: 1px solid rgba(255, 246, 228, 0.2);
+       transparent. 24px keeps shapes recognisable behind it. saturate() stops
+       those shapes going grey; brightness() is the colourless way to keep the
+       surface dark enough to sit type on. */
+    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(0.72);
+    backdrop-filter: blur(24px) saturate(180%) brightness(0.72);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     box-shadow:
-      inset 0 1px 0 rgba(255, 246, 228, 0.34),
-      inset 0 0 0 1px rgba(255, 246, 228, 0.07),
-      inset 0 -22px 40px -26px rgba(0, 0, 0, 0.5),
-      0 34px 72px -26px rgba(2, 12, 8, 0.72);
+      inset 0 1px 0 rgba(255, 255, 255, 0.36),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+      inset 0 -22px 40px -26px rgba(0, 0, 0, 0.45),
+      0 34px 72px -26px rgba(0, 0, 0, 0.6);
   }
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .cj-liquid-glass {
-      background-color: color-mix(in srgb, var(--green-deep) 94%, transparent);
+      background-color: rgba(8, 12, 10, 0.94);
     }
   }
 
