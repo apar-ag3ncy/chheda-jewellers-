@@ -172,16 +172,19 @@
   }
 
   /* ── The legacy ribbon ────────────────────────────────────
-     A sheet of gold: TWO colours (the nav seal's bright pair) swept
+     A sheet of DARK gold: two colours - the mid gold into a deep bronze
+     (gold-deep pulled a quarter back toward gold: pure gold-deep measured
+     2.95:1 under the emerald lettering, a hair below the 3:1 display floor;
+     this stop clears it without losing the dark register) - swept
      diagonally, drawn at 3x width so the slow position sweep reads as light
      travelling along metal rather than a colour change. The lettering is the
      house emerald, plain fill - on gold it needs no tricks. */
   .cj-legacy-strip {
     background-image: linear-gradient(
       100deg,
-      var(--gold-light) 0%,
-      var(--gold) 50%,
-      var(--gold-light) 100%
+      var(--gold) 0%,
+      color-mix(in srgb, var(--gold-deep) 75%, var(--gold)) 50%,
+      var(--gold) 100%
     );
     background-size: 300% 100%;
     animation: cj-legacy-shine 13s ease-in-out infinite;
@@ -193,7 +196,7 @@
 
   .cj-legacy-gold {
     color: var(--green-deep);
-    text-shadow: 0 1px 0 rgba(255, 250, 236, 0.35);
+    text-shadow: 0 1px 0 rgba(255, 240, 214, 0.28);
   }
 
   @keyframes cj-legacy-shine {
