@@ -155,13 +155,13 @@ export function Footer() {
           <div className="flex flex-wrap gap-x-6">
             <Link
               href="/privacy"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center font-body text-[0.72rem] text-text-muted transition-colors hover:text-text-strong"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center font-display text-[0.92rem] uppercase tracking-[0.1em] text-text-muted transition-colors hover:text-text-strong"
             >
               Privacy
             </Link>
             <Link
               href="/terms"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center font-body text-[0.72rem] text-text-muted transition-colors hover:text-text-strong"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center font-display text-[0.92rem] uppercase tracking-[0.1em] text-text-muted transition-colors hover:text-text-strong"
             >
               Terms
             </Link>
