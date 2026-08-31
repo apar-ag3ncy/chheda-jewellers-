@@ -56,9 +56,17 @@ export function JewelleryTypes() {
                   <h3 className="font-display text-2xl font-light text-text-strong md:text-[1.9rem]">
                     {type.name}
                   </h3>
-                  <p className="mt-2 hidden max-h-0 overflow-hidden font-body text-[0.82rem] font-light leading-relaxed text-text-muted opacity-0 transition-all duration-500 ease-[var(--ease-lux)] md:block md:group-hover:max-h-24 md:group-hover:opacity-100">
-                    {type.description}
-                  </p>
+                  {/* Was hidden outright below md and hover-gated above it,
+                      so on a landscape tablet the description existed and
+                      could never be opened. Now it is present wherever there
+                      is no pointer, and unfolds where there is one. */}
+                  <div className="cj-hover-reveal">
+                    <div>
+                      <p className="pt-2 font-body text-[0.82rem] font-light leading-relaxed text-text-muted">
+                        {type.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </Link>
             </Reveal>

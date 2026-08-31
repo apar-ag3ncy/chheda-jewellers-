@@ -239,20 +239,20 @@ function RoomCard({
         >
           {name}
         </h2>
-        <p
-          className={cn(
-            "mt-3 font-body text-[0.86rem] font-light leading-relaxed text-text-muted",
-            // Copy is present on touch (where there is no hover) and revealed
-            // on pointer devices, so nothing is hidden from anyone who cannot
-            // hover - including keyboard users, via group-focus-within.
-            "md:max-h-0 md:overflow-hidden md:opacity-0 md:transition-all md:duration-700 md:ease-[var(--ease-lux)]",
-            "md:group-hover:max-h-40 md:group-hover:opacity-100",
-            "md:group-focus-within:max-h-40 md:group-focus-within:opacity-100",
-            size === "lg" ? "max-w-md" : "max-w-sm",
-          )}
-        >
-          {intro}
-        </p>
+        {/* Present wherever hovering is impossible, revealed where it is not.
+            See .cj-hover-reveal for why this is grid rows and not max-height. */}
+        <div className="cj-hover-reveal">
+          <div>
+            <p
+              className={cn(
+                "pt-3 font-body text-[0.86rem] font-light leading-relaxed text-text-muted",
+                size === "lg" ? "max-w-md" : "max-w-sm",
+              )}
+            >
+              {intro}
+            </p>
+          </div>
+        </div>
       </div>
     </Link>
   );

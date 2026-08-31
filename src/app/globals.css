@@ -334,6 +334,75 @@
     padding-inline: var(--gutter);
   }
 
+  /* ────────────────────────────────────────────────────────────────────
+     HOVER REVEAL - copy that unfolds under a card's title on hover.
+
+     Two things were wrong with the hand-rolled version this replaces, and
+     both are worth stating because they are easy to reintroduce.
+
+     1. It animated `max-height` from 0 to a guessed cap (max-h-40 = 160px)
+        for copy roughly 60px tall. A max-height tween spends its time
+        travelling to the CAP, not to the content, so the text finished
+        arriving about a third of the way through and the remaining two
+        thirds animated empty space. The eye reads that as the reveal
+        stalling - the easing curve chosen was not the curve anyone saw.
+        `grid-template-rows: 0fr -> 1fr` resolves to the content's true
+        height, so the curve and the motion are the same thing, and copy
+        longer than the guess can never be clipped.
+
+     2. The collapsed state was gated on WIDTH (md:), so on any touch screen
+        wide enough to qualify - every iPad in landscape - the copy was
+        collapsed with no way to hover it open. Gating on (hover: hover) and
+        (pointer: fine) instead means the reveal exists only where a pointer
+        can actually perform it; everywhere else the copy is simply present,
+        which is the honest default for text that carries meaning.
+
+     Reveals on focus as well as hover, so it opens for keyboard users. */
+  .cj-hover-reveal {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  /* The direct child is the CLIPPER and must carry no spacing of its own.
+     Put the gap on the content inside it:
+
+       <div class="cj-hover-reveal">
+         <div>                       <- clipper, styled by the rule below
+           <p class="pt-3">...</p>   <- spacing lives in here
+         </div>
+       </div>
+
+     Spacing on the clipper itself does not collapse. A margin sits outside
+     the overflow box entirely; and padding cannot compress either, because a
+     border-box element at height 0 still renders its own padding - both leave
+     the card holding a gap under a title with nothing beneath it. One level
+     deeper, the gap is part of the clipped flow and goes to nothing at 0fr,
+     so the copy grows from zero. */
+  .cj-hover-reveal > * {
+    overflow: hidden;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cj-hover-reveal {
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition:
+        grid-template-rows var(--dur-base) var(--ease-lux),
+        opacity var(--dur-base) var(--ease-lux);
+    }
+    .group:hover .cj-hover-reveal,
+    .group:focus-within .cj-hover-reveal {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cj-hover-reveal {
+      transition: none;
+    }
+  }
+
   /* Wide-tracked Montserrat eyebrow / kicker.
      Uses gold-light (not gold) so small-caps labels clear WCAG AA on green:
      #F0CFAA → ~8.6:1 on --green, vs. --gold #C68D61 at ~4.46:1 which fails. */

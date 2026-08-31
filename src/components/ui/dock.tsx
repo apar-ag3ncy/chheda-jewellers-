@@ -44,6 +44,27 @@ const DEFAULT_MAGNIFICATION = 72;
 const DEFAULT_DISTANCE = 140;
 const DEFAULT_PANEL_HEIGHT = 60;
 
+/**
+ * THE SPRING, chosen by its damping ratio rather than by eye.
+ *
+ *   omega0 = sqrt(k/m) = sqrt(100/0.4) = 15.8 rad/s
+ *   zeta   = c / (2*sqrt(k*m)) = 11 / (2*sqrt(40)) = 0.87
+ *
+ * zeta = 0.87 is just under critical, so the chip accelerates like a mass on
+ * a spring and settles in ~290ms with a 0.4% overshoot - far too small to
+ * read as a bounce, which on a magnifier looks cheap, but enough that the
+ * motion is a spring's rather than a decay curve.
+ *
+ * The inherited values (m 0.1, k 150, c 12) gave zeta = 1.55: OVERDAMPED.
+ * An overdamped spring never accelerates - it creeps at its target
+ * asymptotically, which is what made the hover feel mushy and late. Its
+ * settling time was 282ms, so this is not a speed change; the pace of the
+ * dock is deliberately unchanged. Only the shape of the motion is fixed.
+ *
+ * If you retune these, keep zeta in 0.8-1.0. Above 1 it goes dead again.
+ */
+const DOCK_SPRING: SpringOptions = { mass: 0.4, stiffness: 100, damping: 11 };
+
 type DockProps = {
   children: React.ReactNode;
   className?: string;
@@ -92,7 +113,7 @@ function useDock() {
 export function Dock({
   children,
   className,
-  spring = { mass: 0.1, stiffness: 150, damping: 12 },
+  spring = DOCK_SPRING,
   magnification = DEFAULT_MAGNIFICATION,
   distance = DEFAULT_DISTANCE,
   panelHeight = DEFAULT_PANEL_HEIGHT,
