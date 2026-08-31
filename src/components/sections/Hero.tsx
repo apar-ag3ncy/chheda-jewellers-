@@ -248,7 +248,7 @@ export function Hero() {
              announcement still reaches a screen reader. */
           <h1 className="sr-only">{slide.headline}</h1>
         ) : (
-        <div key={active} className="max-w-2xl">
+        <div key={active} className="max-w-xl">
           {slide.eyebrow ? (
           <p
             className="u-eyebrow mb-6"
@@ -257,7 +257,7 @@ export function Hero() {
             {slide.eyebrow}
           </p>
           ) : null}
-          <h1 className="font-display text-[clamp(2.4rem,8.5vw,6.6rem)] font-light leading-[0.98]">
+          <h1 className="font-display text-[clamp(2.1rem,5.6vw,4.6rem)] font-light leading-[1.02]">
             {slide.headline.split("\n").map((line, i) => (
               <span key={i} className="block overflow-hidden py-[0.02em]">
                 <span
