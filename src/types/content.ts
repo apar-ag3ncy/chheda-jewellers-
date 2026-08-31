@@ -23,7 +23,6 @@ export interface HeroSlide {
    * frame, so the heading exists on every slide whether or not it is drawn.
    */
   headline: string;
-  sub?: string;
   image: ImageAsset;
   /**
    * An alternative frame for portrait screens - true art direction, not a
