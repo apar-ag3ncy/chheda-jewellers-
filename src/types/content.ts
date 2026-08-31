@@ -156,4 +156,9 @@ export interface FilmReel {
   frames: number;
   /** Poster alt text (the SSR/no-JS image). */
   alt: string;
+  /**
+   * Whether the last frame runs back into the first. False means the arc is
+   * open and the ends must never be joined - playing across the gap snaps.
+   */
+  closedTurn?: boolean;
 }

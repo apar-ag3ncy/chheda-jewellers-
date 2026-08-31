@@ -8,7 +8,7 @@
  * are worse than no tests. Git has them if the page ever returns.
  *   npx tsx scripts/unit-test.mjs
  */
-import { clampFrame, wrapFrame, keyDelta } from "../src/lib/scrub.ts";
+import { clampFrame, wrapFrame, keyDelta, reflectFrame } from "../src/lib/scrub.ts";
 
 let pass = 0, fail = 0;
 const eq = (name, got, want) => {
@@ -31,6 +31,16 @@ eq("arrow left steps back", Math.sign(keyDelta("ArrowLeft", 72)), -1);
 eq("unrelated key returns null", keyDelta("Escape", 72), null);
 eq("PageDown jumps an eighth", keyDelta("PageDown", 72), 9);
 eq("PageUp jumps back an eighth", keyDelta("PageUp", 72), -9);
+
+// The ring's arc is open (~280 degrees), so the playhead folds instead of
+// wrapping - it must never step from the last frame to the first.
+eq("reflect inside the range is identity", reflectFrame(30, 72), 30);
+eq("reflect at the last frame", reflectFrame(71, 72), 71);
+eq("reflect one past the end turns back", reflectFrame(72, 72), 70);
+eq("reflect before the start turns back", reflectFrame(-1, 72), 1);
+eq("reflect over a full period returns", reflectFrame(142, 72), 0);
+eq("reflect never reaches a wrap seam",
+   [reflectFrame(70, 72), reflectFrame(71, 72), reflectFrame(72, 72)].join(","), "70,71,70");
 
 console.log("\n" + "═".repeat(60));
 console.log(`  PASS ${pass}   FAIL ${fail}`);
