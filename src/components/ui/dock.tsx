@@ -58,6 +58,17 @@ type DockItemProps = {
   children: React.ReactNode;
   href: string;
   label: string;
+  /**
+   * Touch two-step. When supplied, the chip renders a BUTTON that calls this
+   * instead of a link that navigates - so the first tap can open the item
+   * with nothing to cancel. The caller drops the prop once the item is open,
+   * and the chip becomes a link again so the second tap travels.
+   *
+   * Swapping the element is deliberate: intercepting the click on an ancestor
+   * cannot work, because Link's own handler has already routed by the time
+   * the event bubbles up, and preventDefault has nothing left to stop.
+   */
+  onSelect?: () => void;
 };
 type DockLabelProps = { className?: string; children: React.ReactNode };
 type DockIconProps = { className?: string; children: React.ReactNode };
@@ -137,7 +148,7 @@ export function Dock({
   );
 }
 
-export function DockItem({ children, className, href, label }: DockItemProps) {
+export function DockItem({ children, className, href, label, onSelect }: DockItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { distance, magnification, mouseX, spring, reduced } = useDock();
   const isHovered = useMotionValue(0);
@@ -173,13 +184,24 @@ export function DockItem({ children, className, href, label }: DockItemProps) {
           isHovered,
         }),
       )}
-      <Link
-        href={href}
-        aria-label={label}
-        onFocus={() => isHovered.set(1)}
-        onBlur={() => isHovered.set(0)}
-        className="absolute inset-0 rounded-full outline-none ring-gold-light focus-visible:ring-2"
-      />
+      {onSelect ? (
+        <button
+          type="button"
+          aria-label={label}
+          onFocus={() => isHovered.set(1)}
+          onBlur={() => isHovered.set(0)}
+          onClick={onSelect}
+          className="absolute inset-0 rounded-full outline-none ring-gold-light focus-visible:ring-2"
+        />
+      ) : (
+        <Link
+          href={href}
+          aria-label={label}
+          onFocus={() => isHovered.set(1)}
+          onBlur={() => isHovered.set(0)}
+          className="absolute inset-0 rounded-full outline-none ring-gold-light focus-visible:ring-2"
+        />
+      )}
     </motion.div>
   );
 }

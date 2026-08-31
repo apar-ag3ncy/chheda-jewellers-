@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { promiseIntro, promiseValues } from "@/lib/content/promise";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
@@ -35,6 +35,22 @@ export function PromiseDock() {
   const root = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<number | null>(null);
   const shown = active === null ? null : promiseValues[active];
+
+  /**
+   * Touch parity. The band and the ledger were reachable by hover and focus
+   * only, so on a phone every mark was a bare link to the promise page and
+   * the whole section's content was unreachable. On a coarse pointer the
+   * first tap on a mark OPENS it and the second follows the link - the
+   * standard two-tap affordance - so nothing here is desktop-only.
+   */
+  const [coarse, setCoarse] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: none)");
+    const sync = () => setCoarse(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useGSAP(
     () => {
@@ -123,13 +139,20 @@ export function PromiseDock() {
             {promiseValues.map((v, i) => (
               <div
                 key={v.id}
-                onMouseEnter={() => setActive(i)}
-                onMouseLeave={() => setActive(null)}
+                onMouseEnter={() => !coarse && setActive(i)}
+                onMouseLeave={() => !coarse && setActive(null)}
                 onFocusCapture={() => setActive(i)}
-                onBlurCapture={() => setActive(null)}
+                onBlurCapture={() => !coarse && setActive(null)}
                 className="contents"
               >
-                <DockItem href={`/chheda-promise#${v.id === "purity" ? "hallmark" : v.id === "transparency" ? "estimate" : v.id === "craft" ? "house" : "checklist"}`} label={v.title}>
+                <DockItem
+                  href={`/chheda-promise#${v.id === "purity" ? "hallmark" : v.id === "transparency" ? "estimate" : v.id === "craft" ? "house" : "checklist"}`}
+                  label={v.title}
+                  // Touch only, and only while this mark is shut: the chip
+                  // becomes a button that opens it. Once open it is a link
+                  // again, so the next tap goes to the promise page.
+                  onSelect={coarse && active !== i ? () => setActive(i) : undefined}
+                >
                   <DockLabel>{v.title}</DockLabel>
                   <DockIcon className="overflow-hidden rounded-full">
                     {v.image ? (
@@ -186,6 +209,14 @@ export function PromiseDock() {
           </p>
         )}
       </div>
+
+      {/* Only on touch, and only until a mark has been opened - a pointer
+          user discovers this by moving the mouse, which a phone cannot do. */}
+      {coarse && active === null ? (
+        <p className="mt-1 text-center font-body text-[0.68rem] uppercase tracking-[0.18em] text-gold/80">
+          Tap a mark to read it
+        </p>
+      ) : null}
     </div>
   );
 }

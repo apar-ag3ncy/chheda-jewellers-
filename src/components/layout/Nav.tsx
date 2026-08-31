@@ -31,6 +31,7 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const shellRef = useRef<HTMLDivElement>(null);
 
   const isHome = pathname === "/";
   // The green shell + its extras only exist at the very top of the home page.
@@ -71,6 +72,40 @@ export function Nav() {
     };
   }, []);
 
+  /**
+   * Touch parity for the desktop bar. The bar shows from `lg` up, which
+   * includes plenty of touch hardware - an iPad in landscape, a Surface, a
+   * touchscreen laptop - and its panels opened on hover alone. There, a tap
+   * on "All Jewellery" simply left for /jewellery and the panel of rooms was
+   * unreachable. On a coarse pointer the first tap OPENS the panel and the
+   * second follows the link.
+   */
+  const [coarse, setCoarse] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: none)");
+    const sync = () => setCoarse(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  // With no pointer to leave the bar, an open panel needs a way out.
+  useEffect(() => {
+    if (!coarse || !openMenu) return;
+    const onDown = (e: PointerEvent) => {
+      if (!(e.target instanceof Node)) return;
+      if (shellRef.current?.contains(e.target)) return;
+      setOpenMenu(null);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenMenu(null);
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [coarse, openMenu]);
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -90,6 +125,7 @@ export function Nav() {
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4 md:px-6 md:pt-5">
       {/* ── GREEN SHELL - frames the beige capsule at home-top, disperses on scroll ── */}
       <div
+        ref={shellRef}
         onMouseLeave={handleLeave}
         className={cn(
           "pointer-events-auto relative z-50 flex max-w-[calc(100vw-2rem)] items-center rounded-full",
@@ -148,11 +184,17 @@ export function Nav() {
                 <li
                   key={item.label}
                   className="relative"
-                  onMouseEnter={() => handleEnter(item.label, hasChildren)}
+                  onMouseEnter={() => !coarse && handleEnter(item.label, hasChildren)}
                 >
                   <Link
                     href={item.href}
-                    onFocus={() => handleEnter(item.label, hasChildren)}
+                    onFocus={() => !coarse && handleEnter(item.label, hasChildren)}
+                    onClick={(e) => {
+                      // Touch: open the panel first, travel on the second tap.
+                      if (!coarse || !hasChildren || openMenu === item.label) return;
+                      e.preventDefault();
+                      handleEnter(item.label, true);
+                    }}
                     aria-haspopup={hasChildren ? "true" : undefined}
                     aria-expanded={hasChildren ? openMenu === item.label : undefined}
                     className={cn(
@@ -309,7 +351,7 @@ export function Nav() {
             rel="noopener noreferrer"
             aria-label="Instagram"
             tabIndex={expanded ? 0 : -1}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
           >
             <InstagramIcon className="h-[1.35rem] w-[1.35rem]" />
           </a>
@@ -323,7 +365,7 @@ export function Nav() {
             rel="noopener noreferrer"
             aria-label="WhatsApp"
             tabIndex={expanded ? 0 : -1}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
           >
             <WhatsAppIcon className="h-[1.35rem] w-[1.35rem]" />
           </a>
