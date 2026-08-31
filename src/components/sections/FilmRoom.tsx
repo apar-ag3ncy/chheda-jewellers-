@@ -19,11 +19,9 @@ import { cn } from "@/lib/cn";
  * never rotates on its own, and there is no timeline, counter, caption or
  * chapter list: a single display line and the piece, floating.
  *
- * SEAMLESS BY CONSTRUCTION: no border, no card, no backing. The frames now
- * carry their own alpha - the green studio plate, its lit rim and the ring's
- * reflection are cut away - so the piece genuinely sits on the page. It used
- * to be a rectangle of footage with its edges feathered off by a radial mask,
- * which hid the corners but left the plate and the reflection in plain sight.
+ * SEAMLESS BY CONSTRUCTION: no border, no card, no backing. The frame's own
+ * edges are feathered away by a radial mask so the footage dissolves into the
+ * page's emerald, and the piece simply sits on the site.
  */
 
 /** Rotations across the section's scroll - gentle, so it reads as slow-motion. */
@@ -38,6 +36,10 @@ const SCROLL_TURNS = 0.65;
  * rather than a display model on a motor.
  */
 const AUTO_SPIN = 4.5;
+
+/** Feathers every edge of the frame into the page. */
+const SEAMLESS_MASK =
+  "radial-gradient(ellipse 72% 76% at 50% 47%, black 48%, transparent 78%)";
 
 export function FilmRoom() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -99,9 +101,13 @@ export function FilmRoom() {
             aria-valuenow={scrub.angle}
             aria-valuetext={`${scrub.angle} degrees`}
             {...scrub.handlers}
-            className="relative mt-[clamp(1rem,3svh,2.5rem)] aspect-[88/81] w-[min(80vw,clamp(16rem,54svh,28rem))] cursor-grab touch-pan-y select-none outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-4 focus-visible:ring-offset-bg active:cursor-grabbing"
+            className="relative mt-[clamp(1rem,3svh,2.5rem)] aspect-[4/5] w-[min(78vw,clamp(15rem,52svh,26rem))] cursor-grab touch-pan-y select-none outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-4 focus-visible:ring-offset-bg active:cursor-grabbing"
           >
-            <div aria-hidden className="absolute inset-0">
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{ WebkitMaskImage: SEAMLESS_MASK, maskImage: SEAMLESS_MASK }}
+            >
               {/* Poster - the SSR / no-JS layer; the canvas paints over it. */}
               <Image
                 src={reelPosterSrc(ringFilm)}
@@ -109,8 +115,8 @@ export function FilmRoom() {
                 placeholder="blur"
                 blurDataURL={EMERALD_LQIP}
                 fill
-                sizes="(max-width: 768px) 80vw, 28rem"
-                className="object-contain"
+                sizes="(max-width: 768px) 78vw, 26rem"
+                className="object-cover"
               />
               <canvas
                 ref={scrub.canvasRef}
