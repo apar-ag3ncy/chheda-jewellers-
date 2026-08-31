@@ -32,6 +32,17 @@ export const siteConfig = {
   shortName: "Chheda",
   legalName: "Chheda Jewellers",
 
+  /**
+   * The founding year, in ONE place.
+   *
+   * The old site printed 1991 in its About copy and 1990 in its footer - on a
+   * house whose whole argument is that its paperwork is exact. Its About page
+   * is the primary source ("our story began in 1991"), so 1991 stands. It
+   * lives here rather than in the two components that used to hard-code it,
+   * so the two can never disagree again.
+   */
+  foundedYear: 1991,
+
   tagline: "Heirlooms in the making",
   description:
     "Chheda Jewellers - a house of fine gold, diamond and polki jewellery in Mumbai. Editorial craftsmanship, timeless design, and pieces made to be passed down.",
@@ -121,6 +132,16 @@ export type Branch = (typeof siteConfig.branches)[number];
  * a hand-maintained boolean would - the day a real number is pasted in, every
  * call and WhatsApp affordance on the site turns itself back on.
  */
+
+/**
+ * Completed years since founding. Prose that says "thirty-five years" goes
+ * stale on its own; this does not. Returns the figure only - the caller
+ * decides how to word it.
+ */
+export function yearsInTrade(now: Date = new Date()): number {
+  return now.getFullYear() - siteConfig.foundedYear;
+}
+
 export function contactIsReal(): boolean {
   // A placeholder betrays itself with a long run of one repeated digit
   // ("+91 22 0000 0000"). Testing for six in a row catches every filler we

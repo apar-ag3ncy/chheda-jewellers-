@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       freq: "monthly" as Freq,
     })),
+    { path: "/about", priority: 0.8, freq: "monthly" },
     { path: "/bespoke", priority: 0.8, freq: "monthly" },
     { path: "/gallery", priority: 0.8, freq: "monthly" },
     { path: "/chheda-promise", priority: 0.7, freq: "monthly" },

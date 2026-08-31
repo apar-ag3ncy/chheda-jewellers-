@@ -16,7 +16,7 @@ const soft = (n, d) => { warn++; F.push(`WARN  ${n}\n        ${d}`); };
 const check = (n, cond, detail) => (cond ? ok(n) : bad(n, detail));
 
 const ROUTES = ["/", "/jewellery", "/jewellery/gold", "/jewellery/diamond",
-  "/jewellery/polki", "/bespoke", "/gallery", "/chheda-promise",
+  "/jewellery/polki", "/about", "/bespoke", "/gallery", "/chheda-promise",
   "/offers-and-plans", "/live-gold-rate", "/investors", "/journal",
   "/privacy", "/terms"];
 const GONE = ["/edits", "/edits/bridal", "/nope", "/jewellery/silver"];
