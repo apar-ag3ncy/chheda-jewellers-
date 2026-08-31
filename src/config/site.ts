@@ -69,7 +69,7 @@ export const siteConfig = {
 
   /**
    * Two branches - real localities (Vile Parle East · Trinity Square, and
-   * Ghatkopar East · near Khau Galli). TODO(client): confirm door numbers,
+   * Ghatkopar East · Vallabh Baug Lane). TODO(client): confirm door numbers,
    * phones, hours and the exact map pins.
    */
   branches: [
@@ -94,17 +94,17 @@ export const siteConfig = {
       id: "ghatkopar",
       name: "Chheda Jewellers - Ghatkopar",
       area: "Ghatkopar East",
-      addressLines: ["Vardhaman Business Bay", "Khau Galli, Ghatkopar (East)"],
+      addressLines: ["Vardhaman Business Bay", "Vallabh Baug Lane, Ghatkopar (East)"],
       city: "Mumbai",
       state: "Maharashtra",
       pincode: "400077",
       phone: "+91 22 0000 0000", // TODO(client)
       hours: "Mon-Sun · 11:00 AM - 8:30 PM", // TODO(client)
-      // Vardhaman Business Bay, Khau Galli, Ghatkopar East. TODO(client): confirm the
+      // Vardhaman Business Bay, Vallabh Baug Lane, Ghatkopar East. TODO(client): confirm the
       // exact door pin.
       coordinates: { lat: 19.0855, lng: 72.9098 }, // TODO(client): exact door
       directionsUrl:
-        "https://www.google.com/maps/search/?api=1&query=Chheda+Jewellers+Khau+Galli+Ghatkopar+East",
+        "https://www.google.com/maps/search/?api=1&query=Chheda+Jewellers+Vardhaman+Business+Bay+Vallabh+Baug+Lane+Ghatkopar+East",
       verified: false,
     },
   ],

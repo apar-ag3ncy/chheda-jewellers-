@@ -297,7 +297,9 @@ export function Hero() {
               aria-label={`Show slide ${i + 1}`}
               aria-current={i === active}
               onClick={() => setActive(i)}
-              className="group flex h-10 items-center"
+              // h-11 + px-1: the visible rule is unchanged, but the target
+              // clears the 44px minimum. It measured 24x40 on a phone.
+              className="group flex h-11 items-center px-1"
             >
               <span
                 className={cn(

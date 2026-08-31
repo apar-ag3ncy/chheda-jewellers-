@@ -7,6 +7,7 @@ import { SplitLines } from "@/components/motion/SplitLines";
 import { emphasise } from "@/components/ui/SectionHeading";
 import type { ImageAsset } from "@/types/content";
 import { cn } from "@/lib/cn";
+import { PagePlateMotion } from "@/components/ui/PagePlateMotion";
 
 type MetaRow = { label: string; value: string };
 
@@ -56,10 +57,14 @@ export function PagePlate({
 }: PagePlateProps) {
   return (
     <header className={cn("relative overflow-hidden bg-bg pt-32 md:pt-40", className)}>
+      <PagePlateMotion hasPlate={Boolean(plate)}>
       <Container>
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
           {/* ── Type column ───────────────────────────────────────────── */}
-          <div className={cn("flex flex-col", plate ? "md:col-span-7" : "md:col-span-9")}>
+          <div
+            data-plate-type
+            className={cn("flex flex-col", plate ? "md:col-span-7" : "md:col-span-9")}
+          >
             <div className="flex items-baseline gap-5">
               {folio ? (
                 <Reveal
@@ -103,6 +108,7 @@ export function PagePlate({
             <div className="md:col-span-5">
               <Reveal variant="mask" delay={0.08}>
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-green-deep md:aspect-[3/4]">
+                  <div data-plate-art className="absolute inset-0 scale-[1.12]">
                   <Image
                     src={plate.src}
                     alt={plate.alt}
@@ -114,8 +120,9 @@ export function PagePlate({
                     className="object-cover"
                     style={{ objectPosition: plate.focus ?? "50% 28%" }}
                   />
-                  {/* A single gold hairline down the plate's left edge ties it
-                      to the type column rather than letting it float. */}
+                  </div>
+                  {/* Outside the drifting layer: the hairline marks the frame,
+                      not the photograph, so it must not travel with it. */}
                   <span
                     aria-hidden
                     className="absolute inset-y-0 left-0 w-px"
@@ -143,6 +150,7 @@ export function PagePlate({
           </dl>
         ) : null}
       </Container>
+      </PagePlateMotion>
     </header>
   );
 }
