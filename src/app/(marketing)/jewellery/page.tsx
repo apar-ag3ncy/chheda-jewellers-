@@ -131,11 +131,14 @@ export default function JewelleryPage() {
         </Container>
       </Section>
 
-      {/* ── Bespoke + visit ───────────────────────────────────────────── */}
-      <Section spacing="lg" tone="green">
+      {/* ── Bespoke + visit ───────────────────────────────────────────────
+          On cream, so the house index carries the same green → cream → deep
+          rhythm as every other interior page instead of running three greens
+          together into one flat block. */}
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <div className="grid grid-cols-1 gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
-            <Reveal className="flex flex-col justify-between gap-8 bg-green-deep p-8 md:p-12">
+            <Reveal className="flex flex-col justify-between gap-8 bg-cream p-8 md:p-12">
               <div>
                 <p className="u-eyebrow mb-4">Not in any of the three</p>
                 <h2 className="max-w-sm font-display text-[length:var(--step-3)] font-light leading-[var(--leading-3)]">
@@ -146,14 +149,14 @@ export default function JewelleryPage() {
                   remade into something worn again.
                 </p>
               </div>
-              <Button href="/bespoke" variant="primary" withArrow className="self-start">
+              <Button href="/bespoke" variant="onLight" withArrow className="self-start">
                 The atelier
               </Button>
             </Reveal>
 
             <Reveal
               delay={0.06}
-              className="flex flex-col justify-between gap-8 bg-green-deep p-8 md:p-12"
+              className="flex flex-col justify-between gap-8 bg-cream p-8 md:p-12"
             >
               <div>
                 <p className="u-eyebrow mb-4">Not sure where to begin</p>

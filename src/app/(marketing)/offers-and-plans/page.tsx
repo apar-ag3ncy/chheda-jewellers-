@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { NextStep } from "@/components/ui/NextStep";
 import { plans } from "@/lib/content/plans";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
@@ -122,25 +123,7 @@ export default function OffersAndPlansPage() {
             ))}
           </div>
 
-          <div id="enquire" className="mt-24 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="font-display text-[clamp(1.7rem,3.4vw,2.6rem)] font-light leading-tight">
-                Ready to begin? Let&rsquo;s talk.
-              </h2>
-              <p className="mt-3 max-w-md font-body text-[0.92rem] font-light leading-relaxed text-text-muted">
-                Enquiries are personal. Come into either shop and an advisor
-                will walk you through it line by line - the instalment, the
-                maturity benefit, and what it buys at the day&rsquo;s rate.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              <Button href="/live-gold-rate" variant="onLight" size="lg">
-                Check today&rsquo;s rate
-              </Button>
-            </div>
-          </div>
-
-          <p className="mt-10 font-body text-[0.72rem] leading-relaxed text-text-muted">
+          <p className="mt-16 font-body text-[0.72rem] leading-relaxed text-text-muted">
             Plan terms shown are indicative and pending confirmation. Full{" "}
             <Link
               href="/terms"
@@ -152,6 +135,13 @@ export default function OffersAndPlansPage() {
           </p>
         </Container>
       </Section>
+
+      <NextStep
+        eyebrow="Enrolment is done in person"
+        title="An advisor will walk it through line by line."
+        primary={{ href: "/live-gold-rate", label: "Check today's rate" }}
+        secondary={{ href: "/chheda-promise", label: "How we price it" }}
+      />
     </>
   );
 }

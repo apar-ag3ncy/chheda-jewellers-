@@ -40,6 +40,8 @@ export default function GalleryPage() {
         meta={[
           { label: "Frames", value: String(framed).padStart(2, "0") },
           { label: "Subjects", value: "Six named" },
+          { label: "Shown as", value: "Worn, not laid flat" },
+          { label: "Prices", value: "None on this page" },
         ]}
       />
 

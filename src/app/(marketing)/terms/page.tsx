@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { pageMetadata } from "@/lib/seo";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { PagePlate } from "@/components/ui/PagePlate";
 import { Section, Container } from "@/components/ui/Section";
 
 export const metadata = pageMetadata({
@@ -35,7 +35,17 @@ const sections = [
 export default function TermsPage() {
   return (
     <>
-      <PageHeader eyebrow="Legal" title="Terms of Use" />
+      <PagePlate
+        folio="VIII"
+        eyebrow="Legal"
+        title={"Terms\nof use"}
+        intro="What this website is, what the gold rate on it does and does not mean, and where the binding version of anything shown here lives."
+        meta={[
+          { label: "This site is", value: "An editorial showcase" },
+          { label: "Rate shown", value: "Indicative only" },
+          { label: "Binding terms", value: "Given in-store" },
+        ]}
+      />
       <Section spacing="md" tone="light" className="u-on-light">
         <Container>
           <div className="max-w-2xl">

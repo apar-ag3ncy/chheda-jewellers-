@@ -75,6 +75,12 @@ export default function LiveGoldRatePage() {
           alt: "A gold temple necklace and bangles worn against maroon and ochre silk",
           focus: "50% 30%",
         }}
+        meta={[
+          { label: "Purities", value: "22K · 24K" },
+          { label: "Applies to", value: "Mumbai counters" },
+          { label: "Updated", value: "Through the trading day" },
+          { label: "Status", value: "Indicative only" },
+        ]}
       />
 
       {/* ── The number ────────────────────────────────────────────────── */}

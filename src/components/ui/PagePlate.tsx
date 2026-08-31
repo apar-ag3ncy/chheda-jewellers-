@@ -11,6 +11,14 @@ import { PagePlateMotion } from "@/components/ui/PagePlateMotion";
 
 type MetaRow = { label: string; value: string };
 
+/** Desktop column count for the meta rail, keyed by how many entries it holds. */
+const RAIL_COLUMNS = {
+  1: "md:grid-cols-1",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+  4: "md:grid-cols-4",
+} as const;
+
 type PagePlateProps = {
   /** Archive-style index, e.g. "III". Purely typographic. */
   folio?: string;
@@ -136,7 +144,15 @@ export function PagePlate({
 
         {/* ── Meta rail ───────────────────────────────────────────────── */}
         {meta?.length ? (
-          <dl className="mt-12 grid grid-cols-1 gap-x-6 gap-y-6 border-t border-line pt-7 sm:grid-cols-2 md:mt-16 md:grid-cols-4">
+          <dl
+            className={cn(
+              "mt-12 grid grid-cols-1 gap-x-6 gap-y-6 border-t border-line pt-7 sm:grid-cols-2 md:mt-16",
+              // The rail takes as many columns as it has entries, so a short
+              // rail fills its width instead of leaving dead cells on the
+              // right. Written as whole class names for Tailwind's scanner.
+              RAIL_COLUMNS[Math.min(meta.length, 4) as 1 | 2 | 3 | 4],
+            )}
+          >
             {meta.map((m, i) => (
               <Reveal key={m.label} delay={i * 0.05} variant="slide" x={-22}>
                 <dt className="font-body text-[0.58rem] uppercase tracking-[0.2em] text-text-muted">
