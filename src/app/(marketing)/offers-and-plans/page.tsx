@@ -88,9 +88,9 @@ export default function OffersAndPlansPage() {
                   </div>
 
                   <div className="md:col-span-6">
-                    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-brand)] border border-line bg-line">
+                    <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-brand)] border border-line bg-line sm:grid-cols-2">
                       {plan.features.map((f) => (
-                        <div key={f.label} className="bg-green-deep p-6">
+                        <div key={f.label} className="bg-green-deep p-5 md:p-6">
                           <p className="u-eyebrow mb-2">{f.label}</p>
                           <p className="font-body text-lg font-light text-text-strong">{f.value}</p>
                         </div>

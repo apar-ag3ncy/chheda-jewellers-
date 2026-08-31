@@ -136,7 +136,7 @@ export function PagePlate({
 
         {/* ── Meta rail ───────────────────────────────────────────────── */}
         {meta?.length ? (
-          <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-line pt-7 md:mt-16 md:grid-cols-4">
+          <dl className="mt-12 grid grid-cols-1 gap-x-6 gap-y-6 border-t border-line pt-7 sm:grid-cols-2 md:mt-16 md:grid-cols-4">
             {meta.map((m, i) => (
               <Reveal key={m.label} delay={i * 0.05} variant="slide" x={-22}>
                 <dt className="font-body text-[0.58rem] uppercase tracking-[0.2em] text-text-muted">
