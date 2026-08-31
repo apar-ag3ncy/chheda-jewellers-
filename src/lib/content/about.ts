@@ -10,6 +10,20 @@
  * layout, and the words are the thing most likely to change.
  */
 
+export type MarkPlate = {
+  src: string;
+  alt: string;
+  /** object-position. Every value here was chosen by rendering the real crop
+      at the real aspect and checking the piece reads whole - see below. */
+  focus: string;
+  /**
+   * "side" hangs the plate beside the text and alternates which edge it sits
+   * on. "solo" centres one plate under the text, alone - used once, on the
+   * mark about a piece existing exactly once.
+   */
+  layout: "side" | "solo";
+};
+
 export type Mark = {
   /** 01-05. Rendered as-is. */
   n: string;
@@ -19,6 +33,7 @@ export type Mark = {
   body: string[];
   /** The line that gets set large and alone. */
   pull?: string;
+  plate?: MarkPlate;
 };
 
 /**
@@ -63,6 +78,12 @@ export const marks: Mark[] = [
       "We have grown since. We have not changed who we open the door for.",
     ],
     pull: "We were never in the ornament business.\nWe were in the occasion business.",
+    plate: {
+      src: "/media/promise/plate-02.jpg",
+      alt: "A stack of hand-worked gold bangles and a kundan cuff, worn with a pearl nath",
+      focus: "50% 45%",
+      layout: "side",
+    },
   },
   {
     n: "02",
@@ -74,6 +95,12 @@ export const marks: Mark[] = [
       "And we design for everyone who wants to wear it. The man with the bold gold ring. The teenager experimenting. The mother. The woman who buys her own.",
     ],
     pull: "Heritage isn't something you inherit.\nIt's something you wear out of the house.",
+    plate: {
+      src: "/media/types/necklace.jpg",
+      alt: "A full bridal set - maang tikka, earrings and a kundan choker - worn together",
+      focus: "50% 55%",
+      layout: "side",
+    },
   },
   {
     n: "03",
@@ -102,6 +129,12 @@ export const marks: Mark[] = [
           "We work this way because the alternative is a stranger walking into the same wedding wearing your necklace.",
         ],
     pull: "What you're wearing exists once.",
+    plate: {
+      src: "/media/categories/polki/sapphire-choker.jpg",
+      alt: "A polki choker with a carved sapphire drop and strung pearls",
+      focus: "50% 42%",
+      layout: "solo",
+    },
   },
   {
     n: "05",
@@ -120,4 +153,32 @@ export const proofPoints = [
   { label: "Hallmarked & certified", value: "Every piece, without exception" },
   { label: "Full documentation", value: "Purity, weight, stone, origin - in writing" },
   { label: "Explained before it's sold", value: "4Cs, craft and cost, in plain language" },
+] as const;
+
+/**
+ * MARK 03's evidence - three tight squares under the paragraph about
+ * documentation. Craft is the one claim on this page that a photograph can
+ * carry better than a sentence, so Proof is the mark that shows.
+ *
+ * One bangle stack, one earring, one hand of rings: three different kinds of
+ * work rather than three views of the same one. Each focus value was picked
+ * by rendering the real 1:1 crop and checking the piece reads whole, per the
+ * house rule that the jewellery is never the part that gets cropped out.
+ */
+export const proofPlates = [
+  {
+    src: "/media/types/hathphool.jpg",
+    alt: "Close study of stacked gold bangles and a kundan cuff",
+    focus: "50% 70%",
+  },
+  {
+    src: "/media/categories/polki/drop-earrings.jpg",
+    alt: "A long polki drop earring seen in profile",
+    focus: "50% 60%",
+  },
+  {
+    src: "/media/types/rings.jpg",
+    alt: "A hand wearing layered polki rings and bangles",
+    focus: "50% 55%",
+  },
 ] as const;
