@@ -64,14 +64,19 @@ export function PromiseDock() {
 
   return (
     <div ref={root}>
-      {/* ── The metal, wide ─────────────────────────────────────────── */}
+      {/* ── The metal ────────────────────────────────────────────────
+          Aspect steps with the viewport, and that is a legibility fix, not a
+          taste one: 3:1 across a 360px phone is a 120px letterbox with the
+          dock covering a third of it - the jewellery had nowhere to be. It
+          opens to 5:4 on a phone, 16:9 on a tablet, and keeps the wide band
+          only where the screen is wide enough to carry it. */}
       <div className="relative mt-10 md:mt-14">
         <ParallaxImage
           src="/media/promise/band-trust.jpg"
           alt="A polki and pearl choker set with pink stones, filling the frame"
           focus="50% 45%"
           intensity={0.07}
-          className="aspect-[21/9] w-full md:aspect-[3/1]"
+          className="aspect-[5/4] w-full sm:aspect-[16/9] md:aspect-[3/1]"
           sizes="(max-width: 768px) 100vw, 92vw"
         />
         {/* ── The hover swaps THIS image ─────────────────────────────
