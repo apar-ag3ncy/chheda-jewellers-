@@ -5,7 +5,6 @@ import { hallmarkMarks } from "@/lib/content/promise";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
-import { HuidCheck } from "./HuidCheck";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 /**
@@ -291,19 +290,15 @@ export function Hallmark() {
                 ))}
               </ol>
 
-              <p className="mt-8 border-t border-line pt-6 font-body text-[0.8rem] font-light leading-relaxed text-text-muted">
-                Verify any piece - ours or anyone&rsquo;s - with the Bureau of Indian
-                Standards&rsquo; own{" "}
-                <span className="text-gold-light">BIS Care</span> app. We would rather
-                you checked.
+              <p className="mt-8 border-t border-line pt-6 font-body text-[0.9rem] font-light leading-relaxed text-text-muted">
+                The code is laser-marked on the piece itself - you will need a
+                loupe, or a phone camera at full zoom, to read it. Type it into
+                the Bureau of Indian Standards&rsquo; own{" "}
+                <span className="text-gold-light">BIS Care</span> app and the
+                piece&rsquo;s record comes back: article, purity, and the
+                jeweller who registered it. Check ours. We would rather you did.
                 <span className="sr-only"> Currently reading: {current.label}.</span>
               </p>
-
-              {/* Reading about a hallmark and going to find one are different
-                  acts. This is what turns the section into the second. */}
-              <div className="mt-8">
-                <HuidCheck />
-              </div>
             </div>
           </div>
         </Container>
