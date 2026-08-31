@@ -256,12 +256,12 @@ export function MumbaiPoster({
                   after the button has been found is no signal at all. */}
               <span
                 aria-hidden
-                className="cj-pin-ping absolute inset-0 m-auto h-12 w-12 rounded-full border border-gold-light/70"
+                className="cj-pin-ping absolute inset-0 m-auto h-12 w-12 rounded-full border border-gold/80"
               />
               <span
                 aria-hidden
                 className={cn(
-                  "absolute inset-0 m-auto h-11 w-11 rounded-full border border-gold-light transition-all duration-[900ms] ease-[var(--ease-cinema)]",
+                  "absolute inset-0 m-auto h-11 w-11 rounded-full border border-gold transition-all duration-[900ms] ease-[var(--ease-cinema)]",
                   active === i ? "scale-100 opacity-80" : "scale-50 opacity-0",
                 )}
               />
@@ -271,7 +271,7 @@ export function MumbaiPoster({
                 aria-hidden
                 className={cn(
                   "absolute inset-0 m-auto rounded-full transition-all duration-500 ease-[var(--ease-cinema)]",
-                  "h-10 w-10 bg-[radial-gradient(circle,rgba(240,207,170,0.4)_0%,rgba(240,207,170,0.12)_45%,transparent_72%)]",
+                  "h-10 w-10 bg-[radial-gradient(circle,rgba(198,141,97,0.5)_0%,rgba(198,141,97,0.16)_45%,transparent_72%)]",
                   "group-hover/pin:scale-125 group-hover/pin:opacity-100",
                   active === i ? "opacity-100" : "opacity-75",
                 )}
@@ -279,11 +279,18 @@ export function MumbaiPoster({
               <span
                 aria-hidden
                 className={cn(
-                  "block rounded-full bg-gold-light transition-all duration-500 ease-[var(--ease-cinema)] group-hover/pin:scale-110",
+                  "block rounded-full transition-all duration-500 ease-[var(--ease-cinema)] group-hover/pin:scale-110",
                   active === i
-                    ? "h-[1.35rem] w-[1.35rem] shadow-[0_0_0_4px_rgba(4,23,15,0.75),0_0_22px_8px_rgba(240,207,170,0.9),0_0_52px_18px_rgba(198,141,97,0.5)]"
-                    : "h-[1.1rem] w-[1.1rem] shadow-[0_0_0_4px_rgba(4,23,15,0.7),0_0_18px_6px_rgba(240,207,170,0.75),0_0_40px_14px_rgba(198,141,97,0.35)]",
+                    ? "h-[1.35rem] w-[1.35rem] shadow-[0_0_0_4px_rgba(4,23,15,0.75),0_0_22px_8px_rgba(240,207,170,0.75),0_0_52px_18px_rgba(198,141,97,0.6)]"
+                    : "h-[1.1rem] w-[1.1rem] shadow-[0_0_0_4px_rgba(4,23,15,0.7),0_0_18px_6px_rgba(240,207,170,0.6),0_0_40px_14px_rgba(198,141,97,0.45)]",
                 )}
+                /* A bead of gold, lit top-left: cream core into brand gold
+                   into the deep edge. Flat --gold-light read as a white dot
+                   against the dark map - the ramp is what makes it metal. */
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 32% 28%, #fbe9cd 0%, var(--gold-light) 26%, var(--gold) 62%, var(--gold-deep) 100%)",
+                }}
               />
             </button>
             <span
