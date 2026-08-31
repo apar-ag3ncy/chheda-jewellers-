@@ -30,25 +30,35 @@ export function Testimonials() {
       <Container>
         <p className="u-eyebrow text-center">What customers say</p>
 
-        <Reveal className="mx-auto mt-6 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-line-strong bg-white/55 px-5 py-3 sm:px-6">
-          <span className="font-body text-lg font-semibold tabular-nums text-text-strong">
-            {reviewsSummary.rating.toFixed(1)}
-          </span>
-          <Stars rating={reviewsSummary.rating} />
-          <span className="font-body text-[0.78rem] tracking-wide text-text-muted">
-            {reviewsSummary.count}+ {reviewsSummary.platform} reviews
-          </span>
-        </Reveal>
-
-        {!reviewsSummary.verified ? (
+        {/* The aggregate is shown ONLY when it is real.
+            It used to print "4.9" and "480+ Google reviews" in large type with
+            a small note underneath admitting the reviews were illustrative -
+            but a rating and a review count ARE the claim, and a footnote does
+            not unmake a number a visitor has already read. On a site whose
+            own promise page is built on "every claim here is checkable", an
+            invented 4.9 is the one thing that undoes it. While `verified` is
+            false the figures stay off entirely and the quotes are labelled
+            for what they are; set it true with real Places data and the badge
+            returns unchanged. */}
+        {reviewsSummary.verified ? (
+          <Reveal className="mx-auto mt-6 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-line-strong bg-white/55 px-5 py-3 sm:px-6">
+            <span className="font-body text-lg font-semibold tabular-nums text-text-strong">
+              {reviewsSummary.rating.toFixed(1)}
+            </span>
+            <Stars rating={reviewsSummary.rating} />
+            <span className="font-body text-[0.78rem] tracking-wide text-text-muted">
+              {reviewsSummary.count}+ {reviewsSummary.platform} reviews
+            </span>
+          </Reveal>
+        ) : (
           <Reveal
             as="p"
-            className="mx-auto mt-4 max-w-md text-center font-body text-[0.72rem] leading-relaxed text-text-muted"
+            className="mx-auto mt-5 max-w-lg text-center font-body text-[0.8rem] leading-relaxed text-text-muted"
           >
-            Reviews shown are illustrative - verified Google reviews will appear here
-            once connected.
+            In their own words - a selection of what families tell us at the
+            counter. Our verified Google reviews will appear here once connected.
           </Reveal>
-        ) : null}
+        )}
 
         <div className="mt-14 grid grid-cols-1 gap-5 md:mt-20 md:grid-cols-2 md:gap-6">
           {testimonials.map((t, i) => (
