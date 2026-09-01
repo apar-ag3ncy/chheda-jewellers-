@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FooterGround } from "@/components/layout/FooterGround";
 import { siteConfig, houseLines, contactIsReal } from "@/config/site";
 import { Monogram } from "@/components/ui/Monogram";
+import { cn } from "@/lib/cn";
 
 /**
  * THE SIGN-OFF - one screen: the name, the two shops, the small print.
@@ -80,9 +81,22 @@ export function Footer() {
         </Link>
 
         {/* ── The particulars ──────────────────────────────────────── */}
+        {/* Three columns spread across the full width: the first hugs the
+            left edge, the second sits centred, the third hugs the right. The
+            grid already spanned edge to edge (3 x col-span-4 of 12) - what
+            made the row look lopsided was every column aligning its content
+            LEFT inside its own cell, so the last one stopped short of the
+            edge by the width of its own text. Alignment only from md up; on a
+            phone the columns stack and everything stays left. */}
         <div className="grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-12 md:gap-14">
-          {siteConfig.branches.map((b) => (
-            <address key={b.id} className="not-italic md:col-span-4">
+          {siteConfig.branches.map((b, i) => (
+            <address
+              key={b.id}
+              className={cn(
+                "not-italic md:col-span-4",
+                i === 1 && "md:text-center",
+              )}
+            >
               <p className="u-eyebrow mb-2 text-gold-light">{b.area}</p>
               <p className="font-display text-[1.2rem] font-light leading-snug text-text-strong md:text-[1.3rem]">
                 {b.addressLines[0]}
@@ -95,7 +109,14 @@ export function Footer() {
               <p className="mt-1.5 font-body text-[0.76rem] tracking-wide text-text-muted">
                 {b.hours}
               </p>
-              <div className="mt-2 flex flex-wrap gap-x-5">
+              <div
+                className={cn(
+                  "mt-2 flex flex-wrap gap-x-5",
+                  // text-align cannot move a flex item; the row needs its own
+                  // justification to follow the column.
+                  i === 1 && "md:justify-center",
+                )}
+              >
                 <Link
                   href={b.directionsUrl}
                   target="_blank"
@@ -116,9 +137,11 @@ export function Footer() {
             </address>
           ))}
 
-          <div className="col-span-2 md:col-span-4">
+          <div className="col-span-2 md:col-span-4 md:text-right">
             <p className="u-eyebrow mb-3 text-gold-light">Reach us</p>
-            <ul className="flex flex-col">
+            {/* Same reason as the directions row: these are inline-flex links
+                inside a flex column, so they follow items-end, not text-align. */}
+            <ul className="flex flex-col md:items-end">
               <li>
                 <Link
                   href={`mailto:${siteConfig.contact.email}`}
@@ -139,7 +162,7 @@ export function Footer() {
               </li>
             </ul>
             {siteConfig.branches.some((b) => !b.verified) ? (
-              <p className="mt-1 max-w-xs font-body text-[0.72rem] leading-relaxed text-text-muted">
+              <p className="mt-1 max-w-xs font-body text-[0.72rem] leading-relaxed text-text-muted md:ml-auto">
                 Phone numbers and hours are being confirmed. Email us in the
                 meantime, or come into either shop.
               </p>
