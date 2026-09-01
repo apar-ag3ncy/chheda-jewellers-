@@ -240,7 +240,11 @@ export function Loader() {
 
       <div
         ref={stage}
-        className="relative grid h-full place-items-center will-change-transform"
+        // No standing hint here either: this is the mark's PARENT, and a
+        // composited parent rasterises its whole subtree - which would put the
+        // mandala straight back on a fixed-resolution layer. GSAP promotes it
+        // for the curtain lift and lets it go afterwards.
+        className="relative grid h-full place-items-center"
       >
         {/* Warm bloom - light, not geometry. Sits behind the mark and never
             intercepts a pointer. */}

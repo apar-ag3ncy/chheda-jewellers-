@@ -195,7 +195,7 @@ export function Hero() {
     >
       {/* Slide layers - CSS crossfade, inside one transform host so the
           scroll handoff can move every frame together. */}
-      <div ref={frames} className="absolute inset-0 will-change-transform">
+      <div ref={frames} className="absolute inset-0">
       {heroSlides.map((s, i) => (
         <div
           key={s.id}
@@ -239,7 +239,7 @@ export function Hero() {
         // (usually a face). Sitting it down in the scrim is both the
         // legible position and the elegant one, and it leaves the top two
         // thirds of the artwork uncovered. The padding clears the bar below.
-        className="u-container relative flex h-full flex-col justify-end pb-44 will-change-transform md:pb-40"
+        className="u-container relative flex h-full flex-col justify-end pb-44 md:pb-40"
       >
         {slide.plate ? (
           /* Nothing is drawn over a plate - it already says everything it

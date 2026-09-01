@@ -146,7 +146,6 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.38),
       inset 0 -8px 14px -10px rgba(0, 0, 0, 0.55),
       0 14px 30px -14px rgba(0, 0, 0, 0.6);
-    will-change: transform, opacity;
   }
 
   /* The numeral: brand gold, lit. A static gradient (not the sweep - four
@@ -164,7 +163,6 @@
     background-clip: text;
     color: transparent;
     filter: drop-shadow(0 0 8px rgba(240, 207, 170, 0.35));
-    will-change: transform, opacity;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -455,7 +453,13 @@
   .u-grain::after {
     content: "";
     position: fixed;
-    inset: -50%;
+    /* The grain drifts by at most 3% of its own size, so it needs a bleed a
+       little larger than that - not half the viewport in every direction.
+       At -50% this was a fixed, permanently-composited layer FOUR TIMES the
+       viewport's area, on every page, for a 3% wobble. -8% keeps a margin of
+       more than double what the animation uses and costs 1.35x instead. No
+       visual change; two thirds less layer. */
+    inset: -8%;
     z-index: 1;
     pointer-events: none;
     opacity: 0.042;

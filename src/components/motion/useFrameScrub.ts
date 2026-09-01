@@ -97,7 +97,16 @@ export function useFrameScrub(urls: string[], opts: Options = {}) {
 
     const fold = (v: number) => (closedTurn ? wrapFrame(v, count) : reflectFrame(v, count));
     const playhead = fold(s.scrollFrames + s.userFrames + s.autoFrames);
-    const deg = Math.round((playhead / count) * 360) % 360;
+    /**
+     * The announced angle, in 15-degree steps.
+     *
+     * This is state, so every change re-renders the component. Rounded to the
+     * degree it changed about 22 times a second while the ring turned on its
+     * own - 22 React renders a second, continuously, for a value only a
+     * screen reader ever reads. Quantised, it settles to roughly one and a
+     * half, and "45 degrees" is as useful an announcement as "47".
+     */
+    const deg = Math.round((playhead / count) * 24) * 15 % 360;
     setAngle((prev) => (prev === deg ? prev : deg));
     const base = Math.floor(playhead);
     const frac = playhead - base;
