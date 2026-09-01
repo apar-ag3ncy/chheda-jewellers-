@@ -25,11 +25,20 @@ const CHAPTER_NAMES = ["Solitaire", "Brilliance", "Statement", "Eternity"] as co
  * tuned for the diamond page's 3:4 cards; these bands are ~4.6:1, which
  * keeps only a narrow horizontal slice - at the card values the slice landed
  * on the model's eyes and the earring fell off the bottom. Chosen against
- * rendered strip previews so every band shows its piece whole: the necklace
- * and rings (63%), the violet earring (45%), the diamond ear cuff (45%),
- * the layered necklaces on green (47%).
+ * rendered strip previews so every band shows its piece whole.
+ *
+ * These bands are 3.72:1 - 829x223 at desktop width - which is an extreme
+ * letterbox to take out of a 2:3 portrait, so a few percent is the difference
+ * between a piece and a neck. The first was set to 63% and cut the necklace's
+ * pendant off on the bottom edge: the chain was in frame and the thing it
+ * carries was not. Re-swept against the real 3.72:1 band, 72% holds the whole
+ * necklace, its pendant and the ring on the hand.
+ *
+ * The other three were re-checked at the same aspect and are right where they
+ * are: 45% keeps the violet earring whole, 45% the pearl ear ornament, and
+ * 47% shows more of the layered set on green than any lower framing does.
  */
-const STRIP_FOCUS = ["50% 63%", "50% 45%", "50% 45%", "50% 47%"] as const;
+const STRIP_FOCUS = ["50% 72%", "50% 45%", "50% 45%", "50% 47%"] as const;
 
 const pieces = CHAPTER_NAMES.map((chapterName, i) => {
   const frame = categories.diamond.picks[i]?.image;
