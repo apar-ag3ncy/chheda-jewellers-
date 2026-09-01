@@ -4,6 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitLines } from "@/components/motion/SplitLines";
+import { Sheen } from "@/components/motion/Sheen";
 import { Monogram } from "@/components/ui/Monogram";
 import { siteConfig } from "@/config/site";
 import Image from "next/image";
@@ -219,11 +220,19 @@ function MarkScene({
             : "text-[length:var(--step-2)]",
         )}
       >
-        {mark.pull.split("\n").map((l, n) => (
-          <span key={n} className="block">
-            {l}
-          </span>
-        ))}
+        {mark.pull.split("\n").map((l, n) =>
+          // The light crosses the emphasis mark only - the one claim on this
+          // page that is meant to stop you. Everywhere else it is plain type.
+          emphasis ? (
+            <Sheen key={n} as="span" className="block" delay={0.4 + n * 0.12}>
+              {l}
+            </Sheen>
+          ) : (
+            <span key={n} className="block">
+              {l}
+            </span>
+          ),
+        )}
       </p>
     </Reveal>
   ) : null;

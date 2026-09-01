@@ -68,7 +68,7 @@ export function FeaturedPieces({
         <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:mt-14 md:gap-x-5 lg:grid-cols-6">
           {pieces.map((p, i) => (
             <Reveal as="li" key={p.src} variant="mask" delay={(i % 3) * 0.06}>
-              <Link href={p.href} className="group block">
+              <Link href={p.href} className="cj-card group block">
                 <div className="relative aspect-square w-full overflow-hidden rounded-[var(--radius-brand)] bg-green-deep">
                   <Image
                     src={p.src}
@@ -85,7 +85,10 @@ export function FeaturedPieces({
                     )}
                   />
                 </div>
-                <p className="mt-3 font-display text-[1.05rem] font-light leading-snug text-text-strong">
+                {/* Sized by the card's own width, not the viewport - see
+                    .cj-card. Six-up on a desktop and two-up on a phone give
+                    almost the same card, which no breakpoint can express. */}
+                <p className="cj-card-name mt-3 font-display font-light text-text-strong">
                   {p.name}
                 </p>
                 <p className="mt-1 font-body text-[0.62rem] uppercase tracking-[0.16em] text-gold">

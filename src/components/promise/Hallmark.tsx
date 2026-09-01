@@ -5,6 +5,7 @@ import { hallmarkMarks } from "@/lib/content/promise";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
+import { Sheen } from "@/components/motion/Sheen";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 /**
@@ -61,11 +62,17 @@ export function Hallmark() {
             02 - The mark on the metal
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="max-w-3xl font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
+            {/* The proof page's own claim, and the second of only two
+                places on the site where the light crosses the type. */}
+            <Sheen
+              as="h2"
+              delay={0.5}
+              className="max-w-3xl font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)]"
+            >
               Anyone can say <em className="italic">hallmarked</em>.
               <br />
               Here is how you check.
-            </h2>
+            </Sheen>
           </Reveal>
 
           <div className="mt-14 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
