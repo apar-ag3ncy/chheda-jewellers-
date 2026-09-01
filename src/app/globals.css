@@ -552,6 +552,30 @@
     border-radius: 999px;
   }
 
+  /* ── The estimator's sliders, on a finger ─────────────────────────────
+     Sized for a mouse: an 18px thumb on a 28px-tall control. Both are well
+     under the 44px a touch target needs, so on a phone the thumb was a
+     quarter of a fingertip and the whole row was too short to land on
+     reliably - the control looked present and behaved as if it were not.
+
+     Enlarged on coarse pointers ONLY, so the desktop drawing is untouched:
+     the row grows to 44px and the thumb to 26px, while the track stays the
+     same 1px hairline. Nothing about how it looks on a laptop changes. */
+  @media (pointer: coarse) {
+    .cj-range {
+      height: 44px;
+    }
+    .cj-range::-webkit-slider-thumb {
+      width: 26px;
+      height: 26px;
+      margin-top: -12.5px;
+    }
+    .cj-range::-moz-range-thumb {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
   /**
    * Counter-scope to .u-on-light: restores the DARK-ground token values.
    * Needed for an element that stays dark inside a light band - e.g. the

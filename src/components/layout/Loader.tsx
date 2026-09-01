@@ -139,6 +139,22 @@ export function Loader() {
           filter: "blur(0px)",
           duration: SPIN,
           ease: "cinema",
+          /**
+           * Hand the mark back to the renderer at full size.
+           *
+           * The mark is vector and should be perfectly sharp, but it arrives
+           * by scaling 0.24 -> 1. A composited layer is rasterised ONCE at its
+           * current size and the bitmap is then scaled by the transform, so
+           * the mandala was being drawn at about a quarter size and blown up
+           * four times - which is why it settled soft instead of crisp. The
+           * blur filter forces the same thing.
+           *
+           * Clearing both at the end drops the element off its own layer and
+           * the SVG repaints at its true size.
+           */
+          onComplete: () => {
+            gsap.set(mono.current, { clearProps: "filter,willChange,scale" });
+          },
         },
         0,
       );
@@ -238,8 +254,12 @@ export function Loader() {
           }}
         />
 
-        <div ref={mono} className="relative will-change-transform">
-          <Monogram className="h-28 w-28 md:h-36 md:w-36" />
+        {/* No permanent will-change here. A standing layer hint keeps the
+            mark on a fixed-resolution layer for the whole intro, which is
+            exactly what made a vector mandala look soft; GSAP promotes it for
+            the duration of the tween on its own and releases it after. */}
+        <div ref={mono} className="relative">
+          <Monogram className="h-32 w-32 md:h-40 md:w-40" />
         </div>
       </div>
     </div>
