@@ -1,4 +1,5 @@
 import { NextStep } from "@/components/ui/NextStep";
+import { FeaturedPieces } from "@/components/sections/FeaturedPieces";
 import Link from "next/link";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
@@ -172,6 +173,12 @@ export default function JewelleryPage() {
           </div>
         </Container>
       </Section>
+      <FeaturedPieces
+        eyebrow="On the counter now"
+        title="A few pieces, closer up."
+        tone="deep"
+      />
+
       <NextStep
         eyebrow="When you have chosen a room"
         title="See it in the light, on the day that suits you."

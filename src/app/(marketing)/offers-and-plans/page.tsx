@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NextStep } from "@/components/ui/NextStep";
+import { FeaturedPieces } from "@/components/sections/FeaturedPieces";
 import { plans } from "@/lib/content/plans";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
@@ -135,6 +136,12 @@ export default function OffersAndPlansPage() {
           </p>
         </Container>
       </Section>
+
+      <FeaturedPieces
+        eyebrow="What a plan is for"
+        title="Saved towards, one instalment at a time."
+        tone="green"
+      />
 
       <NextStep
         eyebrow="Enrolment is done in person"

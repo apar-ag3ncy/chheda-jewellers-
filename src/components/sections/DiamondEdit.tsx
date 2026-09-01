@@ -199,15 +199,22 @@ export function DiamondEdit() {
                   alt={p.alt}
                   placeholder="blur" blurDataURL={EMERALD_LQIP} fill
                   sizes="(max-width: 1024px) 100vw, 58vw"
-                  className="object-cover grayscale transition-all duration-[900ms] ease-[var(--ease-lux)] group-hover/piece:grayscale-0 group-hover/piece:scale-[1.04]"
+                  // Grey ONLY where a pointer can lift it. Tailwind's hover
+                  // variants are gated on (hover: hover), so on a phone the
+                  // grayscale had nothing to remove it and every diamond in
+                  // this section sat permanently in black and white.
+                  className="object-cover transition-all duration-[900ms] ease-[var(--ease-lux)] [@media(hover:hover)]:grayscale group-hover/piece:grayscale-0 group-hover/piece:scale-[1.04]"
                   style={{ objectPosition: p.focus }}
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-green-deep/20 transition-opacity duration-500 group-hover/piece:opacity-0"
+                  className="absolute inset-0 bg-green-deep/20 transition-opacity duration-500 [@media(hover:none)]:opacity-0 group-hover/piece:opacity-0"
                 />
-                {/* Piece label - slides up on hover */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-3 p-5 opacity-0 transition-all duration-500 ease-[var(--ease-lux)] group-hover/piece:translate-y-0 group-hover/piece:opacity-100">
+                {/* Piece label. Present on touch, revealed on hover where
+                    there is a pointer - it used to be opacity-0 with only a
+                    hover rule to bring it back, so on a phone every piece on
+                    this wall was unnamed. */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 transition-all duration-500 ease-[var(--ease-lux)] [@media(hover:hover)]:translate-y-3 [@media(hover:hover)]:opacity-0 group-hover/piece:translate-y-0 group-hover/piece:opacity-100">
                   <p className="font-body text-[0.62rem] uppercase tracking-[0.24em] text-gold-light">
                     N° {String(i + 1).padStart(2, "0")}
                   </p>

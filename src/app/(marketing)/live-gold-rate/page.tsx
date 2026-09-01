@@ -1,4 +1,5 @@
 import { NextStep } from "@/components/ui/NextStep";
+import { FeaturedPieces } from "@/components/sections/FeaturedPieces";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
@@ -188,6 +189,13 @@ export default function LiveGoldRatePage() {
           </div>
         </Container>
       </Section>
+      <FeaturedPieces
+        eyebrow="What the rate becomes"
+        title="The metal, once it has been worked."
+        tone="deep"
+        limit={3}
+      />
+
       <NextStep
         tone="green"
         eyebrow="A rate is only half the bill"

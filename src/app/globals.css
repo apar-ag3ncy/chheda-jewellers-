@@ -340,7 +340,7 @@
      Two things were wrong with the hand-rolled version this replaces, and
      both are worth stating because they are easy to reintroduce.
 
-     1. It animated `max-height` from 0 to a guessed cap (max-h-40 = 160px)
+     1. It animated `max-height` from 0 to a guessed cap (a 160px cap)
         for copy roughly 60px tall. A max-height tween spends its time
         travelling to the CAP, not to the content, so the text finished
         arriving about a third of the way through and the remaining two
