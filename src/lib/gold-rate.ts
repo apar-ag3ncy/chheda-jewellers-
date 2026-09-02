@@ -40,7 +40,10 @@ export interface GoldRateResponse {
   disclaimer: string;
 }
 
-const CITY = process.env.GOLD_RATE_CITY ?? "Mumbai";
+// `||`, not `??`: on the live deployment this variable exists but is EMPTY,
+// and ?? only catches null/undefined - so the rate panel shipped with a blank
+// city while every local build said Mumbai. An empty setting is not a city.
+const CITY = process.env.GOLD_RATE_CITY || "Mumbai";
 const PROVIDER = (process.env.GOLD_RATE_PROVIDER ?? "spot").toLowerCase();
 const API_KEY = process.env.GOLD_RATE_API_KEY ?? "";
 
@@ -187,7 +190,15 @@ async function fetchFromGoldApi(): Promise<GoldRate[] | null> {
  * lands within about a percent of the IBJA number, against forty percent off
  * for the old static baseline.
  */
-const DUTY_PCT = Number(process.env.GOLD_RATE_DUTY_PCT ?? "6");
+// Same hazard, worse consequence: Number("") is 0, not NaN, so an empty env
+// var would silently price the metal duty-free. Empty or unparseable falls
+// back to 6; an explicit "0" is honoured - zero duty set on purpose is a
+// setting, an empty string is not.
+const dutyRaw = process.env.GOLD_RATE_DUTY_PCT;
+const DUTY_PCT =
+  dutyRaw !== undefined && dutyRaw !== "" && Number.isFinite(Number(dutyRaw))
+    ? Number(dutyRaw)
+    : 6;
 
 async function fetchUsdInr(): Promise<number | null> {
   try {
