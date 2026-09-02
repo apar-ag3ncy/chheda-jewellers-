@@ -19,12 +19,9 @@ import { cn } from "@/lib/cn";
  * never rotates on its own, and there is no timeline, counter, caption or
  * chapter list: a single display line and the piece, floating.
  *
- * SEAMLESS BY CONSTRUCTION: the frames carry their own alpha - plate, rim
- * and reflection are cut away - so the piece floats on whatever ground the
- * page is showing, including mid-crossfade. The radial-mask approach this
- * replaces feathered the frame's corners but left the footage's own green
- * visible as an oval whenever the ground behind it was not exactly that
- * green - the "cropped video" look. A cut-out cannot mismatch anything.
+ * SEAMLESS BY CONSTRUCTION: no border, no card, no backing. The frame's own
+ * edges are feathered away by a radial mask so the footage dissolves into the
+ * page's emerald, and the piece simply sits on the site.
  */
 
 /** Rotations across the section's scroll - gentle, so it reads as slow-motion. */
@@ -40,14 +37,9 @@ const SCROLL_TURNS = 0.65;
  */
 const AUTO_SPIN = 4.5;
 
-/**
- * The floor. A cut-out with no shadow reads as a sticker; one soft pool of
- * dark under the band is what tells the eye the piece is STANDING somewhere.
- * Neutral dark, so it reads as shadow on the emerald and on the cream that
- * shows through mid-crossfade alike.
- */
-const FLOOR_SHADOW =
-  "radial-gradient(ellipse 46% 9% at 50% 87%, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.16) 55%, transparent 78%)";
+/** Feathers every edge of the frame into the page. */
+const SEAMLESS_MASK =
+  "radial-gradient(ellipse 72% 76% at 50% 47%, black 48%, transparent 78%)";
 
 export function FilmRoom() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -109,15 +101,13 @@ export function FilmRoom() {
             aria-valuenow={scrub.angle}
             aria-valuetext={`${scrub.angle} degrees`}
             {...scrub.handlers}
-            className="relative mt-[clamp(1rem,3svh,2.5rem)] aspect-[88/81] w-[min(80vw,clamp(16rem,54svh,28rem))] cursor-grab touch-pan-y select-none outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-4 focus-visible:ring-offset-bg active:cursor-grabbing"
+            className="relative mt-[clamp(1rem,3svh,2.5rem)] aspect-[4/5] w-[min(78vw,clamp(15rem,52svh,26rem))] cursor-grab touch-pan-y select-none outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-4 focus-visible:ring-offset-bg active:cursor-grabbing"
           >
-            {/* The pool of shadow sits behind the piece, under its band. */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0"
-              style={{ background: FLOOR_SHADOW }}
-            />
-            <div aria-hidden className="absolute inset-0">
+              className="absolute inset-0"
+              style={{ WebkitMaskImage: SEAMLESS_MASK, maskImage: SEAMLESS_MASK }}
+            >
               {/* Poster - the SSR / no-JS layer; the canvas paints over it. */}
               <Image
                 src={reelPosterSrc(ringFilm)}
@@ -125,8 +115,8 @@ export function FilmRoom() {
                 placeholder="blur"
                 blurDataURL={EMERALD_LQIP}
                 fill
-                sizes="(max-width: 768px) 80vw, 28rem"
-                className="object-contain"
+                sizes="(max-width: 768px) 78vw, 26rem"
+                className="object-cover"
               />
               <canvas
                 ref={scrub.canvasRef}
