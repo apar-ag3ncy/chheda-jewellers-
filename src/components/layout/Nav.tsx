@@ -202,7 +202,13 @@ export function Nav() {
                       // optically smaller than Montserrat at the same px and its
                       // caps carry their own width, so the step up to 0.95rem and
                       // the easier tracking are what keep it the same visual size.
-                      "inline-flex items-center gap-1.5 whitespace-nowrap px-2.5 py-2 font-display text-[0.88rem] font-medium uppercase tracking-[0.09em] transition-colors duration-300 2xl:px-3 2xl:text-[0.95rem] 2xl:tracking-[0.1em]",
+                      // The bar's original functional voice - Montserrat, as
+                      // it was before the display-face experiment. The serif
+                      // stays for the panel cards and the mobile menu, where
+                      // type runs large; at bar size the sans reads cleaner.
+                      // whitespace-nowrap stays: it is what keeps every label
+                      // on one line at every width.
+                      "inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-2 font-body text-[0.76rem] font-medium uppercase tracking-[0.13em] transition-colors duration-300",
                       isActive(item.href)
                         ? "text-maroon"
                         : "text-green hover:text-maroon",
