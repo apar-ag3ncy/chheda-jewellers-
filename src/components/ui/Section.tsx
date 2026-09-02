@@ -19,11 +19,11 @@ const spacings: Record<NonNullable<SectionProps["spacing"]>, string> = {
   // Tighter on phones (avoid huge empty bands between sections); generous on
   // desktop - but not cavernous. lg used to be py-44 (176px) a side, and with
   // 27 of the site's 34 sections on lg every boundary was 352px of nothing;
-  // scrolling read as empty green between exhibits. A third off keeps the
+  // scrolling read as empty green between exhibits. Cut twice at the owner's request - worst boundary now 160px, typical 128. Keeps the
   // editorial air while the next section is always announcing itself.
-  sm: "py-10 md:py-16",
-  md: "py-14 md:py-24",
-  lg: "py-16 md:py-28",
+  sm: "py-8 md:py-12",
+  md: "py-10 md:py-16",
+  lg: "py-12 md:py-20",
 };
 
 const tones: Record<NonNullable<SectionProps["tone"]>, string> = {
