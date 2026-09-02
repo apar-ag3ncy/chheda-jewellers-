@@ -70,8 +70,15 @@ export function ScrollThemer({ children }: { children: ReactNode }) {
         const color = toneColor(sec.dataset.bg);
         ScrollTrigger.create({
           trigger: sec,
-          start: "top 55%",
-          end: "bottom 45%",
+          // Both edges at the SAME viewport line. They were 55%/45%, which
+          // made the switch direction-dependent: scrolling down, a boundary
+          // between two grounds recoloured the page when it crossed 55% of
+          // the viewport; scrolling back up, the same boundary recoloured it
+          // at 45% - a tenth of a screen apart. The colour appeared to change
+          // "at the wrong place" whenever you reversed. One line for both
+          // directions makes the crossfade land identically either way.
+          start: "top 50%",
+          end: "bottom 50%",
           onToggle: (self) => {
             if (!self.isActive) return;
             gsap.to(el, {
