@@ -1,6 +1,7 @@
 import { testimonials, reviewsSummary } from "@/lib/content/testimonials";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
+import { Monogram } from "@/components/ui/Monogram";
 
 function Stars({ rating, className }: { rating: number; className?: string }) {
   return (
@@ -26,8 +27,30 @@ function Stars({ rating, className }: { rating: number; className?: string }) {
 
 export function Testimonials() {
   return (
-    <Section id="testimonials" spacing="lg" tone="transparent" data-bg="beige" className="u-on-light">
+    <Section
+      id="testimonials"
+      spacing="lg"
+      tone="transparent"
+      data-bg="beige"
+      // The one seam on the page where both neighbours sit on the same cream
+      // ground, so their paddings pooled into an unbroken 224px of beige with
+      // nothing in it. The negative margin closes a third of that (safe here
+      // precisely BECAUSE the grounds match - there is no boundary to reveal),
+      // and the ornament below gives what remains a resident.
+      className="u-on-light -mt-8 md:-mt-16"
+    >
       <Container>
+        {/* The seam ornament - the mark on a gold hairline, the same language
+            as NextStep's sign-off. Same-ground neighbours get no colour change
+            to separate them, so the divider does that job instead: the air
+            above the eyebrow now reads as setting for an ornament rather than
+            leftover padding. */}
+        <Reveal variant="settle" className="mb-12 flex items-center justify-center gap-5 md:mb-16">
+          <span aria-hidden className="h-px w-16 md:w-24" style={{ background: "var(--grad-gold)", opacity: 0.55 }} />
+          <Monogram className="h-7 w-7 opacity-80" decorative />
+          <span aria-hidden className="h-px w-16 md:w-24" style={{ background: "var(--grad-gold)", opacity: 0.55 }} />
+        </Reveal>
+
         <p className="u-eyebrow text-center">What customers say</p>
 
         {/* The aggregate is shown ONLY when it is real.
