@@ -23,7 +23,6 @@ export interface HeroSlide {
    * frame, so the heading exists on every slide whether or not it is drawn.
    */
   headline: string;
-  sub?: string;
   image: ImageAsset;
   /**
    * An alternative frame for portrait screens - true art direction, not a
@@ -37,6 +36,12 @@ export interface HeroSlide {
    * site copy, the text scrim and the Ken Burns drift for as long as it shows.
    */
   plate?: boolean;
+  /**
+   * Last calendar day (ISO, local time) this slide may show. For dated
+   * announcements whose words are baked into the artwork: an opening billed
+   * for "4th September" must not still be "coming" on the fifth.
+   */
+  expires?: string;
 }
 
 export interface CTA {
@@ -157,4 +162,9 @@ export interface FilmReel {
   frames: number;
   /** Poster alt text (the SSR/no-JS image). */
   alt: string;
+  /**
+   * Whether the last frame runs back into the first. False means the arc is
+   * open and the ends must never be joined - playing across the gap snaps.
+   */
+  closedTurn?: boolean;
 }

@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { pageMetadata } from "@/lib/seo";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { PagePlate } from "@/components/ui/PagePlate";
 import { Section, Container } from "@/components/ui/Section";
 
 export const metadata = pageMetadata({
@@ -35,7 +35,17 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <>
-      <PageHeader eyebrow="Legal" title="Privacy Policy" />
+      <PagePlate
+        folio="VII"
+        eyebrow="Legal"
+        title={"Privacy\npolicy"}
+        intro="What we keep when you get in touch, who it is shared with, how long we hold it, and how to have it removed."
+        meta={[
+          { label: "Applies to", value: "This website" },
+          { label: "Data sold", value: "None, ever" },
+          { label: "Status", value: "Pending counsel" },
+        ]}
+      />
       <Section spacing="md" tone="light" className="u-on-light">
         <Container>
           <div className="max-w-2xl">

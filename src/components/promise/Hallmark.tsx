@@ -5,7 +5,7 @@ import { hallmarkMarks } from "@/lib/content/promise";
 import { Section, Container } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
-import { HuidCheck } from "./HuidCheck";
+import { Sheen } from "@/components/motion/Sheen";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 /**
@@ -62,11 +62,17 @@ export function Hallmark() {
             02 - The mark on the metal
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="max-w-3xl font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)] text-text-strong">
+            {/* The proof page's own claim, and the second of only two
+                places on the site where the light crosses the type. */}
+            <Sheen
+              as="h2"
+              delay={0.5}
+              className="max-w-3xl font-display text-[length:var(--step-4)] font-light leading-[var(--leading-4)] tracking-[var(--tracking-4)]"
+            >
               Anyone can say <em className="italic">hallmarked</em>.
               <br />
               Here is how you check.
-            </h2>
+            </Sheen>
           </Reveal>
 
           <div className="mt-14 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
@@ -291,19 +297,15 @@ export function Hallmark() {
                 ))}
               </ol>
 
-              <p className="mt-8 border-t border-line pt-6 font-body text-[0.8rem] font-light leading-relaxed text-text-muted">
-                Verify any piece - ours or anyone&rsquo;s - with the Bureau of Indian
-                Standards&rsquo; own{" "}
-                <span className="text-gold-light">BIS Care</span> app. We would rather
-                you checked.
+              <p className="mt-8 border-t border-line pt-6 font-body text-[0.9rem] font-light leading-relaxed text-text-muted">
+                The code is laser-marked on the piece itself - you will need a
+                loupe, or a phone camera at full zoom, to read it. Type it into
+                the Bureau of Indian Standards&rsquo; own{" "}
+                <span className="text-gold-light">BIS Care</span> app and the
+                piece&rsquo;s record comes back: article, purity, and the
+                jeweller who registered it. Check ours. We would rather you did.
                 <span className="sr-only"> Currently reading: {current.label}.</span>
               </p>
-
-              {/* Reading about a hallmark and going to find one are different
-                  acts. This is what turns the section into the second. */}
-              <div className="mt-8">
-                <HuidCheck />
-              </div>
             </div>
           </div>
         </Container>

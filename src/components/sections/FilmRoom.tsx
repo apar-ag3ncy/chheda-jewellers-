@@ -30,6 +30,13 @@ import { cn } from "@/lib/cn";
 // movement reads as a slow settle rather than a wheel being cranked.
 const SCROLL_TURNS = 0.65;
 
+/**
+ * Frames per second the ring turns unattended. 4.5 of 72 frames is about a
+ * fifth of a turn a second - slow enough to read as a piece being examined
+ * rather than a display model on a motor.
+ */
+const AUTO_SPIN = 4.5;
+
 /** Feathers every edge of the frame into the page. */
 const SEAMLESS_MASK =
   "radial-gradient(ellipse 72% 76% at 50% 47%, black 48%, transparent 78%)";
@@ -41,7 +48,14 @@ export function FilmRoom() {
     () => Array.from({ length: ringFilm.frames }, (_, i) => reelFrameSrc(ringFilm, i)),
     [],
   );
-  const scrub = useFrameScrub(urls, { sectionRef, scrollTurns: SCROLL_TURNS });
+  const scrub = useFrameScrub(urls, {
+    sectionRef,
+    scrollTurns: SCROLL_TURNS,
+    autoSpin: AUTO_SPIN,
+    // The arc is open (~280 degrees), so the playhead folds at the ends
+    // rather than wrapping - see the note on ringFilm.
+    closedTurn: ringFilm.closedTurn ?? true,
+  });
 
   return (
     <section

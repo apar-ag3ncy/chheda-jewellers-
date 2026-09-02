@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import Link from "next/link";
 import { promiseIntro, promiseIndex } from "@/lib/content/promise";
 import { emphasise } from "@/components/ui/SectionHeading";
@@ -79,7 +80,7 @@ export function PromiseCover() {
                 <span className="flex flex-col items-center gap-1.5">
                   <Monogram className="h-9 w-9 md:h-10 md:w-10" />
                   <span className="font-body text-[0.5rem] uppercase tracking-[0.3em] text-gold-light/90">
-                    Est. 1991
+                    Est. {siteConfig.foundedYear}
                   </span>
                 </span>
               </span>

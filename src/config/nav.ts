@@ -88,6 +88,7 @@ export const primaryNav: NavItem[] = [
       },
     ],
   },
+  { label: "About", href: "/about" },
   { label: "Gallery", href: "/gallery" },
   { label: "Chheda Promise", href: "/chheda-promise" },
   { label: "Offers & Plans", href: "/offers-and-plans" },

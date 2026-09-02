@@ -1,4 +1,5 @@
 import { NextStep } from "@/components/ui/NextStep";
+import { FeaturedPieces } from "@/components/sections/FeaturedPieces";
 import Link from "next/link";
 import Image from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
@@ -131,11 +132,14 @@ export default function JewelleryPage() {
         </Container>
       </Section>
 
-      {/* ── Bespoke + visit ───────────────────────────────────────────── */}
-      <Section spacing="lg" tone="green">
+      {/* ── Bespoke + visit ───────────────────────────────────────────────
+          On cream, so the house index carries the same green → cream → deep
+          rhythm as every other interior page instead of running three greens
+          together into one flat block. */}
+      <Section spacing="lg" tone="light" className="u-on-light">
         <Container>
           <div className="grid grid-cols-1 gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
-            <Reveal className="flex flex-col justify-between gap-8 bg-green-deep p-8 md:p-12">
+            <Reveal className="flex flex-col justify-between gap-8 bg-cream p-8 md:p-12">
               <div>
                 <p className="u-eyebrow mb-4">Not in any of the three</p>
                 <h2 className="max-w-sm font-display text-[length:var(--step-3)] font-light leading-[var(--leading-3)]">
@@ -146,14 +150,14 @@ export default function JewelleryPage() {
                   remade into something worn again.
                 </p>
               </div>
-              <Button href="/bespoke" variant="primary" withArrow className="self-start">
+              <Button href="/bespoke" variant="onLight" withArrow className="self-start">
                 The atelier
               </Button>
             </Reveal>
 
             <Reveal
               delay={0.06}
-              className="flex flex-col justify-between gap-8 bg-green-deep p-8 md:p-12"
+              className="flex flex-col justify-between gap-8 bg-cream p-8 md:p-12"
             >
               <div>
                 <p className="u-eyebrow mb-4">Not sure where to begin</p>
@@ -169,6 +173,12 @@ export default function JewelleryPage() {
           </div>
         </Container>
       </Section>
+      <FeaturedPieces
+        eyebrow="On the counter now"
+        title="A few pieces, closer up."
+        tone="deep"
+      />
+
       <NextStep
         eyebrow="When you have chosen a room"
         title="See it in the light, on the day that suits you."
@@ -236,20 +246,20 @@ function RoomCard({
         >
           {name}
         </h2>
-        <p
-          className={cn(
-            "mt-3 font-body text-[0.86rem] font-light leading-relaxed text-text-muted",
-            // Copy is present on touch (where there is no hover) and revealed
-            // on pointer devices, so nothing is hidden from anyone who cannot
-            // hover - including keyboard users, via group-focus-within.
-            "md:max-h-0 md:overflow-hidden md:opacity-0 md:transition-all md:duration-700 md:ease-[var(--ease-lux)]",
-            "md:group-hover:max-h-40 md:group-hover:opacity-100",
-            "md:group-focus-within:max-h-40 md:group-focus-within:opacity-100",
-            size === "lg" ? "max-w-md" : "max-w-sm",
-          )}
-        >
-          {intro}
-        </p>
+        {/* Present wherever hovering is impossible, revealed where it is not.
+            See .cj-hover-reveal for why this is grid rows and not max-height. */}
+        <div className="cj-hover-reveal">
+          <div>
+            <p
+              className={cn(
+                "pt-3 font-body text-[0.86rem] font-light leading-relaxed text-text-muted",
+                size === "lg" ? "max-w-md" : "max-w-sm",
+              )}
+            >
+              {intro}
+            </p>
+          </div>
+        </div>
       </div>
     </Link>
   );

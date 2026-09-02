@@ -1,4 +1,5 @@
 import { NextStep } from "@/components/ui/NextStep";
+import { FeaturedPieces } from "@/components/sections/FeaturedPieces";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { PagePlate } from "@/components/ui/PagePlate";
@@ -75,6 +76,12 @@ export default function LiveGoldRatePage() {
           alt: "A gold temple necklace and bangles worn against maroon and ochre silk",
           focus: "50% 30%",
         }}
+        meta={[
+          { label: "Purities", value: "22K · 24K" },
+          { label: "Applies to", value: "Mumbai counters" },
+          { label: "Updated", value: "Through the trading day" },
+          { label: "Status", value: "Indicative only" },
+        ]}
       />
 
       {/* ── The number ────────────────────────────────────────────────── */}
@@ -182,6 +189,13 @@ export default function LiveGoldRatePage() {
           </div>
         </Container>
       </Section>
+      <FeaturedPieces
+        eyebrow="What the rate becomes"
+        title="The metal, once it has been worked."
+        tone="deep"
+        limit={3}
+      />
+
       <NextStep
         tone="green"
         eyebrow="A rate is only half the bill"

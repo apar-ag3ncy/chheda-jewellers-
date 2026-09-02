@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { Monogram } from "@/components/ui/Monogram";
 
 /**
@@ -48,7 +49,7 @@ export function LegacyStrip() {
           <Monogram className="h-4 w-4 opacity-80 md:h-5 md:w-5" />
         </span>
         <h2 className="cj-legacy-gold shrink-0 whitespace-nowrap text-center font-display text-[clamp(1.15rem,3.4vw,2rem)] font-light tracking-[0.12em]">
-          Carrying legacy since 1991
+          Carrying legacy since {siteConfig.foundedYear}
         </h2>
         <span aria-hidden className="shrink-0" style={{ filter: "brightness(0.35) saturate(0.9)" }}>
           <Monogram className="h-4 w-4 opacity-80 md:h-5 md:w-5" />

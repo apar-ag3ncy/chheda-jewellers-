@@ -67,19 +67,36 @@ export function Reveal({
       const el = ref.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const vars = fromVars(variant, y, x);
-        const inView = el.getBoundingClientRect().top < window.innerHeight * 0.9;
-        if (inView) {
-          gsap.from(el, { ...vars, delay });
-        } else {
-          gsap.from(el, {
-            ...vars,
-            delay,
-            scrollTrigger: { trigger: el, start: "top 90%", once },
-          });
-        }
-      });
+      mm.add(
+        {
+          motion: "(prefers-reduced-motion: no-preference)",
+          narrow: "(max-width: 767px)",
+        },
+        (ctx) => {
+          const { motion, narrow } = (ctx.conditions ?? {}) as {
+            motion?: boolean;
+            narrow?: boolean;
+          };
+          if (!motion) return;
+
+          // A "slide" row is full-bleed on a phone, so parking it at an x
+          // offset until its trigger fires pushes the whole document sideways
+          // - every un-revealed row below the fold widens the page at once.
+          // It rises there instead, which also reads better at that width.
+          const vars = fromVars(narrow && variant === "slide" ? "rise" : variant, y, x);
+
+          const inView = el.getBoundingClientRect().top < window.innerHeight * 0.9;
+          if (inView) {
+            gsap.from(el, { ...vars, delay });
+          } else {
+            gsap.from(el, {
+              ...vars,
+              delay,
+              scrollTrigger: { trigger: el, start: "top 90%", once },
+            });
+          }
+        },
+      );
     },
     { scope: ref },
   );

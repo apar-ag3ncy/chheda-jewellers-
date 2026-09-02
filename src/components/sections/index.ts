@@ -10,3 +10,4 @@ export { CommunityStrip } from "./CommunityStrip";
 export { Testimonials } from "./Testimonials";
 export { MonthlyPlan } from "./MonthlyPlan";
 export { Branches } from "./Branches";
+export { FeaturedPieces } from "./FeaturedPieces";

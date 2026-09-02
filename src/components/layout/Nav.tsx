@@ -31,6 +31,7 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const shellRef = useRef<HTMLDivElement>(null);
 
   const isHome = pathname === "/";
   // The green shell + its extras only exist at the very top of the home page.
@@ -71,6 +72,40 @@ export function Nav() {
     };
   }, []);
 
+  /**
+   * Touch parity for the desktop bar. The bar shows from `lg` up, which
+   * includes plenty of touch hardware - an iPad in landscape, a Surface, a
+   * touchscreen laptop - and its panels opened on hover alone. There, a tap
+   * on "All Jewellery" simply left for /jewellery and the panel of rooms was
+   * unreachable. On a coarse pointer the first tap OPENS the panel and the
+   * second follows the link.
+   */
+  const [coarse, setCoarse] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: none)");
+    const sync = () => setCoarse(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  // With no pointer to leave the bar, an open panel needs a way out.
+  useEffect(() => {
+    if (!coarse || !openMenu) return;
+    const onDown = (e: PointerEvent) => {
+      if (!(e.target instanceof Node)) return;
+      if (shellRef.current?.contains(e.target)) return;
+      setOpenMenu(null);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenMenu(null);
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [coarse, openMenu]);
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -90,6 +125,7 @@ export function Nav() {
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4 md:px-6 md:pt-5">
       {/* ── GREEN SHELL - frames the beige capsule at home-top, disperses on scroll ── */}
       <div
+        ref={shellRef}
         onMouseLeave={handleLeave}
         className={cn(
           "pointer-events-auto relative z-50 flex max-w-[calc(100vw-2rem)] items-center rounded-full",
@@ -103,7 +139,7 @@ export function Nav() {
         {flags.navGoldRate ? (
           <div
             className={cn(
-              "hidden overflow-hidden whitespace-nowrap transition-all duration-[750ms] ease-[var(--ease-lux)] xl:block",
+              "hidden overflow-hidden whitespace-nowrap transition-all duration-[750ms] ease-[var(--ease-lux)] 2xl:block",
               expanded ? "max-w-[240px] px-3 opacity-100" : "pointer-events-none max-w-0 px-0 opacity-0",
             )}
           >
@@ -122,7 +158,7 @@ export function Nav() {
               setMobileOpen(false);
             }
           }}
-          className="relative z-10 flex items-center gap-1 rounded-full border border-[color-mix(in_srgb,var(--maroon)_26%,transparent)] bg-cream px-3 py-2 shadow-[0_18px_46px_-22px_rgba(0,0,0,0.6)] md:gap-2 md:px-5 md:py-2.5"
+          className="relative z-10 flex items-center gap-1 rounded-full border border-[color-mix(in_srgb,var(--maroon)_26%,transparent)] bg-cream px-3 py-2 shadow-[0_18px_46px_-22px_rgba(0,0,0,0.6)] md:gap-2 md:px-5 md:py-2"
         >
           {/* Brand */}
           <Link
@@ -141,18 +177,24 @@ export function Nav() {
           </Link>
 
           {/* Desktop links */}
-          <ul className="ml-2 hidden items-center gap-0.5 lg:flex">
+          <ul className="ml-2 hidden items-center gap-0.5 xl:flex">
             {primaryNav.map((item) => {
               const hasChildren = Boolean(item.groups?.length);
               return (
                 <li
                   key={item.label}
                   className="relative"
-                  onMouseEnter={() => handleEnter(item.label, hasChildren)}
+                  onMouseEnter={() => !coarse && handleEnter(item.label, hasChildren)}
                 >
                   <Link
                     href={item.href}
-                    onFocus={() => handleEnter(item.label, hasChildren)}
+                    onFocus={() => !coarse && handleEnter(item.label, hasChildren)}
+                    onClick={(e) => {
+                      // Touch: open the panel first, travel on the second tap.
+                      if (!coarse || !hasChildren || openMenu === item.label) return;
+                      e.preventDefault();
+                      handleEnter(item.label, true);
+                    }}
                     aria-haspopup={hasChildren ? "true" : undefined}
                     aria-expanded={hasChildren ? openMenu === item.label : undefined}
                     className={cn(
@@ -160,7 +202,7 @@ export function Nav() {
                       // optically smaller than Montserrat at the same px and its
                       // caps carry their own width, so the step up to 0.95rem and
                       // the easier tracking are what keep it the same visual size.
-                      "inline-flex items-center gap-1.5 px-3 py-2 font-display text-[0.95rem] font-medium uppercase tracking-[0.1em] transition-colors duration-300",
+                      "inline-flex items-center gap-1.5 whitespace-nowrap px-2.5 py-2 font-display text-[0.88rem] font-medium uppercase tracking-[0.09em] transition-colors duration-300 2xl:px-3 2xl:text-[0.95rem] 2xl:tracking-[0.1em]",
                       isActive(item.href)
                         ? "text-maroon"
                         : "text-green hover:text-maroon",
@@ -180,7 +222,7 @@ export function Nav() {
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((v) => !v)}
-              className="flex h-11 w-11 items-center justify-center lg:hidden"
+              className="flex h-11 w-11 items-center justify-center xl:hidden"
             >
               <span className="relative block h-3 w-6">
                 <span className={cn("absolute left-0 h-px w-6 bg-green-deep transition-all duration-300", mobileOpen ? "top-1.5 rotate-45" : "top-0")} />
@@ -309,7 +351,7 @@ export function Nav() {
             rel="noopener noreferrer"
             aria-label="Instagram"
             tabIndex={expanded ? 0 : -1}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
           >
             <InstagramIcon className="h-[1.35rem] w-[1.35rem]" />
           </a>
@@ -323,7 +365,7 @@ export function Nav() {
             rel="noopener noreferrer"
             aria-label="WhatsApp"
             tabIndex={expanded ? 0 : -1}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-text-muted transition-colors hover:text-gold-light"
           >
             <WhatsAppIcon className="h-[1.35rem] w-[1.35rem]" />
           </a>
@@ -402,7 +444,7 @@ function MobileMenu({
       role="dialog"
       aria-modal={open}
       aria-label="Menu"
-      className={cn("pointer-events-none fixed inset-0 z-40 lg:hidden", open ? "pointer-events-auto" : "")}
+      className={cn("pointer-events-none fixed inset-0 z-40 xl:hidden", open ? "pointer-events-auto" : "")}
       aria-hidden={!open}
       inert={!open}
     >

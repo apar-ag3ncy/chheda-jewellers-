@@ -39,6 +39,36 @@
 }
 
 /* ============================================================
+   REGISTERED CUSTOM PROPERTIES
+
+   A plain `--x` is a string to the browser, so it can only ever be swapped,
+   never tweened - which is why gradients are usually animated by sliding
+   background-position around and hoping it reads as light. Registering the
+   property with a type and an initial value makes it a real animatable
+   value, so the ANGLE of a sweep can be eased on its own curve.
+
+   That is the difference between a gradient that slides and metal that
+   catches the light, and on a jeweller's site it is worth the four lines.
+   Older engines that do not support @property simply ignore these and fall
+   back to the static gradient underneath - nothing breaks, it just sits still.
+   ============================================================ */
+@property --cj-sheen {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 115deg;
+}
+
+/* Where the specular sits along a line of type, 0% to 100%. Registered for
+   the same reason: it is used inside calc() in a gradient stop, and an
+   unregistered variable there is a string - the stop would jump between
+   values instead of travelling. */
+@property --cj-sheen-pos {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -40%;
+}
+
+/* ============================================================
    Base layer
    ============================================================ */
 @layer base {
@@ -146,7 +176,6 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.38),
       inset 0 -8px 14px -10px rgba(0, 0, 0, 0.55),
       0 14px 30px -14px rgba(0, 0, 0, 0.6);
-    will-change: transform, opacity;
   }
 
   /* The numeral: brand gold, lit. A static gradient (not the sweep - four
@@ -164,7 +193,6 @@
     background-clip: text;
     color: transparent;
     filter: drop-shadow(0 0 8px rgba(240, 207, 170, 0.35));
-    will-change: transform, opacity;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -181,7 +209,7 @@
      house emerald, plain fill - on gold it needs no tricks. */
   .cj-legacy-strip {
     background-image: linear-gradient(
-      115deg,
+      var(--cj-sheen, 115deg),
       #b0754a 0%,
       #c98f5e 30%,
       #f0cfa4 52%,
@@ -189,7 +217,12 @@
       #b87c4e 100%
     );
     background-size: 300% 100%;
-    animation: cj-legacy-shine 13s ease-in-out infinite;
+    /* Two motions at once, which is what real metal does: the band travels
+       along the strip while the light's ANGLE rocks across it. The angle is
+       only animatable because --cj-sheen is registered above. */
+    animation:
+      cj-legacy-shine 13s ease-in-out infinite,
+      cj-legacy-tilt 19s ease-in-out infinite;
     box-shadow:
       inset 0 1px 0 rgba(255, 252, 240, 0.65),
       inset 0 -1px 0 rgba(154, 86, 58, 0.45),
@@ -206,8 +239,20 @@
     50%      { background-position: 100% 50%; }
   }
 
+  /* The light's angle, rocking a few degrees either side of the swatch's
+     own 115deg. Long and out of phase with the travel above, so the two
+     never repeat together and the strip never looks like a loop. */
+  @keyframes cj-legacy-tilt {
+    0%, 100% { --cj-sheen: 108deg; }
+    50%      { --cj-sheen: 124deg; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .cj-legacy-strip { animation: none; background-position: 50% 50%; }
+    .cj-legacy-strip {
+      animation: none;
+      background-position: 50% 50%;
+      --cj-sheen: 115deg;
+    }
   }
 
   /* ── Liquid glass - the mega menu panel ───────────────────
@@ -334,6 +379,145 @@
     padding-inline: var(--gutter);
   }
 
+  /* ── Light travelling across a line of gold ─────────────────────────
+     A specular that crosses the heading once, as it arrives.
+
+     The band is three stops around --cj-sheen-pos, and moving it is only
+     possible because that property is registered above - inside calc() an
+     ordinary variable cannot be interpolated, so the highlight would snap
+     from one position to the next instead of sliding.
+
+     The base colour of the gradient is the normal heading colour, so if the
+     sweep never runs - no JS, reduced motion, an engine without @property -
+     the type simply renders as it always did. Nothing here is load-bearing.  */
+  /* Every var() below carries a literal fallback. Without one, an engine
+     that does not support @property leaves the variable undefined, calc()
+     goes invalid, the whole gradient is dropped - and with color:transparent
+     the heading would render as INVISIBLE TEXT. The fallback keeps the
+     gradient valid and the type simply sits still. */
+  .cj-sheen-text {
+    background-image: linear-gradient(
+      100deg,
+      var(--text-strong) 0%,
+      var(--text-strong) calc(var(--cj-sheen-pos, -40%) - 14%),
+      #fff6e4 calc(var(--cj-sheen-pos, -40%) - 1%),
+      #fffdf7 var(--cj-sheen-pos, -40%),
+      #fff6e4 calc(var(--cj-sheen-pos, -40%) + 1%),
+      var(--text-strong) calc(var(--cj-sheen-pos, -40%) + 14%),
+      var(--text-strong) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cj-sheen-text {
+      background-image: none;
+      color: var(--text-strong);
+    }
+  }
+
+  /* ── The featured card, sized by ITS OWN width ──────────────────────
+     This component renders two-up on a phone, three-up on a tablet and
+     six-up on a desktop, so a viewport media query is answering the wrong
+     question: at 1440px a card is 190px wide, and at 375px it is 160px -
+     nearly the same card, on opposite ends of every breakpoint. A container
+     query asks the only question that matters, which is how much room this
+     card actually has.
+
+     The type therefore steps up when the card is roomy and stays out of its
+     own way when it is not, without a single breakpoint being involved. */
+  .cj-card {
+    container-type: inline-size;
+  }
+
+  .cj-card-name {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  @container (min-width: 210px) {
+    .cj-card-name {
+      font-size: 1.08rem;
+    }
+  }
+
+  @container (min-width: 280px) {
+    .cj-card-name {
+      font-size: 1.2rem;
+    }
+  }
+
+  /* ────────────────────────────────────────────────────────────────────
+     HOVER REVEAL - copy that unfolds under a card's title on hover.
+
+     Two things were wrong with the hand-rolled version this replaces, and
+     both are worth stating because they are easy to reintroduce.
+
+     1. It animated `max-height` from 0 to a guessed cap (a 160px cap)
+        for copy roughly 60px tall. A max-height tween spends its time
+        travelling to the CAP, not to the content, so the text finished
+        arriving about a third of the way through and the remaining two
+        thirds animated empty space. The eye reads that as the reveal
+        stalling - the easing curve chosen was not the curve anyone saw.
+        `grid-template-rows: 0fr -> 1fr` resolves to the content's true
+        height, so the curve and the motion are the same thing, and copy
+        longer than the guess can never be clipped.
+
+     2. The collapsed state was gated on WIDTH (md:), so on any touch screen
+        wide enough to qualify - every iPad in landscape - the copy was
+        collapsed with no way to hover it open. Gating on (hover: hover) and
+        (pointer: fine) instead means the reveal exists only where a pointer
+        can actually perform it; everywhere else the copy is simply present,
+        which is the honest default for text that carries meaning.
+
+     Reveals on focus as well as hover, so it opens for keyboard users. */
+  .cj-hover-reveal {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  /* The direct child is the CLIPPER and must carry no spacing of its own.
+     Put the gap on the content inside it:
+
+       <div class="cj-hover-reveal">
+         <div>                       <- clipper, styled by the rule below
+           <p class="pt-3">...</p>   <- spacing lives in here
+         </div>
+       </div>
+
+     Spacing on the clipper itself does not collapse. A margin sits outside
+     the overflow box entirely; and padding cannot compress either, because a
+     border-box element at height 0 still renders its own padding - both leave
+     the card holding a gap under a title with nothing beneath it. One level
+     deeper, the gap is part of the clipped flow and goes to nothing at 0fr,
+     so the copy grows from zero. */
+  .cj-hover-reveal > * {
+    overflow: hidden;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cj-hover-reveal {
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition:
+        grid-template-rows var(--dur-base) var(--ease-lux),
+        opacity var(--dur-base) var(--ease-lux);
+    }
+    .group:hover .cj-hover-reveal,
+    .group:focus-within .cj-hover-reveal {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cj-hover-reveal {
+      transition: none;
+    }
+  }
+
   /* Wide-tracked Montserrat eyebrow / kicker.
      Uses gold-light (not gold) so small-caps labels clear WCAG AA on green:
      #F0CFAA → ~8.6:1 on --green, vs. --gold #C68D61 at ~4.46:1 which fails. */
@@ -386,7 +570,13 @@
   .u-grain::after {
     content: "";
     position: fixed;
-    inset: -50%;
+    /* The grain drifts by at most 3% of its own size, so it needs a bleed a
+       little larger than that - not half the viewport in every direction.
+       At -50% this was a fixed, permanently-composited layer FOUR TIMES the
+       viewport's area, on every page, for a 3% wobble. -8% keeps a margin of
+       more than double what the animation uses and costs 1.35x instead. No
+       visual change; two thirds less layer. */
+    inset: -8%;
     z-index: 1;
     pointer-events: none;
     opacity: 0.042;
@@ -481,6 +671,30 @@
     outline: 2px solid var(--gold-light);
     outline-offset: 4px;
     border-radius: 999px;
+  }
+
+  /* ── The estimator's sliders, on a finger ─────────────────────────────
+     Sized for a mouse: an 18px thumb on a 28px-tall control. Both are well
+     under the 44px a touch target needs, so on a phone the thumb was a
+     quarter of a fingertip and the whole row was too short to land on
+     reliably - the control looked present and behaved as if it were not.
+
+     Enlarged on coarse pointers ONLY, so the desktop drawing is untouched:
+     the row grows to 44px and the thumb to 26px, while the track stays the
+     same 1px hairline. Nothing about how it looks on a laptop changes. */
+  @media (pointer: coarse) {
+    .cj-range {
+      height: 44px;
+    }
+    .cj-range::-webkit-slider-thumb {
+      width: 26px;
+      height: 26px;
+      margin-top: -12.5px;
+    }
+    .cj-range::-moz-range-thumb {
+      width: 26px;
+      height: 26px;
+    }
   }
 
   /**

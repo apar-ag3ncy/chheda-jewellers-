@@ -4,7 +4,7 @@ import Image, { getImageProps } from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { heroSlides } from "@/lib/content";
+import { heroSlides, liveHeroSlides } from "@/lib/content";
 import type { HeroSlide } from "@/types/content";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
@@ -94,6 +94,23 @@ function SlideImage({ slide, eager }: { slide: HeroSlide; eager: boolean }) {
 
 export function Hero() {
   const [active, setActive] = useState(0);
+
+  /**
+   * The slides that may show today. heroSlides is already filtered at module
+   * scope, but for a statically-prerendered page that filter runs at BUILD
+   * time - a dated announcement would keep "coming" after its day until the
+   * next deploy. Re-filtering after mount retires it on schedule without a
+   * hydration mismatch: the swap happens post-hydration, and the active index
+   * resets only if the list actually shrank.
+   */
+  const [slides, setSlides] = useState(heroSlides);
+  useEffect(() => {
+    const live = liveHeroSlides();
+    if (live.length !== heroSlides.length) {
+      setSlides(live);
+      setActive(0);
+    }
+  }, []);
   const [reduce, setReduce] = useState(false);
   const [paused, setPaused] = useState(false);
   const [introDone, setIntroDone] = useState(false);
@@ -141,11 +158,11 @@ export function Hero() {
   useEffect(() => {
     if (reduce || paused || !introDone) return;
     const id = setInterval(
-      () => setActive((a) => (a + 1) % heroSlides.length),
+      () => setActive((a) => (a + 1) % slides.length),
       SLIDE_MS,
     );
     return () => clearInterval(id);
-  }, [reduce, paused, active, introDone]);
+  }, [reduce, paused, active, introDone, slides.length]);
 
   useGSAP(
     () => {
@@ -177,7 +194,7 @@ export function Hero() {
     { scope: section },
   );
 
-  const slide = heroSlides[active]!;
+  const slide = slides[active] ?? slides[0]!;
 
   return (
     <section
@@ -195,8 +212,8 @@ export function Hero() {
     >
       {/* Slide layers - CSS crossfade, inside one transform host so the
           scroll handoff can move every frame together. */}
-      <div ref={frames} className="absolute inset-0 will-change-transform">
-      {heroSlides.map((s, i) => (
+      <div ref={frames} className="absolute inset-0">
+      {slides.map((s, i) => (
         <div
           key={s.id}
           className={cn(
@@ -232,7 +249,14 @@ export function Hero() {
           deterministic, and reduced-motion-safe via the global floor). */}
       <div
         ref={copy}
-        className="u-container relative flex h-full flex-col justify-end pb-24 will-change-transform md:justify-center md:pb-0 md:pt-16"
+        // Anchored LOW, not centred. The scrim behind this block is a
+        // bottom-up gradient - its dark end is the floor of the frame - so a
+        // headline centred vertically was floating in the brightest part of
+        // the picture, competing with whatever the photograph had there
+        // (usually a face). Sitting it down in the scrim is both the
+        // legible position and the elegant one, and it leaves the top two
+        // thirds of the artwork uncovered. The padding clears the bar below.
+        className="u-container relative flex h-full flex-col justify-end pb-44 md:pb-40"
       >
         {slide.plate ? (
           /* Nothing is drawn over a plate - it already says everything it
@@ -241,7 +265,7 @@ export function Hero() {
              announcement still reaches a screen reader. */
           <h1 className="sr-only">{slide.headline}</h1>
         ) : (
-        <div key={active} className="max-w-2xl">
+        <div key={active} className="max-w-xl">
           {slide.eyebrow ? (
           <p
             className="u-eyebrow mb-6"
@@ -250,7 +274,7 @@ export function Hero() {
             {slide.eyebrow}
           </p>
           ) : null}
-          <h1 className="font-display text-[clamp(2.4rem,8.5vw,6.6rem)] font-light leading-[0.98]">
+          <h1 className="font-display text-[clamp(2.1rem,5.6vw,4.6rem)] font-light leading-[1.02]">
             {slide.headline.split("\n").map((line, i) => (
               <span key={i} className="block overflow-hidden py-[0.02em]">
                 <span
@@ -265,32 +289,20 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          {slide.sub ? (
-          <p
-            className="mt-7 max-w-md font-body text-[1rem] font-light leading-relaxed text-text"
-            style={{ animation: "fadeRise 0.8s var(--ease-lux) both", animationDelay: "0.55s" }}
-          >
-            {slide.sub}
-          </p>
-          ) : null}
-          {slide.cta ? (
-            <div
-              className="mt-9"
-              style={{ animation: "fadeRise 0.8s var(--ease-lux) both", animationDelay: "0.7s" }}
-            >
-              <Button href={slide.cta.href} variant="outline" size="lg" withArrow>
-                {slide.cta.label}
-              </Button>
-            </div>
-          ) : null}
         </div>
         )}
       </div>
 
-      {/* Slide dots + pause control */}
+      {/* Bottom bar - slide dots and the slide's call to action on one
+          baseline. The button used to sit directly under the headline, which
+          stacked four things down the left edge; split across the bar it
+          balances the frame and the eye gets a clear left-to-right read.
+          col-reverse on a phone puts the button above the dots rather than
+          squeezing both onto one 375px line - same element, no duplicate. */}
       <div className="u-container pointer-events-none absolute inset-x-0 bottom-8 md:bottom-10">
+        <div className="flex flex-col-reverse items-start gap-5 md:flex-row md:items-center md:justify-between md:gap-6">
         <div className="pointer-events-auto flex items-center gap-3">
-          {heroSlides.map((s, i) => (
+          {slides.map((s, i) => (
             <button
               key={s.id}
               type="button"
@@ -329,6 +341,22 @@ export function Hero() {
               )}
             </button>
           ) : null}
+        </div>
+
+        {/* Never over a plate: the artwork carries its own words and the
+            brief is that none of ours is written on it. Keyed by slide so
+            the entrance replays as the frame changes. */}
+        {!slide.plate && slide.cta ? (
+          <div
+            key={active}
+            className="pointer-events-auto"
+            style={{ animation: "fadeRise 0.8s var(--ease-lux) both", animationDelay: "0.5s" }}
+          >
+            <Button href={slide.cta.href} variant="outline" size="lg" withArrow>
+              {slide.cta.label}
+            </Button>
+          </div>
+        ) : null}
         </div>
       </div>
 
