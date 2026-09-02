@@ -53,7 +53,7 @@ export function Footer() {
     <footer className="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-green-deep">
       <FooterGround />
 
-      <div className="relative z-[1] mx-auto flex w-full max-w-[1600px] flex-1 flex-col justify-between gap-4 px-5 pt-[130px] pb-6 md:gap-10 md:px-12 md:pt-[172px] md:pb-11">
+      <div className="relative z-[1] mx-auto flex w-full max-w-[1600px] flex-1 flex-col justify-between gap-4 px-5 pt-[112px] pb-5 md:gap-6 md:px-12 md:pt-[clamp(96px,19svh,138px)] md:pb-6">
         {/* ── The name ─────────────────────────────────────────────── */}
         <Link
           href="/"
@@ -68,14 +68,22 @@ export function Footer() {
               balances the trailing space instead, so the glyph run AND the
               box are both dead centre. */}
           <span
-            className="mt-[clamp(0.7rem,1.6vw,1.3rem)] block pl-[0.26em] font-body font-normal uppercase leading-[0.86] tracking-[0.26em] text-text-strong"
-            style={{ fontSize: "clamp(2.3rem,10.5vw,10.5rem)" }}
+            className="mt-[clamp(0.55rem,1.2vw,1rem)] block pl-[0.26em] font-body font-normal uppercase leading-[0.86] tracking-[0.26em] text-text-strong"
+            // One notch down from 10.5vw/10.5rem: on a 750px-tall laptop the
+            // footer's contents outgrew its 100svh frame, the whole block
+            // crested above the viewport at full scroll, and the monogram
+            // surfaced under the fixed bar. The name is still the largest
+            // thing on the site - it just fits its own screen again.
+            // The svh term is the short-screen guard: on a 650px-tall window the
+            // name yields a few more pixels instead of pushing the monogram
+            // under the bar. On anything 720+ the vw term wins as before.
+            style={{ fontSize: "clamp(2.1rem,min(8.6vw,15svh),8.6rem)" }}
           >
             {houseName}
           </span>
           <span
             className="mt-[clamp(0.5rem,1vw,0.9rem)] block pl-[0.52em] font-body font-normal uppercase text-beige/90"
-            style={{ fontSize: "clamp(0.6rem,1.25vw,1.2rem)", letterSpacing: "0.52em" }}
+            style={{ fontSize: "clamp(0.55rem,1.05vw,1rem)", letterSpacing: "0.52em" }}
           >
             {houseSuffix}
           </span>
