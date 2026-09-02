@@ -4,7 +4,7 @@ import Image, { getImageProps } from "next/image";
 import { EMERALD_LQIP } from "@/lib/image-blur";
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { heroSlides } from "@/lib/content";
+import { heroSlides, liveHeroSlides } from "@/lib/content";
 import type { HeroSlide } from "@/types/content";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
@@ -94,6 +94,23 @@ function SlideImage({ slide, eager }: { slide: HeroSlide; eager: boolean }) {
 
 export function Hero() {
   const [active, setActive] = useState(0);
+
+  /**
+   * The slides that may show today. heroSlides is already filtered at module
+   * scope, but for a statically-prerendered page that filter runs at BUILD
+   * time - a dated announcement would keep "coming" after its day until the
+   * next deploy. Re-filtering after mount retires it on schedule without a
+   * hydration mismatch: the swap happens post-hydration, and the active index
+   * resets only if the list actually shrank.
+   */
+  const [slides, setSlides] = useState(heroSlides);
+  useEffect(() => {
+    const live = liveHeroSlides();
+    if (live.length !== heroSlides.length) {
+      setSlides(live);
+      setActive(0);
+    }
+  }, []);
   const [reduce, setReduce] = useState(false);
   const [paused, setPaused] = useState(false);
   const [introDone, setIntroDone] = useState(false);
@@ -141,11 +158,11 @@ export function Hero() {
   useEffect(() => {
     if (reduce || paused || !introDone) return;
     const id = setInterval(
-      () => setActive((a) => (a + 1) % heroSlides.length),
+      () => setActive((a) => (a + 1) % slides.length),
       SLIDE_MS,
     );
     return () => clearInterval(id);
-  }, [reduce, paused, active, introDone]);
+  }, [reduce, paused, active, introDone, slides.length]);
 
   useGSAP(
     () => {
@@ -177,7 +194,7 @@ export function Hero() {
     { scope: section },
   );
 
-  const slide = heroSlides[active]!;
+  const slide = slides[active] ?? slides[0]!;
 
   return (
     <section
@@ -196,7 +213,7 @@ export function Hero() {
       {/* Slide layers - CSS crossfade, inside one transform host so the
           scroll handoff can move every frame together. */}
       <div ref={frames} className="absolute inset-0">
-      {heroSlides.map((s, i) => (
+      {slides.map((s, i) => (
         <div
           key={s.id}
           className={cn(
@@ -285,7 +302,7 @@ export function Hero() {
       <div className="u-container pointer-events-none absolute inset-x-0 bottom-8 md:bottom-10">
         <div className="flex flex-col-reverse items-start gap-5 md:flex-row md:items-center md:justify-between md:gap-6">
         <div className="pointer-events-auto flex items-center gap-3">
-          {heroSlides.map((s, i) => (
+          {slides.map((s, i) => (
             <button
               key={s.id}
               type="button"

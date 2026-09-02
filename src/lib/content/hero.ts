@@ -5,7 +5,7 @@ import type { HeroSlide } from "@/types/content";
  * motion (handled in the section), never a hard stop. Copy is editorial,
  * never product-led.
  */
-export const heroSlides: HeroSlide[] = [
+const allSlides: HeroSlide[] = [
   {
     /**
      * The Ghatkopar opening. A finished plate: every word is already in the
@@ -36,6 +36,10 @@ export const heroSlides: HeroSlide[] = [
      * change.
      */
     id: "ghatkopar-opening",
+    // The words are in the artwork, so the slide cannot be reworded after
+    // the day - it retires itself instead. The shop opens on the 4th; give
+    // the announcement the opening week, then the carousel closes over it.
+    expires: "2026-09-11",
     headline: "Coming to Ghatkopar this Janmashtami - 4th September 2026",
     image: {
       src: "/media/hero/hero-00-ghatkopar.png",
@@ -83,3 +87,17 @@ export const heroSlides: HeroSlide[] = [
     cta: { label: "The Chheda Promise", href: "/chheda-promise" },
   },
 ];
+
+/**
+ * The slides that may show TODAY. Filtered once at module scope: on the
+ * server that is each render of the page, so a dated announcement drops out
+ * on schedule without a deploy. String comparison is safe because both sides
+ * are ISO yyyy-mm-dd.
+ */
+export function liveHeroSlides(): HeroSlide[] {
+  return allSlides.filter(
+    (s) => !s.expires || new Date().toISOString().slice(0, 10) <= s.expires,
+  );
+}
+
+export const heroSlides: HeroSlide[] = liveHeroSlides();

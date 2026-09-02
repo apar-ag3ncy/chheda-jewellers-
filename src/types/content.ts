@@ -36,6 +36,12 @@ export interface HeroSlide {
    * site copy, the text scrim and the Ken Burns drift for as long as it shows.
    */
   plate?: boolean;
+  /**
+   * Last calendar day (ISO, local time) this slide may show. For dated
+   * announcements whose words are baked into the artwork: an opening billed
+   * for "4th September" must not still be "coming" on the fifth.
+   */
+  expires?: string;
 }
 
 export interface CTA {

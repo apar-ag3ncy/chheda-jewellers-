@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FooterGround } from "@/components/layout/FooterGround";
 import { siteConfig, houseLines, contactIsReal } from "@/config/site";
+import { primaryNav } from "@/config/nav";
 import { Monogram } from "@/components/ui/Monogram";
 import { cn } from "@/lib/cn";
 
@@ -79,6 +80,26 @@ export function Footer() {
             {houseSuffix}
           </span>
         </Link>
+
+        {/* ── The site, in one line ─────────────────────────────────
+            The footer is where a visitor lands when they have run out of
+            page, and it used to offer nothing but the small print - every
+            route back into the site meant scrolling to the top. One quiet
+            row, drawn from the same config as the nav bar so the two can
+            never disagree, plus the two pages the bar does not carry. */}
+        <nav aria-label="Footer" className="flex flex-wrap items-center justify-center gap-x-7 gap-y-1">
+          {[...primaryNav.map((i) => ({ label: i.label, href: i.href })),
+            { label: "Bespoke", href: "/bespoke" },
+            { label: "Journal", href: "/journal" }].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="inline-flex min-h-[44px] items-center font-display text-[0.9rem] font-medium uppercase tracking-[0.1em] text-text-muted transition-colors duration-300 hover:text-gold-light"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
         {/* ── The particulars ──────────────────────────────────────── */}
         {/* Three columns spread across the full width: the first hugs the
