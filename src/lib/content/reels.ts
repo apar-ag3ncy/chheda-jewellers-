@@ -17,14 +17,16 @@ import type { FilmReel } from "@/types/content";
  * TODO(client): re-render the missing arc as f72-f89 and this becomes a real
  * loop; `closedTurn` below is the only thing that needs to change.
  *
- * The frames are the original studio footage, on their green plate. A cut-out
- * version was tried and reverted; the section feathers the frame's edges into
- * the page instead.
+ * The frames are cut out of their green studio plate (scripts/cut-ring.py -
+ * every threshold measured, stones solid). Tried, reverted, and then asked
+ * for again by name once the plate showed its edges over the page's shifting
+ * grounds: footage green can never match a crossfading background, so the
+ * piece must carry no background at all.
  */
 export const ringFilm: FilmReel = {
   id: "turn",
   name: "The Bloom Ring",
-  dir: "/media/reels/turn",
+  dir: "/media/reels/turn-cut",
   frames: 72,
   /** See above: the arc is ~280 degrees, so the ends must not be joined. */
   closedTurn: false,
