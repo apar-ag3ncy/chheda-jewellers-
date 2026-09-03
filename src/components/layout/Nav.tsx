@@ -208,7 +208,7 @@ export function Nav() {
                       // type runs large; at bar size the sans reads cleaner.
                       // whitespace-nowrap stays: it is what keeps every label
                       // on one line at every width.
-                      "inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-2 font-body text-[0.76rem] font-medium uppercase tracking-[0.13em] transition-colors duration-300",
+                      "inline-flex items-center gap-1.5 whitespace-nowrap px-2 py-2 font-body text-[0.76rem] font-medium uppercase tracking-[0.13em] transition-colors duration-300 2xl:px-3",
                       isActive(item.href)
                         ? "text-maroon"
                         : "text-green hover:text-maroon",
@@ -347,7 +347,11 @@ export function Nav() {
         {/* Right extra - socials (home-top only) */}
         <div
           className={cn(
-            "hidden items-center overflow-hidden whitespace-nowrap transition-all duration-[750ms] ease-[var(--ease-lux)] md:flex",
+            // shrink-0: this box was the flex item that gave way when the
+            // shell ran tight (measured 65px for 100px of icons at 1280),
+            // and its own overflow-hidden - needed for the collapse
+            // animation - then clipped the WhatsApp icon in half.
+            "hidden shrink-0 items-center overflow-hidden whitespace-nowrap transition-all duration-[750ms] ease-[var(--ease-lux)] md:flex",
             expanded ? "max-w-[160px] gap-1 px-2 opacity-100" : "pointer-events-none max-w-0 gap-0 px-0 opacity-0",
           )}
         >
