@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site";
+import { PauseOffscreen } from "@/components/motion/PauseOffscreen";
 import { Monogram } from "@/components/ui/Monogram";
 
 /**
@@ -36,6 +37,7 @@ import { Monogram } from "@/components/ui/Monogram";
  */
 export function LegacyStrip() {
   return (
+    <PauseOffscreen>
     <section
       id="legacy"
       className="cj-legacy-strip relative w-full overflow-hidden border-y border-gold-deep/45"
@@ -60,5 +62,6 @@ export function LegacyStrip() {
         />
       </div>
     </section>
+    </PauseOffscreen>
   );
 }

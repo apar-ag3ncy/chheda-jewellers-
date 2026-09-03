@@ -418,6 +418,20 @@
     }
   }
 
+  /* ── Looping animations sleep while off-screen ─────────────────────
+     Paired with <PauseOffscreen>, which flips data-offscreen on its box.
+     Every rule here names an animation that would otherwise run forever:
+     the strip's gradient repaints full-width every frame, the map's trace
+     and pin rings loop at the foot of the page, the hero keeps re-blending a
+     full-screen layer three screens below the fold. A looping animation
+     nobody can see costs exactly as much as one they can. */
+  [data-offscreen="true"] .cj-legacy-strip,
+  [data-offscreen="true"] .cj-trace path,
+  [data-offscreen="true"] .cj-pin-ping,
+  [data-offscreen="true"] [data-ken-burns] {
+    animation-play-state: paused;
+  }
+
   /* ── The featured card, sized by ITS OWN width ──────────────────────
      This component renders two-up on a phone, three-up on a tablet and
      six-up on a desktop, so a viewport media query is answering the wrong

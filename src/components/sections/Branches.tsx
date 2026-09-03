@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { siteConfig, contactIsReal } from "@/config/site";
 import { MumbaiPoster } from "@/components/sections/MumbaiPoster";
+import { PauseOffscreen } from "@/components/motion/PauseOffscreen";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
@@ -36,6 +37,7 @@ export function Branches() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
+    <PauseOffscreen>
     <section
       id="branches"
       className="relative h-[100svh] w-full overflow-hidden"
@@ -97,5 +99,6 @@ export function Branches() {
         ) : null}
       </div>
     </section>
+    </PauseOffscreen>
   );
 }
