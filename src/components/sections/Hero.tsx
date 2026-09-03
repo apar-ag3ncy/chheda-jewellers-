@@ -9,6 +9,7 @@ import type { HeroSlide } from "@/types/content";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import { PauseOffscreen } from "@/components/motion/PauseOffscreen";
 
 const SLIDE_MS = 6400;
 
@@ -58,7 +59,8 @@ function SlideImage({ slide, eager }: { slide: HeroSlide; eager: boolean }) {
 
   if (!slide.imagePortrait) {
     return (
-      <Image {...common} priority={eager} src={slide.image.src} alt={slide.image.alt} className="object-cover" style={style} />
+      <Image {...common} priority={eager} src={slide.image.src} alt={slide.image.alt} className="object-cover" style={style}
+          data-ken-burns="" />
     );
   }
 
@@ -87,6 +89,7 @@ function SlideImage({ slide, eager }: { slide: HeroSlide; eager: boolean }) {
         fetchPriority={eager ? "high" : undefined}
         className="absolute inset-0 h-full w-full object-cover"
         style={style}
+          data-ken-burns=""
       />
     </picture>
   );
@@ -197,6 +200,7 @@ export function Hero() {
   const slide = slides[active] ?? slides[0]!;
 
   return (
+    <PauseOffscreen>
     <section
       ref={section}
       className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-green-deep"
@@ -382,5 +386,6 @@ export function Hero() {
         </span>
       </div>
     </section>
+    </PauseOffscreen>
   );
 }
