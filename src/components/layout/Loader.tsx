@@ -74,12 +74,15 @@ export function Loader() {
       const mandala = el.querySelector<SVGGElement>(".cj-mandala");
       const core = el.querySelector<SVGGElement>(".cj-core");
 
-      // Prevent scroll during the reveal.
-      document.body.style.overflow = "hidden";
+      // Prevent scroll during the reveal. On <html>, not <body>: the nav's
+      // own effect writes body.style.overflow on mount (to "" when its menu
+      // is closed) and was silently erasing this lock, so the page could be
+      // scrolled beneath the curtain.
+      document.documentElement.style.overflow = "hidden";
 
       const finish = () => {
         writeSeen();
-        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
         gsap.set(el, { display: "none" });
         // Anything timed that sits under the curtain needs to know the
         // curtain is gone. The hero carousel in particular was counting down
@@ -90,7 +93,7 @@ export function Loader() {
 
       // Safety net: fires even if the GSAP ticker is throttled (e.g. the tab
       // opened in the background), so scroll never stays locked.
-      const safety = window.setTimeout(finish, 8200);
+      const safety = window.setTimeout(finish, 5600);
 
       const tl = gsap.timeline({
         onComplete: () => {
@@ -128,7 +131,12 @@ export function Loader() {
       // ── The turn ────────────────────────────────────────────────────────
       // Scale and rotation share one duration and one curve, so the mark reads
       // as a single object arriving - not as a stack of separate tweens.
-      const SPIN = 3.6;
+      // 2.4, not 3.6. "cinema" spends its distance in the first third, so at 3.6s
+      // the mark was fully arrived by ~1.4s and then sat frozen for two seconds
+      // before the curtain moved - a stall, not slow motion. At 2.4s the
+      // visible travel fills the slot, and the exit below begins a beat BEFORE
+      // the settle ends, so the piece never comes to a dead stop on screen.
+      const SPIN = 2.4;
 
       tl.fromTo(
         mono.current,
@@ -190,8 +198,8 @@ export function Loader() {
       tl.fromTo(
         bloom.current,
         { autoAlpha: 0, scale: 0.55 },
-        { autoAlpha: 1, scale: 1, duration: 1.7, ease: "power2.out" },
-        SPIN - 1.7,
+        { autoAlpha: 1, scale: 1, duration: 1.3, ease: "power2.out" },
+        SPIN - 1.3,
       ).to(
         bloom.current,
         { autoAlpha: 0.35, duration: 0.7, ease: "power2.inOut" },
@@ -202,11 +210,11 @@ export function Loader() {
       // A held breath after the lock, then the emerald curtain leaves. The
       // mark travels slower than the curtain, so it is still settling as the
       // hero arrives underneath - the two scenes overlap instead of cutting.
-      const EXIT = SPIN + 0.5;
-      tl.to(el, { yPercent: -100, duration: 1.6, ease: "veil" }, EXIT);
+      const EXIT = SPIN - 0.15;
+      tl.to(el, { yPercent: -100, duration: 1.25, ease: "veil" }, EXIT);
       tl.to(
         stage.current,
-        { yPercent: -30, scale: 1.05, duration: 1.9, ease: "veil" },
+        { yPercent: -30, scale: 1.05, duration: 1.5, ease: "veil" },
         EXIT,
       );
 
@@ -214,7 +222,7 @@ export function Loader() {
         skipRef.current = null;
         detachSkip();
         window.clearTimeout(safety);
-        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
       };
     },
     { scope: root },
